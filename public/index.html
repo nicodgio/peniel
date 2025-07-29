@@ -1,43 +1,455 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iglesia Todopoderoso - Confiamos en Nuestro Salvador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            background: white;
+            color: black;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23000" width="1200" height="800"/><g fill="%23ff6b35" opacity="0.3"><circle cx="300" cy="200" r="100"/><circle cx="900" cy="300" r="80"/><circle cx="600" cy="500" r="120"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(transparent, rgba(255, 107, 53, 0.3));
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            max-width: 1000px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-info {
+            position: absolute;
+            bottom: 2rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 4rem;
+        }
+
+        .hero-info div {
+            color: white;
+            font-weight: bold;
+        }
+
+        .ministries-section {
+            padding: 5rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .ministry-card {
+            flex: 0 0 400px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .ministry-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .ministry-card-content {
+            padding: 2rem;
+        }
+
+        .ministry-date {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .ministry-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .ministry-card p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .more-info-btn {
+            color: #ff6b35;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .videos-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-card iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+        }
+
+        .video-card-content {
+            padding: 1.5rem;
+        }
+
+        .video-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .video-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-info {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .ministry-card {
+                flex: 0 0 300px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            Iglesia Peniel <span>Madrid</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#iglesia">NUESTRA IGLESIA</a></li>
+            <li><a href="#ministerios">MINISTERIOS</a></li>
+            <li><a href="#eventos">EVENTOS</a></li>
+            <li><a href="#transmision">TRANSMISIÓN</a></li>
+            <li><a href="#pastores">PASTORES</a></li>
+            <li><a href="#contacto">CONTACTO</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>CONFIAMOS EN NUESTRO SALVADOR, EL SEÑOR JESUCRISTO</h1>
+        <p>Alabemos Juntos al Todopoderoso</p>
+        
+        <div class="hero-info">
+            <div>REUNIONES A LAS 8 AM MIÉ.</div>
+            <div>MINISTERIOS A LAS 10 PM MAR.</div>
+        </div>
+    </section>
+
+    <section class="ministries-section">
+        <div class="section-title">
+            <h2>Involúcrate en nuestro movimiento</h2>
+            <div class="carousel-nav">
+                <button class="nav-btn" onclick="prevSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-btn" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel" id="ministries-carousel">
+                <div class="ministry-card">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23ff6b35' width='400' height='250'/><circle fill='%23fff' cx='200' cy='125' r='60' opacity='0.8'/><text x='200' y='135' text-anchor='middle' fill='%23333' font-size='16' font-family='Arial'>Niños</text></svg>" alt="Grupo de Niños">
+                    <div class="ministry-card-content">
+                        <div class="ministry-date">
+                            <i class="far fa-calendar"></i>
+                            <span>DOMINGO</span>
+                            <i class="far fa-clock"></i>
+                            <span>4:00 PM</span>
+                        </div>
+                        <h3>Reunión Grupo de Niños</h3>
+                        <p>Un espacio especial para que los más pequeños aprendan sobre el amor de Dios a través de actividades divertidas, juegos y enseñanzas adaptadas a su edad.</p>
+                        <a href="#" class="more-info-btn">MÁS INFORMACIÓN</a>
+                    </div>
+                </div>
+
+                <div class="ministry-card">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23e74c3c' width='400' height='250'/><circle fill='%23fff' cx='200' cy='125' r='60' opacity='0.8'/><text x='200' y='135' text-anchor='middle' fill='%23333' font-size='16' font-family='Arial'>Jóvenes</text></svg>" alt="Grupo de Jóvenes">
+                    <div class="ministry-card-content">
+                        <div class="ministry-date">
+                            <i class="far fa-calendar"></i>
+                            <span>VIERNES</span>
+                            <i class="far fa-clock"></i>
+                            <span>4:00 PM</span>
+                        </div>
+                        <h3>Reunión Grupo de Jóvenes</h3>
+                        <p>Encuentros dinámicos donde los jóvenes pueden crecer en su fe, desarrollar amistades sólidas y descubrir el propósito que Dios tiene para sus vidas.</p>
+                        <a href="#" class="more-info-btn">MÁS INFORMACIÓN</a>
+                    </div>
+                </div>
+
+                <div class="ministry-card">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%239b59b6' width='400' height='250'/><circle fill='%23fff' cx='200' cy='125' r='60' opacity='0.8'/><text x='200' y='135' text-anchor='middle' fill='%23333' font-size='14' font-family='Arial'>Mujeres</text></svg>" alt="Grupo de Mujeres">
+                    <div class="ministry-card-content">
+                        <div class="ministry-date">
+                            <i class="far fa-calendar"></i>
+                            <span>LUNES</span>
+                            <i class="far fa-clock"></i>
+                            <span>5:00 PM</span>
+                        </div>
+                        <h3>Reunión Grupo de Mujeres</h3>
+                        <p>Un ministerio dedicado a empoderar a las mujeres en su caminar con Dios, fortaleciendo lazos de hermandad y crecimiento espiritual mutuo.</p>
+                        <a href="#" class="more-info-btn">MÁS INFORMACIÓN</a>
+                    </div>
+                </div>
+
+                <div class="ministry-card">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%2334495e' width='400' height='250'/><circle fill='%23fff' cx='200' cy='125' r='60' opacity='0.8'/><text x='200' y='135' text-anchor='middle' fill='%23333' font-size='14' font-family='Arial'>Hombres</text></svg>" alt="Grupo de Hombres">
+                    <div class="ministry-card-content">
+                        <div class="ministry-date">
+                            <i class="far fa-calendar"></i>
+                            <span>SÁBADO</span>
+                            <i class="far fa-clock"></i>
+                            <span>6:00 AM</span>
+                        </div>
+                        <h3>Reunión Grupo de Hombres</h3>
+                        <p>Encuentros masculinos centrados en el crecimiento espiritual, liderazgo cristiano y fortalecimiento de la identidad como hombres de Dios.</p>
+                        <a href="#" class="more-info-btn">MÁS INFORMACIÓN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="videos-section">
+        <div class="section-title">
+            <h2>Últimos Mensajes</h2>
+        </div>
+        
+        <div class="videos-grid">
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                <div class="video-card-content">
+                    <h3>Mensaje Dominical - La Fe que Transforma</h3>
+                    <p>Un poderoso mensaje sobre cómo la fe genuina puede transformar nuestras vidas completamente.</p>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                <div class="video-card-content">
+                    <h3>Conferencia Especial - El Amor de Dios</h3>
+                    <p>Una reflexión profunda sobre el amor incondicional de Dios hacia cada uno de nosotros.</p>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                <div class="video-card-content">
+                    <h3>Testimonio - Milagros en Nuestra Comunidad</h3>
+                    <p>Historias reales de cómo Dios está obrando milagros en las vidas de nuestra congregación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentSlide = 0;
+        const carousel = document.getElementById('ministries-carousel');
+        const totalCards = document.querySelectorAll('.ministry-card').length;
+        const cardWidth = 400 + 32;
+
+        function nextSlide() {
+            if (currentSlide < totalCards - 3) {
+                currentSlide++;
+                updateCarousel();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateCarousel();
+            }
+        }
+
+        function updateCarousel() {
+            const translateX = -currentSlide * cardWidth;
+            carousel.style.transform = `translateX(${translateX}px)`;
+        }
+
+        window.addEventListener('resize', function() {
+            updateCarousel();
+        });
+    </script>
+</body>
 </html>
