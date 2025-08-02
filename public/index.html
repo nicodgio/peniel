@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iglesia Todopoderoso - Confiamos en Nuestro Salvador</title>
+    <title>Iglesia Peniel Comunidad Cristiana - Madrid</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -36,6 +36,7 @@
             z-index: 1000;
             backdrop-filter: blur(20px);
             background: rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
         }
 
         .nav-container {
@@ -45,19 +46,39 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
         }
 
-        .logo span {
-            background: white;
-            color: black;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-text .peniel {
+            font-size: 1.5rem;
             font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo-text .madrid {
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .nav-links {
@@ -74,6 +95,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
         }
 
         /* Hero Section */
@@ -117,6 +142,47 @@
             opacity: 0.8;
         }
 
+        .hero-cta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: black;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: black;
+        }
+
         .hero-bottom {
             position: absolute;
             bottom: 2rem;
@@ -128,21 +194,80 @@
             font-weight: 600;
         }
 
-        /* Ministerios Section */
-        .ministerios {
+        /* Reuniones Section */
+        .reuniones {
             padding: 8rem 4rem;
-            position: relative;
+            background: #0a0a0a;
         }
 
         .section-header {
             margin-bottom: 4rem;
+            text-align: center;
         }
 
         .section-title {
             font-size: 3.5rem;
             font-weight: 900;
             line-height: 1.2;
-            max-width: 600px;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .reuniones-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .reuniones-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .reunion-item {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .reunion-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .reunion-time {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .reunion-map {
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        /* Ministerios Section */
+        .ministerios {
+            padding: 8rem 4rem;
+            position: relative;
         }
 
         .carousel-controls {
@@ -250,6 +375,138 @@
             font-size: 0.9rem;
         }
 
+        /* Vision Section */
+        .vision {
+            padding: 8rem 4rem;
+            background: #111;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vision-content h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vision-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .vision-graphic {
+            position: relative;
+            height: 600px;
+        }
+
+        .vision-circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vision-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+        .vision-circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 2px solid #667eea;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .vision-circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: rgba(118, 75, 162, 0.2);
+            border: 2px solid #764ba2;
+            top: 150px;
+            left: 0;
+        }
+
+        .vision-circle:nth-child(3) {
+            width: 180px;
+            height: 180px;
+            background: rgba(240, 147, 251, 0.2);
+            border: 2px solid #f093fb;
+            top: 150px;
+            right: 0;
+        }
+
+        .vision-circle:nth-child(4) {
+            width: 160px;
+            height: 160px;
+            background: rgba(245, 87, 108, 0.2);
+            border: 2px solid #f5576c;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .vision-circle:hover {
+            transform: scale(1.1) translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .vision-circle:nth-child(2):hover,
+        .vision-circle:nth-child(3):hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: -150px;
+            right: -150px;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            bottom: -150px;
+            left: -150px;
+            animation-delay: 5s;
+        }
+
         /* Predicas Section */
         .predicas {
             padding: 8rem 4rem;
@@ -327,101 +584,6 @@
         .predica-meta {
             font-size: 0.9rem;
             opacity: 0.8;
-        }
-
-        /* Eventos Section */
-        .eventos {
-            padding: 8rem 4rem;
-            background: #111;
-        }
-
-        .eventos-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-top: 4rem;
-        }
-
-        .evento-featured {
-            position: relative;
-            height: 600px;
-            border-radius: 30px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .evento-featured-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 3rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-        }
-
-        .evento-featured h3 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-        }
-
-        .eventos-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .evento-item {
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .evento-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(10px);
-        }
-
-        .evento-date {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-        }
-
-        .evento-date-day {
-            font-size: 2rem;
-            font-weight: 900;
-        }
-
-        .evento-date-month {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-
-        .evento-details {
-            flex: 1;
-            margin: 0 2rem;
-        }
-
-        .evento-details h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .evento-details p {
-            opacity: 0.7;
-            font-size: 0.9rem;
         }
 
         /* Footer */
@@ -508,21 +670,20 @@
                 font-size: 3rem;
             }
             
-            .ministerios,
-            .predicas,
-            .eventos {
-                padding: 4rem 2rem;
+            .section-title {
+                font-size: 2.5rem;
             }
             
             .carousel-controls {
                 display: none;
             }
             
-            .predicas-grid {
+            .reuniones-grid,
+            .vision-container {
                 grid-template-columns: 1fr;
             }
             
-            .eventos-container {
+            .predicas-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -538,36 +699,141 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                Almighty <span>One</span>
+                <div class="logo-img">
+                    <i class="fas fa-cross"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="peniel">PENIEL</div>
+                    <div class="madrid">MADRID</div>
+                </div>
             </div>
             <ul class="nav-links">
-                <li><a href="#church">OUR CHURCH</a></li>
-                <li><a href="#ministries">MINISTRIES</a></li>
-                <li><a href="#events">EVENTS</a></li>
-                <li><a href="#stream">STREAM</a></li>
-                <li><a href="#pastors">PASTORS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="#inicio">INICIO</a></li>
+                <li><a href="#reuniones">REUNIONES</a></li>
+                <li><a href="#ministerios">MINISTERIOS</a></li>
+                <li><a href="#vision">VISIÓN</a></li>
+                <li><a href="#predicas">PRÉDICAS</a></li>
+                <li><a href="#contacto">CONTACTO</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="inicio">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <h1>TRUST OUR SAVIOR,<br>THE LORD, JESUS CHRIST</h1>
-            <p class="hero-subtitle">Let's Praise the Almighty One Together</p>
+            <h1>BIENVENIDO A IGLESIA<br>PENIEL COMUNIDAD CRISTIANA</h1>
+            <p class="hero-subtitle">Un encuentro con Dios lo cambia todo</p>
+            <div class="hero-cta">
+                <a href="#reuniones" class="btn btn-primary">VISÍTANOS</a>
+                <a href="https://www.youtube.com/@CcPeniel" target="_blank" class="btn btn-secondary">VER EN VIVO</a>
+            </div>
         </div>
         <div class="hero-bottom">
-            <div>MEETINGS AT 8 AM WED.</div>
-            <div>MINISTRIES AT 10 PM TUE.</div>
+            <div>REUNIONES GENERALES DOMINGOS 11:00 HS</div>
+            <div>JÓVENES SÁBADOS 19:00 HS</div>
+        </div>
+    </section>
+
+    <!-- Live Section -->
+    <section class="live-section" id="envivo">
+        <div class="live-container">
+            <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span class="live-text">EN VIVO</span>
+            </div>
+            
+            <div class="live-content">
+                <div class="live-video">
+                    <div class="video-wrapper">
+                        <div class="video-placeholder">
+                            <div class="pulse-ring"></div>
+                            <div class="pulse-ring"></div>
+                            <div class="pulse-ring"></div>
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="live-info">
+                    <h2 class="live-title">Reunión General en Vivo</h2>
+                    <p class="live-subtitle">Conéctate con nosotros desde donde estés</p>
+                    
+                    <div class="live-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span>237 viendo ahora</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-heart"></i>
+                            <span>542 interacciones</span>
+                        </div>
+                    </div>
+                    
+                    <div class="live-message">
+                        <p>"El Poder de la Fe Inquebrantable"</p>
+                        <p class="live-speaker">Pastor Julio Ortega</p>
+                    </div>
+                    
+                    <div class="live-actions">
+                        <a href="https://www.youtube.com/@CcPeniel" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-youtube"></i> VER EN YOUTUBE
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-share-alt"></i> COMPARTIR
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="live-bg-elements">
+                <div class="wave wave1"></div>
+                <div class="wave wave2"></div>
+                <div class="wave wave3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reuniones Section -->
+    <section class="reuniones" id="reuniones">
+        <div class="section-header">
+            <h2 class="section-title">REUNIONES</h2>
+            <p class="section-subtitle">Si quieres visitarnos y ser parte de esta gran familia, ¡eres bienvenido!</p>
+        </div>
+        
+        <div class="reuniones-grid">
+            <div class="reuniones-info">
+                <h3><i class="fas fa-map-marker-alt"></i> Ubicación</h3>
+                <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem;">Calle Miguel Fleta 11, 28037, Madrid</p>
+                <p style="opacity: 0.7; margin-bottom: 2rem;">De fácil acceso en transporte público y con aparcamiento en la zona</p>
+                
+                <div class="reunion-item">
+                    <div class="reunion-time">Domingos 11:00 hs</div>
+                    <p>Reuniones Generales</p>
+                </div>
+                
+                <div class="reunion-item">
+                    <div class="reunion-time">Sábados 19:00 hs</div>
+                    <p>Reuniones de Jóvenes</p>
+                </div>
+                
+                <div class="reunion-item">
+                    <div class="reunion-time">Durante la semana</div>
+                    <p>Grupos Peniel - ¡Apúntate y forma parte!</p>
+                </div>
+            </div>
+            
+            <div class="reunion-map">
+                <i class="fas fa-map-marked-alt" style="font-size: 3rem;"></i>
+                <p>Mapa Interactivo</p>
+            </div>
         </div>
     </section>
 
     <!-- Ministerios Section -->
-    <section class="ministerios" id="ministries">
+    <section class="ministerios" id="ministerios">
         <div class="section-header">
-            <h2 class="section-title">Get involved in our movement</h2>
+            <h2 class="section-title">Involúcrate en nuestro movimiento</h2>
             <div class="carousel-controls">
                 <button class="carousel-btn" onclick="scrollCarousel(-1)">
                     <i class="fas fa-chevron-left"></i>
@@ -583,12 +849,12 @@
                 <div class="ministerio-img"></div>
                 <div class="ministerio-content">
                     <div class="ministerio-meta">
-                        <span><i class="far fa-calendar"></i> SUNDAY</span>
-                        <span><i class="far fa-clock"></i> 4:00 PM</span>
+                        <span><i class="far fa-calendar"></i> MENSUAL</span>
+                        <span><i class="fas fa-hands-helping"></i> SERVICIO</span>
                     </div>
-                    <h3>Young Kids Group Reunion</h3>
-                    <p>A special space where the little ones learn about God's love through fun activities and age-appropriate teachings.</p>
-                    <a href="#" class="more-info">MORE INFORMATION</a>
+                    <h3>Acción Social</h3>
+                    <p>Banco de alimentos y ropero comunitario. Ayudamos a personas en situación de vulnerabilidad, promoviendo la economía circular.</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
                 </div>
             </div>
             
@@ -596,12 +862,12 @@
                 <div class="ministerio-img"></div>
                 <div class="ministerio-content">
                     <div class="ministerio-meta">
-                        <span><i class="far fa-calendar"></i> FRIDAY</span>
-                        <span><i class="far fa-clock"></i> 4:00 PM</span>
+                        <span><i class="far fa-calendar"></i> SÁBADOS</span>
+                        <span><i class="far fa-clock"></i> 19:00 HS</span>
                     </div>
-                    <h3>Youth Group Reunion</h3>
-                    <p>Dynamic meetings where young people can grow in faith, develop solid friendships and discover God's purpose.</p>
-                    <a href="#" class="more-info">MORE INFORMATION</a>
+                    <h3>Peniel NG (Next Generation)</h3>
+                    <p>Ministerio para adolescentes (12-18) y jóvenes (18-35). Reuniones dinámicas y dos campamentos al año.</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
                 </div>
             </div>
             
@@ -609,12 +875,12 @@
                 <div class="ministerio-img"></div>
                 <div class="ministerio-content">
                     <div class="ministerio-meta">
-                        <span><i class="far fa-calendar"></i> MONDAY</span>
-                        <span><i class="far fa-clock"></i> 5:00 PM</span>
+                        <span><i class="far fa-calendar"></i> DOMINGOS</span>
+                        <span><i class="far fa-clock"></i> 11:00 HS</span>
                     </div>
-                    <h3>Women Group Reunion</h3>
-                    <p>A ministry dedicated to empowering women in their walk with God, strengthening bonds of sisterhood.</p>
-                    <a href="#" class="more-info">MORE INFORMATION</a>
+                    <h3>Peniel Kids</h3>
+                    <p>Enseñanza creativa para niños de 3-11 años: Exploradores, Valientes y Detectives. Campamento urbano en julio.</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
                 </div>
             </div>
             
@@ -622,21 +888,101 @@
                 <div class="ministerio-img"></div>
                 <div class="ministerio-content">
                     <div class="ministerio-meta">
-                        <span><i class="far fa-calendar"></i> SATURDAY</span>
-                        <span><i class="far fa-clock"></i> 6:00 AM</span>
+                        <span><i class="far fa-heart"></i> CONTINUO</span>
+                        <span><i class="fas fa-user-friends"></i> SERVICIO</span>
                     </div>
-                    <h3>Men Group Reunion</h3>
-                    <p>Men's meetings focused on spiritual growth, Christian leadership and strengthening identity as men of God.</p>
-                    <a href="#" class="more-info">MORE INFORMATION</a>
+                    <h3>Atención Primaria y Consolidación</h3>
+                    <p>Primer contacto para nuevos visitantes y recién convertidos. Acompañamiento personalizado en los primeros pasos de fe.</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
+                </div>
+            </div>
+            
+            <div class="ministerio-card">
+                <div class="ministerio-img"></div>
+                <div class="ministerio-content">
+                    <div class="ministerio-meta">
+                        <span><i class="far fa-calendar"></i> MARTES</span>
+                        <span><i class="far fa-clock"></i> 21:00 HS</span>
+                    </div>
+                    <h3>Instituto Bíblico Peniel</h3>
+                    <p>Formación teológica semipresencial con material de Global University. Certificaciones internas disponibles.</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
+                </div>
+            </div>
+            
+            <div class="ministerio-card">
+                <div class="ministerio-img"></div>
+                <div class="ministerio-content">
+                    <div class="ministerio-meta">
+                        <span><i class="fas fa-globe-americas"></i> GLOBAL</span>
+                        <span><i class="fas fa-praying-hands"></i> 9 PROYECTOS</span>
+                    </div>
+                    <h3>Misiones</h3>
+                    <p>Apoyamos proyectos misioneros alrededor del mundo. Celebramos anualmente la Fiesta de las Naciones.</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
+                </div>
+            </div>
+            
+            <div class="ministerio-card">
+                <div class="ministerio-img"></div>
+                <div class="ministerio-content">
+                    <div class="ministerio-meta">
+                        <span><i class="far fa-calendar"></i> MIÉRCOLES</span>
+                        <span><i class="far fa-clock"></i> 19:00 HS</span>
+                    </div>
+                    <h3>Evangelismo</h3>
+                    <p>Salimos cada semana a compartir esperanza. Punto de encuentro: C.C. Alcalá Norte (Ciudad Lineal).</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
+                </div>
+            </div>
+            
+            <div class="ministerio-card">
+                <div class="ministerio-img"></div>
+                <div class="ministerio-content">
+                    <div class="ministerio-meta">
+                        <span><i class="fas fa-home"></i> HOGARES</span>
+                        <span><i class="far fa-calendar"></i> SEMANAL</span>
+                    </div>
+                    <h3>Grupos Peniel</h3>
+                    <p>Células en hogares donde compartimos, crecemos y alcanzamos a nuestros vecinos. La iglesia más allá de las cuatro paredes.</p>
+                    <a href="#" class="more-info">MÁS INFORMACIÓN</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="vision" id="vision">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="section-header">
+            <h2 class="section-title">NUESTRA VISIÓN</h2>
+        </div>
+        
+        <div class="vision-container">
+            <div class="vision-content">
+                <h2>"Ser y Hacer Discípulos"</h2>
+                <p>Creemos que la tarea primordial de la iglesia es que todas las personas en el mundo sean salvas de la condenación eterna y que todos aquellos que reciben el don de la salvación sean transformados profundamente.</p>
+                <p>Nuestra dinámica de trabajo es el <strong>Ciclo de Vida</strong>, que asegura el crecimiento y la multiplicación de la iglesia a través de cuatro pasos fundamentales.</p>
+            </div>
+            
+            <div class="vision-graphic">
+                <div class="vision-circles">
+                    <div class="vision-circle">GANAR</div>
+                    <div class="vision-circle">CONSOLIDAR</div>
+                    <div class="vision-circle">DISCIPULAR</div>
+                    <div class="vision-circle">ENVIAR</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Predicas Section -->
-    <section class="predicas" id="sermons">
+    <section class="predicas" id="predicas">
         <div class="section-header">
-            <h2 class="section-title">Latest Messages</h2>
+            <h2 class="section-title">MENSAJES RECIENTES</h2>
+            <p class="section-subtitle">Revive nuestras prédicas más recientes desde nuestro canal de YouTube</p>
         </div>
         
         <div class="predicas-grid">
@@ -647,8 +993,8 @@
                     </div>
                 </div>
                 <div class="predica-info">
-                    <h3 class="predica-title">The Power of Unshakeable Faith</h3>
-                    <p class="predica-meta">Pastor John Martinez • July 28, 2025</p>
+                    <h3 class="predica-title">El Poder de la Fe Inquebrantable</h3>
+                    <p class="predica-meta">Pastor Julio Ortega • 28 Julio 2025</p>
                 </div>
             </div>
             
@@ -659,8 +1005,8 @@
                     </div>
                 </div>
                 <div class="predica-info">
-                    <h3 class="predica-title">Walking in God's Will</h3>
-                    <p class="predica-meta">Pastor Maria Gonzalez • July 21, 2025</p>
+                    <h3 class="predica-title">Caminando en la Voluntad de Dios</h3>
+                    <p class="predica-meta">Pastora Ethel Bayona • 21 Julio 2025</p>
                 </div>
             </div>
             
@@ -671,111 +1017,99 @@
                     </div>
                 </div>
                 <div class="predica-info">
-                    <h3 class="predica-title">Grace That Transforms</h3>
-                    <p class="predica-meta">Pastor David Rodriguez • July 14, 2025</p>
+                    <h3 class="predica-title">La Gracia que Transforma</h3>
+                    <p class="predica-meta">Pastor Juan Carlos Escobar • 14 Julio 2025</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Eventos Section -->
-    <section class="eventos" id="events">
-        <div class="section-header">
-            <h2 class="section-title">Upcoming Events</h2>
+            
+            <div class="predica-card">
+                <div class="predica-overlay">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="predica-info">
+                    <h3 class="predica-title">Restauración Divina</h3>
+                    <p class="predica-meta">Pastora Fiona Belshaw • 7 Julio 2025</p>
+                </div>
+            </div>
+            
+            <div class="predica-card">
+                <div class="predica-overlay">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="predica-info">
+                    <h3 class="predica-title">El Fuego del Espíritu</h3>
+                    <p class="predica-meta">Pastor Julio Ortega • 30 Junio 2025</p>
+                </div>
+            </div>
+            
+            <div class="predica-card">
+                <div class="predica-overlay">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="predica-info">
+                    <h3 class="predica-title">Venciendo en Cristo</h3>
+                    <p class="predica-meta">Pastora Ethel Bayona • 23 Junio 2025</p>
+                </div>
+            </div>
         </div>
         
-        <div class="eventos-container">
-            <div class="evento-featured">
-                <div class="evento-featured-content">
-                    <h3>Annual Conference 2025</h3>
-                    <p>Join us for three days of powerful worship, inspiring messages, and life-changing encounters with God.</p>
-                    <p style="margin-top: 1rem; opacity: 0.8;">August 15-17, 2025</p>
-                </div>
-            </div>
-            
-            <div class="eventos-list">
-                <div class="evento-item">
-                    <div class="evento-date">
-                        <div class="evento-date-day">12</div>
-                        <div class="evento-date-month">AUG</div>
-                    </div>
-                    <div class="evento-details">
-                        <h4>Prayer Night</h4>
-                        <p>A special evening dedicated to prayer and worship</p>
-                    </div>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                
-                <div class="evento-item">
-                    <div class="evento-date">
-                        <div class="evento-date-day">24</div>
-                        <div class="evento-date-month">AUG</div>
-                    </div>
-                    <div class="evento-details">
-                        <h4>Community Outreach</h4>
-                        <p>Serving our community with love and compassion</p>
-                    </div>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                
-                <div class="evento-item">
-                    <div class="evento-date">
-                        <div class="evento-date-day">05</div>
-                        <div class="evento-date-month">SEP</div>
-                    </div>
-                    <div class="evento-details">
-                        <h4>Youth Camp</h4>
-                        <p>A weekend retreat for our young people</p>
-                    </div>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://www.youtube.com/@CcPeniel" target="_blank" class="btn btn-primary">VER MÁS PRÉDICAS</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contacto">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>Almighty One Church</h3>
-                <p style="opacity: 0.6; margin-top: 1rem;">Building a community of faith, hope, and love centered in Jesus Christ.</p>
+                <h3>Iglesia Peniel Comunidad Cristiana</h3>
+                <p style="opacity: 0.6; margin-top: 1rem;">Un encuentro con Dios lo cambia todo. Construyendo una comunidad de fe, esperanza y amor centrada en Jesucristo.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/penielmadrid/?hl=es" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@CcPeniel" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/34609377944" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4>Enlaces Rápidos</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Beliefs</a></li>
-                    <li><a href="#">Leadership</a></li>
-                    <li><a href="#">Testimonies</a></li>
+                    <li><a href="#vision">Nuestra Visión</a></li>
+                    <li><a href="#ministerios">Ministerios</a></li>
+                    <li><a href="#reuniones">Horarios</a></li>
+                    <li><a href="#historia">Historia</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h4>Get Involved</h4>
+                <h4>Involúcrate</h4>
                 <ul>
-                    <li><a href="#">Ministries</a></li>
-                    <li><a href="#">Small Groups</a></li>
-                    <li><a href="#">Volunteer</a></li>
-                    <li><a href="#">Give</a></li>
+                    <li><a href="#">Grupos Peniel</a></li>
+                    <li><a href="#">Voluntariado</a></li>
+                    <li><a href="#">Instituto Bíblico</a></li>
+                    <li><a href="#">Misiones</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h4>Contact</h4>
+                <h4>Contacto</h4>
                 <ul>
-                    <li><a href="#">123 Main Street</a></li>
-                    <li><a href="#">City, State 12345</a></li>
-                    <li><a href="#">(123) 456-7890</a></li>
-                    <li><a href="#">info@almightyone.com</a></li>
+                    <li><a href="#">Calle Miguel Fleta 11</a></li>
+                    <li><a href="#">28037, Madrid</a></li>
+                    <li><a href="tel:+34609377944">(+34) 609 377 944</a></li>
+                    <li><a href="#">info@penielmadrid.com</a></li>
                 </ul>
             </div>
+        </div>
+        
+        <div style="text-align: center; padding-top: 3rem; margin-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.5;">
+            <p>&copy; 2025 Iglesia Peniel Comunidad Cristiana. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -811,6 +1145,64 @@
             if (heroBg) {
                 heroBg.style.transform = `scale(1.2) translateY(${scrolled * 0.5}px)`;
             }
+            
+            // Float elements parallax
+            const floatElements = document.querySelectorAll('.floating-element');
+            floatElements.forEach((el, index) => {
+                const speed = index === 0 ? 0.3 : 0.2;
+                el.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.02}deg)`;
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.3)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.ministerio-card, .reunion-item, .vision-circle, .predica-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Vision circles interaction
+        const visionCircles = document.querySelectorAll('.vision-circle');
+        visionCircles.forEach(circle => {
+            circle.addEventListener('mouseenter', () => {
+                visionCircles.forEach(c => {
+                    if (c !== circle) {
+                        c.style.opacity = '0.5';
+                    }
+                });
+            });
+            
+            circle.addEventListener('mouseleave', () => {
+                visionCircles.forEach(c => {
+                    c.style.opacity = '1';
+                });
+            });
         });
     </script>
 </body>
