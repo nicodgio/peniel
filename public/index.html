@@ -15,7 +15,7 @@
       <div class="nav-container">
         <div class="logo">
           <div class="logo-img">
-            <i class="fas fa-cross"></i>
+            <img src="/imgs/peniel.svg" alt="Peniel Madrid" />
           </div>
           <div class="logo-text">
             <div class="peniel">PENIEL</div>
@@ -37,16 +37,13 @@
     <section class="hero" id="inicio">
       <div class="hero-bg"></div>
       <div class="hero-content">
-        <h1>BIENVENIDO A IGLESIA<br />PENIEL COMUNIDAD CRISTIANA</h1>
+        <!-- Antes: BIENVENIDO... -->
+        <h1>PENIEL MADRID</h1>
         <p class="hero-subtitle">Un encuentro con Dios lo cambia todo</p>
         <div class="hero-cta">
           <a href="#reuniones" class="btn btn-primary">VISÍTANOS</a>
-          <a
-            href="https://www.youtube.com/@CcPeniel"
-            target="_blank"
-            class="btn btn-secondary"
-            >VER EN VIVO</a
-          >
+          <!-- Antes: VER EN VIVO (YouTube) -->
+          <a href="#" class="btn btn-secondary" id="btnHablanos">HABLANOS</a>
         </div>
       </div>
       <div class="hero-bottom">
@@ -163,8 +160,16 @@
         </div>
 
         <div class="reunion-map">
-          <i class="fas fa-map-marked-alt" style="font-size: 3rem"></i>
-          <p>Mapa Interactivo</p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.947988960281!2d-3.634061223578483!3d40.43215057143719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422f72711cfea9%3A0x33f8534cc9869da9!2sC.%20de%20Miguel%20Fleta%2C%2011%2C%20San%20Blas-Canillejas%2C%2028037%20Madrid%2C%20Espa%C3%B1a!5e0!3m2!1ses-419!2smx!4v1754721691771!5m2!1ses-419!2smx"
+            width="100%"
+            height="100%"
+            style="border: 0; border-radius: 20px"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
         </div>
       </div>
     </section>
@@ -350,100 +355,98 @@
       </div>
     </section>
 
-    <!-- Predicas Section -->
-    <section class="predicas" id="predicas">
-      <div class="section-header">
-        <h2 class="section-title">MENSAJES RECIENTES</h2>
-        <p class="section-subtitle">
-          Revive nuestras prédicas más recientes desde nuestro canal de YouTube
-        </p>
-      </div>
+<!-- Predicas Section -->
+<section class="predicas" id="predicas">
+  <div class="section-header">
+    <h2 class="section-title">MENSAJES RECIENTES</h2>
+    <p class="section-subtitle">
+      Revive nuestras prédicas más recientes desde nuestro canal de YouTube
+    </p>
+  </div>
 
-      <div class="predicas-grid">
-        <div class="predica-card">
-          <div class="predica-overlay">
-            <div class="play-button">
-              <i class="fas fa-play"></i>
-            </div>
-          </div>
-          <div class="predica-info">
-            <h3 class="predica-title">El Poder de la Fe Inquebrantable</h3>
-            <p class="predica-meta">Pastor Julio Ortega • 28 Julio 2025</p>
-          </div>
-        </div>
-
-        <div class="predica-card">
-          <div class="predica-overlay">
-            <div class="play-button">
-              <i class="fas fa-play"></i>
-            </div>
-          </div>
-          <div class="predica-info">
-            <h3 class="predica-title">Caminando en la Voluntad de Dios</h3>
-            <p class="predica-meta">Pastora Ethel Bayona • 21 Julio 2025</p>
-          </div>
-        </div>
-
-        <div class="predica-card">
-          <div class="predica-overlay">
-            <div class="play-button">
-              <i class="fas fa-play"></i>
-            </div>
-          </div>
-          <div class="predica-info">
-            <h3 class="predica-title">La Gracia que Transforma</h3>
-            <p class="predica-meta">
-              Pastor Juan Carlos Escobar • 14 Julio 2025
-            </p>
-          </div>
-        </div>
-
-        <div class="predica-card">
-          <div class="predica-overlay">
-            <div class="play-button">
-              <i class="fas fa-play"></i>
-            </div>
-          </div>
-          <div class="predica-info">
-            <h3 class="predica-title">Restauración Divina</h3>
-            <p class="predica-meta">Pastora Fiona Belshaw • 7 Julio 2025</p>
-          </div>
-        </div>
-
-        <div class="predica-card">
-          <div class="predica-overlay">
-            <div class="play-button">
-              <i class="fas fa-play"></i>
-            </div>
-          </div>
-          <div class="predica-info">
-            <h3 class="predica-title">El Fuego del Espíritu</h3>
-            <p class="predica-meta">Pastor Julio Ortega • 30 Junio 2025</p>
-          </div>
-        </div>
-
-        <div class="predica-card">
-          <div class="predica-overlay">
-            <div class="play-button">
-              <i class="fas fa-play"></i>
-            </div>
-          </div>
-          <div class="predica-info">
-            <h3 class="predica-title">Venciendo en Cristo</h3>
-            <p class="predica-meta">Pastora Ethel Bayona • 23 Junio 2025</p>
-          </div>
+  <div class="predicas-grid">
+    <div class="predica-card" style="background-image: url('/imgs/predicas/predica1.png');" onclick="window.open('https://www.youtube.com/watch?v=G4xpiUtz944&t=1s', '_blank')">
+      <div class="predica-overlay">
+        <div class="play-button">
+          <i class="fas fa-play"></i>
         </div>
       </div>
-
-      <div style="text-align: center; margin-top: 3rem">
-        <a
-          href="https://www.youtube.com/@CcPeniel"
-          target="_blank"
-          class="btn btn-primary"
-          >VER MÁS PRÉDICAS</a
-        >
+      <div class="predica-info">
+        <h3 class="predica-title">Cuídate bien: El descanso de Dios</h3>
+        <p class="predica-meta">Pastor Julio Ortega</p>
       </div>
-    </section>
+    </div>
+
+    <div class="predica-card" style="background-image: url('/imgs/predica2.jpg');" onclick="window.open('https://www.youtube.com/watch?v=TU_LINK_2', '_blank')">
+      <div class="predica-overlay">
+        <div class="play-button">
+          <i class="fas fa-play"></i>
+        </div>
+      </div>
+      <div class="predica-info">
+        <h3 class="predica-title">Caminando en la Voluntad de Dios</h3>
+        <p class="predica-meta">Pastora Ethel Bayona • 21 Julio 2025</p>
+      </div>
+    </div>
+
+    <div class="predica-card" style="background-image: url('/imgs/predica3.jpg');" onclick="window.open('https://www.youtube.com/watch?v=TU_LINK_3', '_blank')">
+      <div class="predica-overlay">
+        <div class="play-button">
+          <i class="fas fa-play"></i>
+        </div>
+      </div>
+      <div class="predica-info">
+        <h3 class="predica-title">La Gracia que Transforma</h3>
+        <p class="predica-meta">Pastor Juan Carlos Escobar • 14 Julio 2025</p>
+      </div>
+    </div>
+
+    <div class="predica-card" style="background-image: url('/imgs/predica4.jpg');" onclick="window.open('https://www.youtube.com/watch?v=TU_LINK_4', '_blank')">
+      <div class="predica-overlay">
+        <div class="play-button">
+          <i class="fas fa-play"></i>
+        </div>
+      </div>
+      <div class="predica-info">
+        <h3 class="predica-title">Restauración Divina</h3>
+        <p class="predica-meta">Pastora Fiona Belshaw • 7 Julio 2025</p>
+      </div>
+    </div>
+
+    <div class="predica-card" style="background-image: url('/imgs/predica5.jpg');" onclick="window.open('https://www.youtube.com/watch?v=TU_LINK_5', '_blank')">
+      <div class="predica-overlay">
+        <div class="play-button">
+          <i class="fas fa-play"></i>
+        </div>
+      </div>
+      <div class="predica-info">
+        <h3 class="predica-title">El Fuego del Espíritu</h3>
+        <p class="predica-meta">Pastor Julio Ortega • 30 Junio 2025</p>
+      </div>
+    </div>
+
+    <div class="predica-card" style="background-image: url('/imgs/predica6.jpg');" onclick="window.open('https://www.youtube.com/watch?v=TU_LINK_6', '_blank')">
+      <div class="predica-overlay">
+        <div class="play-button">
+          <i class="fas fa-play"></i>
+        </div>
+      </div>
+      <div class="predica-info">
+        <h3 class="predica-title">Venciendo en Cristo</h3>
+        <p class="predica-meta">Pastora Ethel Bayona • 23 Junio 2025</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 3rem">
+    
+      href="https://www.youtube.com/@CcPeniel"
+      target="_blank"
+      class="btn btn-primary"
+      >VER MÁS PRÉDICAS</a
+    >
+  </div>
+</section>
 
     <!-- Footer -->
     <footer id="contacto">
@@ -517,6 +520,12 @@
     </footer>
 
     <script>
+      // Evitar acción del botón "HABLANOS" por ahora
+      document.addEventListener("click", (e) => {
+        const habla = e.target.closest("#btnHablanos");
+        if (habla) e.preventDefault();
+      });
+
       // Configuración de YouTube API
       const YOUTUBE_CONFIG = {
         API_KEY: "AIzaSyCkJJFxIAnw1ukBakSOwrhP0GavwY_yt18",
