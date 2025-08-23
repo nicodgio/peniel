@@ -1,0 +1,538 @@
+.grupos-peniel-page {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.grupos-peniel-page .floating-element {
+  position: absolute;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.grupos-peniel-page .floating-element:first-of-type {
+  width: 400px;
+  height: 400px;
+  top: -200px;
+  right: -200px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.grupos-peniel-page .floating-element:last-of-type {
+  width: 300px;
+  height: 300px;
+  bottom: -150px;
+  left: -150px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.grupos-hero {
+  padding: 4rem 2rem 6rem;
+  text-align: center;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.hero-text h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 3rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #667eea;
+  line-height: 1;
+}
+
+.stat .label {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-placeholder {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: white;
+  opacity: 0.8;
+}
+
+.que-son-section {
+  padding: 6rem 0;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.que-son-section h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.descripcion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.descripcion-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.descripcion-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.descripcion-card h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.descripcion-card p {
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.beneficios-section {
+  padding: 6rem 0;
+}
+
+.beneficios-section h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.beneficio-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.beneficio-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.beneficio-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.beneficio-card h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.beneficio-card p {
+  opacity: 0.8;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.tipos-section {
+  padding: 6rem 0;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tipos-section h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tipos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.tipo-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.tipo-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tipo-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tipo-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.tipo-card h4 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #667eea;
+}
+
+.tipo-descripcion {
+  opacity: 0.8;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.tipo-horarios {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.testimonios-section {
+  padding: 6rem 0;
+}
+
+.testimonios-section h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.testimonio-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.testimonio-foto {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.testimonio-content p {
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.testimonio-autor strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.testimonio-autor span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.como-funciona-section {
+  padding: 6rem 0;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.como-funciona-section h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.timeline {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 70px;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, #667eea, transparent);
+}
+
+.timeline-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.timeline-content h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #667eea;
+}
+
+.timeline-content p {
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.cta-section {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.cta-content h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cta-content > p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-note {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@media (max-width: 768px) {
+  .grupos-peniel-page {
+    padding: 2rem 1rem;
+  }
+  
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .hero-stats {
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .hero-text h3 {
+    font-size: 2rem;
+  }
+  
+  .section-container h3 {
+    font-size: 2rem;
+  }
+  
+  .descripcion-grid,
+  .beneficios-grid,
+  .tipos-grid,
+  .testimonios-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonio-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .timeline-item:not(:last-child)::after {
+    display: none;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

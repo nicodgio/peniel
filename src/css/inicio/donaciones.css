@@ -1,0 +1,541 @@
+.donaciones-page {
+  padding: 4rem 4rem 8rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.donaciones-page .floating-element {
+  position: absolute;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.donaciones-page .floating-element:first-of-type {
+  width: 400px;
+  height: 400px;
+  top: -200px;
+  right: -200px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.donaciones-page .floating-element:last-of-type {
+  width: 300px;
+  height: 300px;
+  bottom: -150px;
+  left: -150px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+.donaciones-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.impacto-section {
+  margin-bottom: 6rem;
+  text-align: center;
+}
+
+.impacto-content h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.impacto-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.estadisticas-impacto {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.stat-impacto {
+  text-align: center;
+}
+
+.stat-numero {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #27ae60;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  max-width: 150px;
+}
+
+.metodos-donacion {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 6rem;
+}
+
+.metodos-donacion h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #27ae60;
+}
+
+.metodos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.metodo-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.metodo-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.metodo-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metodo-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.metodo-header h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.metodo-descripcion {
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.metodo-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dato-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.dato-label {
+  font-weight: 600;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.dato-valor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copiar-btn {
+  background: transparent;
+  border: none;
+  color: #27ae60;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.copiar-btn:hover {
+  background: rgba(39, 174, 96, 0.2);
+}
+
+.proyectos-section {
+  margin-bottom: 6rem;
+}
+
+.proyectos-section h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.proyecto-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.proyecto-header {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.proyecto-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.proyecto-info h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.proyecto-info p {
+  opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.proyecto-progreso {
+  margin-top: 1.5rem;
+}
+
+.progreso-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.barra-progreso {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progreso-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  transition: width 0.3s ease;
+}
+
+.tipos-donacion {
+  margin-bottom: 6rem;
+}
+
+.tipos-donacion h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tipos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.tipo-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2.5rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.tipo-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tipo-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.tipo-card h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #27ae60;
+}
+
+.tipo-card p {
+  opacity: 0.8;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.tipo-card ul {
+  list-style: none;
+  text-align: left;
+}
+
+.tipo-card li {
+  padding: 0.3rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.tipo-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.transparencia-section {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3rem;
+  border-radius: 20px;
+  margin-bottom: 6rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transparencia-content h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #27ae60;
+}
+
+.transparencia-content > p {
+  text-align: center;
+  opacity: 0.9;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.compromisos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.compromiso-item {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.compromiso-item i {
+  font-size: 2rem;
+  color: #27ae60;
+  margin-bottom: 1rem;
+}
+
+.compromiso-item h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.compromiso-item p {
+  opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.contacto-financiero {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.8;
+}
+
+.contacto-financiero a {
+  color: #27ae60;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.contacto-financiero a:hover {
+  text-decoration: underline;
+}
+
+.llamado-final {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4rem;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.llamado-content h3 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.llamado-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+}
+
+.llamado-content p:first-of-type {
+  font-style: italic;
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.contacto-donaciones {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.contacto-donaciones .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@media (max-width: 768px) {
+  .donaciones-page {
+    padding: 4rem 2rem;
+  }
+  
+  .estadisticas-impacto {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .metodos-donacion {
+    padding: 2rem;
+  }
+  
+  .metodos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dato-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .proyectos-grid,
+  .tipos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .proyecto-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .compromisos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .transparencia-section {
+    padding: 2rem;
+  }
+  
+  .llamado-final {
+    padding: 2rem;
+  }
+  
+  .llamado-content h3 {
+    font-size: 1.8rem;
+  }
+  
+  .contacto-donaciones {
+    flex-direction: column;
+    align-items: center;
+  }
+}
