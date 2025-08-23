@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Configuración de YouTube API
-$API_KEY = 'AIzaSyBgg5f96RaAexmF4DB98Y8RptIshmjBL5I';
+$API_KEY = 'AIzaSyCkJJFxIAnw1ukBakSOwrhP0GavwY_yt18';
 $CHANNEL_ID = 'UC9hskYYUu84QrSsho5bsizg';
 
 // Función para obtener los últimos videos del canal

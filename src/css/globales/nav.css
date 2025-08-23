@@ -1,3 +1,4 @@
+/* NAVBAR ORIGINAL */
 .navbar {
   position: fixed;
   top: 0;
@@ -98,6 +99,112 @@
   border-radius: 1px;
 }
 
+/* BOTÓN FLOTANTE "SOY NUEVO" */
+.nuevo-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1001;
+  
+  /* Estilo del botón */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  
+  /* Tamaño y forma */
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  
+  /* Flexbox para centrar contenido */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  
+  /* Efectos visuales */
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  
+  /* Transiciones suaves */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+  
+  /* Animación de pulso suave */
+  animation: nuevoPulse 3s ease-in-out infinite;
+}
+
+.nuevo-button:hover {
+  /* Hover: Más grande y brillante */
+  transform: scale(1.15);
+  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+  background: linear-gradient(135deg, #7b8ef7 0%, #8659b8 100%);
+  
+  /* Detener la animación de pulso al hacer hover */
+  animation: none;
+}
+
+.nuevo-button:active {
+  /* Click: Efecto de presión */
+  transform: scale(1.05);
+  transition: transform 0.1s;
+}
+
+.nuevo-text {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1;
+  text-align: center;
+}
+
+.nuevo-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Animación de pulso suave */
+@keyframes nuevoPulse {
+  0%, 100% { 
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 8px 35px rgba(102, 126, 234, 0.6);
+    transform: scale(1.05);
+  }
+}
+
+/* Efecto de brillo al aparecer */
+.nuevo-button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.nuevo-button:hover::before {
+  opacity: 1;
+  animation: shine 1s ease-in-out;
+}
+
+@keyframes shine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem 2rem;
@@ -105,5 +212,39 @@
   
   .nav-links {
     display: none;
+  }
+  
+  /* Botón más pequeño en móvil */
+  .nuevo-button {
+    width: 70px;
+    height: 70px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .nuevo-text {
+    font-size: 0.6rem;
+  }
+  
+  .nuevo-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Botón aún más pequeño en pantallas muy pequeñas */
+  .nuevo-button {
+    width: 60px;
+    height: 60px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  .nuevo-text {
+    font-size: 0.55rem;
+  }
+  
+  .nuevo-icon {
+    font-size: 0.9rem;
   }
 }

@@ -98,22 +98,190 @@ const Home = () => {
     }
   ];
 
+  const proximosEventos = [
+    {
+      fecha: "DOM 15 DIC",
+      titulo: "Celebración de Navidad",
+      descripcion: "Únete a nuestra celebración especial navideña con presentaciones, coro y mensaje inspirador.",
+      hora: "11:00 HS",
+      icono: "fas fa-gifts"
+    },
+    {
+      fecha: "SÁB 21 DIC",
+      titulo: "Retiro de Jóvenes",
+      descripcion: "Un fin de semana de crecimiento espiritual y comunión para jóvenes de 18-35 años.",
+      hora: "19:00 HS",
+      icono: "fas fa-mountain"
+    },
+    {
+      fecha: "DOM 29 DIC",
+      titulo: "Culto de Fin de Año",
+      descripcion: "Cerramos el año dando gracias y con expectativa por lo que Dios hará en el nuevo año.",
+      hora: "11:00 HS",
+      icono: "fas fa-calendar-check"
+    }
+  ];
+
   return (
     <>
-      {/* Hero Section */}
-      <section className="hero" id="inicio">
-        <div className="hero-bg"></div>
-        <div className="hero-content">
-          <h1>PENIEL MADRID</h1>
-          <p className="hero-subtitle">Un encuentro con Dios lo cambia todo</p>
-          <div className="hero-cta">
-            <a href="/reuniones" className="btn btn-primary">VISÍTANOS</a>
-            <a href="/contacto" className="btn btn-secondary">HABLANOS</a>
+      {/* Hero Section - SOLUCIÓN PERFECTA: CSS + Tailwind centrado */}
+      <section 
+        className="hero" 
+        id="inicio"
+        style={{
+          height: '100vh',
+          width: '100%',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          marginTop: '-120px'
+        }}
+      >
+        {/* Background */}
+        <div 
+          className="hero-bg"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/imgs/hero.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            zIndex: -1
+          }}
+        ></div>
+        
+        {/* Contenido principal - CENTRADO PERFECTO */}
+        <div 
+          style={{
+            position: 'relative',
+            zIndex: 10,
+            textAlign: 'center',
+            color: 'white',
+            maxWidth: '1200px',
+            width: '100%',
+            padding: '0 2rem'
+          }}
+        >
+          <h1 
+            style={{
+              fontSize: 'clamp(3rem, 8vw, 7rem)',
+              fontWeight: 900,
+              lineHeight: 1,
+              margin: '0 0 1.5rem 0',
+              letterSpacing: '-2px',
+              fontFamily: 'Montserrat, sans-serif',
+              textTransform: 'uppercase',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+              textAlign: 'center',
+              width: '100%'
+            }}
+          >
+            PENIEL MADRID
+          </h1>
+          
+          <p 
+            style={{
+              fontSize: 'clamp(1.2rem, 3vw, 2rem)',
+              fontWeight: 300,
+              margin: '0 0 3rem 0',
+              opacity: 0.95,
+              fontFamily: 'Montserrat, sans-serif',
+              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+              lineHeight: 1.3,
+              textAlign: 'center',
+              width: '100%'
+            }}
+          >
+            Un encuentro con Dios lo cambia todo
+          </p>
+          
+          <div 
+            style={{
+              display: 'flex',
+              gap: '2rem',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              width: '100%'
+            }}
+          >
+            <a 
+              href="/reuniones" 
+              className="btn btn-primary"
+              style={{
+                padding: '1rem 2.5rem',
+                border: 'none',
+                borderRadius: '50px',
+                fontWeight: 600,
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                textDecoration: 'none',
+                display: 'inline-block',
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '0.9rem',
+                background: 'rgba(255, 255, 255, 0.9)',
+                color: 'black',
+                border: '2px solid rgba(255, 255, 255, 0.9)'
+              }}
+            >
+              VISÍTANOS
+            </a>
+            <a 
+              href="/contacto" 
+              className="btn btn-secondary"
+              style={{
+                padding: '1rem 2.5rem',
+                borderRadius: '50px',
+                fontWeight: 600,
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                textDecoration: 'none',
+                display: 'inline-block',
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '0.9rem',
+                background: 'transparent',
+                color: 'white',
+                border: '2px solid rgba(255, 255, 255, 0.8)',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              HÁBLANOS
+            </a>
           </div>
         </div>
-        <div className="hero-bottom">
-          <div>REUNIONES GENERALES DOMINGOS 11:00 HS</div>
-          <div>JÓVENES SÁBADOS 19:00 HS</div>
+
+        {/* Info cards en la parte inferior */}
+        <div 
+          className="hero-info"
+          style={{
+            position: 'absolute',
+            bottom: '2rem',
+            left: '4rem',
+            right: '4rem',
+            zIndex: 10,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <div className="hero-info-item">
+            REUNIONES GENERALES<br/>
+            <strong>DOMINGOS 11:00 HS</strong>
+          </div>
+          <div className="hero-info-item">
+            JÓVENES<br/>
+            <strong>SÁBADOS 19:00 HS</strong>
+          </div>
         </div>
       </section>
 
@@ -186,51 +354,61 @@ const Home = () => {
         </section>
       )}
 
-      {/* Reuniones Section */}
-      <section className="reuniones" id="reuniones">
+      {/* Visítanos Banner */}
+      <section className="visitanos-banner">
+        <div className="visitanos-content">
+          <div className="visitanos-image">
+            <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&h=600&fit=crop" alt="Iglesia Peniel Madrid" />
+          </div>
+          <div className="visitanos-text">
+            <h2>Ven y Visítanos</h2>
+            <p>Te esperamos con los brazos abiertos en nuestra iglesia. Experimenta la presencia de Dios y forma parte de nuestra familia.</p>
+            <a href="/reuniones" className="btn btn-primary">CONOCER MÁS</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Próximos Eventos Section */}
+      <section className="proximos-eventos" id="eventos">
         <div className="section-header">
-          <h2 className="section-title">REUNIONES</h2>
+          <h2 className="section-title">PRÓXIMOS EVENTOS</h2>
           <p className="section-subtitle">
-            Si quieres visitarnos y ser parte de esta gran familia, ¡eres bienvenido!
+            No te pierdas las actividades especiales que tenemos preparadas
           </p>
         </div>
 
-        <div className="reuniones-grid">
-          <div className="reuniones-info">
-            <h3><i className="fas fa-map-marker-alt"></i> Ubicación</h3>
-            <p style={{ fontSize: '1.2rem', opacity: 0.9, marginBottom: '2rem' }}>
-              Calle Miguel Fleta 11, 28037, Madrid
-            </p>
-            <p style={{ opacity: 0.7, marginBottom: '2rem' }}>
-              De fácil acceso en transporte público y con aparcamiento en la zona
-            </p>
-
-            <div className="reunion-item">
-              <div className="reunion-time">Domingos 11:00 hs</div>
-              <p>Reuniones Generales</p>
+        <div className="events-grid">
+          {proximosEventos.map((evento, index) => (
+            <div key={index} className="event-card">
+              <div className="event-image">
+                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=200&fit=crop" alt={evento.titulo} />
+              </div>
+              <div className="event-content">
+                <div className="event-date">{evento.fecha}</div>
+                <h3 className="event-title">
+                  <i className={evento.icono}></i> {evento.titulo}
+                </h3>
+                <p className="event-description">{evento.descripcion}</p>
+                <div className="event-time">
+                  <i className="far fa-clock"></i>
+                  {evento.hora}
+                </div>
+              </div>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <div className="reunion-item">
-              <div className="reunion-time">Sábados 19:00 hs</div>
-              <p>Reuniones de Jóvenes</p>
-            </div>
-
-            <div className="reunion-item">
-              <div className="reunion-time">Durante la semana</div>
-              <p>Grupos Peniel - ¡Apúntate y forma parte!</p>
-            </div>
+      {/* Menú Dominical Banner */}
+      <section className="menu-dominical">
+        <div className="menu-content">
+          <div className="menu-text">
+            <h2><i className="fas fa-utensils"></i> Te invitamos a conocer nuestro Menú Dominical</h2>
+            <p>Cada domingo preparamos un delicioso menú casero. Tu contribución nos ayuda a seguir bendiciendo a más familias y sostener los ministerios de la iglesia.</p>
+            <a href="/menu-dominical" className="btn btn-primary">VER MENÚ DE ESTA SEMANA</a>
           </div>
-
-          <div className="reunion-map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.947988960281!2d-3.634061223578483!3d40.43215057143719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422f72711cfea9%3A0x33f8534cc9869da9!2sC.%20de%20Miguel%20Fleta%2C%2011%2C%20San%20Blas-Canillejas%2C%2028037%20Madrid%2C%20Espa%C3%B1a!5e0!3m2!1ses-419!2smx!4v1754721691771!5m2!1ses-419!2smx"
-              width="100%"
-              height="100%"
-              style={{ border: 0, borderRadius: '20px' }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="menu-image">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop" alt="Menú Dominical" />
           </div>
         </div>
       </section>
@@ -268,42 +446,6 @@ const Home = () => {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Vision Section */}
-      <section className="vision" id="vision">
-        <div className="floating-element"></div>
-        <div className="floating-element"></div>
-
-        <div className="section-header">
-          <h2 className="section-title">NUESTRA VISIÓN</h2>
-        </div>
-
-        <div className="vision-container">
-          <div className="vision-content">
-            <h2>"Ser y Hacer Discípulos"</h2>
-            <p>
-              Creemos que la tarea primordial de la iglesia es que todas las
-              personas en el mundo sean salvas de la condenación eterna y que
-              todos aquellos que reciben el don de la salvación sean transformados
-              profundamente.
-            </p>
-            <p>
-              Nuestra dinámica de trabajo es el <strong>Ciclo de Vida</strong>,
-              que asegura el crecimiento y la multiplicación de la iglesia a
-              través de cuatro pasos fundamentales.
-            </p>
-          </div>
-
-          <div className="vision-graphic">
-            <div className="vision-circles">
-              <div className="vision-circle">GANAR</div>
-              <div className="vision-circle">CONSOLIDAR</div>
-              <div className="vision-circle">DISCIPULAR</div>
-              <div className="vision-circle">ENVIAR</div>
-            </div>
-          </div>
         </div>
       </section>
 
