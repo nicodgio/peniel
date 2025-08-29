@@ -14,7 +14,7 @@ const Home = () => {
 
   const YOUTUBE_CONFIG = {
     API_KEY: "AIzaSyBgg5f96RaAexmF4DB98Y8RptIshmjBL5I",
-    CHANNEL_ID: "UC9hskYYUu84QrSsho5bsizg",
+    CHANNEL_ID: "UCbfff5PKN2dbtJCgK8w9_yA",
   };
 
   useEffect(() => {
@@ -59,12 +59,12 @@ const Home = () => {
     {
       meta: ["MENSUAL", "SERVICIO"],
       title: "Acción Social",
-      description: "Banco de alimentos y ropero comunitario. Ayudamos a personas en situación de vulnerabilidad, promoviendo la economía circular."
+      description: "Cada mes recogemos y distribuimos alimentos a más de 100 personas en riesgo de exclusión, evitando el desperdicio y ofreciendo también un ropero comunitario. Todo esto como expresión práctica del amor de Dios."
     },
     {
       meta: ["SÁBADOS", "19:00 HS"],
       title: "Peniel NG (Next Generation)",
-      description: "Ministerio para adolescentes (12-18) y jóvenes (18-35). Reuniones dinámicas y dos campamentos al año."
+      description: "Ministerio para adolescentes y jóvenes apasionados por Cristo. Crecemos en la fe, fortalecemos amistades y vivimos juntos la Palabra de Dios. También organizamos campamentos en verano e invierno."
     },
     {
       meta: ["DOMINGOS", "11:00 HS"],
@@ -74,57 +74,77 @@ const Home = () => {
     {
       meta: ["CONTINUO", "SERVICIO"],
       title: "Atención Primaria y Consolidación",
-      description: "Primer contacto para nuevos visitantes y recién convertidos. Acompañamiento personalizado en los primeros pasos de fe."
+      description: "El primer contacto para quienes llegan a la iglesia o comienzan su caminar con Jesús. Acompañamos a los recién convertidos para afianzar su relación con Dios e integrarse a la familia de la iglesia."
     },
     {
       meta: ["MARTES", "21:00 HS"],
       title: "Instituto Bíblico Peniel",
-      description: "Formación teológica semipresencial con material de Global University. Certificaciones internas disponibles."
+      description: "Formación semipresencial para profundizar en la Palabra y prepararse para el servicio ministerial. Material oficial de Global University con certificaciones internas."
     },
     {
       meta: ["GLOBAL", "9 PROYECTOS"],
       title: "Misiones",
-      description: "Apoyamos proyectos misioneros alrededor del mundo. Celebramos anualmente la Fiesta de las Naciones."
+      description: "Somos una comunidad misionera comprometida con llevar el evangelio a todas las naciones. Apoyamos 9 proyectos misioneros alrededor del mundo. Celebramos anualmente la Fiesta de las Naciones."
     },
     {
       meta: ["MIÉRCOLES", "19:00 HS"],
       title: "Evangelismo",
-      description: "Salimos cada semana a compartir esperanza. Punto de encuentro: C.C. Alcalá Norte (Ciudad Lineal)."
+      description: "Cada semana salimos a llevar esperanza a nuestra ciudad. Punto de encuentro: Centro Comercial Alcalá Norte (Ciudad Lineal). No se necesita experiencia, solo un corazón dispuesto."
     },
     {
       meta: ["HOGARES", "SEMANAL"],
       title: "Grupos Peniel",
-      description: "Células en hogares donde compartimos, crecemos y alcanzamos a nuestros vecinos. La iglesia más allá de las cuatro paredes."
+      description: "Peniel es una iglesia en células con un solo propósito: alcanzar más almas. Las células llevan el evangelio a los hogares para dar a conocer el nombre de Dios a nuestros amigos, vecinos y comunidad."
     }
   ];
 
   const proximosEventos = [
     {
-      fecha: "DOM 15 DIC",
-      titulo: "Celebración de Navidad",
-      descripcion: "Únete a nuestra celebración especial navideña con presentaciones, coro y mensaje inspirador.",
+      fecha: "SÁB 27 SEP",
+      titulo: "Cena de Matrimonios",
+      descripcion: "Una velada de gala para celebrar el amor y agradecer a Dios por cada matrimonio, compartiendo momentos especiales en pareja.",
+      hora: "20:00 HS",
+      icono: "fas fa-heart"
+    },
+    {
+      fecha: "SÁB 12 OCT",
+      titulo: "Fiesta de las Naciones",
+      descripcion: "Un día donde disfrutaremos de comidas típicas de distintos países, presentaciones llenas de color y un ambiente familiar.",
+      hora: "11:00 HS",
+      icono: "fas fa-globe"
+    },
+    {
+      fecha: "SÁB 30 NOV",
+      titulo: "Acción de Gracias",
+      descripcion: "Celebramos juntos con una comida en familia, menú delicioso, dinámicas de gratitud a Dios y testimonios de Su fidelidad.",
+      hora: "13:00 HS",
+      icono: "fas fa-pray"
+    },
+    {
+      fecha: "5-8 DIC",
+      titulo: "Campamento Jóvenes ESCAPE '25",
+      descripcion: "Un fin de semana para escaparnos de la rutina, encontrarnos con Dios y pasarla increíble con amigos nuevos y de siempre.",
+      hora: "TODO EL DÍA",
+      icono: "fas fa-mountain"
+    },
+    {
+      fecha: "SÁB 21 DIC",
+      titulo: "Culto de Navidad",
+      descripcion: "Un tiempo especial para celebrar el nacimiento de Jesús, compartir juntos en familia y agradecer todo lo que Dios ha hecho este año.",
       hora: "11:00 HS",
       icono: "fas fa-gifts"
     },
     {
-      fecha: "SÁB 21 DIC",
-      titulo: "Retiro de Jóvenes",
-      descripcion: "Un fin de semana de crecimiento espiritual y comunión para jóvenes de 18-35 años.",
-      hora: "19:00 HS",
-      icono: "fas fa-mountain"
-    },
-    {
-      fecha: "DOM 29 DIC",
-      titulo: "Culto de Fin de Año",
-      descripcion: "Cerramos el año dando gracias y con expectativa por lo que Dios hará en el nuevo año.",
-      hora: "11:00 HS",
+      fecha: "MAR 31 DIC",
+      titulo: "Fiesta de Nochevieja",
+      descripcion: "Una noche para cerrar el año agradeciendo y comenzarlo en oración. Cenamos juntos, juegos, photocall y cerramos con churros y chocolate.",
+      hora: "20:00 HS",
       icono: "fas fa-calendar-check"
     }
   ];
 
   return (
     <>
-      {/* Hero Section - SOLUCIÓN PERFECTA: CSS + Tailwind centrado */}
       <section 
         className="hero" 
         id="inicio"
@@ -139,7 +159,6 @@ const Home = () => {
           marginTop: '-120px'
         }}
       >
-        {/* Background */}
         <div 
           className="hero-bg"
           style={{
@@ -156,7 +175,6 @@ const Home = () => {
           }}
         ></div>
         
-        {/* Contenido principal - CENTRADO PERFECTO */}
         <div 
           style={{
             position: 'relative',
@@ -260,7 +278,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Info cards en la parte inferior */}
         <div 
           className="hero-info"
           style={{
@@ -285,7 +302,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Live Section */}
       {isLiveActive && (
         <section className="live-section active">
           <div className="live-bg-effect"></div>
@@ -354,7 +370,6 @@ const Home = () => {
         </section>
       )}
 
-      {/* Visítanos Banner */}
       <section className="visitanos-banner">
         <div className="visitanos-content">
           <div className="visitanos-image">
@@ -368,7 +383,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Próximos Eventos Section */}
       <section className="proximos-eventos" id="eventos">
         <div className="section-header">
           <h2 className="section-title">PRÓXIMOS EVENTOS</h2>
@@ -399,7 +413,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Menú Dominical Banner */}
       <section className="menu-dominical">
         <div className="menu-content">
           <div className="menu-text">
@@ -413,7 +426,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Ministerios Section */}
       <section className="ministerios" id="ministerios">
         <div className="section-header">
           <h2 className="section-title">Involúcrate en nuestro movimiento</h2>
@@ -449,7 +461,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Predicas Section */}
       <section className="predicas" id="predicas">
         <div className="section-header">
           <h2 className="section-title">MENSAJES RECIENTES</h2>

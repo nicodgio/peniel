@@ -68,7 +68,7 @@ const Contacto = () => {
                     <i className="fas fa-envelope"></i>
                     <div>
                       <span className="label">Email</span>
-                      <a href="mailto:info@penielmadrid.com" className="valor">info@penielmadrid.com</a>
+                      <a href="mailto:secretariapenielmadrid@gmail.com" className="valor">secretariapenielmadrid@gmail.com</a>
                     </div>
                   </div>
                   

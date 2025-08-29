@@ -62,7 +62,7 @@ const Footer = () => {
             <li><a href="#">Calle Miguel Fleta 11</a></li>
             <li><a href="#">28037, Madrid</a></li>
             <li><a href="tel:+34609377944">(+34) 609 377 944</a></li>
-            <li><a href="#">info@penielmadrid.com</a></li>
+            <li><a href="#">secretariapenielmadrid@gmail.com</a></li>
           </ul>
         </div>
       </div>
