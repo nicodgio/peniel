@@ -1,16 +1,23 @@
-/* HERO SECTION - SOLUCIÓN DEFINITIVA */
+/* ESTILOS GLOBALES */
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* HERO SECTION */
 .hero {
-  /* Ocupar toda la pantalla visible */
   height: 100vh;
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrar verticalmente */
-  align-items: center; /* Centrar horizontalmente */
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-  /* IMPORTANTE: Quitar el padding que viene del main-content */
-  margin-top: -120px; /* Compensar el padding-top del main-content */
+  margin-top: -120px;
 }
 
 .hero-bg {
@@ -27,10 +34,10 @@
 }
 
 .hero-content {
-  position: absolute; /* Cambiar a absolute para mejor control */
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centrado perfecto */
+  transform: translate(-50%, -50%);
   z-index: 10;
   text-align: center;
   width: 100%;
@@ -40,7 +47,6 @@
 
 .hero-main-text {
   width: 100%;
-  /* Asegurar centrado perfecto */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -52,39 +58,39 @@
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 900;
   line-height: 1;
-  margin: 0 0 1.5rem 0; /* Simplificar margins */
+  margin: 0 0 1.5rem 0;
   letter-spacing: -2px;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  text-align: center; /* Asegurar texto centrado */
-  width: 100%; /* Ocupar todo el ancho */
+  text-align: center;
+  width: 100%;
 }
 
 .hero-subtitle {
   font-size: clamp(1.2rem, 3vw, 2rem);
   font-weight: 300;
-  margin: 0 0 3rem 0; /* Simplificar margins */
+  margin: 0 0 3rem 0;
   opacity: 0.95;
   font-family: 'Montserrat', sans-serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   line-height: 1.3;
-  text-align: center; /* Asegurar texto centrado */
-  width: 100%; /* Ocupar todo el ancho */
+  text-align: center;
+  width: 100%;
 }
 
 .hero-cta {
   display: flex;
   gap: 2rem;
-  justify-content: center; /* Centrar botones */
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
 }
 
 .hero-info {
-  position: absolute; /* Cambiar a absolute para posicionar al fondo */
-  bottom: 2rem; /* Posicionar al fondo del hero */
+  position: absolute;
+  bottom: 2rem;
   left: 4rem;
   right: 4rem;
   z-index: 10;
@@ -98,7 +104,7 @@
   font-size: 0.9rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
-  text-align: center; /* Centrar texto */
+  text-align: center;
   line-height: 1.4;
   background: rgba(0, 0, 0, 0.7);
   padding: 1rem 1.5rem;
@@ -156,14 +162,12 @@
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .hero {
-    margin-top: -100px; /* Ajustar para móvil */
+    margin-top: -100px;
   }
   
   .hero-content {
-    /* Mantener centrado en móvil */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -241,8 +245,8 @@
 .live-bg-effect {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 50%, rgba(255, 0, 0, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 50%, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 20% 50%, rgba(96, 155, 232, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(96, 155, 232, 0.1) 0%, transparent 50%);
   animation: livePulse 4s ease-in-out infinite;
 }
 
@@ -267,12 +271,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 0, 0, 0.9);
+  background: rgba(96, 155, 232, 0.9);
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 50px;
   font-weight: 700;
   font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 1rem;
@@ -280,9 +285,9 @@
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(255, 0, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(96, 155, 232, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(96, 155, 232, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(96, 155, 232, 0); }
 }
 
 .live-dot {
@@ -302,6 +307,7 @@
   font-size: 3rem;
   font-weight: 900;
   margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
   background: linear-gradient(135deg, #fff 0%, #ccc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -309,6 +315,7 @@
 
 .live-subtitle {
   font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
   opacity: 0.8;
   margin-bottom: 3rem;
 }
@@ -355,6 +362,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .live-info {
@@ -367,6 +375,7 @@
 
 .live-info h3 {
   font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
   margin-bottom: 1rem;
 }
 
@@ -397,6 +406,7 @@
 
 .live-info-text {
   flex: 1;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .live-info-label {
@@ -411,12 +421,13 @@
 
 .live-chat-btn {
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
   color: white;
   border: none;
   padding: 1rem;
   border-radius: 50px;
   font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
@@ -426,296 +437,9 @@
 
 .live-chat-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 30px rgba(96, 155, 232, 0.3);
 }
 
-/* REUNIONES SECTION */
-.reuniones {
-  padding: 8rem 4rem;
-  background: #0a0a0a;
-}
-
-.reuniones-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  margin-top: 4rem;
-}
-
-.reuniones-info h3 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.reunion-item {
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s;
-}
-
-.reunion-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(10px);
-}
-
-.reunion-time {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #667eea;
-  margin-bottom: 0.5rem;
-}
-
-.reunion-map {
-  height: 400px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  opacity: 0.7;
-}
-
-/* VISION SECTION */
-.vision {
-  padding: 8rem 4rem;
-  background: #111;
-  position: relative;
-  overflow: hidden;
-}
-
-.vision-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-}
-
-.vision-content h2 {
-  font-size: 3rem;
-  font-weight: 900;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.vision-content p {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  opacity: 0.9;
-  margin-bottom: 2rem;
-}
-
-.vision-graphic {
-  position: relative;
-  height: 600px;
-}
-
-.vision-circles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.vision-circle {
-  position: absolute;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.5s;
-  cursor: pointer;
-}
-
-.vision-circle:nth-child(1) {
-  width: 200px;
-  height: 200px;
-  background: rgba(102, 126, 234, 0.2);
-  border: 2px solid #667eea;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.vision-circle:nth-child(2) {
-  width: 150px;
-  height: 150px;
-  background: rgba(118, 75, 162, 0.2);
-  border: 2px solid #764ba2;
-  top: 150px;
-  left: 0;
-}
-
-.vision-circle:nth-child(3) {
-  width: 180px;
-  height: 180px;
-  background: rgba(240, 147, 251, 0.2);
-  border: 2px solid #f093fb;
-  top: 150px;
-  right: 0;
-}
-
-.vision-circle:nth-child(4) {
-  width: 160px;
-  height: 160px;
-  background: rgba(245, 87, 108, 0.2);
-  border: 2px solid #f5576c;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.vision-circle:hover {
-  transform: scale(1.1) translateX(-50%);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.vision-circle:nth-child(2):hover,
-.vision-circle:nth-child(3):hover {
-  transform: scale(1.1);
-}
-
-.floating-element {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-  border-radius: 50%;
-  filter: blur(40px);
-  animation: float 10s ease-in-out infinite;
-}
-
-.floating-element:nth-child(1) {
-  top: -150px;
-  right: -150px;
-  animation-delay: 0s;
-}
-
-.floating-element:nth-child(2) {
-  bottom: -150px;
-  left: -150px;
-  animation-delay: 5s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
-}
-
-/* FOOTER */
-footer {
-  padding: 6rem 4rem 2rem;
-  background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
-}
-
-.footer-brand h3 {
-  font-size: 2rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
-
-.footer-section h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.footer-section ul {
-  list-style: none;
-}
-
-.footer-section li {
-  margin-bottom: 1rem;
-}
-
-.footer-section a {
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-section a:hover {
-  color: white;
-}
-
-.social-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.social-links a {
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: all 0.3s;
-}
-
-.social-links a:hover {
-  background: white;
-  color: black;
-  transform: scale(1.1);
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 3rem;
-  }
-  
-  .hero-bottom {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-    left: 2rem;
-    right: 2rem;
-  }
-  
-  .live-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .live-title {
-    font-size: 2rem;
-  }
-  
-  .reuniones-grid,
-  .vision-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
 /* VISÍTANOS BANNER */
 .visitanos-banner {
   padding: 6rem 4rem;
@@ -743,7 +467,7 @@ footer {
   font-weight: 900;
   margin-bottom: 1.5rem;
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #609be8, #4a8bc2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -762,9 +486,35 @@ footer {
   background: #111;
 }
 
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #609be8, #4a8bc2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 4rem;
 }
@@ -800,7 +550,7 @@ footer {
 }
 
 .event-date {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 10px;
@@ -821,7 +571,7 @@ footer {
 
 .event-title i {
   margin-right: 0.5rem;
-  color: #667eea;
+  color: #609be8;
 }
 
 .event-description {
@@ -863,7 +613,7 @@ footer {
 }
 
 .menu-text h2 i {
-  color: #667eea;
+  color: #609be8;
   margin-right: 1rem;
 }
 
@@ -882,7 +632,335 @@ footer {
   border-radius: 20px;
 }
 
+/* MINISTERIOS SECTION */
+.ministerios {
+  padding: 8rem 4rem;
+  position: relative;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 8rem;
+  right: 4rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.carousel-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.carousel-btn:hover {
+  background: white;
+  color: black;
+  transform: scale(1.1);
+}
+
+.ministerios-carousel {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2rem;
+}
+
+.ministerios-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.ministerio-card {
+  flex: 0 0 450px;
+  scroll-snap-align: start;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 520px;
+  height: auto;
+  background: #111;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.ministerio-card:hover {
+  transform: translateY(-10px);
+}
+
+.ministerio-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  background-color: #333;
+}
+
+.ministerio-card:nth-child(1) .ministerio-img {
+  background-image: url('/imgs/ministerios/accion-social.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-card:nth-child(2) .ministerio-img {
+  background-image: url('/imgs/ministerios/jovenes.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-card:nth-child(3) .ministerio-img {
+  background-image: url('/imgs/ministerios/kids.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-card:nth-child(4) .ministerio-img {
+  background-image: url('/imgs/ministerios/consolidacion.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-card:nth-child(5) .ministerio-img {
+  background-image: url('/imgs/ministerios/instituto.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-card:nth-child(6) .ministerio-img {
+  background-image: url('/imgs/ministerios/misiones.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-card:nth-child(7) .ministerio-img {
+  background-image: url('/imgs/ministerios/evangelismo.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-card:nth-child(8) .ministerio-img {
+  background-image: url('/imgs/ministerios/grupos.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+}
+
+.ministerio-content {
+  padding: 1.8rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+}
+
+.ministerio-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.7rem;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0.7;
+  width: 100%;
+  min-height: 24px;
+}
+
+.ministerio-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+  font-size: 0.65rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex: 0 0 auto;
+  max-width: calc(50% - 0.25rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ministerio-meta span i {
+  font-size: 0.6rem;
+  opacity: 0.8;
+  flex-shrink: 0;
+  width: 10px;
+}
+
+.ministerio-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.ministerio-card p {
+  opacity: 0.8;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  flex-grow: 1;
+}
+
+.more-info {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* PREDICAS SECTION */
+.predicas {
+  padding: 8rem 4rem;
+  background: #0a0a0a;
+}
+
+.predicas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.predica-card {
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.predica-card:hover {
+  transform: scale(1.05);
+}
+
+.predica-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.predica-card:hover .predica-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: all 0.3s;
+}
+
+.predica-card:hover .play-button {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.predica-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+
+.predica-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.predica-meta {
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0.8;
+}
+
+/* PREDICAS CAROUSEL - MOBILE */
+.predicas-carousel {
+  display: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2rem;
+}
+
+.predicas-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.predicas-carousel .predica-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  margin-right: 1.5rem;
+}
+
+.predicas-carousel-controls {
+  display: none;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.predicas-carousel-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.predicas-carousel-btn:hover {
+  background: #609be8;
+  transform: scale(1.1);
+}
+
 /* RESPONSIVE */
+@media (max-width: 1200px) {
+  .ministerio-card {
+    flex: 0 0 380px;
+    min-height: 480px;
+  }
+  
+  .predicas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .visitanos-content,
   .menu-content {
@@ -903,5 +981,105 @@ footer {
   .proximos-eventos,
   .menu-dominical {
     padding: 4rem 2rem;
+  }
+  
+  .ministerios {
+    padding: 4rem 2rem;
+  }
+  
+  .carousel-controls {
+    top: 4rem;
+    right: 2rem;
+  }
+  
+  .ministerio-card {
+    flex: 0 0 300px;
+    min-height: 440px;
+  }
+  
+  .ministerio-content {
+    padding: 1.4rem;
+    min-height: 260px;
+  }
+  
+  .ministerio-img {
+    height: 160px;
+  }
+  
+  .ministerio-meta {
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    font-size: 0.65rem;
+  }
+  
+  .ministerio-meta span {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.4rem;
+    gap: 0.2rem;
+    max-width: calc(50% - 0.2rem);
+  }
+  
+  .ministerio-meta span i {
+    font-size: 0.55rem;
+    width: 8px;
+  }
+  
+  .predicas {
+    padding: 4rem 2rem;
+  }
+  
+  .predicas-grid {
+    display: none;
+  }
+  
+  .predicas-carousel {
+    display: flex;
+  }
+  
+  .predicas-carousel-controls {
+    display: flex;
+  }
+  
+  .live-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .live-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ministerio-card {
+    flex: 0 0 260px;
+    min-height: 450px;
+  }
+  
+  .ministerio-content {
+    padding: 1.2rem;
+    min-height: 260px;
+  }
+  
+  .predicas-carousel .predica-card {
+    flex: 0 0 280px;
+  }
+  
+  .carousel-controls {
+    top: 4rem;
+    right: 1rem;
+  }
+  
+  .carousel-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  
+  .events-grid {
+    gap: 1.5rem;
   }
 }
