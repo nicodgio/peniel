@@ -85,7 +85,7 @@
 }
 
 .nav-links a.active {
-  color: #667eea;
+  color: #609be8;
 }
 
 .nav-links a.active::after {
@@ -95,8 +95,168 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: #667eea;
+  background: #609be8;
   border-radius: 1px;
+}
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1002;
+  position: relative;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 2px;
+  background: white;
+  margin: 3px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* MOBILE OVERLAY MENU */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-content {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  transform: translateY(30px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-overlay.active .mobile-nav-content {
+  transform: translateY(0);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav-links li {
+  margin: 1.5rem 0;
+  transform: translateX(-30px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-overlay.active .mobile-nav-links li {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(6) { transition-delay: 0.35s; }
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(7) { transition-delay: 0.4s; }
+.mobile-nav-overlay.active .mobile-nav-links li:nth-child(8) { transition-delay: 0.45s; }
+
+.mobile-nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Montserrat', sans-serif;
+  display: block;
+  padding: 1rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-nav-links a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(96, 155, 232, 0.3) 0%, rgba(74, 139, 194, 0.3) 100%);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.mobile-nav-links a:hover::before,
+.mobile-nav-links a.active::before {
+  left: 0;
+}
+
+.mobile-nav-links a.active {
+  color: #609be8;
+  background: rgba(96, 155, 232, 0.1);
+  border: 1px solid rgba(96, 155, 232, 0.3);
+}
+
+.mobile-nav-links a:hover {
+  transform: scale(1.05);
+  color: #609be8;
+}
+
+.mobile-nav-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-overlay.active .mobile-nav-footer {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.5s;
+}
+
+.mobile-nav-footer p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
 }
 
 /* BOTÓN FLOTANTE "SOY NUEVO" */
@@ -106,48 +266,39 @@
   right: 2rem;
   z-index: 1001;
   
-  /* Estilo del botón */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
   color: white;
   text-decoration: none;
   
-  /* Tamaño y forma */
   width: 80px;
   height: 80px;
   border-radius: 50%;
   
-  /* Flexbox para centrar contenido */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.2rem;
   
-  /* Efectos visuales */
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 25px rgba(96, 155, 232, 0.4);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.1);
   
-  /* Transiciones suaves */
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(1);
   
-  /* Animación de pulso suave */
   animation: nuevoPulse 3s ease-in-out infinite;
 }
 
 .nuevo-button:hover {
-  /* Hover: Más grande y brillante */
   transform: scale(1.15);
-  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
-  background: linear-gradient(135deg, #7b8ef7 0%, #8659b8 100%);
+  box-shadow: 0 15px 35px rgba(96, 155, 232, 0.6);
+  background: linear-gradient(135deg, #70a7f0 0%, #5494d1 100%);
   
-  /* Detener la animación de pulso al hacer hover */
   animation: none;
 }
 
 .nuevo-button:active {
-  /* Click: Efecto de presión */
   transform: scale(1.05);
   transition: transform 0.1s;
 }
@@ -167,19 +318,17 @@
   line-height: 1;
 }
 
-/* Animación de pulso suave */
 @keyframes nuevoPulse {
   0%, 100% { 
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(96, 155, 232, 0.4);
     transform: scale(1);
   }
   50% { 
-    box-shadow: 0 8px 35px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 8px 35px rgba(96, 155, 232, 0.6);
     transform: scale(1.05);
   }
 }
 
-/* Efecto de brillo al aparecer */
 .nuevo-button::before {
   content: '';
   position: absolute;
@@ -214,7 +363,10 @@
     display: none;
   }
   
-  /* Botón más pequeño en móvil */
+  .hamburger {
+    display: flex;
+  }
+  
   .nuevo-button {
     width: 70px;
     height: 70px;
@@ -232,7 +384,19 @@
 }
 
 @media (max-width: 480px) {
-  /* Botón aún más pequeño en pantallas muy pequeñas */
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+  
+  .mobile-nav-content {
+    padding: 1.5rem;
+  }
+  
+  .mobile-nav-links a {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+  
   .nuevo-button {
     width: 60px;
     height: 60px;
