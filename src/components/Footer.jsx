@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-brand">
           <h3>Iglesia Peniel Comunidad Cristiana</h3>
-          <p style={{ opacity: 0.6, marginTop: '1rem' }}>
+          <p>
             Un encuentro con Dios lo cambia todo. Construyendo una comunidad de
             fe, esperanza y amor centrada en Jesucristo.
           </p>
@@ -16,6 +16,7 @@ const Footer = () => {
               href="https://www.instagram.com/penielmadrid/?hl=es"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Instagram de Peniel Madrid"
             >
               <i className="fab fa-instagram"></i>
             </a>
@@ -23,6 +24,7 @@ const Footer = () => {
               href="https://www.youtube.com/@CcPeniel" 
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Canal de YouTube de Peniel"
             >
               <i className="fab fa-youtube"></i>
             </a>
@@ -30,6 +32,7 @@ const Footer = () => {
               href="https://wa.me/34609377944" 
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="WhatsApp de Peniel Madrid"
             >
               <i className="fab fa-whatsapp"></i>
             </a>
@@ -50,32 +53,46 @@ const Footer = () => {
           <h4>Involúcrate</h4>
           <ul>
             <li><Link to="/grupos-peniel">Grupos Peniel</Link></li>
-            <li><a href="#">Voluntariado</a></li>
-            <li><a href="#">Instituto Bíblico</a></li>
-            <li><a href="#">Misiones</a></li>
+            <li><Link to="/ministerios">Voluntariado</Link></li>
+            <li><Link to="/ministerios">Instituto Bíblico</Link></li>
+            <li><Link to="/ministerios">Misiones</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h4>Contacto</h4>
           <ul>
-            <li><a href="#">Calle Miguel Fleta 11</a></li>
-            <li><a href="#">28037, Madrid</a></li>
-            <li><a href="tel:+34609377944">(+34) 609 377 944</a></li>
-            <li><a href="#">secretariapenielmadrid@gmail.com</a></li>
+            <li>
+              <a 
+                href="https://maps.google.com/?q=Calle+Miguel+Fleta+11,+Madrid" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Calle Miguel Fleta 11
+              </a>
+            </li>
+            <li>
+              <a 
+                href="https://maps.google.com/?q=28037+Madrid" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                28037, Madrid
+              </a>
+            </li>
+            <li>
+              <a href="tel:+34609377944">(+34) 609 377 944</a>
+            </li>
+            <li>
+              <a href="mailto:secretariapenielmadrid@gmail.com">
+                secretariapenielmadrid@gmail.com
+              </a>
+            </li>
           </ul>
         </div>
       </div>
 
-      <div
-        style={{
-          textAlign: 'center',
-          paddingTop: '3rem',
-          marginTop: '3rem',
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          opacity: 0.5,
-        }}
-      >
+      <div className="footer-copyright">
         <p>
           &copy; 2025 Iglesia Peniel Comunidad Cristiana. Todos los derechos
           reservados.

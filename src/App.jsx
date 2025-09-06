@@ -11,6 +11,7 @@ import Contacto from './pages/Contacto';
 import Footer from './components/Footer';
 import './css/globales/global.css';
 import './css/globales/nav.css';
+import './css/globales/footer.css';
 import './css/inicio/sections.css';
 import './css/inicio/ministerios-predicas.css';
 import './css/inicio/about.css';

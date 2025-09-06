@@ -707,39 +707,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   flex-shrink: 0;
-  background-color: #333;
-}
-
-.ministerio-card:nth-child(1) .ministerio-img {
-  background-image: url('/imgs/ministerios/accion-social.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
-}
-
-.ministerio-card:nth-child(2) .ministerio-img {
-  background-image: url('/imgs/ministerios/jovenes.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
-}
-
-.ministerio-card:nth-child(3) .ministerio-img {
-  background-image: url('/imgs/ministerios/kids.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
-}
-
-.ministerio-card:nth-child(4) .ministerio-img {
-  background-image: url('/imgs/ministerios/consolidacion.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
-}
-
-.ministerio-card:nth-child(5) .ministerio-img {
-  background-image: url('/imgs/ministerios/instituto.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
-}
-
-.ministerio-card:nth-child(6) .ministerio-img {
-  background-image: url('/imgs/ministerios/misiones.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
-}
-
-.ministerio-card:nth-child(7) .ministerio-img {
-  background-image: url('/imgs/ministerios/evangelismo.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
-}
-
-.ministerio-card:nth-child(8) .ministerio-img {
-  background-image: url('/imgs/ministerios/grupos.jpg'), linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+  background-image: linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
 }
 
 .ministerio-content {

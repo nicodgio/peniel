@@ -16,6 +16,7 @@ const Home = () => {
     error: videosError,
   } = useYouTubeVideos();
 
+  // Configuración para live stream sigue igual
   const YOUTUBE_CONFIG = {
     API_KEY: "AIzaSyBgg5f96RaAexmF4DB98Y8RptIshmjBL5I",
     CHANNEL_ID: "UCbfff5PKN2dbtJCgK8w9_yA",

@@ -40,11 +40,7 @@ const Navbar = () => {
         <div className="nav-container">
           <Link to="/" className="logo">
             <div className="logo-img">
-              <img src="/imgs/peniel.svg" alt="Peniel Madrid" />
-            </div>
-            <div className="logo-text">
-              <div className="peniel">PENIEL</div>
-              <div className="madrid">MADRID</div>
+              <img src="/imgs/logopeniel.png" alt="Peniel Madrid"/>
             </div>
           </Link>
 

@@ -1,9 +1,8 @@
-/* NAVBAR ORIGINAL */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 2rem 4rem;
+  padding: 0.5rem 4rem; /* Reducido significativamente */
   z-index: 1000;
   backdrop-filter: blur(20px);
   background: rgba(0, 0, 0, 0.3);
@@ -29,8 +28,8 @@
 }
 
 .logo-img {
-  width: 80px;
-  height: 80px;
+  width: 200px; /* Más grande */
+  height: 80px; /* Altura fija más pequeña para no agrandar el nav */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -359,6 +358,11 @@
     padding: 1rem 2rem;
   }
   
+  .logo-img {
+    width: 80px;
+    height: 80px;
+  }
+  
   .nav-links {
     display: none;
   }
@@ -386,6 +390,11 @@
 @media (max-width: 480px) {
   .navbar {
     padding: 1rem 1.5rem;
+  }
+  
+  .logo-img {
+    width: 60px;
+    height: 60px;
   }
   
   .mobile-nav-content {
