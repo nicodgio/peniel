@@ -36,9 +36,13 @@
 .hero-clean {
   padding: 12rem 0 8rem;
   text-align: center;
-  background: #0a0a0a;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/imgs/about/abouthero.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin-top: -120px;
   padding-top: 16rem;
+  position: relative;
 }
 
 .hero-clean h1 {
@@ -74,10 +78,22 @@ h3 {
   color: white;
 }
 
+h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #609be8;
+  margin-bottom: 1rem;
+}
+
 .text-block p {
   font-size: 1.1rem;
   margin-bottom: 2rem;
   color: rgba(255, 255, 255, 0.8);
+}
+
+.text-block strong {
+  color: white;
+  font-weight: 600;
 }
 
 .text-block-large p {
@@ -86,6 +102,167 @@ h3 {
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* Historia Timeline */
+.history-timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.history-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #609be8, transparent);
+  transform: translateX(-50%);
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rem;
+  position: relative;
+}
+
+.history-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.history-year {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #609be8;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  z-index: 2;
+}
+
+.history-content {
+  width: 45%;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.history-content:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.history-item.reverse .history-content {
+  margin-left: auto;
+}
+
+.history-image {
+  flex: 0 0 200px;
+  height: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.history-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.history-text {
+  flex: 1;
+}
+
+.history-text h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.history-text p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Sección de Fe - ACTUALIZADA */
+.faith-section {
+  padding: 8rem 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+}
+
+.faith-section .container-clean {
+  max-width: 1400px; /* Aumentado de 1200px */
+  padding: 0 2rem; /* Reducido de 3rem */
+}
+
+.faith-intro {
+  text-align: center;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faith-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Cambiado para forzar 4 columnas */
+  gap: 2.5rem; /* Aumentado de 2rem */
+  max-width: none; /* Removido el límite de 1000px */
+  margin: 0 auto;
+}
+
+.faith-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.faith-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(96, 155, 232, 0.3);
+}
+
+.faith-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #609be8, #4a8bc2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.faith-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.faith-card p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+/* Stats */
 .stats-container {
   display: flex;
   align-items: center;
@@ -127,6 +304,7 @@ h3 {
   font-weight: 500;
 }
 
+/* Vision Section Updated */
 .vision-section-animated {
   padding: 8rem 0;
   background: #111;
@@ -143,20 +321,31 @@ h3 {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   color: #609be8;
+}
+
+.vision-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4rem;
+}
+
+.vision-subtitle strong {
+  color: white;
 }
 
 .vision-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
   margin-bottom: 4rem;
 }
 
 .vision-card {
   background: rgba(255, 255, 255, 0.05);
-  padding: 3rem 2rem;
+  padding: 2.5rem 1.5rem;
   border-radius: 20px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -190,24 +379,28 @@ h3 {
 }
 
 .vision-card:hover {
-  transform: translateY(-15px);
+  transform: translateY(-10px);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(96, 155, 232, 0.3);
   box-shadow: 0 20px 40px rgba(96, 155, 232, 0.1);
 }
 
 .vision-icon {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background: linear-gradient(135deg, #609be8, #4a8bc2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 2rem;
-  font-size: 2rem;
-  color: white;
+  margin: 0 auto 1.5rem;
   transition: all 0.4s ease;
+}
+
+.vision-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
 }
 
 .vision-card:hover .vision-icon {
@@ -215,29 +408,19 @@ h3 {
 }
 
 .vision-card h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   color: white;
 }
 
 .vision-card p {
   color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
 
-.vision-text-main {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.vision-text-main p {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.8;
-}
-
+/* Gallery Section */
 .gallery-section-cards {
   padding: 8rem 0;
   background: #0a0a0a;
@@ -344,6 +527,7 @@ h3 {
   right: 2rem;
 }
 
+/* Valores */
 .valores-grid-clean {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -388,6 +572,7 @@ h3 {
   font-size: 0.95rem;
 }
 
+/* Pastoral */
 .pastoral-grid {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -445,6 +630,7 @@ h3 {
   color: #609be8;
 }
 
+/* Contact */
 .contact-clean {
   text-align: center;
   max-width: 600px;
@@ -505,6 +691,14 @@ h3 {
   transform: translateY(-3px);
 }
 
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .faith-grid {
+    grid-template-columns: repeat(3, 1fr); /* En pantallas medianas, 3 columnas */
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid-2col,
   .pastoral-grid {
@@ -513,8 +707,45 @@ h3 {
   }
   
   .vision-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+  }
+  
+  .faith-grid {
+    grid-template-columns: repeat(2, 1fr); /* En tablets, 2 columnas */
+    gap: 2rem;
+  }
+  
+  .history-timeline::before {
+    display: none;
+  }
+  
+  .history-item,
+  .history-item.reverse {
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
+  
+  .history-year {
+    position: static;
+    transform: none;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+  
+  .history-content {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .history-item.reverse .history-content {
+    margin-left: 0;
+  }
+  
+  .history-image {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 250px;
   }
   
   .gallery-cards-container {
@@ -551,6 +782,10 @@ h3 {
     padding: 0 2rem;
   }
   
+  .faith-section .container-clean {
+    padding: 0 1.5rem; /* Ajuste específico para mobile */
+  }
+  
   .section-clean {
     padding: 4rem 0;
   }
@@ -575,6 +810,19 @@ h3 {
   
   .vision-cards {
     grid-template-columns: 1fr;
+  }
+  
+  .faith-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .history-content {
+    padding: 1.5rem;
+  }
+  
+  .history-image {
+    height: 200px;
   }
   
   .buttons-clean {
@@ -644,8 +892,20 @@ h3 {
     padding: 0 1rem;
   }
   
+  .faith-section .container-clean {
+    padding: 0 1rem; /* Ajuste específico para mobile pequeño */
+  }
+  
   .hero-clean h1 {
     font-size: 2rem;
+  }
+  
+  .hero-clean p {
+    font-size: 1.2rem;
+  }
+  
+  h2, .vision-title {
+    font-size: 1.75rem;
   }
   
   .gallery-section-cards {
@@ -659,5 +919,32 @@ h3 {
   
   .vision-section-animated {
     padding: 4rem 0;
+  }
+  
+  .faith-section {
+    padding: 4rem 0;
+  }
+  
+  .faith-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .faith-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .history-year {
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+  }
+  
+  .history-text h3 {
+    font-size: 1.2rem;
+  }
+  
+  .history-text h4 {
+    font-size: 1rem;
   }
 }
