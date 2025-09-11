@@ -26,6 +26,10 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -152,11 +156,17 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Botón flotante "Soy Nuevo" */}
-      <Link to="/contacto" className="nuevo-button">
-        <span className="nuevo-text">SOY NUEVO</span>
-        <div className="nuevo-icon">👋</div>
-      </Link>
+      {/* Botón flotante circular "Soy Nuevo" */}
+      <div className="nuevo-floating-btn">
+        <Link to="/contacto" className="nuevo-circle">
+          <div className="nuevo-content">
+            <span className="nuevo-text">SOY</span>
+            <span className="nuevo-text">NUEVO</span>
+          </div>
+          <div className="nuevo-pulse-ring"></div>
+          <div className="nuevo-pulse-ring-2"></div>
+        </Link>
+      </div>
     </>
   );
 };
