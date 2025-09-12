@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useYouTubeVideos } from "../hooks/useYoutubeVideos";
+import '../css/inicio/sections.css';
+import '../css/inicio/ministerios-predicas.css';
 
 const Home = () => {
   const [isLiveActive, setIsLiveActive] = useState(false);

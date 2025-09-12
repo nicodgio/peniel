@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/inicio/about.css';
 
 const About = () => {
   const [selectedImage, setSelectedImage] = useState(0);

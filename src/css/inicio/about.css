@@ -45,42 +45,46 @@
   position: relative;
 }
 
-.hero-clean h1 {
-  font-size: 4rem;
-  font-weight: 300;
+/* SOLUCIÓN 1: Mayor especificidad */
+.about-page-clean .hero-clean h1 {
+  font-size: 4rem !important;
+  font-weight: 300 !important;
   margin-bottom: 1rem;
   color: #609be8;
   letter-spacing: -1px;
 }
 
-.hero-clean p {
-  font-size: 1.5rem;
+.about-page-clean .hero-clean p {
+  font-size: 1.5rem !important;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 300;
 }
 
-h2 {
-  font-size: 2.5rem;
-  font-weight: 600;
+/* SOLUCIÓN 2: Títulos con mayor especificidad */
+.about-page-clean h2,
+.about-page-clean .section-title-centered,
+.about-page-clean .vision-title {
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
   margin-bottom: 3rem;
   color: white;
 }
 
-.section-title-centered {
+.about-page-clean .section-title-centered {
   text-align: center;
   margin-bottom: 4rem;
 }
 
-h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
+.about-page-clean h3 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
   margin-bottom: 1rem;
   color: white;
 }
 
-h4 {
-  font-size: 1.2rem;
-  font-weight: 500;
+.about-page-clean h4 {
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
   color: #609be8;
   margin-bottom: 1rem;
 }
@@ -182,8 +186,8 @@ h4 {
   flex: 1;
 }
 
-.history-text h3 {
-  font-size: 1.3rem;
+.about-page-clean .history-text h3 {
+  font-size: 1.3rem !important;
   margin-bottom: 0.5rem;
 }
 
@@ -200,8 +204,8 @@ h4 {
 }
 
 .faith-section .container-clean {
-  max-width: 1400px; /* Aumentado de 1200px */
-  padding: 0 2rem; /* Reducido de 3rem */
+  max-width: 1400px;
+  padding: 0 2rem;
 }
 
 .faith-intro {
@@ -216,9 +220,9 @@ h4 {
 
 .faith-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Cambiado para forzar 4 columnas */
-  gap: 2.5rem; /* Aumentado de 2rem */
-  max-width: none; /* Removido el límite de 1000px */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  max-width: none;
   margin: 0 auto;
 }
 
@@ -251,8 +255,8 @@ h4 {
   color: white;
 }
 
-.faith-card h4 {
-  font-size: 1.1rem;
+.about-page-clean .faith-card h4 {
+  font-size: 1.1rem !important;
   margin-bottom: 0.5rem;
   color: white;
 }
@@ -317,10 +321,10 @@ h4 {
   z-index: 2;
 }
 
-.vision-title {
+.about-page-clean .vision-title {
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
   margin-bottom: 1rem;
   color: #609be8;
 }
@@ -407,9 +411,9 @@ h4 {
   transform: scale(1.1) rotate(360deg);
 }
 
-.vision-card h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
+.about-page-clean .vision-card h3 {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
   margin-bottom: 0.8rem;
   color: white;
 }
@@ -433,11 +437,13 @@ h4 {
   padding: 0;
 }
 
-.gallery-section-cards h2 {
+.about-page-clean .gallery-section-cards h2 {
   text-align: center;
   margin-bottom: 4rem;
   color: #609be8;
   padding: 0 2rem;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
 }
 
 .gallery-cards-container {
@@ -562,9 +568,11 @@ h4 {
   color: white;
 }
 
-.valor-item-clean h3 {
+.about-page-clean .valor-item-clean h3 {
   margin-bottom: 1rem;
   color: white;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
 }
 
 .valor-item-clean p {
@@ -606,8 +614,8 @@ h4 {
   text-align: center;
 }
 
-.pastor-content h3 {
-  font-size: 1.5rem;
+.about-page-clean .pastor-content h3 {
+  font-size: 1.5rem !important;
   margin-bottom: 0.5rem;
 }
 
@@ -625,9 +633,11 @@ h4 {
   line-height: 1.6;
 }
 
-.pastoral-text h3 {
+.about-page-clean .pastoral-text h3 {
   margin-bottom: 2rem;
   color: #609be8;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
 }
 
 /* Contact */
@@ -637,9 +647,11 @@ h4 {
   margin: 0 auto;
 }
 
-.contact-clean h2 {
+.about-page-clean .contact-clean h2 {
   margin-bottom: 1rem;
   color: white;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
 }
 
 .contact-clean p {
@@ -694,7 +706,7 @@ h4 {
 /* Responsive Design */
 @media (max-width: 1200px) {
   .faith-grid {
-    grid-template-columns: repeat(3, 1fr); /* En pantallas medianas, 3 columnas */
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 }
@@ -712,7 +724,7 @@ h4 {
   }
   
   .faith-grid {
-    grid-template-columns: repeat(2, 1fr); /* En tablets, 2 columnas */
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
   
@@ -783,7 +795,7 @@ h4 {
   }
   
   .faith-section .container-clean {
-    padding: 0 1.5rem; /* Ajuste específico para mobile */
+    padding: 0 1.5rem;
   }
   
   .section-clean {
@@ -795,12 +807,14 @@ h4 {
     padding-top: 12rem;
   }
   
-  .hero-clean h1 {
-    font-size: 2.5rem;
+  .about-page-clean .hero-clean h1 {
+    font-size: 2.5rem !important;
   }
   
-  h2, .vision-title {
-    font-size: 2rem;
+  .about-page-clean h2, 
+  .about-page-clean .vision-title,
+  .about-page-clean .section-title-centered {
+    font-size: 2rem !important;
   }
   
   .stats-grid-clean {
@@ -893,19 +907,21 @@ h4 {
   }
   
   .faith-section .container-clean {
-    padding: 0 1rem; /* Ajuste específico para mobile pequeño */
+    padding: 0 1rem;
   }
   
-  .hero-clean h1 {
-    font-size: 2rem;
+  .about-page-clean .hero-clean h1 {
+    font-size: 2rem !important;
   }
   
-  .hero-clean p {
-    font-size: 1.2rem;
+  .about-page-clean .hero-clean p {
+    font-size: 1.2rem !important;
   }
   
-  h2, .vision-title {
-    font-size: 1.75rem;
+  .about-page-clean h2, 
+  .about-page-clean .vision-title,
+  .about-page-clean .section-title-centered {
+    font-size: 1.75rem !important;
   }
   
   .gallery-section-cards {
@@ -940,11 +956,11 @@ h4 {
     padding: 0.4rem 1rem;
   }
   
-  .history-text h3 {
-    font-size: 1.2rem;
+  .about-page-clean .history-text h3 {
+    font-size: 1.2rem !important;
   }
   
-  .history-text h4 {
-    font-size: 1rem;
+  .about-page-clean .history-text h4 {
+    font-size: 1rem !important;
   }
 }

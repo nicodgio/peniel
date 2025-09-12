@@ -12,14 +12,6 @@ import Footer from './components/Footer';
 import './css/globales/global.css';
 import './css/globales/nav.css';
 import './css/globales/footer.css';
-import './css/inicio/sections.css';
-import './css/inicio/ministerios-predicas.css';
-import './css/inicio/about.css';
-import './css/inicio/reuniones.css';
-import './css/inicio/grupos.css';
-import './css/inicio/ministerios.css';
-import './css/inicio/donaciones.css';
-import './css/inicio/contacto.css';
 
 const App = () => {
   return (
