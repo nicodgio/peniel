@@ -106,7 +106,7 @@
 }
 
 .ministerio-card:nth-child(8) .ministerio-img {
-  background-image: url('/imgs/ministerios/grupospeniel.jpg'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  background-image: url('/imgs/ministerios/grupospeniel.jpeg'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
 }
 
 .ministerio-content {

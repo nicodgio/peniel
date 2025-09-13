@@ -374,7 +374,7 @@ const ministerios = [
         <div className="visitanos-content">
           <div className="visitanos-image">
             <img
-              src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&h=600&fit=crop"
+              src="/imgs/visit2.jpg"
               alt="Iglesia Peniel Madrid"
             />
           </div>

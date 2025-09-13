@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/inicio/reuniones.css';
 
 const Reuniones = () => {
@@ -13,27 +14,29 @@ const Reuniones = () => {
     {
       dia: "Domingos",
       hora: "11:00hs",
-      tipo: "Reunión General",
+      tipo: "Culto Dominical",
+      descripcion: "Te invitamos a formar parte de nuestra comunidad cristiana",
       icono: "fas fa-church"
     },
     {
       dia: "Sábados", 
       hora: "19:00hs",
-      tipo: "Jóvenes y Adolescentes",
+      tipo: "Reunión de Jóvenes",
+      descripcion: "Un espacio para crecer en fe",
       icono: "fas fa-users"
     },
     {
       dia: "Martes",
       hora: "20:00hs",
-      tipo: "Reunión de Oración vía Zoom",
-      descripcion: "Contacta al móvil de secretaría para unirte a la lista de difusión",
+      tipo: "Reunión de Oración",
+      descripcion: "Vía Zoom - Contacta al móvil de secretaría",
       icono: "fas fa-video"
     },
     {
       dia: "Miércoles",
       hora: "",
       tipo: "Evangelismo",
-      descripcion: "Punto de encuentro: Centro Comercial Alcalá Norte",
+      descripcion: "Centro Comercial Alcalá Norte",
       icono: "fas fa-heart"
     }
   ];
@@ -48,18 +51,19 @@ const Reuniones = () => {
     {
       tipo: "Autobús",
       detalle: "Líneas 28, 38 y 70",
+      tiempo: "Parada cercana",
       icono: "fas fa-bus"
     },
     {
       tipo: "Coche",
-      detalle: "Aparcamiento gratuito en calles adyacentes",
+      detalle: "Aparcamiento gratuito disponible",
+      tiempo: "Zona azul",
       icono: "fas fa-car"
     }
   ];
 
   return (
     <div className={`reuniones-page ${isVisible ? 'loaded' : ''}`}>
-      {/* Hero Section */}
       <section className="reuniones-hero">
         <div className="container-clean">
           <h1>Nuestras reuniones</h1>
@@ -68,78 +72,97 @@ const Reuniones = () => {
       </section>
 
       <div className="reuniones-container">
-        {/* Horarios Section */}
         <section className="horarios-section">
           <div className="section-header">
             <h2>Horarios de Reuniones</h2>
+            <div className="header-line"></div>
           </div>
 
           <div className="horarios-grid">
             {horarios.map((horario, index) => (
-              <div key={index} className="horario-card" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="horario-icon">
-                  <i className={horario.icono}></i>
-                </div>
-                <div className="horario-content">
+              <div key={index} className="horario-card" style={{ animationDelay: `${index * 0.15}s` }}>
+                <div className="card-top">
+                  <div className="horario-icon">
+                    <i className={horario.icono}></i>
+                  </div>
                   <div className="horario-time">
                     <span className="dia">{horario.dia}</span>
                     {horario.hora && <span className="hora">{horario.hora}</span>}
                   </div>
+                </div>
+                <div className="card-content">
                   <h3>{horario.tipo}</h3>
-                  {horario.descripcion && <p className="descripcion">{horario.descripcion}</p>}
+                  <p>{horario.descripcion}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Grupos Peniel */}
         <section className="grupos-section">
-          <div className="grupos-card">
-            <div className="grupos-icon">
-              <i className="fas fa-users"></i>
+          <div className="grupos-wrapper">
+            <div className="grupos-image">
+              <img src="/imgs/ministerios/grupospeniel.jpeg" alt="Grupos Peniel" />
+              <div className="image-overlay"></div>
             </div>
             <div className="grupos-content">
-              <h3>Grupos Peniel (semanales)</h3>
-              <p>Participa en nuestros <strong>grupos pequeños</strong> y crece en comunidad.</p>
-              <a href="#" className="formulario-link">→ formulario de inscripción</a>
+              <div className="grupos-badge">
+                <i className="fas fa-users"></i>
+                <span>Comunidad</span>
+              </div>
+              <h3>Grupos Peniel</h3>
+              <p>Conecta, crece y comparte en nuestros grupos pequeños. Una experiencia de fe auténtica donde cada persona importa.</p>
+              <div className="grupos-features">
+                <div className="feature">
+                  <i className="fas fa-calendar-week"></i>
+                  <span>Reuniones semanales</span>
+                </div>
+                <div className="feature">
+                  <i className="fas fa-heart"></i>
+                  <span>Ambiente familiar</span>
+                </div>
+                <div className="feature">
+                  <i className="fas fa-book-open"></i>
+                  <span>Estudio bíblico</span>
+                </div>
+              </div>
+              <Link to="/grupos-peniel" className="btn-grupos">
+                Únete ahora
+                <i className="fas fa-arrow-right"></i>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* Ubicación Section */}
         <section className="ubicacion-section">
-          <div className="section-content">
-            <div className="ubicacion-info">
-              <div className="section-header">
-                <h2>
+          <div className="section-header">
+            <h2>Visítanos</h2>
+            <div className="header-line"></div>
+          </div>
+          
+          <div className="ubicacion-layout">
+            <div className="direccion-y-mapa">
+              <div className="direccion-info">
+                <div className="direccion-pin">
                   <i className="fas fa-map-marker-alt"></i>
-                  Nuestra Ubicación
-                </h2>
-                <div className="direccion-principal">
-                  <h3>Calle Miguel Fleta 11, 28037, Ciudad Lineal, Madrid</h3>
-                  <p>Fácil acceso en transporte público y con aparcamiento disponible.</p>
+                </div>
+                <div className="direccion-detalles">
+                  <h3>Calle Miguel Fleta 11</h3>
+                  <p>28037 Ciudad Lineal, Madrid</p>
+                  <span>Fácil acceso en transporte público</span>
                 </div>
               </div>
               
-              <div className="transporte-grid">
-                {transporteInfo.map((transporte, index) => (
-                  <div key={index} className="transporte-card" style={{ animationDelay: `${index * 0.1}s` }}>
-                    <div className="transporte-icon">
-                      <i className={transporte.icono}></i>
-                    </div>
-                    <div className="transporte-content">
-                      <h4>{transporte.tipo}</h4>
-                      <p>{transporte.detalle}</p>
-                      {transporte.tiempo && <span className="tiempo">{transporte.tiempo}</span>}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mapa-wrapper">
-              <div className="mapa-container">
+              <div className="mapa-moderno">
+                <div className="mapa-overlay">
+                  <a href="https://www.google.com/maps/place/C.+de+Miguel+Fleta,+11,+San+Blas-Canillejas,+28037+Madrid,+España/@40.432151,-3.631486,16z/data=!4m6!3m5!1s0xd422f72711cfea9:0x33f8534cc9869da9!8m2!3d40.4321506!4d-3.6314863!16s%2Fg%2F11c1yks2yr?hl=es-419&entry=ttu&g_ep=EgoyMDI1MDkxMC4wIKXMDSoASAFQAw%3D%3D" 
+                     target="_blank" 
+                     rel="noopener noreferrer" 
+                     className="mapa-link">
+                    <i className="fas fa-external-link-alt"></i>
+                    Abrir en Google Maps
+                  </a>
+                </div>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.947988960281!2d-3.634061223578483!3d40.43215057143719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422f72711cfea9%3A0x33f8534cc9869da9!2sC.%20de%20Miguel%20Fleta%2C%2011%2C%20San%20Blas-Canillejas%2C%2028037%20Madrid%2C%20Espa%C3%B1a!5e0!3m2!1ses-419!2smx!4v1754721691771!5m2!1ses-419!2smx"
                   width="100%"
@@ -149,6 +172,24 @@ const Reuniones = () => {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
+              </div>
+            </div>
+
+            <div className="transporte-moderno">
+              <h4>Cómo llegar</h4>
+              <div className="transporte-cards">
+                {transporteInfo.map((transporte, index) => (
+                  <div key={index} className="transporte-item" style={{ animationDelay: `${index * 0.15}s` }}>
+                    <div className="transporte-icon">
+                      <i className={transporte.icono}></i>
+                    </div>
+                    <div className="transporte-details">
+                      <h5>{transporte.tipo}</h5>
+                      <p>{transporte.detalle}</p>
+                      <span className="tiempo">{transporte.tiempo}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
