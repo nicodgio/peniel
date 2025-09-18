@@ -85,7 +85,7 @@ const ministerios = [
   {
     meta: ["DOMINGOS", "11:00"],
     title: "Peniel Kids",
-    description: "Enseñanza creativa para niños de 3-11 años: Exploradores, Valientes y Detectives. Campamento urbano en julio."
+    description: "Ministerio para los niños de 3 a 11 años. Aprenden la Palabra de Dios de forma creativa y divertida cada domingo. Se dividen en tres grupos por edad: Exploradores (3-5 años), Valientes (6-9 años) y Detectives (9-11 años). Además, disfrutan de un campamento urbano especial en julio."
   },
   {
     meta: ["CONTINUO", "SERVICIO"],
@@ -138,7 +138,7 @@ const proximosEventos = [
   {
     dia: "30",
     mes: "NOV",
-    diaSemana: "SÁBADO",
+    diaSemana: "DOMINGO",
     titulo: "Acción de Gracias",
     descripcion: "Celebramos juntos con una comida en familia, menú delicioso, dinámicas de gratitud a Dios y testimonios de Su fidelidad.",
     hora: "13:00 HS",
@@ -459,7 +459,7 @@ const proximosEventos = [
           </div>
           <div className="menu-image">
             <img
-              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop"
+              src="/imgs/menu1.jpg"
               alt="Menú Dominical"
             />
           </div>

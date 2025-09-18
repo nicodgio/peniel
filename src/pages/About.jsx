@@ -1,14 +1,6 @@
 import React from 'react';
 import '../css/inicio/about.css';
-
 const About = () => {
-  const estadisticas = [
-    { numero: "24+", label: "Años de historia" },
-    { numero: "300+", label: "Miembros activos" },
-    { numero: "11", label: "Ministerios activos" },
-    { numero: "4", label: "Pasos de discipulado" }
-  ];
-
   return (
     <div className="about-page-clean">
       
@@ -18,7 +10,6 @@ const About = () => {
           <p>Peniel Comunidad Cristiana</p>
         </div>
       </section>
-
       <section className="section-clean">
         <div className="container-clean">
           <div className="grid-2col">
@@ -42,20 +33,14 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="stats-container">
-              <div className="stats-grid-clean">
-                {estadisticas.map((stat, index) => (
-                  <div key={index} className="stat-item-clean">
-                    <div className="stat-number-clean">{stat.numero}</div>
-                    <div className="stat-label-clean">{stat.label}</div>
-                  </div>
-                ))}
+            <div className="church-image-container">
+              <div className="church-image">
+                <img src="/imgs/hero.jpg" alt="Iglesia Peniel con cartel de fondo" />
               </div>
             </div>
           </div>
         </div>
       </section>
-
       <section className="faith-section">
         <div className="container-clean">
           <h2 className="section-title-centered">Nuestra Fe</h2>
@@ -120,7 +105,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
       <section className="pastoral-section">
         <div className="container-clean">
           <h2 className="section-title-centered">Nuestros Pastores</h2>
@@ -162,7 +146,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
       <section className="vision-mission-modern">
         <div className="container-clean">
           <div className="section-intro">
@@ -233,7 +216,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
       <section className="values-modern">
         <div className="container-clean">
           <div className="values-header">
@@ -300,7 +282,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
       <section className="section-clean">
         <div className="container-clean">
           <div className="contact-clean">
@@ -313,9 +294,7 @@ const About = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };
-
 export default About;
