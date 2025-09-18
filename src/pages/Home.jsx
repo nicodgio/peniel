@@ -114,32 +114,38 @@ const ministerios = [
   }
 ];
 
-  const proximosEventos = [
-    {
-      fecha: "SÁB 27 SEP",
-      titulo: "Cena de Matrimonios",
-      descripcion:
-        "Una velada de gala para celebrar el amor y agradecer a Dios por cada matrimonio, compartiendo momentos especiales en pareja.",
-      hora: "20:00 HS",
-      icono: "fas fa-heart",
-    },
-    {
-      fecha: "SÁB 12 OCT",
-      titulo: "Fiesta de las Naciones",
-      descripcion:
-        "Un día donde disfrutaremos de comidas típicas de distintos países, presentaciones llenas de color y un ambiente familiar.",
-      hora: "11:00 HS",
-      icono: "fas fa-globe",
-    },
-    {
-      fecha: "SÁB 30 NOV",
-      titulo: "Acción de Gracias",
-      descripcion:
-        "Celebramos juntos con una comida en familia, menú delicioso, dinámicas de gratitud a Dios y testimonios de Su fidelidad.",
-      hora: "13:00 HS",
-      icono: "fas fa-pray",
-    },
-  ];
+const proximosEventos = [
+  {
+    dia: "27",
+    mes: "SEP",
+    diaSemana: "SÁBADO",
+    titulo: "Cena de Matrimonios",
+    descripcion: "Una velada de gala para celebrar el amor y agradecer a Dios por cada matrimonio, compartiendo momentos especiales en pareja.",
+    hora: "19:00 HS",
+    icono: "fas fa-heart",
+    color: "#609be8"
+  },
+  {
+    dia: "12",
+    mes: "OCT",
+    diaSemana: "DOMINGO",
+    titulo: "Fiesta de las Naciones",
+    descripcion: "Un día donde disfrutaremos de comidas típicas de distintos países, presentaciones llenas de color y un ambiente familiar.",
+    hora: "11:00 HS",
+    icono: "fas fa-globe",
+    color: "#609be8"
+  },
+  {
+    dia: "30",
+    mes: "NOV",
+    diaSemana: "SÁBADO",
+    titulo: "Acción de Gracias",
+    descripcion: "Celebramos juntos con una comida en familia, menú delicioso, dinámicas de gratitud a Dios y testimonios de Su fidelidad.",
+    hora: "13:00 HS",
+    icono: "fas fa-pray",
+    color: "#609be8"
+  },
+];
 
   return (
     <>
@@ -401,23 +407,34 @@ const ministerios = [
 
         <div className="events-grid">
           {proximosEventos.map((evento, index) => (
-            <div key={index} className="event-card">
-              <div className="event-image">
-                <img
-                  src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=200&fit=crop"
-                  alt={evento.titulo}
-                />
-              </div>
-              <div className="event-content">
-                <div className="event-date">{evento.fecha}</div>
-                <h3 className="event-title">
-                  <i className={evento.icono}></i> {evento.titulo}
-                </h3>
-                <p className="event-description">{evento.descripcion}</p>
-                <div className="event-time">
-                  <i className="far fa-clock"></i>
-                  {evento.hora}
+            <div key={index} className="event-card-calendar">
+              <div className="event-calendar-date" style={{borderTopColor: evento.color}}>
+                <div className="calendar-month" style={{backgroundColor: evento.color}}>
+                  {evento.mes}
                 </div>
+                <div className="calendar-day">
+                  {evento.dia}
+                </div>
+                <div className="calendar-weekday">
+                  {evento.diaSemana}
+                </div>
+              </div>
+              
+              <div className="event-content-calendar">
+                <div className="event-header">
+                  <h3 className="event-title-calendar">
+                    <i className={evento.icono} style={{color: evento.color}}></i>
+                    {evento.titulo}
+                  </h3>
+                  <div className="event-time-calendar">
+                    <i className="far fa-clock"></i>
+                    {evento.hora}
+                  </div>
+                </div>
+                
+                <p className="event-description-calendar">
+                  {evento.descripcion}
+                </p>
               </div>
             </div>
           ))}

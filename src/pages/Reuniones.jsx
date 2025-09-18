@@ -10,6 +10,47 @@ const Reuniones = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Carrusel de imágenes con extensiones mixtas
+  const images = Array.from({ length: 26 }, (_, i) => {
+    const imageNumber = i + 1;
+    // Definir extensiones según tus archivos reales
+    const extension = imageNumber <= 18 ? 'jpeg' : 'jpg';
+    return {
+      id: imageNumber,
+      url: `/imgs/about/${imageNumber}.${extension}`,
+      title: `Momento ${imageNumber}`
+    };
+  });
+
+  // Auto-scroll infinito más simple
+  useEffect(() => {
+    const wrapper = document.querySelector('.gallery-cards-wrapper');
+    if (!wrapper) return;
+
+    let scrollLeft = 0;
+    const scrollSpeed = 0.3; // Velocidad más lenta
+    let animationId;
+
+    const scroll = () => {
+      scrollLeft += scrollSpeed;
+      wrapper.scrollLeft = scrollLeft;
+
+      // Reset cuando llegamos a la mitad (donde empiezan las imágenes duplicadas)
+      if (scrollLeft >= wrapper.scrollWidth / 2) {
+        scrollLeft = 0;
+        wrapper.scrollLeft = 0;
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
+
+    // Iniciar scroll
+    animationId = requestAnimationFrame(scroll);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+
   const horarios = [
     {
       dia: "Domingos",
@@ -34,7 +75,7 @@ const Reuniones = () => {
     },
     {
       dia: "Miércoles",
-      hora: "",
+      hora: "19:00hs",
       tipo: "Evangelismo",
       descripcion: "Centro Comercial Alcalá Norte",
       icono: "fas fa-heart"
@@ -57,7 +98,7 @@ const Reuniones = () => {
     {
       tipo: "Coche",
       detalle: "Aparcamiento gratuito disponible",
-      tiempo: "Zona azul",
+      tiempo: "Zona blanca",
       icono: "fas fa-car"
     }
   ];
@@ -68,6 +109,40 @@ const Reuniones = () => {
         <div className="container-clean">
           <h1>Nuestras reuniones</h1>
           <p>Si quieres visitarnos y ser parte de esta gran familia, ¡eres bienvenido!</p>
+        </div>
+      </section>
+
+      <section className="gallery-section-cards">
+        <div className="gallery-full-width">
+          <h2>Momentos que nos definen</h2>
+          
+          <div className="gallery-cards-container">
+            <div className="gallery-cards-wrapper">
+              {/* Duplicar las imágenes para scroll infinito */}
+              {[...images, ...images].map((image, index) => (
+                <div 
+                  key={`${image.id}-${index}`} 
+                  className="gallery-card"
+                >
+                  <div className="card-image">
+                    <img 
+                      src={image.url} 
+                      alt={image.title}
+                      onError={(e) => {
+                        // Fallback para extensiones
+                        const currentSrc = e.target.src;
+                        if (currentSrc.includes('.jpeg')) {
+                          e.target.src = currentSrc.replace('.jpeg', '.jpg');
+                        } else if (currentSrc.includes('.jpg')) {
+                          e.target.src = currentSrc.replace('.jpg', '.jpeg');
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

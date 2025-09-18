@@ -51,6 +51,77 @@
   margin: 0;
 }
 
+/* GALERÍA DE CARRUSEL */
+.gallery-section-cards {
+  padding: 8rem 0;
+  background: #0a0a0a;
+  position: relative;
+}
+
+.gallery-full-width {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-section-cards h2 {
+  text-align: center;
+  margin-bottom: 4rem;
+  color: #609be8;
+  padding: 0 2rem;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+}
+
+.gallery-cards-container {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0 4rem;
+  overflow: hidden;
+}
+
+.gallery-cards-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: hidden; /* Cambiado de auto a hidden */
+  scroll-snap-type: none; /* Removido snap para scroll suave */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 2rem 0;
+  animation: none; /* Sin animación predeterminada */
+}
+
+.gallery-cards-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-card {
+  flex: 0 0 280px;
+  height: 400px;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+  /* Removidos todos los efectos hover y transition */
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Removido transition y hover effects */
+}
+
+/* Removido completamente .gallery-nav-btn y sus variantes */
+
 .reuniones-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -586,6 +657,7 @@
   }
 }
 
+/* RESPONSIVE DESIGN */
 @media (max-width: 1200px) {
   .horarios-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -609,6 +681,15 @@
     max-width: 500px;
     margin: 0 auto;
   }
+  
+  .gallery-cards-container {
+    padding: 0 2rem;
+  }
+  
+  .gallery-card {
+    flex: 0 0 260px;
+    height: 350px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -619,7 +700,8 @@
   
   .horarios-section,
   .grupos-section,
-  .ubicacion-section {
+  .ubicacion-section,
+  .gallery-section-cards {
     padding: 4rem 0;
   }
   
@@ -636,7 +718,8 @@
     font-size: 1.2rem !important;
   }
   
-  .section-header h2 {
+  .section-header h2,
+  .gallery-section-cards h2 {
     font-size: 2rem !important;
   }
   
@@ -673,6 +756,15 @@
   .transporte-moderno {
     padding: 2rem;
   }
+  
+  .gallery-cards-container {
+    padding: 0 1rem;
+  }
+  
+  .gallery-card {
+    flex: 0 0 calc(100vw - 4rem);
+    height: 350px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -689,7 +781,8 @@
     font-size: 1rem !important;
   }
   
-  .section-header h2 {
+  .section-header h2,
+  .gallery-section-cards h2 {
     font-size: 1.75rem !important;
   }
   
@@ -707,5 +800,14 @@
   
   .transporte-item {
     padding: 1.5rem;
+  }
+  
+  .gallery-section-cards {
+    padding: 4rem 0;
+  }
+  
+  .gallery-card {
+    flex: 0 0 calc(100vw - 2rem);
+    height: 320px;
   }
 }

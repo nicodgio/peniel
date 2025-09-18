@@ -1,43 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../css/inicio/about.css';
 
 const About = () => {
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const images = Array.from({ length: 18 }, (_, i) => ({
-    id: i + 1,
-    url: `/imgs/about/${i + 1}.jpeg`,
-    thumbnail: `/imgs/about/${i + 1}.jpeg`,
-    title: `Momento ${i + 1}`,
-    description: `Descripción de la imagen ${i + 1}`
-  }));
-
   const estadisticas = [
     { numero: "24+", label: "Años de historia" },
     { numero: "300+", label: "Miembros activos" },
     { numero: "11", label: "Ministerios activos" },
     { numero: "4", label: "Pasos de discipulado" }
   ];
-
-  const openModal = (index) => {
-    setSelectedImage(index);
-    setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    document.body.style.overflow = 'unset';
-  };
-
-  const nextImage = () => {
-    setSelectedImage((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setSelectedImage((prev) => (prev - 1 + images.length) % images.length);
-  };
 
   return (
     <div className="about-page-clean">
@@ -80,73 +50,6 @@ const About = () => {
                     <div className="stat-label-clean">{stat.label}</div>
                   </div>
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-clean bg-light">
-        <div className="container-clean">
-          <h2 className="section-title-centered">Nuestra Historia</h2>
-          
-          <div className="history-timeline">
-            <div className="history-item">
-              <div className="history-year">2000</div>
-              <div className="history-content">
-                <div className="history-image">
-                  <img src="/imgs/about/victor_janet.png" alt="Victor y Janet Hedman" />
-                </div>
-                <div className="history-text">
-                  <h3>Los Pioneros</h3>
-                  <h4>Victor y Janet Hedman</h4>
-                  <p>
-                    La historia de Peniel Madrid comienza cuando los misioneros estadounidenses 
-                    Victor y Janet Hedman, tras años de servicio en Argentina y Paraguay, 
-                    recibieron de parte de Dios el llamado a fundar una iglesia en Madrid. 
-                    Las primeras reuniones fueron en hoteles y en el garaje de su casa, 
-                    hasta que en 2002 se alquiló el primer local en la calle Rufino González.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="history-item reverse">
-              <div className="history-year">2003</div>
-              <div className="history-content">
-                <div className="history-image">
-                  <img src="/imgs/about/juan_fiona.png" alt="Juan Carlos Escobar y Fiona Belshaw" />
-                </div>
-                <div className="history-text">
-                  <h3>Etapa de Crecimiento</h3>
-                  <h4>Juan Carlos Escobar y Fiona Belshaw</h4>
-                  <p>
-                    En 2003, los pastores Juan Carlos Escobar y Fiona Belshaw asumieron 
-                    el liderazgo, impulsando una nueva etapa de crecimiento que llevó a 
-                    la iglesia a diferentes locales, hasta establecerse en 2015 en la 
-                    calle Miguel Fleta 11.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="history-item">
-              <div className="history-year">2017</div>
-              <div className="history-content">
-                <div className="history-image">
-                  <img src="/imgs/about/Pastores.png" alt="Julio Ortega y Ethel Bayona" />
-                </div>
-                <div className="history-text">
-                  <h3>El Presente</h3>
-                  <h4>Julio Ortega y Ethel Bayona</h4>
-                  <p>
-                    Tras un tiempo de oración y dirección de Dios, en 2017 los pastores 
-                    Julio Ortega y Ethel Bayona fueron consagrados y tomaron el testigo 
-                    pastoral. Con un corazón pastoral y un fuerte compromiso con la 
-                    enseñanza bíblica, lideran la iglesia junto a un equipo de ministros 
-                    y líderes que trabajan en unidad para edificar la familia de la fe.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -218,140 +121,16 @@ const About = () => {
         </div>
       </section>
 
-      <section className="vision-section-animated">
+      <section className="pastoral-section">
         <div className="container-clean">
-          <div className="vision-container">
-            <h2 className="vision-title">Nuestra Visión y Misión</h2>
-            <p className="vision-subtitle">
-              Siguiendo el mandato de Jesús en Mateo 28:19-20, nuestra visión es <strong>ser y hacer discípulos</strong>:
-            </p>
-            
-            <div className="vision-cards">
-              <div className="vision-card">
-                <div className="vision-icon">
-                  <span className="vision-number">1</span>
-                </div>
-                <h3>Ganar</h3>
-                <p>Anunciar el evangelio a todas las personas</p>
-              </div>
-              
-              <div className="vision-card">
-                <div className="vision-icon">
-                  <span className="vision-number">2</span>
-                </div>
-                <h3>Consolidar</h3>
-                <p>Ayudar a los nuevos creyentes a afirmarse en la fe</p>
-              </div>
-              
-              <div className="vision-card">
-                <div className="vision-icon">
-                  <span className="vision-number">3</span>
-                </div>
-                <h3>Discipular</h3>
-                <p>Formar seguidores de Cristo comprometidos</p>
-              </div>
-              
-              <div className="vision-card">
-                <div className="vision-icon">
-                  <span className="vision-number">4</span>
-                </div>
-                <h3>Enviar</h3>
-                <p>Levantar obreros que alcancen a otros con el evangelio</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="gallery-section-cards">
-        <div className="gallery-full-width">
-          <h2>Momentos que nos definen</h2>
+          <h2 className="section-title-centered">Nuestros Pastores</h2>
           
-          <div className="gallery-cards-container">
-            <div className="gallery-cards-wrapper" id="galleryCardsWrapper">
-              {images.map((image, index) => (
-                <div 
-                  key={image.id} 
-                  className="gallery-card"
-                  onClick={window.innerWidth > 768 ? () => openModal(index) : undefined}
-                >
-                  <div className="card-image">
-                    <img src={image.url} alt={image.title} />
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <button 
-              className="gallery-nav-btn gallery-nav-prev"
-              onClick={() => {
-                const wrapper = document.getElementById('galleryCardsWrapper');
-                const cardWidth = window.innerWidth <= 768 ? 300 : 1500;
-                wrapper.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-              }}
-            >
-              <i className="fas fa-chevron-left"></i>
-            </button>
-            <button 
-              className="gallery-nav-btn gallery-nav-next"
-              onClick={() => {
-                const wrapper = document.getElementById('galleryCardsWrapper');
-                const cardWidth = window.innerWidth <= 768 ? 300 : 1500;
-                wrapper.scrollBy({ left: cardWidth, behavior: 'smooth' });
-              }}
-            >
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-clean">
-        <div className="container-clean">
-          <h2 className="section-title-centered">Nuestros Valores</h2>
-          <div className="valores-grid-clean">
-            <div className="valor-item-clean">
-              <div className="valor-icon-clean">
-                <i className="fas fa-heart"></i>
-              </div>
-              <h3>Amor</h3>
-              <p>Amamos a Dios y extendemos ese amor a nuestro prójimo.</p>
-            </div>
-            <div className="valor-item-clean">
-              <div className="valor-icon-clean">
-                <i className="fas fa-users"></i>
-              </div>
-              <h3>Comunidad</h3>
-              <p>Creemos en la vida en familia de fe.</p>
-            </div>
-            <div className="valor-item-clean">
-              <div className="valor-icon-clean">
-                <i className="fas fa-seedling"></i>
-              </div>
-              <h3>Crecimiento</h3>
-              <p>Buscamos madurar espiritualmente a través de la Palabra y la oración.</p>
-            </div>
-            <div className="valor-item-clean">
-              <div className="valor-icon-clean">
-                <i className="fas fa-globe"></i>
-              </div>
-              <h3>Misión</h3>
-              <p>Estamos comprometidos con la Gran Comisión en Madrid y el mundo.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-clean bg-light">
-        <div className="container-clean">
-          <h2 className="section-title-centered">Pastores Principales</h2>
-          
-          <div className="pastoral-grid">
-            <div className="pastor-card-clean">
-              <div className="pastor-image-clean">
+          <div className="pastoral-layout">
+            <div className="pastor-main">
+              <div className="pastor-image">
                 <img src="/imgs/about/Pastores.png" alt="Julio Ortega y Ethel Bayona" />
               </div>
-              <div className="pastor-content">
+              <div className="pastor-info">
                 <h3>Julio Ortega y Ethel Bayona</h3>
                 <p className="pastor-role">Pastores Principales</p>
                 <p>
@@ -363,9 +142,9 @@ const About = () => {
               </div>
             </div>
             
-            <div className="pastoral-text">
-              <h3 class="text-center">Un Liderazgo Comprometido</h3>
-              <div className="text-block">
+            <div className="leadership-info">
+              <h3>Un Liderazgo Comprometido</h3>
+              <div className="leadership-content">
                 <p>
                   Nuestra familia pastoral está compuesta por líderes íntegros y comprometidos 
                   que han sido llamados por Dios para servir a esta congregación. Cada miembro 
@@ -378,11 +157,143 @@ const About = () => {
                   predican desde el púlpito, sino que viven entre la congregación, compartiendo 
                   sus alegrías y tristezas.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="vision-mission-modern">
+        <div className="container-clean">
+          <div className="section-intro">
+            <h2>Visión y Misión</h2>
+            <p>Nuestro propósito y dirección como iglesia</p>
+          </div>
+          
+          <div className="vm-hero">
+            <div className="vision-side">
+              <div className="vm-label">VISIÓN</div>
+              <h3>Transformar vidas y comunidades</h3>
+              <p>
+                Ser una iglesia que transforma vidas y comunidades a través del 
+                poder del evangelio, formando discípulos comprometidos que extiendan 
+                el Reino de Dios en Madrid y hasta lo último de la tierra.
+              </p>
+            </div>
+            
+            <div className="mission-side">
+              <div className="vm-label">MISIÓN</div>
+              <h3>Hacer discípulos de todas las naciones</h3>
+              <p>
+                Siguiendo el mandato de Jesús en Mateo 28:19-20, cumplimos nuestra 
+                misión a través de cuatro pasos fundamentales que nos permiten 
+                <strong> ser y hacer discípulos</strong> de manera integral.
+              </p>
+              
+              <div className="process-flow">
+                <div className="process-step">
+                  <div className="step-circle">01</div>
+                  <div className="step-info">
+                    <h4>Ganar</h4>
+                    <span>Evangelismo</span>
+                  </div>
+                </div>
+                
+                <div className="flow-arrow">→</div>
+                
+                <div className="process-step">
+                  <div className="step-circle">02</div>
+                  <div className="step-info">
+                    <h4>Consolidar</h4>
+                    <span>Afianzar la fe</span>
+                  </div>
+                </div>
+                
+                <div className="flow-arrow">→</div>
+                
+                <div className="process-step">
+                  <div className="step-circle">03</div>
+                  <div className="step-info">
+                    <h4>Discipular</h4>
+                    <span>Formar carácter</span>
+                  </div>
+                </div>
+                
+                <div className="flow-arrow">→</div>
+                
+                <div className="process-step">
+                  <div className="step-circle">04</div>
+                  <div className="step-info">
+                    <h4>Enviar</h4>
+                    <span>Multiplicar obreros</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="values-modern">
+        <div className="container-clean">
+          <div className="values-header">
+            <h2>Nuestros Valores</h2>
+            <p>Los principios que guían cada aspecto de nuestra vida como iglesia</p>
+          </div>
+          
+          <div className="values-showcase">
+            <div className="value-highlight">
+              <div className="value-number">01</div>
+              <div className="value-content-modern">
+                <div className="value-title">
+                  <i className="fas fa-heart"></i>
+                  <h3>Amor</h3>
+                </div>
                 <p>
-                  El equipo pastoral está disponible para el cuidado espiritual, consejería, 
-                  oración y acompañamiento en los momentos más importantes de la vida. Su 
-                  compromiso va más allá del domingo; es una dedicación de vida completa al 
-                  llamado que Dios les ha dado.
+                  Amamos a Dios sobre todas las cosas y extendemos ese amor incondicional 
+                  a nuestro prójimo, creando un ambiente de gracia, aceptación y cuidado mutuo.
+                </p>
+              </div>
+            </div>
+            
+            <div className="value-highlight">
+              <div className="value-number">02</div>
+              <div className="value-content-modern">
+                <div className="value-title">
+                  <i className="fas fa-users"></i>
+                  <h3>Comunidad</h3>
+                </div>
+                <p>
+                  Creemos en la vida en familia de fe, donde cada persona es valorada, 
+                  cuidada y tiene un lugar de pertenencia dentro del cuerpo de Cristo.
+                </p>
+              </div>
+            </div>
+            
+            <div className="value-highlight">
+              <div className="value-number">03</div>
+              <div className="value-content-modern">
+                <div className="value-title">
+                  <i className="fas fa-seedling"></i>
+                  <h3>Crecimiento</h3>
+                </div>
+                <p>
+                  Buscamos constantemente madurar espiritualmente a través del estudio 
+                  de la Palabra, la oración y la aplicación práctica de los principios bíblicos.
+                </p>
+              </div>
+            </div>
+            
+            <div className="value-highlight">
+              <div className="value-number">04</div>
+              <div className="value-content-modern">
+                <div className="value-title">
+                  <i className="fas fa-globe"></i>
+                  <h3>Misión</h3>
+                </div>
+                <p>
+                  Estamos profundamente comprometidos con la Gran Comisión, llevando el 
+                  evangelio tanto a nuestra ciudad de Madrid como hasta los confines del mundo.
                 </p>
               </div>
             </div>

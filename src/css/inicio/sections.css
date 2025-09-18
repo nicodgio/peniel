@@ -480,114 +480,154 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* PRÓXIMOS EVENTOS */
+/* PRÓXIMOS EVENTOS - DISEÑO CALENDARIO */
 .proximos-eventos {
   padding: 8rem 4rem;
   background: #111;
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-title {
-  font-size: 3rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #609be8, #4a8bc2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-}
-
-.section-subtitle {
-  font-size: 1.2rem;
-  font-family: 'Montserrat', sans-serif;
-  opacity: 0.8;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
 .events-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 2.5rem;
   margin-top: 4rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.event-card {
+.event-card-calendar {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   overflow: hidden;
   transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.event-card:hover {
+.event-card-calendar:hover {
   transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.event-image {
-  width: 100%;
-  height: 200px;
+.event-calendar-date {
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #609be8;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
   overflow: hidden;
 }
 
-.event-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.event-content {
-  padding: 2rem;
-}
-
-.event-date {
-  background: linear-gradient(135deg, #609be8 0%, #4a8bc2 100%);
+.calendar-month {
+  background: #609be8;
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
+  padding: 0.4rem 1rem;
+  border-radius: 15px;
   font-weight: 700;
-  font-size: 0.9rem;
-  display: inline-block;
-  margin-bottom: 1rem;
+  font-size: 0.8rem;
   font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 0.8rem;
 }
 
-.event-title {
+.calendar-day {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.calendar-weekday {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.event-content-calendar {
+  padding: 2rem 1.8rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-header {
+  margin-bottom: 1.2rem;
+}
+
+.event-title-calendar {
   font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   color: white;
   font-family: 'Montserrat', sans-serif;
-}
-
-.event-title i {
-  margin-right: 0.5rem;
-  color: #609be8;
-}
-
-.event-description {
-  opacity: 0.8;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.event-time {
-  font-size: 0.9rem;
-  opacity: 0.7;
+  line-height: 1.3;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+}
+
+.event-time-calendar {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
   font-family: 'Montserrat', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.event-description-calendar {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .event-card-calendar {
+    margin: 0 auto;
+    max-width: 400px;
+  }
+  
+  .event-calendar-date {
+    padding: 1.2rem;
+  }
+  
+  .calendar-day {
+    font-size: 2rem;
+  }
+  
+  .event-content-calendar {
+    padding: 1.5rem;
+  }
+  
+  .event-title-calendar {
+    font-size: 1.2rem;
+  }
 }
 
 /* MENÚ DOMINICAL BANNER */
