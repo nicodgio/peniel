@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -13,12 +13,23 @@ import './css/globales/global.css';
 import './css/globales/nav.css';
 import './css/globales/footer.css';
 
+// Componente para manejar el scroll automático al cambiar de página
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+};
+
 const App = () => {
   return (
     <Router>
       <div className="peniel-app">
+        <ScrollToTop />
         <Navbar />
-        
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -31,7 +42,6 @@ const App = () => {
             <Route path="/contacto" element={<Contacto />} />
           </Routes>
         </main>
-
         <Footer />
       </div>
     </Router>
