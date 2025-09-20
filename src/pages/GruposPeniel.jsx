@@ -3,6 +3,11 @@ import '../css/inicio/grupos.css';
 
 const GruposPeniel = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
@@ -24,11 +29,103 @@ const GruposPeniel = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('Datos del formulario:', formData);
-    // Aquí iría la funcionalidad del formulario
-    alert('Formulario enviado correctamente');
+  const validateStep1 = () => {
+    return formData.nombre.trim() !== '' && 
+           formData.telefono.trim() !== '' && 
+           formData.fechaNacimiento.trim() !== '' && 
+           formData.sexo !== '';
+  };
+
+  const validateStep2 = () => {
+    return formData.direccion.trim() !== '' && 
+           formData.cp.trim() !== '' && 
+           formData.primeraVez !== '';
+  };
+
+  const validateStep3 = () => {
+    return formData.conocerMas !== '';
+  };
+
+  const nextStep = () => {
+    let canAdvance = false;
+    
+    if (currentStep === 1) {
+      canAdvance = validateStep1();
+      if (!canAdvance) {
+        setErrorMessage('Por favor, completa todos los campos obligatorios del paso 1');
+        setShowErrorModal(true);
+        return;
+      }
+    } else if (currentStep === 2) {
+      canAdvance = validateStep2();
+      if (!canAdvance) {
+        setErrorMessage('Por favor, completa todos los campos obligatorios del paso 2');
+        setShowErrorModal(true);
+        return;
+      }
+    }
+    
+    if (canAdvance && currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!validateStep3()) {
+      setErrorMessage('Por favor, completa todos los campos obligatorios del paso 3');
+      setShowErrorModal(true);
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://orangered-guanaco-582072.hostingersite.com/api/grupospeniel.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setShowSuccessModal(true);
+        setShowModal(false);
+        setCurrentStep(1);
+        // Limpiar formulario
+        setFormData({
+          nombre: '',
+          telefono: '',
+          fechaNacimiento: '',
+          sexo: '',
+          direccion: '',
+          cp: '',
+          invitadoDe: '',
+          primeraVez: '',
+          conocerMas: '',
+          pedidoOracion: ''
+        });
+      } else {
+        setErrorMessage(result.error || 'Error al enviar el formulario');
+        setShowErrorModal(true);
+      }
+    } catch (error) {
+      setErrorMessage('Error de conexión. Por favor, inténtalo de nuevo.');
+      setShowErrorModal(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 1) setCurrentStep(currentStep - 1);
+  };
+
+  const closeModal = () => {
     setShowModal(false);
+    setCurrentStep(1);
   };
 
   return (
@@ -40,7 +137,7 @@ const GruposPeniel = () => {
         <div className="grupos-hero">
           <div className="container-clean">
             <h1>GRUPOS PENIEL</h1>
-            <p>La iglesia más allá de las cuatro paredes</p>
+            <p>“Y todos los días, en el templo y por las casas, no cesaban de enseñar y predicar a Jesucristo”</p>
           </div>
         </div>
 
@@ -61,7 +158,7 @@ const GruposPeniel = () => {
               </div>
               <div className="intro-image">
                 <div className="church-image">
-                  <img src="/imgs/grupos/grupos-hero.jpg" alt="Grupos Peniel" />
+                  <img src="/imgs/gp.png" alt="Grupos Peniel" />
                 </div>
               </div>
             </div>
@@ -222,7 +319,7 @@ const GruposPeniel = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="section-clean bg-light">
+        <section className="section-clean bg-dark">
           <div className="container-clean">
             <div className="cta-content">
               <h2>Únete a un Grupo Peniel</h2>
@@ -245,218 +342,328 @@ const GruposPeniel = () => {
         </section>
       </div>
 
-      {/* Modal del Formulario */}
+      {/* Modal del Formulario Rediseñado */}
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2>Únete a Grupos Peniel</h2>
-              <button
-                onClick={() => setShowModal(false)}
-                className="close-button"
-              >
-                ×
+          <div className="modal-modern">
+            {/* Header del modal */}
+            <div className="modal-header-modern">
+              <button onClick={closeModal} className="close-btn-modern">
+                <i className="fas fa-times"></i>
               </button>
             </div>
 
-            <div className="form-container">
-              {/* Nombre completo */}
-              <div className="form-group">
-                <label>Nombre completo *</label>
-                <input
-                  type="text"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Teléfono */}
-              <div className="form-group">
-                <label>Teléfono *</label>
-                <input
-                  type="tel"
-                  name="telefono"
-                  value={formData.telefono}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Fecha de nacimiento */}
-              <div className="form-group">
-                <label>Fecha de nacimiento *</label>
-                <input
-                  type="date"
-                  name="fechaNacimiento"
-                  value={formData.fechaNacimiento}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Sexo */}
-              <div className="form-group">
-                <label>Sexo *</label>
-                <div className="radio-group">
-                  <label className="radio-label">
-                    <input
-                      type="radio"
-                      name="sexo"
-                      value="F"
-                      checked={formData.sexo === 'F'}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    Femenino
-                  </label>
-                  <label className="radio-label">
-                    <input
-                      type="radio"
-                      name="sexo"
-                      value="M"
-                      checked={formData.sexo === 'M'}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    Masculino
-                  </label>
+            {/* Contenido principal del modal */}
+            <div className="modal-body-modern">
+              {/* Lado izquierdo - Imagen */}
+              <div className="modal-image-side">
+                <div className="modal-image-container">
+                  <img src="/imgs/ministerios/grupospeniel.jpeg" alt="Grupos Peniel" />
+                  <div className="image-overlay-modern">
+                    <div className="overlay-content">
+                      <h3>Únete a Grupos Peniel</h3>
+                      <p>Forma parte de nuestra familia de fe</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Dirección */}
-              <div className="form-group">
-                <label>Dirección *</label>
-                <input
-                  type="text"
-                  name="direccion"
-                  value={formData.direccion}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* CP */}
-              <div className="form-group">
-                <label>Código Postal *</label>
-                <input
-                  type="text"
-                  name="cp"
-                  value={formData.cp}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              {/* Invitado de */}
-              <div className="form-group">
-                <label>Invitado de (opcional)</label>
-                <input
-                  type="text"
-                  name="invitadoDe"
-                  value={formData.invitadoDe}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* Primera vez en iglesia evangélica */}
-              <div className="form-group">
-                <label>¿Es tu primera vez en una iglesia evangélica? *</label>
-                <div className="radio-group">
-                  <label className="radio-label">
-                    <input
-                      type="radio"
-                      name="primeraVez"
-                      value="si"
-                      checked={formData.primeraVez === 'si'}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    Sí
-                  </label>
-                  <label className="radio-label">
-                    <input
-                      type="radio"
-                      name="primeraVez"
-                      value="no"
-                      checked={formData.primeraVez === 'no'}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    No
-                  </label>
+              {/* Lado derecho - Formulario */}
+              <div className="modal-form-side">
+                {/* Progress indicator */}
+                <div className="step-indicator" data-step={currentStep}>
+                  <div className={`step ${currentStep >= 1 ? 'active' : ''}`}>
+                    <div className="step-number">1</div>
+                    <span>Datos personales</span>
+                  </div>
+                  <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
+                    <div className="step-number">2</div>
+                    <span>Información adicional</span>
+                  </div>
+                  <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
+                    <div className="step-number">3</div>
+                    <span>Finalizar</span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Conocer más de Dios */}
-              <div className="form-group">
-                <label>¿Te gustaría conocer más de Dios y la Biblia? *</label>
-                <div className="radio-group">
-                  <label className="radio-label">
-                    <input
-                      type="radio"
-                      name="conocerMas"
-                      value="si"
-                      checked={formData.conocerMas === 'si'}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    Sí
-                  </label>
-                  <label className="radio-label">
-                    <input
-                      type="radio"
-                      name="conocerMas"
-                      value="no"
-                      checked={formData.conocerMas === 'no'}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    No
-                  </label>
+                {/* Formulario por pasos */}
+                <div className="form-steps">
+                  {/* Paso 1: Datos Personales */}
+                  {currentStep === 1 && (
+                    <div className="step-content">
+                      <h4>Datos Personales</h4>
+                      <div className="form-grid">
+                        <div className="form-field">
+                          <label>Nombre completo *</label>
+                          <input
+                            type="text"
+                            name="nombre"
+                            value={formData.nombre}
+                            onChange={handleInputChange}
+                            placeholder="Tu nombre completo"
+                            required
+                          />
+                        </div>
+                        <div className="form-field">
+                          <label>Teléfono *</label>
+                          <input
+                            type="tel"
+                            name="telefono"
+                            value={formData.telefono}
+                            onChange={handleInputChange}
+                            placeholder="+34 xxx xxx xxx"
+                            required
+                          />
+                        </div>
+                        <div className="form-field">
+                          <label>Fecha de nacimiento *</label>
+                          <input
+                            type="date"
+                            name="fechaNacimiento"
+                            value={formData.fechaNacimiento}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </div>
+                        <div className="form-field">
+                          <label>Sexo *</label>
+                          <div className="radio-modern">
+                            <label className="radio-option">
+                              <input
+                                type="radio"
+                                name="sexo"
+                                value="F"
+                                checked={formData.sexo === 'F'}
+                                onChange={handleInputChange}
+                                required
+                              />
+                              <span className="radio-custom"></span>
+                              Femenino
+                            </label>
+                            <label className="radio-option">
+                              <input
+                                type="radio"
+                                name="sexo"
+                                value="M"
+                                checked={formData.sexo === 'M'}
+                                onChange={handleInputChange}
+                                required
+                              />
+                              <span className="radio-custom"></span>
+                              Masculino
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Paso 2: Información Adicional */}
+                  {currentStep === 2 && (
+                    <div className="step-content">
+                      <h4>Información Adicional</h4>
+                      <div className="form-grid">
+                        <div className="form-field">
+                          <label>Dirección *</label>
+                          <input
+                            type="text"
+                            name="direccion"
+                            value={formData.direccion}
+                            onChange={handleInputChange}
+                            placeholder="Tu dirección completa"
+                            required
+                          />
+                        </div>
+                        <div className="form-field">
+                          <label>Código Postal *</label>
+                          <input
+                            type="text"
+                            name="cp"
+                            value={formData.cp}
+                            onChange={handleInputChange}
+                            placeholder="28xxx"
+                            required
+                          />
+                        </div>
+                        <div className="form-field">
+                          <label>Invitado de (opcional)</label>
+                          <input
+                            type="text"
+                            name="invitadoDe"
+                            value={formData.invitadoDe}
+                            onChange={handleInputChange}
+                            placeholder="¿Quién te invitó?"
+                          />
+                        </div>
+                        <div className="form-field full-width">
+                          <label>¿Es tu primera vez en una iglesia evangélica? *</label>
+                          <div className="radio-modern">
+                            <label className="radio-option">
+                              <input
+                                type="radio"
+                                name="primeraVez"
+                                value="si"
+                                checked={formData.primeraVez === 'si'}
+                                onChange={handleInputChange}
+                                required
+                              />
+                              <span className="radio-custom"></span>
+                              Sí
+                            </label>
+                            <label className="radio-option">
+                              <input
+                                type="radio"
+                                name="primeraVez"
+                                value="no"
+                                checked={formData.primeraVez === 'no'}
+                                onChange={handleInputChange}
+                                required
+                              />
+                              <span className="radio-custom"></span>
+                              No
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Paso 3: Finalizar */}
+                  {currentStep === 3 && (
+                    <div className="step-content">
+                      <h4>Información Final</h4>
+                      <div className="form-grid">
+                        <div className="form-field full-width">
+                          <label>¿Te gustaría conocer más de Dios y la Biblia? *</label>
+                          <div className="radio-modern">
+                            <label className="radio-option">
+                              <input
+                                type="radio"
+                                name="conocerMas"
+                                value="si"
+                                checked={formData.conocerMas === 'si'}
+                                onChange={handleInputChange}
+                                required
+                              />
+                              <span className="radio-custom"></span>
+                              Sí
+                            </label>
+                            <label className="radio-option">
+                              <input
+                                type="radio"
+                                name="conocerMas"
+                                value="no"
+                                checked={formData.conocerMas === 'no'}
+                                onChange={handleInputChange}
+                                required
+                              />
+                              <span className="radio-custom"></span>
+                              No
+                            </label>
+                          </div>
+                        </div>
+                        <div className="form-field full-width">
+                          <label>¿Tienes algún pedido de oración?</label>
+                          <textarea
+                            name="pedidoOracion"
+                            value={formData.pedidoOracion}
+                            onChange={handleInputChange}
+                            rows="4"
+                            placeholder="Comparte tu pedido de oración (opcional)..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
 
-              {/* Pedido de oración */}
-              <div className="form-group">
-                <label>¿Tienes algún pedido de oración?</label>
-                <textarea
-                  name="pedidoOracion"
-                  value={formData.pedidoOracion}
-                  onChange={handleInputChange}
-                  rows="4"
-                  placeholder="Comparte tu pedido de oración..."
-                />
-              </div>
+                {/* Navegación */}
+                <div className="modal-navigation">
+                  {currentStep > 1 && (
+                    <button onClick={prevStep} className="btn-nav secondary">
+                      <i className="fas fa-arrow-left"></i>
+                      Anterior
+                    </button>
+                  )}
+                  <div className="nav-spacer"></div>
+                  {currentStep < 3 ? (
+                    <button onClick={nextStep} className="btn-nav primary">
+                      Siguiente
+                      <i className="fas fa-arrow-right"></i>
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={handleSubmit} 
+                      className="btn-nav primary"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          Enviando...
+                          <i className="fas fa-spinner fa-spin"></i>
+                        </>
+                      ) : (
+                        <>
+                          Enviar
+                          <i className="fas fa-paper-plane"></i>
+                        </>
+                      )}
+                    </button>
+                  )}
+                </div>
 
-              {/* Aviso de privacidad */}
-              <div className="privacy-notice">
-                De conformidad con lo establecido en la Ley Orgánica 15/1999, de 13 de
-                diciembre, de Protección de Datos de Carácter Personal, así como
-                a la inclusión de mis datos en el directorio de IGLESIA PENIEL COMUNIDAD
-                CRISTIANA, para su difusión interna. Así mismo, consiento expresamente
-                los derechos de acceso, rectificación, cancelación y oposición que podré
-                ejercitar dirigiéndome por escrito a Tf: 609377944 Ó
-                secretariapenielmadridesp@gmail.com
+                {/* Aviso de privacidad compacto */}
+                {currentStep === 3 && (
+                  <div className="privacy-compact">
+                    <p>Al enviar este formulario aceptas nuestros términos de privacidad y el uso de tus datos según la LOPD.</p>
+                  </div>
+                )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
 
-              {/* Botones */}
-              <div className="form-buttons">
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="btn-clean secondary"
-                >
-                  Cancelar
-                </button>
-                <button
-                  onClick={handleSubmit}
-                  className="btn-clean primary"
-                >
-                  Enviar
-                </button>
+      {/* Modal de Éxito */}
+      {showSuccessModal && (
+        <div className="modal-overlay">
+          <div className="modal-simple">
+            <div className="modal-simple-content">
+              <div className="success-icon">
+                <i className="fas fa-check-circle"></i>
               </div>
+              <h3>¡Datos enviados correctamente!</h3>
+              <p>
+                Gracias por tu interés en formar parte de Grupos Peniel. 
+                Hemos recibido tu información y en breve nos pondremos en contacto contigo.
+              </p>
+              <button 
+                onClick={() => setShowSuccessModal(false)} 
+                className="btn-nav primary"
+              >
+                Entendido
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Error */}
+      {showErrorModal && (
+        <div className="modal-overlay">
+          <div className="modal-simple">
+            <div className="modal-simple-content">
+              <div className="error-icon">
+                <i className="fas fa-exclamation-triangle"></i>
+              </div>
+              <h3>Error</h3>
+              <p>{errorMessage}</p>
+              <button 
+                onClick={() => setShowErrorModal(false)} 
+                className="btn-nav secondary"
+              >
+                Cerrar
+              </button>
             </div>
           </div>
         </div>

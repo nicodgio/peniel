@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/inicio/ministerios.css';
 
 const Ministerios = () => {
   const [ministerioActivo, setMinisterioActivo] = useState(null);
