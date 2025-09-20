@@ -10,186 +10,221 @@ const Ministerios = () => {
       nombre: 'Acción Social',
       categoria: 'Servicio',
       frecuencia: 'Mensual',
-      horario: 'Sábados 10:00 HS',
-      descripcion: 'Transformamos vidas a través del servicio práctico a nuestra comunidad.',
-      descripcionCompleta: 'Nuestro ministerio de Acción Social es el corazón compasivo de Peniel Madrid. Operamos un banco de alimentos y ropero comunitario que atiende a familias en situación de vulnerabilidad. Promovemos la economía circular y la sostenibilidad mientras demostramos el amor de Cristo de manera práctica.',
-      lider: 'Carmen Rodríguez',
-      telefono: '+34 600 123 456',
+      horario: 'Sábados por la mañana',
+      lema: 'Transformando vidas a través del servicio',
+      descripcion: 'Un noble esfuerzo comunitario que se ha convertido en una hermosa tradición mensual de donaciones de alimentos y ropa.',
+      descripcionCompleta: 'En Iglesia Peniel, creemos firmemente en poner la fe en acción. Desde hace muchos años, hemos emprendido un noble esfuerzo comunitario que se ha convertido en una hermosa tradición mensual: nuestro programa de Donaciones de Alimentos y Ropa. Este ministerio nace del deseo profundo de servir a quienes más lo necesitan, brindando no solo recursos materiales, sino también esperanza, dignidad y consuelo en momentos difíciles. Cada mes, nuestros miembros se unen con generosidad y compromiso para recolectar y distribuir alimentos no perecederos, ropa, calzado y enseres básicos, destinados a personas y familias en situación de vulnerabilidad. Gracias al valioso apoyo del Banco de Alimentos de Madrid, y al esfuerzo colectivo de toda nuestra congregación, hemos logrado ampliar nuestro alcance y fortalecer nuestra capacidad de ayuda, llegando a más hogares y corazones con cada jornada de donación.',
+      lider: 'Equipo de Acción Social',
+      telefono: '+34 609 377 944',
       actividades: [
-        'Banco de alimentos semanal',
-        'Ropero comunitario',
-        'Campañas de recolección',
-        'Visitas a familias necesitadas',
-        'Colaboración con ONGs locales'
+        'Donando alimentos, ropa o artículos esenciales',
+        'Colaborando como voluntario en la organización y distribución',
+        'Orando por las personas y familias que reciben esta ayuda',
+        'Colaboración con Banco de Alimentos de Madrid',
+        'Distribución mensual a familias vulnerables',
+        'Recolección de calzado y enseres básicos'
       ],
       requisitos: [
         'Corazón de servicio',
-        'Disponibilidad los sábados',
-        'Compromiso mensual mínimo'
+        'Compromiso con los valores del Evangelio',
+        'Disponibilidad para actividades mensuales',
+        'Solidaridad, compasión y amor al prójimo'
       ],
+      impacto: 'Cada gesto cuenta y marca la diferencia en nuestra comunidad',
       icono: 'fas fa-hands-helping',
-      color: '#e74c3c'
+      color: '#e74c3c',
+      imagen: '/imgs/ministerios/accion-social.jpg'
     },
     {
       id: 'peniel-ng',
-      nombre: 'Peniel NG (Next Generation)',
+      nombre: 'Peniel NG',
       categoria: 'Jóvenes',
       frecuencia: 'Semanal',
-      horario: 'Sábados 19:00 HS',
-      descripcion: 'Empoderando a la nueva generación para impactar su mundo.',
-      descripcionCompleta: 'Peniel NG es nuestro dinámico ministerio para adolescentes (12-18) y jóvenes (18-35). Creamos un espacio donde la nueva generación puede experimentar a Dios de manera relevante y contemporánea, desarrollando liderazgo y propósito para transformar su generación.',
-      lider: 'David Martínez',
-      telefono: '+34 600 234 567',
+      horario: 'Programa regular + 2 campamentos anuales',
+      lema: 'Volver a la esencia, arder por Cristo',
+      descripcion: 'Un espacio donde la pasión por Cristo, el crecimiento espiritual y la amistad verdadera se encuentran.',
+      descripcionCompleta: 'Peniel NG es el ministerio de adolescentes y jóvenes de nuestra iglesia, un espacio donde la pasión por Cristo, el crecimiento espiritual y la amistad verdadera se encuentran. Nos guiamos por cuatro pilares fundamentales que dan forma a nuestra identidad como grupo: A.R.D.E. (Alabanza y Adoración, Relaciones Interpersonales, Discipulado, Evangelismo). Creemos que muchas veces podemos perdernos en lo superficial —las formas, los métodos, lo exterior— y olvidar lo más importante: nuestra esencia y el propósito por el cual fuimos creados. Por eso, nuestro enfoque es volver a la fuente, a las sendas antiguas, y dejar que el fuego del Espíritu nos lleve de nuevo al centro de todo: Jesús.',
+      lider: 'Equipo Peniel NG',
+      telefono: '+34 609 377 944',
       actividades: [
-        'Reuniones dinámicas con música contemporánea',
-        'Talleres de liderazgo juvenil',
-        'Dos campamentos anuales',
-        'Noches de juegos y comunión',
-        'Proyectos de evangelismo creativo',
-        'Mentoría personal'
+        'Crecemos juntos en la Palabra de Dios',
+        'Fortalecemos amistades reales y profundas',
+        'Adoramos con libertad y sin reservas',
+        'Organizamos dos campamentos al año (verano e invierno)',
+        'Espacios clave para el encuentro con Dios',
+        'Comunión y transformación personal'
       ],
       requisitos: [
-        'Edad entre 12-35 años',
-        'Deseo de crecer espiritualmente',
-        'Participación regular en reuniones'
+        'Adolescentes de 12 a 18 años',
+        'Jóvenes de 19 a 35 años',
+        'Pasión por Cristo y crecimiento espiritual',
+        'Compromiso con una fe activa y contagiosa'
       ],
-      icono: 'fas fa-rocket',
-      color: '#9b59b6'
+      impacto: 'Invertimos en esta generación porque creemos que Dios está haciendo algo nuevo en cada uno',
+      icono: 'fas fa-fire',
+      color: '#e67e22',
+      imagen: '/imgs/ministerios/peniel-ng.jpg'
     },
     {
       id: 'peniel-kids',
       nombre: 'Peniel Kids',
       categoria: 'Niños',
       frecuencia: 'Semanal',
-      horario: 'Domingos 11:00 HS',
-      descripcion: 'Sembrando semillas de fe en los corazones más pequeños.',
-      descripcionCompleta: 'Peniel Kids ofrece enseñanza creativa y apropiada para la edad de niños de 3-11 años. Nuestros programas incluyen Exploradores (3-5), Valientes (6-8) y Detectives (9-11), cada uno diseñado para enseñar verdades bíblicas de manera divertida y memorable.',
-      lider: 'Ana García',
-      telefono: '+34 600 345 678',
+      horario: 'Domingos + Campamento urbano en julio',
+      lema: 'Donde aprender de Dios es una aventura',
+      descripcion: 'Acompañamos a los más pequeños en sus primeros pasos en la fe con enseñanza creativa, divertida y significativa.',
+      descripcionCompleta: 'En Peniel Kids acompañamos a los más pequeños en sus primeros pasos en la fe con una enseñanza bíblica creativa, divertida y significativa. Nuestro ministerio está diseñado para niños de 3 a 11 años, con actividades adaptadas a cada etapa de su desarrollo. Los niños se agrupan según su edad en tres equipos, lo que nos permite ofrecer una atención más cercana y programas diseñados especialmente para ellos: Exploradores (3 a 5 años), Valientes (6 a 8 años) y Detectives (9 a 11 años). Cada domingo, a través de juegos, música, manualidades e historias bíblicas, los niños aprenden valores cristianos, fortalecen su fe y descubren que seguir a Jesús es la mejor aventura.',
+      lider: 'Equipo Peniel Kids',
+      telefono: '+34 609 377 944',
       actividades: [
-        'Clases dominicales por edades',
-        'Teatro y representaciones bíblicas',
-        'Manualidades y actividades creativas',
-        'Campamento urbano en julio',
-        'Festivales familiares',
-        'Programas de memorización bíblica'
+        'Exploradores (3 a 5 años)',
+        'Valientes (6 a 8 años)',
+        'Detectives (9 a 11 años)',
+        'Juegos, música y manualidades',
+        'Historias bíblicas interactivas',
+        'Campamento urbano anual en julio'
       ],
       requisitos: [
         'Amor por los niños',
-        'Paciencia y creatividad',
+        'Creatividad y paciencia',
         'Compromiso con la enseñanza bíblica',
-        'Certificado de antecedentes (requerido)'
+        'Disponibilidad los domingos'
       ],
+      impacto: 'Una experiencia inolvidable que deja huellas en el corazón de cada niño',
       icono: 'fas fa-child',
-      color: '#f39c12'
+      color: '#f39c12',
+      imagen: '/imgs/ministerios/peniel-kids.jpg'
     },
     {
       id: 'consolidacion',
       nombre: 'Atención Primaria y Consolidación',
       categoria: 'Pastoral',
       frecuencia: 'Continuo',
-      horario: 'Flexible según necesidad',
-      descripcion: 'Acompañando a cada persona en sus primeros pasos de fe.',
-      descripcionCompleta: 'Este ministerio vital se encarga del primer contacto con nuevos visitantes y recién convertidos. Proporcionamos acompañamiento personalizado durante los primeros pasos cruciales en la fe cristiana, asegurándonos de que nadie camine solo en su jornada espiritual.',
-      lider: 'Miguel Santos',
-      telefono: '+34 600 456 789',
+      horario: 'Según necesidad personalizada',
+      lema: 'Acompañando el primer paso en la nueva vida con Jesús',
+      descripcion: 'Nadie debe hacer este recorrido solo. Acompañamos de manera cercana y amorosa a quienes recién llegan a la fe.',
+      descripcionCompleta: 'Cuando una persona decide seguir a Cristo, comienza un viaje de transformación profunda. En Peniel, creemos que nadie debe hacer este recorrido solo. Por eso, a través del ministerio de Atención Primaria y Consolidación, acompañamos de manera cercana y amorosa a quienes recién llegan a la fe o se integran a nuestra iglesia. Este ministerio es el primer contacto para los nuevos creyentes. Les brindamos orientación, apoyo espiritual y acompañamiento personal para que puedan afianzar su relación con Dios y ser integrados a la familia de la iglesia. Nuestro enfoque sigue el Ciclo de Vida: Ganar, Consolidar, Discipular y Enviar. El ministerio de consolidación se enfoca en la segunda etapa: ayudar a que una decisión por Jesús se transforme en una verdadera conversión, fuerte, firme y estable.',
+      lider: 'Equipo Pastoral',
+      telefono: '+34 609 377 944',
       actividades: [
-        'Recepción de nuevos visitantes',
-        'Seguimiento personalizado',
-        'Clases de fundamentos de la fe',
-        'Conexión con grupos pequeños',
-        'Mentorías individuales',
-        'Programa de integración de 3 meses'
+        'Contactamos a quienes han tomado la decisión de seguir a Cristo',
+        'Acompañamiento personalizado (llamadas, visitas, encuentros)',
+        'Enseñanza de fundamentos de la fe cristiana',
+        'Preparación para el bautismo y su integración a la iglesia',
+        'Caminamos con ellos hasta que estén listos para ser discipulados',
+        'Formación para discipular a otros'
       ],
       requisitos: [
-        'Madurez espiritual',
-        'Habilidades de comunicación',
-        'Disponibilidad para seguimiento',
-        'Corazón pastoral'
+        'Personas maduras en la fe',
+        'Vida cristiana sólida',
+        'Disponibilidad para acompañar nuevos creyentes',
+        'Obediencia al llamado de Jesús de hacer discípulos'
       ],
+      impacto: 'Como Ananías con Saulo, un consolidador acompaña a otro en su proceso de transformación',
       icono: 'fas fa-heart',
-      color: '#e67e22'
+      color: '#9b59b6',
+      imagen: '/imgs/ministerios/consolidacion.jpg'
     },
     {
       id: 'instituto-biblico',
       nombre: 'Instituto Bíblico Peniel',
       categoria: 'Educación',
-      frecuencia: 'Semanal',
-      horario: 'Martes 21:00 HS',
-      descripcion: 'Formación teológica sólida para el ministerio y la vida.',
-      descripcionCompleta: 'Nuestro Instituto Bíblico ofrece formación teológica semipresencial utilizando material de Global University. Proporcionamos educación bíblica de calidad para equipar a los santos para la obra del ministerio, con certificaciones internas disponibles.',
-      lider: 'Pastor Julio Ortega',
-      telefono: '+34 600 567 890',
+      frecuencia: 'Semipresencial',
+      horario: 'Horarios flexibles',
+      lema: 'Formación bíblica para un ministerio con propósito',
+      descripcion: 'Preparación integral para líderes y todo aquel llamado a servir en el Reino de Dios.',
+      descripcionCompleta: 'El Instituto Bíblico Peniel es el espacio de formación teológica y espiritual de nuestra iglesia, diseñado para todos aquellos que desean profundizar en el estudio de la Palabra de Dios y prepararse para servir con excelencia en el ministerio. A través de un modelo semipresencial, ofrecemos una experiencia de aprendizaje flexible, accesible y transformadora, que combina el estudio personal con encuentros formativos presenciales y comunitarios. Utilizamos material oficial de Global University, una institución reconocida internacionalmente por su formación teológica y ministerial, con certificaciones internas que avalan tu progreso y te capacitan para servir en diferentes áreas de la iglesia.',
+      lider: 'Equipo Académico',
+      telefono: '+34 609 377 944',
       actividades: [
-        'Clases presenciales semanales',
-        'Estudio personal dirigido',
-        'Seminarios especializados',
-        'Proyectos de investigación bíblica',
-        'Conferencias con invitados',
-        'Certificación en teología básica'
+        'Material oficial de Global University',
+        'Certificaciones internas',
+        'Experiencia de aprendizaje flexible y accesible',
+        'Estudio personal con encuentros presenciales',
+        'Preparación integral para líderes',
+        'Formación para pastores, maestros y evangelistas'
       ],
       requisitos: [
-        'Compromiso de estudio',
-        'Asistencia regular a clases',
-        'Completar asignaciones',
-        'Recomendación pastoral'
+        'Deseo de profundizar su relación con Dios a través del estudio bíblico',
+        'Llamado al servicio ministerial o liderazgo en la iglesia',
+        'Preparación para discipular, enseñar y liderar con sabiduría',
+        'Compromiso con la formación continua'
       ],
+      impacto: 'Una plataforma de lanzamiento para marcar una diferencia con fundamento, carácter y pasión por Cristo',
       icono: 'fas fa-graduation-cap',
-      color: '#3498db'
+      color: '#3498db',
+      imagen: '/imgs/ministerios/instituto-biblico.jpg'
     },
     {
       id: 'misiones',
       nombre: 'Misiones',
       categoria: 'Evangelismo',
       frecuencia: 'Continuo',
-      horario: '9 Proyectos Globales',
-      descripcion: 'Llevando el evangelio hasta lo último de la tierra.',
-      descripcionCompleta: 'Nuestro corazón misionero nos lleva a apoyar proyectos evangelísticos alrededor del mundo. Mantenemos 9 proyectos misioneros activos y celebramos anualmente la Fiesta de las Naciones, conectando nuestra iglesia local con la visión global del Reino de Dios.',
-      lider: 'Rosa Delgado',
-      telefono: '+34 600 678 901',
+      horario: '9 Proyectos Globales + Fiesta de las Naciones',
+      lema: 'Hasta lo último de la tierra',
+      descripcion: 'Somos una comunidad misionera que ora, da y envía, respondiendo al mandato de Jesús en Mateo 28:19.',
+      descripcionCompleta: 'En Iglesia Peniel Comunidad Cristiana, creemos firmemente en el llamado global de la iglesia: llevar el Evangelio a todas las naciones. Por eso, somos una comunidad misionera que ora, da y envía, respondiendo al mandato de Jesús en Mateo 28:19. Apoyamos 9 proyectos misioneros en el mundo que reflejan nuestro deseo de impactar cada rincón del planeta con el mensaje de esperanza, salvación y transformación que solo Jesús puede dar. Cada año celebramos la Fiesta de las Naciones, un evento donde honramos la riqueza cultural de nuestra iglesia y del mundo.',
+      lider: 'Comité Misionero',
+      telefono: '+34 609 377 944',
+      proyectosMisioneros: [
+        'Pilar y Cristian - Holanda',
+        'Familia Flores - Perú',
+        'Geni y su hija Ester - Burkina Faso',
+        'Eva - Comunidad china',
+        'ONG Fiet Gratia - España / internacional',
+        'Oasis Center Madrid - Ministerio urbano y multicultural',
+        'Pramila - Estudiante del Instituto Bíblico en Nepal',
+        'Familia Moslero - Grecia',
+        'Melissa - Medio Oriente'
+      ],
       actividades: [
-        'Apoyo a 9 misioneros globales',
-        'Fiesta de las Naciones anual',
-        'Campañas de ofrenda misionera',
-        'Comunicación con misioneros',
-        'Educación sobre misiones mundiales',
-        'Viajes misioneros cortos'
+        'Orando por los misioneros y los pueblos alcanzados',
+        'Donando para sostener y expandir los proyectos',
+        'Involucrándonos en la movilización misionera local e internacional',
+        'Fiesta de las Naciones con comidas típicas, testimonios, danzas y música',
+        'Oración por cada nación representada',
+        'Comunicación regular con misioneros'
       ],
       requisitos: [
         'Visión global del evangelio',
-        'Compromiso con la oración',
-        'Generosidad para ofrendas',
-        'Interés en otras culturas'
+        'Compromiso con la oración por las naciones',
+        'Corazón generoso para el sostenimiento',
+        'Interés en la diversidad cultural'
       ],
+      impacto: 'Una celebración de unidad, fe y diversidad que impacta cada rincón del planeta',
       icono: 'fas fa-globe',
-      color: '#27ae60'
+      color: '#27ae60',
+      imagen: '/imgs/ministerios/misiones.jpg'
     },
     {
       id: 'evangelismo',
       nombre: 'Evangelismo',
       categoria: 'Evangelismo',
       frecuencia: 'Semanal',
-      horario: 'Miércoles 19:00 HS',
-      descripcion: 'Compartiendo esperanza en las calles de Madrid.',
-      descripcionCompleta: 'Cada semana salimos a las calles de Madrid para compartir el amor de Cristo de manera práctica y relevante. Nuestro punto de encuentro es el Centro Comercial Alcalá Norte en Ciudad Lineal, desde donde desplegamos equipos de evangelismo por toda la zona.',
-      lider: 'Carlos Ruiz',
-      telefono: '+34 600 789 012',
+      horario: 'Miércoles 19:30h - C.C. Alcalá Norte',
+      lema: 'Llevamos esperanza a nuestra ciudad',
+      descripcion: 'El mensaje de Jesús debe compartirse con amor, claridad y convicción. No es solo una buena noticia: es la mejor noticia.',
+      descripcionCompleta: 'En Iglesia Peniel, creemos que el mensaje de Jesús debe compartirse con amor, claridad y convicción. No es solo una buena noticia: es la mejor noticia que el mundo necesita oír. Por eso, como iglesia, salimos cada semana a las calles de nuestra ciudad para compartir el evangelio de manera práctica y cercana. Nos reunimos todos los miércoles a las 19:30h en el Centro Comercial Alcalá Norte (Ciudad Lineal, Madrid) para orar, compartir el mensaje de salvación, y hablar del amor de Dios con quienes más lo necesitan. Escuchamos, servimos y sembramos con fe, sabiendo que cada palabra puede transformar una vida.',
+      lider: 'Equipo de Evangelismo',
+      telefono: '+34 609 377 944',
       actividades: [
-        'Evangelismo callejero semanal',
-        'Repartición de literatura cristiana',
-        'Oración por las calles',
-        'Eventos evangelísticos especiales',
-        'Capacitación en evangelismo personal',
-        'Testimonios públicos'
+        'Reunión semanal en Centro Comercial Alcalá Norte',
+        'Oración por la ciudad y preparación espiritual',
+        'Compartir el mensaje de salvación de manera práctica',
+        'Escuchar y servir a quienes más lo necesitan',
+        'Sembrar con fe en las calles de Madrid',
+        'Testimonios del amor de Dios'
       ],
       requisitos: [
-        'Pasión por las almas perdidas',
-        'Disponibilidad los miércoles',
-        'Valentía para compartir la fe',
-        'Entrenamiento en evangelismo'
+        'Corazón dispuesto (no se requiere experiencia)',
+        'Disponibilidad los miércoles por la tarde',
+        'Deseo de compartir el amor de Dios',
+        'Fe para sembrar y ver transformación'
       ],
+      impacto: 'Cada palabra puede transformar una vida en las calles de Madrid',
       icono: 'fas fa-bullhorn',
-      color: '#e74c3c'
+      color: '#e74c3c',
+      imagen: '/imgs/ministerios/evangelismo.jpg'
     },
     {
       id: 'grupos-peniel',
@@ -197,26 +232,29 @@ const Ministerios = () => {
       categoria: 'Comunidad',
       frecuencia: 'Semanal',
       horario: 'Diversos horarios en hogares',
-      descripcion: 'La iglesia más allá de las cuatro paredes.',
-      descripcionCompleta: 'Los Grupos Peniel son células que se reúnen en hogares por toda Madrid. Estos grupos son donde compartimos la vida real, crecemos espiritualmente y alcanzamos a nuestros vecinos con el amor de Cristo. Cada grupo es una mini-iglesia con propósito evangelístico.',
-      lider: 'Varios Líderes',
+      lema: 'La iglesia más allá de las cuatro paredes',
+      descripcion: 'Células que se reúnen en hogares por toda Madrid donde compartimos la vida real, crecemos espiritualmente y alcanzamos a nuestros vecinos.',
+      descripcionCompleta: 'Los Grupos Peniel son células que se reúnen en hogares por toda Madrid. Estos grupos son donde compartimos la vida real, crecemos espiritualmente y alcanzamos a nuestros vecinos con el amor de Cristo. Cada grupo es una mini-iglesia con propósito evangelístico. En estos espacios íntimos desarrollamos relaciones auténticas, estudiamos la Palabra de Dios de manera participativa, oramos unos por otros y planificamos maneras creativas de alcanzar a nuestra comunidad. Los grupos están diseñados para multiplicarse, formando nuevos líderes y expandiendo el Reino de Dios en cada barrio de Madrid.',
+      lider: 'Líderes de Célula',
       telefono: '+34 609 377 944',
       actividades: [
-        'Reuniones semanales en hogares',
-        'Estudio bíblico participativo',
-        'Oración intercesora',
-        'Eventos de alcance comunitario',
-        'Multiplicación de grupos',
-        'Formación de líderes'
+        'Reuniones semanales en hogares por toda Madrid',
+        'Estudio bíblico participativo y vida real',
+        'Oración intercesora unos por otros',
+        'Comunión auténtica y relaciones profundas',
+        'Alcance evangelístico comunitario',
+        'Multiplicación y formación de nuevos líderes'
       ],
       requisitos: [
-        'Deseo de comunidad genuina',
-        'Compromiso semanal',
-        'Apertura para evangelismo',
-        'Disposición para liderar (eventual)'
+        'Deseo de comunidad genuina más allá de las cuatro paredes',
+        'Compromiso semanal con el grupo',
+        'Apertura para evangelismo vecinal',
+        'Disposición para liderar eventualmente'
       ],
+      impacto: 'Expandiendo el Reino de Dios en cada barrio de Madrid',
       icono: 'fas fa-home',
-      color: '#9b59b6'
+      color: '#8e44ad',
+      imagen: '/imgs/ministerios/grupos-peniel.jpg'
     }
   ];
 
@@ -236,51 +274,63 @@ const Ministerios = () => {
   };
 
   return (
-    <div className="page-content">
-      <section className="ministerios-page">
-        <div className="floating-element"></div>
-        <div className="floating-element"></div>
-        
-        <div className="section-header">
-          <h2 className="section-title">NUESTROS MINISTERIOS</h2>
-          <p className="section-subtitle">
-            Descubre tu lugar en el Reino de Dios y usa tus dones para transformar vidas
-          </p>
+    <div className="ministerios-page">
+      {/* Hero Section */}
+      <div className="ministerios-hero">
+        <div className="container-ministerios">
+          <div className="hero-content">
+            <h1>NUESTROS MINISTERIOS</h1>
+            <p>"Y todos los días, en el templo y por las casas, no cesaban de enseñar y predicar a Jesucristo"</p>
+            <div className="hero-subtitle">
+              Descubre tu lugar en el Reino de Dios y usa tus dones para transformar vidas
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div className="ministerios-container">
-          <div className="vision-ministerios">
-            <div className="vision-content">
-              <h3>Una iglesia con propósito</h3>
+      {/* Introducción */}
+      <section className="section-ministerios">
+        <div className="container-ministerios">
+          <div className="intro-ministerios">
+            <div className="intro-text">
+              <h2>Una iglesia con propósito</h2>
               <p>
                 En Peniel Madrid creemos que cada persona tiene dones únicos que Dios quiere usar 
                 para bendecir a otros. Nuestros ministerios no son solo programas, son oportunidades 
                 para descubrir tu llamado, desarrollar tus talentos y ser parte de algo más grande que tú mismo.
               </p>
-              <div class="vision-stats">
-                <div class="stat-item">
-                  <span class="number">8</span>
-                  <span class="label">Ministerios Activos</span>
+              <div className="stats-ministerios">
+                <div className="stat-item">
+                  <span className="number">8</span>
+                  <span className="label">Ministerios Activos</span>
                 </div>
-                <div class="stat-item">
-                  <span class="number">150+</span>
-                  <span class="label">Voluntarios</span>
+                <div className="stat-item">
+                  <span className="number">9</span>
+                  <span className="label">Proyectos Misioneros</span>
                 </div>
-                <div class="stat-item">
-                  <span class="number">12</span>
-                  <span class="label">Líderes Principales</span>
+                <div className="stat-item">
+                  <span className="number">3</span>
+                  <span className="label">Grupos de Edad</span>
                 </div>
               </div>
             </div>
+            <div className="intro-image">
+              <img src="/imgs/ministerios-hero.jpg" alt="Ministerios Peniel" />
+            </div>
           </div>
+        </div>
+      </section>
 
+      {/* Filtros */}
+      <section className="section-ministerios bg-dark">
+        <div className="container-ministerios">
           <div className="filtros-section">
-            <h3>Explora por categoría</h3>
-            <div className="filtros-tabs">
+            <h2>Explora por categoría</h2>
+            <div className="filtros-container">
               {categorias.map(categoria => (
                 <button 
                   key={categoria}
-                  className={`filtro-tab ${categoriaActiva === categoria ? 'active' : ''}`}
+                  className={`filtro-btn ${categoriaActiva === categoria ? 'active' : ''}`}
                   onClick={() => setCategoriaActiva(categoria)}
                 >
                   {categoria}
@@ -288,114 +338,147 @@ const Ministerios = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* Grid de Ministerios */}
+      <section className="section-ministerios">
+        <div className="container-ministerios">
           <div className="ministerios-grid">
             {ministeriosFiltrados.map((ministerio, index) => (
-              <div key={index} className="ministerio-card">
-                <div className="ministerio-header">
-                  <div className="ministerio-icon" style={{ background: `linear-gradient(135deg, ${ministerio.color}, ${ministerio.color}dd)` }}>
-                    <i className={ministerio.icono}></i>
-                  </div>
-                  <div className="ministerio-meta">
-                    <span className="categoria" style={{ color: ministerio.color }}>
-                      {ministerio.categoria}
-                    </span>
-                    <div className="horario-info">
-                      <i className="far fa-clock"></i>
-                      <span>{ministerio.horario}</span>
+              <div key={index} className="ministerio-card-modern">
+                <div className="card-image">
+                  <img src={ministerio.imagen} alt={ministerio.nombre} />
+                  <div className="card-overlay">
+                    <div className="ministerio-icon-modern">
+                      <i className={ministerio.icono}></i>
                     </div>
                   </div>
                 </div>
                 
-                <div className="ministerio-content">
-                  <h4>{ministerio.nombre}</h4>
-                  <p>{ministerio.descripcion}</p>
-                  
-                  <div className="ministerio-detalles">
-                    <div className="detalle-item">
-                      <i className="fas fa-user-tie"></i>
-                      <span>Líder: {ministerio.lider}</span>
-                    </div>
-                    <div className="detalle-item">
-                      <i className="far fa-calendar"></i>
+                <div className="card-content">
+                  <div className="card-header">
+                    <span className="categoria-badge" style={{ background: ministerio.color }}>
+                      {ministerio.categoria}
+                    </span>
+                    <div className="horario-badge">
+                      <i className="far fa-clock"></i>
                       <span>{ministerio.frecuencia}</span>
                     </div>
                   </div>
                   
-                  <div className="ministerio-actions">
-                    <button 
-                      className="btn-secundario"
-                      onClick={() => abrirModal(ministerio)}
-                    >
-                      <i className="fas fa-info-circle"></i>
-                      MÁS INFO
-                    </button>
-                    <a 
-                      href={`https://wa.me/${ministerio.telefono.replace(/\s/g, '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primario"
-                    >
-                      <i className="fab fa-whatsapp"></i>
-                      UNIRME
-                    </a>
+                  <h3>{ministerio.nombre}</h3>
+                  <p className="lema">{ministerio.lema}</p>
+                  <p className="descripcion">{ministerio.descripcion}</p>
+                  
+                  <div className="card-footer">
+                    <div className="leader-info">
+                      <i className="fas fa-user-tie"></i>
+                      <span>{ministerio.lider}</span>
+                    </div>
+                    
+                    <div className="card-actions">
+                      <button 
+                        className="btn-info"
+                        onClick={() => abrirModal(ministerio)}
+                      >
+                        <i className="fas fa-info-circle"></i>
+                        Más Info
+                      </button>
+                      <a 
+                        href={`https://wa.me/${ministerio.telefono.replace(/\s/g, '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-join"
+                        style={{ background: ministerio.color }}
+                      >
+                        <i className="fab fa-whatsapp"></i>
+                        Unirme
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="llamado-section">
-            <div className="llamado-content">
-              <h3>¿Listo para usar tus dones?</h3>
-              <p>
-                No importa cuáles sean tus talentos, experiencia o disponibilidad, 
-                hay un lugar para ti en el Reino de Dios. Da el paso y descubre 
-                cómo Dios puede usar tu vida para transformar otras vidas.
-              </p>
-              <div className="llamado-actions">
-                <a href="/contacto" className="btn btn-primary">
-                  <i className="fas fa-phone"></i>
-                  CONTACTAR PASTORAL
-                </a>
-                <a href="https://wa.me/34609377944" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                  <i className="fab fa-whatsapp"></i>
-                  WHATSAPP
-                </a>
-              </div>
+      {/* Call to Action */}
+      <section className="section-ministerios bg-dark">
+        <div className="container-ministerios">
+          <div className="cta-ministerios">
+            <h2>¿Listo para usar tus dones?</h2>
+            <p>
+              No importa cuáles sean tus talentos, experiencia o disponibilidad, 
+              hay un lugar para ti en el Reino de Dios. Da el paso y descubre 
+              cómo Dios puede usar tu vida para transformar otras vidas.
+            </p>
+            <div className="cta-buttons">
+              <a href="/contacto" className="btn-cta primary">
+                <i className="fas fa-phone"></i>
+                Contactar Pastoral
+              </a>
+              <a href="https://wa.me/34609377944" target="_blank" rel="noopener noreferrer" className="btn-cta secondary">
+                <i className="fab fa-whatsapp"></i>
+                WhatsApp
+              </a>
+            </div>
+            <div className="contact-info">
+              También puedes escribirnos al <strong>+34 609 377 944</strong>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Modal de información detallada */}
-        {ministerioActivo && (
-          <div className="modal-overlay" onClick={cerrarModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close" onClick={cerrarModal}>
-                <i className="fas fa-times"></i>
-              </button>
-              
-              <div className="modal-header">
-                <div className="modal-icon" style={{ background: `linear-gradient(135deg, ${ministerioActivo.color}, ${ministerioActivo.color}dd)` }}>
-                  <i className={ministerioActivo.icono}></i>
-                </div>
-                <div>
-                  <h3>{ministerioActivo.nombre}</h3>
-                  <p className="modal-categoria" style={{ color: ministerioActivo.color }}>
-                    {ministerioActivo.categoria}
-                  </p>
+      {/* Modal Moderno */}
+      {ministerioActivo && (
+        <div className="modal-overlay-ministerios" onClick={cerrarModal}>
+          <div className="modal-modern-ministerios" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={cerrarModal}>
+              <i className="fas fa-times"></i>
+            </button>
+            
+            <div className="modal-body-ministerios">
+              <div className="modal-image-side">
+                <img src={ministerioActivo.imagen} alt={ministerioActivo.nombre} />
+                <div className="modal-image-overlay">
+                  <div className="modal-icon-large" style={{ background: ministerioActivo.color }}>
+                    <i className={ministerioActivo.icono}></i>
+                  </div>
+                  <div className="modal-header-content">
+                    <h3>{ministerioActivo.nombre}</h3>
+                    <p className="modal-lema">{ministerioActivo.lema}</p>
+                    <span className="modal-categoria" style={{ color: ministerioActivo.color }}>
+                      {ministerioActivo.categoria}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div className="modal-body">
-                <div className="modal-descripcion">
-                  <h4>Acerca de este ministerio</h4>
+              <div className="modal-content-side">
+                <div className="modal-section">
+                  <h4><i className="fas fa-heart"></i> Acerca de este ministerio</h4>
                   <p>{ministerioActivo.descripcionCompleta}</p>
                 </div>
 
+                {ministerioActivo.proyectosMisioneros && (
+                  <div className="modal-section">
+                    <h4><i className="fas fa-globe"></i> Proyectos Misioneros</h4>
+                    <div className="proyectos-grid">
+                      {ministerioActivo.proyectosMisioneros.map((proyecto, idx) => (
+                        <div key={idx} className="proyecto-item">
+                          <i className="fas fa-map-marker-alt"></i>
+                          <span>{proyecto}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <div className="modal-info-grid">
                   <div className="modal-info-section">
-                    <h4><i className="fas fa-tasks"></i> Actividades principales</h4>
+                    <h4><i className="fas fa-tasks"></i> Actividades</h4>
                     <ul>
                       {ministerioActivo.actividades.map((actividad, idx) => (
                         <li key={idx}>{actividad}</li>
@@ -413,21 +496,25 @@ const Ministerios = () => {
                   </div>
                 </div>
 
-                <div className="modal-contacto">
-                  <h4>Información de contacto</h4>
-                  <div className="contacto-info">
-                    <div className="contacto-item">
-                      <i className="fas fa-user-tie"></i>
-                      <span>Líder: {ministerioActivo.lider}</span>
-                    </div>
-                    <div className="contacto-item">
-                      <i className="fas fa-phone"></i>
-                      <span>{ministerioActivo.telefono}</span>
-                    </div>
-                    <div className="contacto-item">
-                      <i className="far fa-clock"></i>
-                      <span>{ministerioActivo.horario}</span>
-                    </div>
+                <div className="modal-impact">
+                  <div className="impact-icon">
+                    <i className="fas fa-star"></i>
+                  </div>
+                  <p>"{ministerioActivo.impacto}"</p>
+                </div>
+
+                <div className="modal-contact-info">
+                  <div className="contact-item">
+                    <i className="fas fa-user-tie"></i>
+                    <span>Líder: {ministerioActivo.lider}</span>
+                  </div>
+                  <div className="contact-item">
+                    <i className="fas fa-phone"></i>
+                    <span>{ministerioActivo.telefono}</span>
+                  </div>
+                  <div className="contact-item">
+                    <i className="far fa-clock"></i>
+                    <span>{ministerioActivo.horario}</span>
                   </div>
                 </div>
 
@@ -436,17 +523,18 @@ const Ministerios = () => {
                     href={`https://wa.me/${ministerioActivo.telefono.replace(/\s/g, '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-primary"
+                    className="btn-modal-action"
+                    style={{ background: ministerioActivo.color }}
                   >
                     <i className="fab fa-whatsapp"></i>
-                    CONTACTAR LÍDER
+                    Contactar Líder
                   </a>
                 </div>
               </div>
             </div>
           </div>
-        )}
-      </section>
+        </div>
+      )}
     </div>
   );
 };

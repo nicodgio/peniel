@@ -1,541 +1,565 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* Base y reset */
 .donaciones-page {
-  padding: 4rem 4rem 8rem;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  background: #000;
+  color: white;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-.donaciones-page .floating-element {
-  position: absolute;
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.05));
-  border-radius: 50%;
-  filter: blur(1px);
-}
-
-.donaciones-page .floating-element:first-of-type {
-  width: 400px;
-  height: 400px;
-  top: -200px;
-  right: -200px;
-  animation: float 20s ease-in-out infinite;
-}
-
-.donaciones-page .floating-element:last-of-type {
-  width: 300px;
-  height: 300px;
-  bottom: -150px;
-  left: -150px;
-  animation: float 25s ease-in-out infinite reverse;
-}
-
-.donaciones-container {
-  max-width: 1200px;
+.container-donaciones {
+  max-width: 1400px;
   margin: 0 auto;
-  position: relative;
-  z-index: 2;
+  padding: 0 2rem;
 }
 
-.impacto-section {
-  margin-bottom: 6rem;
+.section-donaciones {
+  padding: 8rem 0;
+}
+
+.bg-dark {
+  background: #111;
+}
+
+/* HERO SECTION */
+.donaciones-hero {
+  padding: 12rem 0 8rem;
   text-align: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/imgs/hero-peniel.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin-top: -120px;
+  padding-top: 16rem;
+  position: relative;
 }
 
-.impacto-content h3 {
-  font-size: 2.5rem;
-  font-weight: 800;
+.donaciones-page .donaciones-hero h1 {
+  font-size: 4rem !important;
+  font-weight: 300 !important;
   margin-bottom: 2rem;
-  background: linear-gradient(135deg, #ffffff, #cccccc);
+  color: #27ae60;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem !important;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* IMPACTO SECTION */
+.impacto-content {
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.impacto-content h2 {
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.impacto-content p {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  opacity: 0.9;
-  max-width: 800px;
-  margin: 0 auto 3rem;
-}
-
-.estadisticas-impacto {
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
-  flex-wrap: wrap;
-}
-
-.stat-impacto {
-  text-align: center;
-}
-
-.stat-numero {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #27ae60;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  opacity: 0.7;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  max-width: 150px;
-}
-
-.metodos-donacion {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 3rem;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 6rem;
-}
-
-.metodos-donacion h3 {
-  font-size: 2rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #27ae60;
-}
-
-.metodos-grid {
+.impactos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
+}
+
+.impacto-item {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.impacto-item:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(39, 174, 96, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.impacto-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  margin: 0 auto 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.impacto-item:hover .impacto-icon {
+  transform: scale(1.1);
+}
+
+.impacto-item p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* MÉTODOS DE DONACIÓN */
+.metodos-section {
+  text-align: center;
+}
+
+.metodos-section h2 {
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 4rem;
+  color: white;
+}
+
+.metodos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .metodo-card {
   background: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 15px;
+  border-radius: 25px;
+  padding: 3rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(15px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metodo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .metodo-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-15px);
   background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(39, 174, 96, 0.3);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+}
+
+.metodo-card:hover::before {
+  opacity: 1;
 }
 
 .metodo-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  text-align: left;
 }
 
 .metodo-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  color: white;
-}
-
-.metodo-header h5 {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.metodo-descripcion {
-  opacity: 0.8;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-}
-
-.metodo-datos {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.dato-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-}
-
-.dato-label {
-  font-weight: 600;
-  opacity: 0.8;
-  font-size: 0.9rem;
-}
-
-.dato-valor {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.copiar-btn {
-  background: transparent;
-  border: none;
-  color: #27ae60;
-  cursor: pointer;
-  padding: 0.3rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.copiar-btn:hover {
-  background: rgba(39, 174, 96, 0.2);
-}
-
-.proyectos-section {
-  margin-bottom: 6rem;
-}
-
-.proyectos-section h3 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 3rem;
-  background: linear-gradient(135deg, #ffffff, #cccccc);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.proyectos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.proyecto-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.proyecto-header {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.proyecto-icon {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: linear-gradient(135deg, #27ae60, #2ecc71);
-  border-radius: 15px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: white;
   flex-shrink: 0;
 }
 
-.proyecto-info h4 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.proyecto-info p {
-  opacity: 0.8;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.proyecto-progreso {
-  margin-top: 1.5rem;
-}
-
-.progreso-info {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.8rem;
-  font-size: 0.9rem;
-}
-
-.barra-progreso {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progreso-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #27ae60, #2ecc71);
-  transition: width 0.3s ease;
-}
-
-.tipos-donacion {
-  margin-bottom: 6rem;
-}
-
-.tipos-donacion h3 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 3rem;
-  background: linear-gradient(135deg, #ffffff, #cccccc);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.tipos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.tipo-card {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 2.5rem;
-  border-radius: 15px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.tipo-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.tipo-icon {
-  width: 70px;
-  height: 70px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
+.metodo-info h3 {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem;
   color: white;
 }
 
-.tipo-card h4 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #27ae60;
-}
-
-.tipo-card p {
-  opacity: 0.8;
+.metodo-info p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin: 0;
 }
 
-.tipo-card ul {
-  list-style: none;
-  text-align: left;
-}
-
-.tipo-card li {
-  padding: 0.3rem 0;
-  padding-left: 1.5rem;
-  position: relative;
-  opacity: 0.8;
-  font-size: 0.9rem;
-}
-
-.tipo-card li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
+.metodo-info strong {
   color: #27ae60;
-  font-weight: bold;
-}
-
-.transparencia-section {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 3rem;
-  border-radius: 20px;
-  margin-bottom: 6rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.transparencia-content h3 {
-  font-size: 2rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #27ae60;
-}
-
-.transparencia-content > p {
-  text-align: center;
-  opacity: 0.9;
-  line-height: 1.7;
-  margin-bottom: 3rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.compromisos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.compromiso-item {
-  text-align: center;
-  padding: 1.5rem;
-}
-
-.compromiso-item i {
-  font-size: 2rem;
-  color: #27ae60;
-  margin-bottom: 1rem;
-}
-
-.compromiso-item h4 {
-  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 0.8rem;
 }
 
-.compromiso-item p {
-  opacity: 0.8;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.contacto-financiero {
+/* BIZUM ESPECÍFICO */
+.codigo-container {
   text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  opacity: 0.8;
 }
 
-.contacto-financiero a {
-  color: #27ae60;
-  text-decoration: none;
-  font-weight: 600;
-  margin-left: 0.5rem;
-}
-
-.contacto-financiero a:hover {
-  text-decoration: underline;
-}
-
-.llamado-final {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4rem;
+.codigo-display {
+  background: rgba(39, 174, 96, 0.1);
+  border: 2px solid rgba(39, 174, 96, 0.3);
   border-radius: 20px;
-  text-align: center;
-  backdrop-filter: blur(10px);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.codigo-numero {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #27ae60;
+  letter-spacing: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+/* TRANSFERENCIA ESPECÍFICA */
+.datos-bancarios {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dato-bancario {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.llamado-content h3 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, #ffffff, #cccccc);
+.dato-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+}
+
+.dato-valor {
+  font-weight: 700;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.iban-dato {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.iban-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iban-numero {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: #27ae60;
+  letter-spacing: 1px;
+}
+
+/* BOTONES COPIAR */
+.copiar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.copiar-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+  filter: brightness(1.1);
+}
+
+.copiar-btn.copiado {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* AGRADECIMIENTO FINAL */
+.agradecimiento-final {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.agradecimiento-content h2 {
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.llamado-content p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  opacity: 0.9;
-  max-width: 700px;
-  margin: 0 auto 1.5rem;
-}
-
-.llamado-content p:first-of-type {
+.mensaje-impacto {
+  font-size: 1.3rem !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600 !important;
+  margin-bottom: 3rem !important;
   font-style: italic;
-  color: #27ae60;
-  font-weight: 600;
 }
 
-.contacto-donaciones {
+.contacto-section {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.contacto-section p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+}
+
+.contacto-buttons {
   display: flex;
-  justify-content: center;
   gap: 2rem;
+  justify-content: center;
   flex-wrap: wrap;
-  margin-top: 3rem;
 }
 
-.contacto-donaciones .btn {
-  display: flex;
+.btn-donaciones {
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+  padding: 1.2rem 2.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: 2px solid;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
+.btn-donaciones.primary {
+  background: #27ae60;
+  color: white;
+  border-color: #27ae60;
+}
+
+.btn-donaciones.primary:hover {
+  background: #2ecc71;
+  border-color: #2ecc71;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(39, 174, 96, 0.4);
+}
+
+.btn-donaciones.secondary {
+  background: transparent;
+  color: #27ae60;
+  border-color: #27ae60;
+}
+
+.btn-donaciones.secondary:hover {
+  background: #27ae60;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(39, 174, 96, 0.3);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .metodos-container {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+  
+  .impactos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .donaciones-page {
-    padding: 4rem 2rem;
+  .container-donaciones {
+    padding: 0 1.5rem;
   }
   
-  .estadisticas-impacto {
-    flex-direction: column;
-    gap: 2rem;
+  .section-donaciones {
+    padding: 4rem 0;
   }
   
-  .metodos-donacion {
+  .donaciones-hero {
+    padding: 8rem 0 4rem;
+    padding-top: 12rem;
+  }
+  
+  .donaciones-page .donaciones-hero h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem !important;
+  }
+  
+  .impacto-content h2 {
+    font-size: 2.2rem !important;
+  }
+  
+  .metodos-section h2 {
+    font-size: 2.2rem !important;
+  }
+  
+  .metodos-container {
+    min-width: auto;
+  }
+  
+  .metodo-card {
     padding: 2rem;
   }
   
-  .metodos-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .dato-item {
+  .metodo-header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    text-align: center;
+    gap: 1.5rem;
   }
   
-  .proyectos-grid,
-  .tipos-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .proyecto-header {
+  .codigo-display {
     flex-direction: column;
+    gap: 1.5rem;
     text-align: center;
   }
   
-  .compromisos-grid {
+  .codigo-numero {
+    font-size: 2.5rem;
+  }
+  
+  .dato-bancario {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .iban-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .iban-numero {
+    font-size: 1rem;
+    word-break: break-all;
+  }
+  
+  .contacto-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-donaciones {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+  
+  .contacto-section {
+    padding: 2rem;
+  }
+  
+  .agradecimiento-content h2 {
+    font-size: 2.2rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-donaciones {
+    padding: 0 1rem;
+  }
+  
+  .donaciones-page .donaciones-hero h1 {
+    font-size: 2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .impacto-content h2 {
+    font-size: 1.8rem !important;
+  }
+  
+  .metodos-section h2 {
+    font-size: 1.8rem !important;
+  }
+  
+  .impactos-grid {
     grid-template-columns: 1fr;
   }
   
-  .transparencia-section {
+  .impacto-item {
     padding: 2rem;
   }
   
-  .llamado-final {
-    padding: 2rem;
+  .metodo-card {
+    padding: 1.5rem;
   }
   
-  .llamado-content h3 {
-    font-size: 1.8rem;
+  .metodo-info h3 {
+    font-size: 1.5rem !important;
   }
   
-  .contacto-donaciones {
-    flex-direction: column;
-    align-items: center;
+  .codigo-numero {
+    font-size: 2rem;
+  }
+  
+  .agradecimiento-content h2 {
+    font-size: 1.8rem !important;
+  }
+  
+  .mensaje-impacto {
+    font-size: 1.1rem !important;
   }
 }
