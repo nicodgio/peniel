@@ -1091,3 +1091,72 @@ body {
     gap: 1.5rem;
   }
 }
+/* Modal del menú dominical */
+.menu-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.menu-modal-content {
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    color: white;
+    position: relative;
+}
+
+.menu-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.menu-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.menu-form-select {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.menu-form-select option {
+    background: #1a1a1a;
+    color: white;
+    padding: 0.5rem;
+}
+
+.menu-form-select:focus {
+    outline: none;
+    border-color: #609be8;
+    box-shadow: 0 0 0 3px rgba(96, 155, 232, 0.2);
+}

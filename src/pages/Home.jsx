@@ -4,13 +4,15 @@ import '../css/inicio/sections.css';
 import '../css/inicio/ministerios-predicas.css';
 
 const Home = () => {
-  const [isLiveActive, setIsLiveActive] = useState(false);
-  const [liveData, setLiveData] = useState({
-    predicador: "Pastor Julio Ortega",
-    mensaje: "El Poder de la Fe",
-    tiempoVivo: "45 minutos",
-    viewerCount: "247 viendo ahora",
+  const [eventos, setEventos] = useState([]);
+  const [showMenuModal, setShowMenuModal] = useState(false);
+  const [menuForm, setMenuForm] = useState({
+    nombre: '',
+    telefono: '',
+    cantidad: 1
   });
+  const [formLoading, setFormLoading] = useState(false);
+  const [formMessage, setFormMessage] = useState('');
 
   const {
     videos: predicas,
@@ -18,39 +20,62 @@ const Home = () => {
     error: videosError,
   } = useYouTubeVideos();
 
-  // Configuración para live stream sigue igual
-  const YOUTUBE_CONFIG = {
-    API_KEY: "AIzaSyBgg5f96RaAexmF4DB98Y8RptIshmjBL5I",
-    CHANNEL_ID: "UCbfff5PKN2dbtJCgK8w9_yA",
-  };
-
   useEffect(() => {
-    checkLiveStream();
-    const interval = setInterval(checkLiveStream, 60000);
-    return () => clearInterval(interval);
+    fetchEventos();
   }, []);
 
-  const checkLiveStream = async () => {
+  const fetchEventos = async () => {
     try {
-      const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CONFIG.CHANNEL_ID}&eventType=live&type=video&key=${YOUTUBE_CONFIG.API_KEY}&maxResults=1`;
-
-      const response = await fetch(searchUrl);
+      const response = await fetch('https://orangered-guanaco-582072.hostingersite.com/api/eventos.php');
       const data = await response.json();
-
-      if (data.items && data.items.length > 0) {
-        setIsLiveActive(true);
-        const liveVideo = data.items[0];
-        setLiveData((prev) => ({
-          ...prev,
-          mensaje: liveVideo.snippet.title,
-          predicador: liveVideo.snippet.channelTitle,
-        }));
-      } else {
-        setIsLiveActive(false);
+      if (data.success) {
+        setEventos(data.eventos.slice(0, 3)); // Solo los primeros 3
       }
     } catch (error) {
-      console.error("Error verificando transmisión:", error);
+      console.error("Error cargando eventos:", error);
     }
+  };
+
+  const handleMenuSubmit = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setFormMessage('');
+
+    try {
+      const response = await fetch('https://orangered-guanaco-582072.hostingersite.com/api/menu-registro.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(menuForm)
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setFormMessage('¡Registro exitoso! Nos vemos el domingo.');
+        setMenuForm({ nombre: '', telefono: '', cantidad: 1 });
+        setTimeout(() => {
+          setShowMenuModal(false);
+          setFormMessage('');
+        }, 2000);
+      } else {
+        setFormMessage(data.message || 'Error al procesar el registro');
+      }
+    } catch (error) {
+      console.error("Error enviando formulario:", error);
+      setFormMessage('Error de conexión. Intenta nuevamente.');
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setMenuForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const scrollCarousel = (direction) => {
@@ -64,7 +89,7 @@ const Home = () => {
 
   const scrollPredicasCarousel = (direction) => {
     const carousel = document.getElementById("predicasCarousel");
-    const cardWidth = 320; // Ancho de cada tarjeta más margen
+    const cardWidth = 320;
     carousel.scrollBy({
       left: direction * cardWidth,
       behavior: "smooth",
@@ -112,39 +137,6 @@ const ministerios = [
     title: "Grupos Peniel",
     description: "Peniel es una iglesia en células con un solo propósito: alcanzar más almas. Las células llevan el evangelio a los hogares para dar a conocer el nombre de Dios a nuestros amigos, vecinos y comunidad."
   }
-];
-
-const proximosEventos = [
-  {
-    dia: "27",
-    mes: "SEP",
-    diaSemana: "SÁBADO",
-    titulo: "Cena de Matrimonios",
-    descripcion: "Una velada de gala para celebrar el amor y agradecer a Dios por cada matrimonio, compartiendo momentos especiales en pareja.",
-    hora: "19:00 HS",
-    icono: "fas fa-heart",
-    color: "#609be8"
-  },
-  {
-    dia: "12",
-    mes: "OCT",
-    diaSemana: "DOMINGO",
-    titulo: "Fiesta de las Naciones",
-    descripcion: "Un día donde disfrutaremos de comidas típicas de distintos países, presentaciones llenas de color y un ambiente familiar.",
-    hora: "11:00 HS",
-    icono: "fas fa-globe",
-    color: "#609be8"
-  },
-  {
-    dia: "30",
-    mes: "NOV",
-    diaSemana: "DOMINGO",
-    titulo: "Acción de Gracias",
-    descripcion: "Celebramos juntos con una comida en familia, menú delicioso, dinámicas de gratitud a Dios y testimonios de Su fidelidad.",
-    hora: "13:00 HS",
-    icono: "fas fa-pray",
-    color: "#609be8"
-  },
 ];
 
   return (
@@ -308,79 +300,11 @@ const proximosEventos = [
         </div>
       </section>
 
-      {isLiveActive && (
-        <section className="live-section active">
-          <div className="live-bg-effect"></div>
-          <div className="live-container">
-            <div className="live-header">
-              <div className="live-badge">
-                <div className="live-dot"></div>
-                EN VIVO
-              </div>
-              <h2 className="live-title">Transmisión en Directo</h2>
-              <p className="live-subtitle">
-                Únete a nuestra reunión desde cualquier lugar
-              </p>
-            </div>
-
-            <div className="live-content">
-              <div className="live-player">
-                <iframe id="youtubePlayer" src="" allowFullScreen></iframe>
-                <div className="live-player-overlay">
-                  <div className="live-viewers">
-                    <i className="fas fa-eye"></i>
-                    <span>{liveData.viewerCount}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="live-info">
-                <h3>Información de la Transmisión</h3>
-
-                <div className="live-info-item">
-                  <div className="live-info-icon">
-                    <i className="fas fa-microphone"></i>
-                  </div>
-                  <div className="live-info-text">
-                    <div className="live-info-label">Predicador</div>
-                    <div className="live-info-value">{liveData.predicador}</div>
-                  </div>
-                </div>
-
-                <div className="live-info-item">
-                  <div className="live-info-icon">
-                    <i className="fas fa-bible"></i>
-                  </div>
-                  <div className="live-info-text">
-                    <div className="live-info-label">Mensaje</div>
-                    <div className="live-info-value">{liveData.mensaje}</div>
-                  </div>
-                </div>
-
-                <div className="live-info-item">
-                  <div className="live-info-icon">
-                    <i className="fas fa-clock"></i>
-                  </div>
-                  <div className="live-info-text">
-                    <div className="live-info-label">Tiempo en vivo</div>
-                    <div className="live-info-value">{liveData.tiempoVivo}</div>
-                  </div>
-                </div>
-
-                <button className="live-chat-btn">
-                  <i className="fas fa-comments"></i> PARTICIPAR EN EL CHAT
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       <section className="visitanos-banner">
         <div className="visitanos-content">
           <div className="visitanos-image">
             <img
-              src="/imgs/visit2.jpg"
+              src="/imgs/hero-peniel.jpg"
               alt="Iglesia Peniel Madrid"
             />
           </div>
@@ -406,38 +330,44 @@ const proximosEventos = [
         </div>
 
         <div className="events-grid">
-          {proximosEventos.map((evento, index) => (
-            <div key={index} className="event-card-calendar">
-              <div className="event-calendar-date" style={{borderTopColor: evento.color}}>
-                <div className="calendar-month" style={{backgroundColor: evento.color}}>
-                  {evento.mes}
-                </div>
-                <div className="calendar-day">
-                  {evento.dia}
-                </div>
-                <div className="calendar-weekday">
-                  {evento.diaSemana}
-                </div>
-              </div>
-              
-              <div className="event-content-calendar">
-                <div className="event-header">
-                  <h3 className="event-title-calendar">
-                    <i className={evento.icono} style={{color: evento.color}}></i>
-                    {evento.titulo}
-                  </h3>
-                  <div className="event-time-calendar">
-                    <i className="far fa-clock"></i>
-                    {evento.hora}
+          {eventos.length > 0 ? (
+            eventos.map((evento, index) => (
+              <div key={evento.id || index} className="event-card-calendar">
+                <div className="event-calendar-date" style={{borderTopColor: evento.color}}>
+                  <div className="calendar-month" style={{backgroundColor: evento.color}}>
+                    {evento.mes}
+                  </div>
+                  <div className="calendar-day">
+                    {evento.dias}
+                  </div>
+                  <div className="calendar-weekday">
+                    {evento.diaSemana}
                   </div>
                 </div>
                 
-                <p className="event-description-calendar">
-                  {evento.descripcion}
-                </p>
+                <div className="event-content-calendar">
+                  <div className="event-header">
+                    <h3 className="event-title-calendar">
+                      <i className={evento.icono} style={{color: evento.color}}></i>
+                      {evento.titulo}
+                    </h3>
+                    <div className="event-time-calendar">
+                      <i className="far fa-clock"></i>
+                      {evento.hora}
+                    </div>
+                  </div>
+                  
+                  <p className="event-description-calendar">
+                    {evento.descripcion}
+                  </p>
+                </div>
               </div>
+            ))
+          ) : (
+            <div style={{gridColumn: '1 / -1', textAlign: 'center', padding: '2rem'}}>
+              <p>No hay eventos programados en este momento.</p>
             </div>
-          ))}
+          )}
         </div>
       </section>
 
@@ -453,9 +383,12 @@ const proximosEventos = [
               nos ayuda a seguir bendiciendo a más familias y sostener los
               ministerios de la iglesia.
             </p>
-            <a href="/menu-dominical" className="btn btn-primary">
-              VER MENÚ DE ESTA SEMANA
-            </a>
+            <button 
+              onClick={() => setShowMenuModal(true)}
+              className="btn btn-primary"
+            >
+              REGISTRARSE PARA EL MENÚ
+            </button>
           </div>
           <div className="menu-image">
             <img
@@ -465,6 +398,148 @@ const proximosEventos = [
           </div>
         </div>
       </section>
+
+      {/* Modal de registro para menú dominical */}
+      {showMenuModal && (
+        <div 
+          className="menu-modal"
+          onClick={(e) => e.target === e.currentTarget && setShowMenuModal(false)}
+        >
+          <div className="menu-modal-content">
+            <button
+              onClick={() => setShowMenuModal(false)}
+              className="menu-modal-close"
+            >
+              ×
+            </button>
+
+            <h3 style={{ 
+              marginBottom: '1.5rem', 
+              fontFamily: 'Montserrat, sans-serif',
+              textAlign: 'center',
+              fontSize: '1.5rem',
+              fontWeight: '700'
+            }}>
+              Registro Menú Dominical
+            </h3>
+
+            {formMessage && (
+              <div style={{
+                padding: '1rem',
+                borderRadius: '10px',
+                marginBottom: '1rem',
+                textAlign: 'center',
+                backgroundColor: formMessage.includes('exitoso') ? 'rgba(74, 222, 128, 0.2)' : 'rgba(248, 113, 113, 0.2)',
+                color: formMessage.includes('exitoso') ? '#4ade80' : '#f87171',
+                border: `1px solid ${formMessage.includes('exitoso') ? 'rgba(74, 222, 128, 0.3)' : 'rgba(248, 113, 113, 0.3)'}`
+              }}>
+                {formMessage}
+              </div>
+            )}
+
+            <form onSubmit={handleMenuSubmit}>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{
+                  display: 'block',
+                  marginBottom: '0.5rem',
+                  fontWeight: '600',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}>
+                  Nombre completo *
+                </label>
+                <input
+                  type="text"
+                  name="nombre"
+                  value={menuForm.nombre}
+                  onChange={handleInputChange}
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '0.8rem',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: '10px',
+                    color: 'white',
+                    fontFamily: 'Montserrat, sans-serif'
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{
+                  display: 'block',
+                  marginBottom: '0.5rem',
+                  fontWeight: '600',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}>
+                  Teléfono *
+                </label>
+                <input
+                  type="tel"
+                  name="telefono"
+                  value={menuForm.telefono}
+                  onChange={handleInputChange}
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '0.8rem',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: '10px',
+                    color: 'white',
+                    fontFamily: 'Montserrat, sans-serif'
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: '2rem' }}>
+                <label style={{
+                  display: 'block',
+                  marginBottom: '0.5rem',
+                  fontWeight: '600',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}>
+                  Cantidad de personas *
+                </label>
+                <select
+                  name="cantidad"
+                  value={menuForm.cantidad}
+                  onChange={handleInputChange}
+                  required
+                  className="menu-form-select"
+                >
+                  {[...Array(10)].map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {i + 1} {i === 0 ? 'persona' : 'personas'}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                disabled={formLoading}
+                style={{
+                  width: '100%',
+                  padding: '1rem',
+                  backgroundColor: '#609be8',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '15px',
+                  fontWeight: '600',
+                  fontFamily: 'Montserrat, sans-serif',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  cursor: formLoading ? 'not-allowed' : 'pointer',
+                  opacity: formLoading ? 0.7 : 1
+                }}
+              >
+                {formLoading ? 'REGISTRANDO...' : 'CONFIRMAR REGISTRO'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       <section className="ministerios" id="ministerios">
         <div className="section-header">
@@ -504,6 +579,7 @@ const proximosEventos = [
           ))}
         </div>
       </section>
+
       <section className="predicas" id="predicas">
         <div className="section-header">
           <h2 className="section-title">MENSAJES RECIENTES</h2>
@@ -513,7 +589,6 @@ const proximosEventos = [
           </p>
         </div>
 
-        {/* Grid para desktop */}
         <div className="predicas-grid">
           {videosLoading ? (
             <div
@@ -565,7 +640,6 @@ const proximosEventos = [
           )}
         </div>
 
-        {/* Carousel para mobile */}
         <div className="predicas-carousel" id="predicasCarousel">
           {videosLoading ? (
             <div
@@ -609,7 +683,6 @@ const proximosEventos = [
           )}
         </div>
 
-        {/* Controles del carousel móvil */}
         <div className="predicas-carousel-controls">
           <button
             className="predicas-carousel-btn"

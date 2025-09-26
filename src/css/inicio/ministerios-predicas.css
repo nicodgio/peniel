@@ -90,7 +90,7 @@
 }
 
 .ministerio-card:nth-child(4) .ministerio-img {
-  background-image: url('/imgs/ministerios/atencion-primaria.jpg'), linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  background-image: url('/imgs/ministerios/atencion-primaria.png'), linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
 .ministerio-card:nth-child(5) .ministerio-img {

@@ -56,14 +56,14 @@ const Reuniones = () => {
       dia: "Domingos",
       hora: "11:00hs",
       tipo: "Culto Dominical",
-      descripcion: "Te invitamos a formar parte de nuestra comunidad cristiana",
+      descripcion: "Te invitamos a compartir un tiempo de fe, adoración y comunidad. ¡Eres bienvenido!",
       icono: "fas fa-church"
     },
     {
       dia: "Sábados", 
       hora: "19:00hs",
       tipo: "Reunión de Jóvenes",
-      descripcion: "Un espacio para crecer en fe",
+      descripcion: "Un espacio para conectar con otros, compartir, aprender y crecer en la fe. Si eres adolescente o joven, ¡te esperamos!",
       icono: "fas fa-users"
     },
     {

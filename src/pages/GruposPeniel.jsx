@@ -152,7 +152,7 @@ const GruposPeniel = () => {
                   Llevamos el evangelio a los hogares y a cada rincón de nuestra ciudad.
                 </p>
                 <p>
-                  Por eso nos hemos convertido en una <strong>iglesia en células</strong>, con un propósito claro:
+                  Por eso somos una <strong>iglesia en células</strong>, con un propósito claro:<br></br>
                   <span className="highlight">Alcanzar más almas para Cristo.</span>
                 </p>
               </div>
@@ -211,7 +211,7 @@ const GruposPeniel = () => {
                   Los Grupos Peniel no son solo reuniones de oración o alabanza, ni un club social.
                 </p>
                 <p className="objetivo-main">
-                  Su verdadero objetivo es <strong>dar a conocer el nombre de Dios</strong> a nuestros amigos, vecinos, comunidad y nación.
+                  Su verdadero objetivo es <strong>dar a conocer a Jesús</strong> a nuestros amigos, vecinos, comunidad y nación.
                 </p>
                 <p className="objetivo-footer">
                   Esta no es tarea de unos pocos, es una misión que nos involucra a todos.
@@ -252,7 +252,7 @@ const GruposPeniel = () => {
                     </div>
                     <div className="item-content">
                       <h4>Homogeneidad</h4>
-                      <p>Se organiza por edad (menores o mayores de 30) y sexo (hombres o mujeres).</p>
+                      <p>Se organiza por edad (adolescentes, jovenes y adultos) y sexo (hombres o mujeres).</p>
                     </div>
                   </div>
                 </div>
