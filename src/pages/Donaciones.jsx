@@ -35,7 +35,6 @@ const Donaciones = () => {
 
   return (
     <div className="donaciones-page">
-      {/* Hero Section */}
       <div className="donaciones-hero">
         <div className="container-donaciones">
           <div className="hero-content">
@@ -47,7 +46,6 @@ const Donaciones = () => {
         </div>
       </div>
 
-      {/* Impacto Section */}
       <section className="section-donaciones">
         <div className="container-donaciones">
           <div className="impacto-content">
@@ -66,14 +64,12 @@ const Donaciones = () => {
         </div>
       </section>
 
-      {/* Métodos de Donación */}
       <section className="section-donaciones bg-dark">
         <div className="container-donaciones">
           <div className="metodos-section">
             <h2>Formas de donar</h2>
             
             <div className="metodos-container">
-              {/* Bizum */}
               <div className="metodo-card bizum-card">
                 <div className="metodo-header">
                   <div className="metodo-icon">
@@ -99,7 +95,6 @@ const Donaciones = () => {
                 </div>
               </div>
 
-              {/* Transferencia */}
               <div className="metodo-card transferencia-card">
                 <div className="metodo-header">
                   <div className="metodo-icon">
@@ -131,12 +126,35 @@ const Donaciones = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="metodo-card kilo-card">
+                <div className="metodo-header">
+                  <div className="metodo-icon">
+                    <i className="fas fa-heart"></i>
+                  </div>
+                  <div className="metodo-info">
+                    <h3>3. Kilo de Amor</h3>
+                    <p>Los <strong>primeros domingos de cada mes</strong>, puedes traer un alimento no perecedero destinado a apoyar familias en situaciones vulnerables.</p>
+                  </div>
+                </div>
+                
+                <div className="kilo-info">
+                  <div className="kilo-display">
+                    <div className="kilo-icono">
+                      <i className="fas fa-calendar-alt"></i>
+                    </div>
+                    <div className="kilo-texto">
+                      <span className="kilo-fecha">Primer domingo del mes</span>
+                      <span className="kilo-descripcion">Alimento no perecedero</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Agradecimiento Final */}
       <section className="section-donaciones">
         <div className="container-donaciones">
           <div className="agradecimiento-final">

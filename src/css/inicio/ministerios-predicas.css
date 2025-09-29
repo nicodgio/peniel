@@ -109,6 +109,10 @@
   background-image: url('/imgs/ministerios/grupospeniel.jpeg'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
 }
 
+.ministerio-card:nth-child(9) .ministerio-img {
+  background-image: url('/imgs/ministerios/adoracion.jpg'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+}
+
 .ministerio-content {
   padding: 2rem;
   flex-grow: 1;

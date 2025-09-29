@@ -216,6 +216,41 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* Video en sección Nuestra Identidad */
+.church-video {
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.church-video:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
+}
+
+.church-video-element {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .church-video-element {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .church-video-element {
+    height: 250px;
+  }
+}
+
 .pastor-image {
   width: 100%;
   overflow: hidden;

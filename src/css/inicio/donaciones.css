@@ -134,16 +134,16 @@
 
 .metodos-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-  gap: 3rem;
-  max-width: 1000px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .metodo-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 25px;
-  padding: 3rem;
+  padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   transition: all 0.4s ease;
@@ -320,7 +320,65 @@
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
+/* KILO DE AMOR ESPECÍFICO */
+.kilo-info {
+  text-align: center;
+}
 
+.kilo-display {
+  background: rgba(39, 174, 96, 0.1);
+  border: 2px solid rgba(39, 174, 96, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.kilo-icono {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.kilo-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.kilo-fecha {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.kilo-descripcion {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .kilo-display {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .kilo-texto {
+    text-align: center;
+  }
+}
 /* AGRADECIMIENTO FINAL */
 .agradecimiento-final {
   text-align: center;
@@ -411,10 +469,15 @@
 }
 
 /* RESPONSIVE DESIGN */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .metodos-container {
     grid-template-columns: 1fr;
     max-width: 600px;
+    gap: 3rem;
+  }
+  
+  .metodo-card {
+    padding: 3rem;
   }
   
   .impactos-grid {

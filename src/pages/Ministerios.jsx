@@ -71,7 +71,8 @@ const Ministerios = () => {
         "Invertimos en esta generación porque creemos que Dios está haciendo algo nuevo en cada uno",
       icono: "fas fa-fire",
       color: "#e67e22",
-      imagen: "/imgs/ministerios/peniel-ng.jpg",
+      imagen: "/imgs/ministerios/ados.jpg",
+      videoUrl: "/videos/ministerios/penielng.mov", // Agrega la URL de tu video
     },
     {
       id: "peniel-kids",
@@ -108,7 +109,7 @@ const Ministerios = () => {
         "Una experiencia inolvidable que deja huellas en el corazón de cada niño",
       icono: "fas fa-child",
       color: "#f39c12",
-      imagen: "/imgs/ministerios/peniel-kids.jpg",
+      imagen: "/imgs/ministerios/kids.jpg",
     },
     {
       id: "consolidacion",
@@ -145,6 +146,7 @@ const Ministerios = () => {
       icono: "fas fa-heart",
       color: "#9b59b6",
       imagen: "/imgs/ministerios/consolidacion.jpg",
+      videoUrl: "/videos/ministerios/atencionprimaria.mp4", // Agrega la URL de tu video
     },
     {
       id: "instituto-biblico",
@@ -177,7 +179,7 @@ const Ministerios = () => {
         "Una plataforma de lanzamiento para marcar una diferencia con fundamento, carácter y pasión por Cristo",
       icono: "fas fa-graduation-cap",
       color: "#3498db",
-      imagen: "/imgs/ministerios/instituto-biblico.jpg",
+      imagen: "/imgs/ministerios/instituto.jpg",
     },
     {
       id: "misiones",
@@ -289,7 +291,43 @@ const Ministerios = () => {
       impacto: "Expandiendo el Reino de Dios en cada barrio de Madrid",
       icono: "fas fa-home",
       color: "#8e44ad",
-      imagen: "/imgs/ministerios/grupos-peniel.jpg",
+      imagen: "/imgs/ministerios/grupospeniel.jpeg",
+    },
+    {
+      id: "alabanza-adoracion",
+      nombre: "Alabanza y Adoración",
+      categoria: "Adoración",
+      frecuencia: "Semanal",
+      horario: "Sabados y Domingos",
+      lema: "Adorar es más que cantar; es responder con todo nuestro ser a la presencia de Dios",
+      descripcion:
+        "Exaltamos el nombre de Jesús con excelencia, pasión y reverencia, creando un ambiente donde cada persona pueda tener un encuentro real con Dios.",
+      descripcionCompleta:
+        "En Peniel, creemos que la alabanza y la adoración no son simplemente un momento del servicio, sino una expresión viva y poderosa de nuestra relación con Dios. Es el lenguaje del corazón rendido, la respuesta genuina a Su amor, y una puerta abierta para que el cielo toque la tierra. Nuestro ministerio de Alabanza y Adoración existe con un solo propósito: exaltar el nombre de Jesús con excelencia, pasión y reverencia. A través de la música, buscamos crear un ambiente donde cada persona pueda tener un encuentro real con Dios, donde las cadenas se rompan, los corazones se sanen y las vidas sean transformadas por Su presencia. No se trata de talento, sino de unción. No buscamos performance, buscamos presencia. No adoramos por lo que sentimos, adoramos por quién es Él.",
+      lider: "Arturo Ccallo",
+      telefono: "+34 609 377 944",
+      actividades: [
+        "Preparamos y guiamos los tiempos de alabanza en nuestras reuniones generales",
+        "Cultivamos una atmósfera de adoración sensible al Espíritu Santo",
+        "Formamos continuamente a músicos, cantantes y técnicos comprometidos",
+        "Realizamos talleres formativos cada 15 días para crecer en habilidades",
+        "Trabajamos en equipo con otros ministerios para servir integralmente",
+        "Cada ensayo es una oportunidad para rendirnos más y servir mejor",
+      ],
+      requisitos: [
+        "Ser miembro activo y comprometido con la iglesia",
+        "Estar bautizado",
+        "Hacer el curso de integración",
+        "Asistir a un grupo Peniel",
+        "Dones musicales o técnicos dados por Dios",
+        "Compromiso con la excelencia y la reverencia",
+        "Disponibilidad para ensayos y talleres formativos",
+      ],
+      impacto:
+        "El Padre busca adoradores en espíritu y en verdad. Nosotros respondemos a ese llamado",
+      icono: "fas fa-music",
+      color: "#d946ef",
+      imagen: "/imgs/ministerios/adoracion.jpg",
     },
   ];
 
@@ -302,6 +340,7 @@ const Ministerios = () => {
     "Educación",
     "Evangelismo",
     "Comunidad",
+    "Adoración",
   ];
   const [categoriaActiva, setCategoriaActiva] = useState("Todos");
 
@@ -324,10 +363,7 @@ const Ministerios = () => {
       <div className="ministerios-hero">
         <div className="container-clean">
           <h1>NUESTROS MINISTERIOS</h1>
-          <p>
-            "Y todos los días, en el templo y por las casas, no cesaban de
-            enseñar y predicar a Jesucristo"
-          </p>
+          <p>"Sirviendo con propósito, predicando a Jesús."</p>
         </div>
       </div>
 
@@ -345,8 +381,11 @@ const Ministerios = () => {
                 mismo.
               </p>
             </div>
-            <div className="intro-image">
-              <img src="/imgs/ministerios-hero.jpg" alt="Ministerios Peniel" />
+            <div className="intro-video">
+              <video className="intro-video-element" controls playsInline>
+                <source src="/videos/ministerios/ministerios.mov" type="video/quicktime" />
+                Tu navegador no soporta el elemento de video.
+              </video>
             </div>
           </div>
         </div>
@@ -513,6 +552,23 @@ const Ministerios = () => {
               </div>
 
               <div className="modal-content-side">
+                {/* Video dentro del modal si existe */}
+                {ministerioActivo.videoUrl && (
+                  <div className="modal-video-section">
+                    <video
+                      className="modal-video"
+                      controls
+                      poster={ministerioActivo.imagen}
+                    >
+                      <source
+                        src={ministerioActivo.videoUrl}
+                        type="video/mp4"
+                      />
+                      Tu navegador no soporta el elemento de video.
+                    </video>
+                  </div>
+                )}
+
                 <div className="modal-section">
                   <h4>
                     <i className="fas fa-heart"></i> Acerca de este ministerio

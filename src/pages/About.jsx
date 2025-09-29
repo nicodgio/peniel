@@ -38,11 +38,14 @@ const About = () => {
               </div>
             </div>
             <div className="church-image-container">
-              <div className="church-image">
-                <img
-                  src="/imgs/hero.jpg"
-                  alt="Iglesia Peniel con cartel de fondo"
-                />
+              <div className="church-video">
+                <video className="church-video-element" controls playsInline>
+                  <source
+                    src="/videos/about/about.MOV"
+                    type="video/mp4"
+                  />
+                  Tu navegador no soporta el elemento de video.
+                </video>
               </div>
             </div>
           </div>
@@ -171,21 +174,22 @@ const About = () => {
           <div className="vm-hero">
             <div className="vision-side">
               <div className="vm-label">VISIÓN</div>
-              <h3>Ser y hacer discipulos</h3>
+              <h3>Ser y hacer discípulos</h3>
               <p>
                 A la luz de la Palabra, entendemos que la Visión de la iglesia
-                es la revelación del plan de Dios para que sea cumplido en la
-                iglesia misma y en el mundo. Dicho de otro modo, es la idea o
-                sentir que nuestro Padre Celestial tiene en su corazón, y que es
-                revelada a la mente de sus hijos para que estos la ejecuten.
+                es la revelación del plan de Dios, dada a conocer para que sea
+                cumplida tanto en la iglesia como en el mundo. Dicho de otro
+                modo, es la idea o el sentir que nuestro Padre Celestial tiene
+                en su corazón, y que revela a la mente de sus hijos para que
+                ellos la lleven a cabo.
                 <br></br>
                 <br></br>
-                Esta Visión que hemos recibido coincide con la voluntad de Dios
-                de salvar a los que se pierden y, una vez salvos, proveerles de
-                lo necesario para la oportuna transformación de sus vidas. Es
-                decir, hacemos discípulos y –con la ayuda del Espíritu Santo–
-                los alimentamos de lo necesario para su transformación, a fin de
-                que sean capaces de hacer ellos mismos más discípulos.
+                La Visión que hemos recibido está alineada con la voluntad de
+                Dios de salvar a los que se pierden y, una vez salvos,
+                proveerles lo necesario para la transformación oportuna de sus
+                vidas. Es decir, hacemos discípulos y –con la ayuda del Espíritu
+                Santo– los alimentamos con lo necesario para su crecimiento, de
+                modo que ellos también puedan hacer más discípulos.
               </p>
             </div>
 
@@ -197,18 +201,17 @@ const About = () => {
               </h3>
               <p>
                 Siguiendo el mandato de Jesús en Mateo 28:19-20, llevamos a cabo
-                la visión a través de lo que llamamos Ciclo de Vida, es el
-                proceso por el cual todo creyente debe transitar como resultado
-                del crecimiento natural dado por Dios. Abarca desde el momento
-                en el que acepta a Cristo y decide convertirse en un discípulo
-                suyo, hasta el momento en el que puede ayudar a otros a hacer lo
-                mismo.
+                la visión a través de lo que llamamos el Ciclo de Vida, que es
+                el proceso por el cual todo creyente debe transitar como
+                resultado del crecimiento natural dado por Dios. Este ciclo
+                abarca desde el momento en que acepta a Cristo y decide
+                convertirse en un discípulo suyo, hasta el momento en que puede
+                ayudar a otros a hacer lo mismo.
                 <br></br>
                 <br></br>
-                En el caso de la iglesia, en su Ciclo de Vida, que tendría que
-                darse siempre de manera natural, existen cuatro pasos
-                fundamentales que nos permite ser y hacer discípulos de manera
-                integral:
+                En el caso de la iglesia, en su Ciclo de Vida, que debería darse
+                siempre de manera natural, existen cuatro pasos fundamentales
+                que nos permiten ser y hacer discípulos de manera integral:
               </p>
 
               <div className="process-flow">

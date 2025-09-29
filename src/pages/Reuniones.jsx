@@ -22,25 +22,51 @@ const Reuniones = () => {
     };
   });
 
-  // Auto-scroll infinito más simple
+  // Auto-scroll infinito que respeta la interacción manual
   useEffect(() => {
     const wrapper = document.querySelector('.gallery-cards-wrapper');
     if (!wrapper) return;
 
     let scrollLeft = 0;
-    const scrollSpeed = 0.3; // Velocidad más lenta
+    const scrollSpeed = 0.3;
     let animationId;
+    let lastManualScroll = 0;
 
     const scroll = () => {
-      scrollLeft += scrollSpeed;
-      wrapper.scrollLeft = scrollLeft;
+      const currentTime = Date.now();
+      
+      // Solo auto-scroll si no ha habido interacción manual reciente (2 segundos)
+      if (currentTime - lastManualScroll > 2000) {
+        scrollLeft += scrollSpeed;
+        wrapper.scrollLeft = scrollLeft;
 
-      // Reset cuando llegamos a la mitad (donde empiezan las imágenes duplicadas)
-      if (scrollLeft >= wrapper.scrollWidth / 2) {
-        scrollLeft = 0;
-        wrapper.scrollLeft = 0;
+        // Reset cuando llegamos a la mitad
+        if (scrollLeft >= wrapper.scrollWidth / 2) {
+          scrollLeft = 0;
+          wrapper.scrollLeft = 0;
+        }
+      } else {
+        // Sincronizar la posición con el scroll manual
+        scrollLeft = wrapper.scrollLeft;
       }
+      
       animationId = requestAnimationFrame(scroll);
+    };
+
+    // Función para manejar scroll manual
+    const handleManualScroll = () => {
+      lastManualScroll = Date.now();
+    };
+
+    // Funciones para los botones
+    window.scrollGalleryLeft = () => {
+      handleManualScroll();
+      wrapper.scrollBy({ left: -300, behavior: 'smooth' });
+    };
+
+    window.scrollGalleryRight = () => {
+      handleManualScroll();
+      wrapper.scrollBy({ left: 300, behavior: 'smooth' });
     };
 
     // Iniciar scroll
@@ -48,6 +74,8 @@ const Reuniones = () => {
 
     return () => {
       cancelAnimationFrame(animationId);
+      delete window.scrollGalleryLeft;
+      delete window.scrollGalleryRight;
     };
   }, []);
 
@@ -63,7 +91,7 @@ const Reuniones = () => {
       dia: "Sábados", 
       hora: "19:00hs",
       tipo: "Reunión de Jóvenes",
-      descripcion: "Un espacio para conectar con otros, compartir, aprender y crecer en la fe. Si eres adolescente o joven, ¡te esperamos!",
+      descripcion: "Un espacio para conectar con otros, compartir, aprender y crecer en la fe. Si eres joven o adolescente , ¡Te esperamos!",
       icono: "fas fa-users"
     },
     {
@@ -142,6 +170,28 @@ const Reuniones = () => {
                 </div>
               ))}
             </div>
+            
+            {/* Botones de navegación */}
+            <button 
+              className="gallery-nav-btn gallery-nav-prev"
+              onClick={() => {
+                if (window.scrollGalleryLeft) {
+                  window.scrollGalleryLeft();
+                }
+              }}
+            >
+              <i className="fas fa-chevron-left"></i>
+            </button>
+            <button 
+              className="gallery-nav-btn gallery-nav-next"
+              onClick={() => {
+                if (window.scrollGalleryRight) {
+                  window.scrollGalleryRight();
+                }
+              }}
+            >
+              <i className="fas fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </section>

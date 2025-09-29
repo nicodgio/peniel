@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useYouTubeVideos } from "../hooks/useYoutubeVideos";
-import '../css/inicio/sections.css';
-import '../css/inicio/ministerios-predicas.css';
+import "../css/inicio/sections.css";
+import "../css/inicio/ministerios-predicas.css";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
   const [showMenuModal, setShowMenuModal] = useState(false);
   const [menuForm, setMenuForm] = useState({
-    nombre: '',
-    telefono: '',
-    cantidad: 1
+    nombre: "",
+    telefono: "",
+    cantidad: 1,
   });
   const [formLoading, setFormLoading] = useState(false);
-  const [formMessage, setFormMessage] = useState('');
+  const [formMessage, setFormMessage] = useState("");
 
   const {
     videos: predicas,
@@ -26,7 +26,9 @@ const Home = () => {
 
   const fetchEventos = async () => {
     try {
-      const response = await fetch('https://orangered-guanaco-582072.hostingersite.com/api/eventos.php');
+      const response = await fetch(
+        "https://orangered-guanaco-582072.hostingersite.com/api/eventos.php"
+      );
       const data = await response.json();
       if (data.success) {
         setEventos(data.eventos.slice(0, 3)); // Solo los primeros 3
@@ -39,32 +41,35 @@ const Home = () => {
   const handleMenuSubmit = async (e) => {
     e.preventDefault();
     setFormLoading(true);
-    setFormMessage('');
+    setFormMessage("");
 
     try {
-      const response = await fetch('https://orangered-guanaco-582072.hostingersite.com/api/menu-registro.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(menuForm)
-      });
+      const response = await fetch(
+        "https://orangered-guanaco-582072.hostingersite.com/api/menu-registro.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(menuForm),
+        }
+      );
 
       const data = await response.json();
-      
+
       if (data.success) {
-        setFormMessage('¡Registro exitoso! Nos vemos el domingo.');
-        setMenuForm({ nombre: '', telefono: '', cantidad: 1 });
+        setFormMessage("¡Registro exitoso! Nos vemos el domingo.");
+        setMenuForm({ nombre: "", telefono: "", cantidad: 1 });
         setTimeout(() => {
           setShowMenuModal(false);
-          setFormMessage('');
+          setFormMessage("");
         }, 2000);
       } else {
-        setFormMessage(data.message || 'Error al procesar el registro');
+        setFormMessage(data.message || "Error al procesar el registro");
       }
     } catch (error) {
       console.error("Error enviando formulario:", error);
-      setFormMessage('Error de conexión. Intenta nuevamente.');
+      setFormMessage("Error de conexión. Intenta nuevamente.");
     } finally {
       setFormLoading(false);
     }
@@ -72,9 +77,9 @@ const Home = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setMenuForm(prev => ({
+    setMenuForm((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -96,48 +101,62 @@ const Home = () => {
     });
   };
 
-const ministerios = [
-  {
-    meta: ["MENSUAL", "SERVICIO"],
-    title: "Acción Social",
-    description: "Cada mes recogemos y distribuimos alimentos a más de 100 personas en riesgo de exclusión, evitando el desperdicio y ofreciendo también un ropero comunitario. Todo esto como expresión práctica del amor de Dios."
-  },
-  {
-    meta: ["SÁBADOS", "19:00"],
-    title: "Peniel NG (Next Generation)",
-    description: "Ministerio para adolescentes y jóvenes apasionados por Cristo. Crecemos en la fe, fortalecemos amistades y vivimos juntos la Palabra de Dios. También organizamos campamentos en verano e invierno."
-  },
-  {
-    meta: ["DOMINGOS", "11:00"],
-    title: "Peniel Kids",
-    description: "Ministerio para los niños de 3 a 11 años. Aprenden la Palabra de Dios de forma creativa y divertida cada domingo. Se dividen en tres grupos por edad: Exploradores (3-5 años), Valientes (6-9 años) y Detectives (9-11 años). Además, disfrutan de un campamento urbano especial en julio."
-  },
-  {
-    meta: ["CONTINUO", "SERVICIO"],
-    title: "Atención Primaria y Consolidación",
-    description: "El primer contacto para quienes llegan a la iglesia o comienzan su caminar con Jesús. Acompañamos a los recién convertidos para afianzar su relación con Dios e integrarse a la familia de la iglesia."
-  },
-  {
-    meta: ["MARTES", "21:00"],
-    title: "Instituto Bíblico Peniel",
-    description: "Formación semipresencial para profundizar en la Palabra y prepararse para el servicio ministerial. Material oficial de Global University con certificaciones internas."
-  },
-  {
-    meta: ["GLOBAL", "9 PAÍSES"],
-    title: "Misiones",
-    description: "Somos una comunidad misionera comprometida con llevar el evangelio a todas las naciones. Apoyamos 9 proyectos misioneros alrededor del mundo. Celebramos anualmente la Fiesta de las Naciones."
-  },
-  {
-    meta: ["MIÉRCOLES", "19:00"],
-    title: "Evangelismo",
-    description: "Cada semana salimos a llevar esperanza a nuestra ciudad. Punto de encuentro: Centro Comercial Alcalá Norte (Ciudad Lineal). No se necesita experiencia, solo un corazón dispuesto."
-  },
-  {
-    meta: ["HOGARES", "SEMANAL"],
-    title: "Grupos Peniel",
-    description: "Peniel es una iglesia en células con un solo propósito: alcanzar más almas. Las células llevan el evangelio a los hogares para dar a conocer el nombre de Dios a nuestros amigos, vecinos y comunidad."
-  }
-];
+  const ministerios = [
+    {
+      meta: ["MENSUAL", "SERVICIO"],
+      title: "Acción Social",
+      description:
+        "Cada mes recogemos y distribuimos alimentos a más de 100 personas en riesgo de exclusión, evitando el desperdicio y ofreciendo también un ropero comunitario. Todo esto como expresión práctica del amor de Dios.",
+    },
+    {
+      meta: ["SÁBADOS", "19:00"],
+      title: "Peniel NG (Next Generation)",
+      description:
+        "Ministerio para adolescentes y jóvenes apasionados por Cristo. Crecemos en la fe, fortalecemos amistades y vivimos juntos la Palabra de Dios. También organizamos campamentos en verano e invierno.",
+    },
+    {
+      meta: ["DOMINGOS", "11:00"],
+      title: "Peniel Kids",
+      description:
+        "Ministerio para los niños de 3 a 11 años. Aprenden la Palabra de Dios de forma creativa y divertida cada domingo. Se dividen en tres grupos por edad: Exploradores (3-5 años), Valientes (6-9 años) y Detectives (9-11 años). Además, disfrutan de un campamento urbano especial en julio.",
+    },
+    {
+      meta: ["CONTINUO", "SERVICIO"],
+      title: "Atención Primaria y Consolidación",
+      description:
+        "El primer contacto para quienes llegan a la iglesia o comienzan su caminar con Jesús. Acompañamos a los recién convertidos para afianzar su relación con Dios e integrarse a la familia de la iglesia.",
+    },
+    {
+      meta: ["MARTES", "21:00"],
+      title: "Instituto Bíblico Peniel",
+      description:
+        "Formación semipresencial para profundizar en la Palabra y prepararse para el servicio ministerial. Material oficial de Global University con certificaciones internas.",
+    },
+    {
+      meta: ["GLOBAL", "9 PAÍSES"],
+      title: "Misiones",
+      description:
+        "Somos una comunidad misionera comprometida con llevar el evangelio a todas las naciones. Apoyamos 9 proyectos misioneros alrededor del mundo. Celebramos anualmente la Fiesta de las Naciones.",
+    },
+    {
+      meta: ["MIÉRCOLES", "19:00"],
+      title: "Evangelismo",
+      description:
+        "Cada semana salimos a llevar esperanza a nuestra ciudad. Punto de encuentro: Centro Comercial Alcalá Norte (Ciudad Lineal). No se necesita experiencia, solo un corazón dispuesto.",
+    },
+    {
+      meta: ["HOGARES", "SEMANAL"],
+      title: "Grupos Peniel",
+      description:
+        "Peniel es una iglesia en células con un solo propósito: alcanzar más almas. Las células llevan el evangelio a los hogares para dar a conocer el nombre de Dios a nuestros amigos, vecinos y comunidad.",
+    },
+    {
+      meta: ["DOMINGOS", "ADORACIÓN"],
+      title: "Alabanza y Adoración",
+      description:
+        "En Peniel, creemos que la alabanza y la adoración no son simplemente un momento del servicio, sino una expresión viva y poderosa de nuestra relación con Dios.",
+    },
+  ];
 
   return (
     <>
@@ -303,10 +322,7 @@ const ministerios = [
       <section className="visitanos-banner">
         <div className="visitanos-content">
           <div className="visitanos-image">
-            <img
-              src="/imgs/hero-peniel.jpg"
-              alt="Iglesia Peniel Madrid"
-            />
+            <img src="/imgs/hero-peniel.jpg" alt="Iglesia Peniel Madrid" />
           </div>
           <div className="visitanos-text">
             <h2>Ven y Visítanos</h2>
@@ -333,22 +349,27 @@ const ministerios = [
           {eventos.length > 0 ? (
             eventos.map((evento, index) => (
               <div key={evento.id || index} className="event-card-calendar">
-                <div className="event-calendar-date" style={{borderTopColor: evento.color}}>
-                  <div className="calendar-month" style={{backgroundColor: evento.color}}>
+                <div
+                  className="event-calendar-date"
+                  style={{ borderTopColor: evento.color }}
+                >
+                  <div
+                    className="calendar-month"
+                    style={{ backgroundColor: evento.color }}
+                  >
                     {evento.mes}
                   </div>
-                  <div className="calendar-day">
-                    {evento.dias}
-                  </div>
-                  <div className="calendar-weekday">
-                    {evento.diaSemana}
-                  </div>
+                  <div className="calendar-day">{evento.dias}</div>
+                  <div className="calendar-weekday">{evento.diaSemana}</div>
                 </div>
-                
+
                 <div className="event-content-calendar">
                   <div className="event-header">
                     <h3 className="event-title-calendar">
-                      <i className={evento.icono} style={{color: evento.color}}></i>
+                      <i
+                        className={evento.icono}
+                        style={{ color: evento.color }}
+                      ></i>
                       {evento.titulo}
                     </h3>
                     <div className="event-time-calendar">
@@ -356,7 +377,7 @@ const ministerios = [
                       {evento.hora}
                     </div>
                   </div>
-                  
+
                   <p className="event-description-calendar">
                     {evento.descripcion}
                   </p>
@@ -364,182 +385,18 @@ const ministerios = [
               </div>
             ))
           ) : (
-            <div style={{gridColumn: '1 / -1', textAlign: 'center', padding: '2rem'}}>
+            <div
+              style={{
+                gridColumn: "1 / -1",
+                textAlign: "center",
+                padding: "2rem",
+              }}
+            >
               <p>No hay eventos programados en este momento.</p>
             </div>
           )}
         </div>
       </section>
-
-      <section className="menu-dominical">
-        <div className="menu-content">
-          <div className="menu-text">
-            <h2>
-              <i className="fas fa-utensils"></i> Te invitamos a conocer nuestro
-              Menú Dominical
-            </h2>
-            <p>
-              Cada domingo preparamos un delicioso menú casero. Tu contribución
-              nos ayuda a seguir bendiciendo a más familias y sostener los
-              ministerios de la iglesia.
-            </p>
-            <button 
-              onClick={() => setShowMenuModal(true)}
-              className="btn btn-primary"
-            >
-              REGISTRARSE PARA EL MENÚ
-            </button>
-          </div>
-          <div className="menu-image">
-            <img
-              src="/imgs/menu1.jpg"
-              alt="Menú Dominical"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Modal de registro para menú dominical */}
-      {showMenuModal && (
-        <div 
-          className="menu-modal"
-          onClick={(e) => e.target === e.currentTarget && setShowMenuModal(false)}
-        >
-          <div className="menu-modal-content">
-            <button
-              onClick={() => setShowMenuModal(false)}
-              className="menu-modal-close"
-            >
-              ×
-            </button>
-
-            <h3 style={{ 
-              marginBottom: '1.5rem', 
-              fontFamily: 'Montserrat, sans-serif',
-              textAlign: 'center',
-              fontSize: '1.5rem',
-              fontWeight: '700'
-            }}>
-              Registro Menú Dominical
-            </h3>
-
-            {formMessage && (
-              <div style={{
-                padding: '1rem',
-                borderRadius: '10px',
-                marginBottom: '1rem',
-                textAlign: 'center',
-                backgroundColor: formMessage.includes('exitoso') ? 'rgba(74, 222, 128, 0.2)' : 'rgba(248, 113, 113, 0.2)',
-                color: formMessage.includes('exitoso') ? '#4ade80' : '#f87171',
-                border: `1px solid ${formMessage.includes('exitoso') ? 'rgba(74, 222, 128, 0.3)' : 'rgba(248, 113, 113, 0.3)'}`
-              }}>
-                {formMessage}
-              </div>
-            )}
-
-            <form onSubmit={handleMenuSubmit}>
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{
-                  display: 'block',
-                  marginBottom: '0.5rem',
-                  fontWeight: '600',
-                  fontFamily: 'Montserrat, sans-serif'
-                }}>
-                  Nombre completo *
-                </label>
-                <input
-                  type="text"
-                  name="nombre"
-                  value={menuForm.nombre}
-                  onChange={handleInputChange}
-                  required
-                  style={{
-                    width: '100%',
-                    padding: '0.8rem',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                    borderRadius: '10px',
-                    color: 'white',
-                    fontFamily: 'Montserrat, sans-serif'
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{
-                  display: 'block',
-                  marginBottom: '0.5rem',
-                  fontWeight: '600',
-                  fontFamily: 'Montserrat, sans-serif'
-                }}>
-                  Teléfono *
-                </label>
-                <input
-                  type="tel"
-                  name="telefono"
-                  value={menuForm.telefono}
-                  onChange={handleInputChange}
-                  required
-                  style={{
-                    width: '100%',
-                    padding: '0.8rem',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                    borderRadius: '10px',
-                    color: 'white',
-                    fontFamily: 'Montserrat, sans-serif'
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '2rem' }}>
-                <label style={{
-                  display: 'block',
-                  marginBottom: '0.5rem',
-                  fontWeight: '600',
-                  fontFamily: 'Montserrat, sans-serif'
-                }}>
-                  Cantidad de personas *
-                </label>
-                <select
-                  name="cantidad"
-                  value={menuForm.cantidad}
-                  onChange={handleInputChange}
-                  required
-                  className="menu-form-select"
-                >
-                  {[...Array(10)].map((_, i) => (
-                    <option key={i + 1} value={i + 1}>
-                      {i + 1} {i === 0 ? 'persona' : 'personas'}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <button
-                type="submit"
-                disabled={formLoading}
-                style={{
-                  width: '100%',
-                  padding: '1rem',
-                  backgroundColor: '#609be8',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '15px',
-                  fontWeight: '600',
-                  fontFamily: 'Montserrat, sans-serif',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  cursor: formLoading ? 'not-allowed' : 'pointer',
-                  opacity: formLoading ? 0.7 : 1
-                }}
-              >
-                {formLoading ? 'REGISTRANDO...' : 'CONFIRMAR REGISTRO'}
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
 
       <section className="ministerios" id="ministerios">
         <div className="section-header">
@@ -579,6 +436,193 @@ const ministerios = [
           ))}
         </div>
       </section>
+
+      <section className="menu-dominical">
+        <div className="menu-content">
+          <div className="menu-text">
+            <h2>
+              <i className="fas fa-utensils"></i> Te invitamos a conocer nuestro
+              Menú Dominical
+            </h2>
+            <p>
+              Cada domingo preparamos un delicioso menú casero. Tu contribución
+              nos ayuda a seguir bendiciendo a más familias y sostener los
+              ministerios de la iglesia.
+            </p>
+            <button
+              onClick={() => setShowMenuModal(true)}
+              className="btn btn-primary"
+            >
+              REGISTRARSE PARA EL MENÚ
+            </button>
+          </div>
+          <div className="menu-image">
+            <img src="/imgs/menu1.jpg" alt="Menú Dominical" />
+          </div>
+        </div>
+      </section>
+
+      {/* Modal de registro para menú dominical */}
+      {showMenuModal && (
+        <div
+          className="menu-modal"
+          onClick={(e) =>
+            e.target === e.currentTarget && setShowMenuModal(false)
+          }
+        >
+          <div className="menu-modal-content">
+            <button
+              onClick={() => setShowMenuModal(false)}
+              className="menu-modal-close"
+            >
+              ×
+            </button>
+
+            <h3
+              style={{
+                marginBottom: "1.5rem",
+                fontFamily: "Montserrat, sans-serif",
+                textAlign: "center",
+                fontSize: "1.5rem",
+                fontWeight: "700",
+              }}
+            >
+              Registro Menú Dominical
+            </h3>
+
+            {formMessage && (
+              <div
+                style={{
+                  padding: "1rem",
+                  borderRadius: "10px",
+                  marginBottom: "1rem",
+                  textAlign: "center",
+                  backgroundColor: formMessage.includes("exitoso")
+                    ? "rgba(74, 222, 128, 0.2)"
+                    : "rgba(248, 113, 113, 0.2)",
+                  color: formMessage.includes("exitoso")
+                    ? "#4ade80"
+                    : "#f87171",
+                  border: `1px solid ${
+                    formMessage.includes("exitoso")
+                      ? "rgba(74, 222, 128, 0.3)"
+                      : "rgba(248, 113, 113, 0.3)"
+                  }`,
+                }}
+              >
+                {formMessage}
+              </div>
+            )}
+
+            <form onSubmit={handleMenuSubmit}>
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontWeight: "600",
+                    fontFamily: "Montserrat, sans-serif",
+                  }}
+                >
+                  Nombre completo *
+                </label>
+                <input
+                  type="text"
+                  name="nombre"
+                  value={menuForm.nombre}
+                  onChange={handleInputChange}
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "0.8rem",
+                    background: "rgba(255, 255, 255, 0.05)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    borderRadius: "10px",
+                    color: "white",
+                    fontFamily: "Montserrat, sans-serif",
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontWeight: "600",
+                    fontFamily: "Montserrat, sans-serif",
+                  }}
+                >
+                  Teléfono *
+                </label>
+                <input
+                  type="tel"
+                  name="telefono"
+                  value={menuForm.telefono}
+                  onChange={handleInputChange}
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "0.8rem",
+                    background: "rgba(255, 255, 255, 0.05)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    borderRadius: "10px",
+                    color: "white",
+                    fontFamily: "Montserrat, sans-serif",
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: "2rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontWeight: "600",
+                    fontFamily: "Montserrat, sans-serif",
+                  }}
+                >
+                  Cantidad de personas *
+                </label>
+                <select
+                  name="cantidad"
+                  value={menuForm.cantidad}
+                  onChange={handleInputChange}
+                  required
+                  className="menu-form-select"
+                >
+                  {[...Array(10)].map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {i + 1} {i === 0 ? "persona" : "personas"}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                disabled={formLoading}
+                style={{
+                  width: "100%",
+                  padding: "1rem",
+                  backgroundColor: "#609be8",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "15px",
+                  fontWeight: "600",
+                  fontFamily: "Montserrat, sans-serif",
+                  textTransform: "uppercase",
+                  letterSpacing: "1px",
+                  cursor: formLoading ? "not-allowed" : "pointer",
+                  opacity: formLoading ? 0.7 : 1,
+                }}
+              >
+                {formLoading ? "REGISTRANDO..." : "CONFIRMAR REGISTRO"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       <section className="predicas" id="predicas">
         <div className="section-header">

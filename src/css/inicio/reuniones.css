@@ -84,12 +84,10 @@
 .gallery-cards-wrapper {
   display: flex;
   gap: 1.5rem;
-  overflow-x: hidden; /* Cambiado de auto a hidden */
-  scroll-snap-type: none; /* Removido snap para scroll suave */
+  overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 2rem 0;
-  animation: none; /* Sin animación predeterminada */
 }
 
 .gallery-cards-wrapper::-webkit-scrollbar {
@@ -97,14 +95,21 @@
 }
 
 .gallery-card {
-  flex: 0 0 280px;
-  height: 400px;
+  flex: 0 0 240px;  /* Ancho menor */
+  height: auto;    /* Altura mucho mayor */
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   background: #111;
-  /* Removidos todos los efectos hover y transition */
 }
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
 
 .card-image {
   width: 100%;
@@ -113,14 +118,38 @@
   overflow: hidden;
 }
 
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Removido transition y hover effects */
+/* Botones de navegación del carrusel */
+.gallery-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Removido completamente .gallery-nav-btn y sus variantes */
+.gallery-nav-btn:hover {
+  background: #609be8;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 25px rgba(96, 155, 232, 0.3);
+}
+
+.gallery-nav-prev {
+  left: 2rem;
+}
+
+.gallery-nav-next {
+  right: 2rem;
+}
 
 .reuniones-container {
   max-width: 1200px;
@@ -688,7 +717,21 @@
   
   .gallery-card {
     flex: 0 0 260px;
-    height: 350px;
+    height: 400px;
+  }
+  
+  .gallery-nav-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .gallery-nav-prev {
+    left: 1rem;
+  }
+  
+  .gallery-nav-next {
+    right: 1rem;
   }
 }
 
@@ -762,8 +805,22 @@
   }
   
   .gallery-card {
-    flex: 0 0 calc(100vw - 4rem);
-    height: 350px;
+    flex: 0 0 250px;
+    height: 380px;
+  }
+  
+  .gallery-nav-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  
+  .gallery-nav-prev {
+    left: 0.5rem;
+  }
+  
+  .gallery-nav-next {
+    right: 0.5rem;
   }
 }
 
@@ -807,7 +864,7 @@
   }
   
   .gallery-card {
-    flex: 0 0 calc(100vw - 2rem);
-    height: 320px;
+    flex: 0 0 220px;
+    height: 350px;
   }
 }
