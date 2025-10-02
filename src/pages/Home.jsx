@@ -20,6 +20,14 @@ const Home = () => {
     error: videosError,
   } = useYouTubeVideos();
 
+  // Función para decodificar entidades HTML
+  const decodeHtmlEntities = (text) => {
+    if (!text) return text;
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+  };
+
   useEffect(() => {
     fetchEventos();
   }, []);
@@ -31,7 +39,7 @@ const Home = () => {
       );
       const data = await response.json();
       if (data.success) {
-        setEventos(data.eventos.slice(0, 3)); // Solo los primeros 3
+        setEventos(data.eventos.slice(0, 3));
       }
     } catch (error) {
       console.error("Error cargando eventos:", error);
@@ -462,7 +470,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Modal de registro para menú dominical */}
       {showMenuModal && (
         <div
           className="menu-modal"
@@ -633,7 +640,8 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="predicas-grid">
+        {/* Grid de prédicas - Solo visible en desktop */}
+        <div className="predicas-grid" style={{ display: window.innerWidth > 768 ? 'grid' : 'none' }}>
           {videosLoading ? (
             <div
               style={{
@@ -672,9 +680,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="predica-info">
-                  <h3 className="predica-title">{predica.title}</h3>
+                  <h3 className="predica-title">{decodeHtmlEntities(predica.title)}</h3>
                   <p className="predica-meta">
-                    {predica.channelTitle || predica.pastor}
+                    {predica.channelTitle ? decodeHtmlEntities(predica.channelTitle) : predica.pastor}
                     {predica.timeAgo && ` • ${predica.timeAgo}`}
                     {predica.date && ` • ${predica.date}`}
                   </p>
@@ -684,7 +692,8 @@ const Home = () => {
           )}
         </div>
 
-        <div className="predicas-carousel" id="predicasCarousel">
+        {/* Carrusel de prédicas - Solo visible en mobile */}
+        <div className="predicas-carousel" id="predicasCarousel" style={{ display: window.innerWidth <= 768 ? 'flex' : 'none' }}>
           {videosLoading ? (
             <div
               style={{ textAlign: "center", padding: "2rem", width: "100%" }}
@@ -715,9 +724,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="predica-info">
-                  <h3 className="predica-title">{predica.title}</h3>
+                  <h3 className="predica-title">{decodeHtmlEntities(predica.title)}</h3>
                   <p className="predica-meta">
-                    {predica.channelTitle || predica.pastor}
+                    {predica.channelTitle ? decodeHtmlEntities(predica.channelTitle) : predica.pastor}
                     {predica.timeAgo && ` • ${predica.timeAgo}`}
                     {predica.date && ` • ${predica.date}`}
                   </p>
@@ -727,7 +736,8 @@ const Home = () => {
           )}
         </div>
 
-        <div className="predicas-carousel-controls">
+        {/* Controles del carrusel - Solo visibles en mobile */}
+        <div className="predicas-carousel-controls" style={{ display: window.innerWidth <= 768 ? 'flex' : 'none' }}>
           <button
             className="predicas-carousel-btn"
             onClick={() => scrollPredicasCarousel(-1)}

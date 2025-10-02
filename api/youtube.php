@@ -1,19 +1,40 @@
 <?php
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Content-Type');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
 
-require_once '../config/database.php';
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Accept');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+try {
+    require_once '../config/database.php';
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Error cargando configuración',
+        'message' => $e->getMessage(),
+        'file' => $e->getFile(),
+        'line' => $e->getLine()
+    ], JSON_UNESCAPED_UNICODE);
+    exit();
+}
 
 try {
     $db = Database::getInstance()->getConnection();
     
     $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 6;
-    $limit = min($limit, 20);
+    $limit = max(1, min($limit, 20));
     
     $stmt = $db->prepare("
-        SELECT 
+        SELECT
             video_id as id,
             title,
             description,
@@ -28,73 +49,48 @@ try {
             time_ago as timeAgo,
             published_date as publishedDate,
             updated_at
-        FROM youtube_videos 
-        ORDER BY published_at DESC 
+        FROM youtube_videos
+        WHERE thumbnail IS NOT NULL
+        ORDER BY published_at DESC
         LIMIT ?
     ");
     
     $stmt->execute([$limit]);
-    $videos = $stmt->fetchAll();
+    $videos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     if (empty($videos)) {
-        $fallbackVideos = [
-            [
-                'id' => 'G4xpiUtz944',
-                'title' => "Cuídate bien: El descanso de Dios",
-                'thumbnail' => "https://img.youtube.com/vi/G4xpiUtz944/maxresdefault.jpg",
-                'channelTitle' => "Pastor Julio Ortega",
-                'timeAgo' => "hace 1 semana",
-                'url' => "https://www.youtube.com/watch?v=G4xpiUtz944&t=1s",
-                'embedUrl' => "https://www.youtube.com/embed/G4xpiUtz944",
-                'views' => '1.2K',
-                'duration' => '45:30',
-                'publishedDate' => date('d M Y', strtotime('-1 week'))
-            ],
-            [
-                'id' => 'fallback2',
-                'title' => "Caminando en la Voluntad de Dios",
-                'thumbnail' => "/imgs/predica2.jpg",
-                'channelTitle' => "Pastora Ethel Bayona",
-                'timeAgo' => "hace 2 semanas",
-                'url' => "https://www.youtube.com/watch?v=fallback2",
-                'embedUrl' => "https://www.youtube.com/embed/fallback2",
-                'views' => '890',
-                'duration' => '38:15',
-                'publishedDate' => date('d M Y', strtotime('-2 weeks'))
-            ],
-            [
-                'id' => 'fallback3',
-                'title' => "La Gracia que Transforma",
-                'thumbnail' => "/imgs/predica3.jpg",
-                'channelTitle' => "Pastor Juan Carlos Escobar",
-                'timeAgo' => "hace 3 semanas",
-                'url' => "https://www.youtube.com/watch?v=fallback3",
-                'embedUrl' => "https://www.youtube.com/embed/fallback3",
-                'views' => '1.5K',
-                'duration' => '42:20',
-                'publishedDate' => date('d M Y', strtotime('-3 weeks'))
-            ]
-        ];
-        
-        $videos = array_slice($fallbackVideos, 0, $limit);
+        throw new Exception('No hay videos disponibles en la base de datos');
     }
     
-    $lastUpdated = $db->query("SELECT MAX(updated_at) as last_update FROM youtube_videos")->fetch();
+    $lastUpdatedQuery = $db->query("SELECT MAX(updated_at) as last_update FROM youtube_videos");
+    $lastUpdated = $lastUpdatedQuery ? $lastUpdatedQuery->fetch(PDO::FETCH_ASSOC) : null;
     
     echo json_encode([
         'success' => true,
         'videos' => $videos,
         'total' => count($videos),
-        'lastUpdated' => $lastUpdated['last_update'] ?? date('c'),
-        'source' => empty($videos) ? 'fallback' : 'database'
-    ]);
+        'lastUpdated' => $lastUpdated['last_update'] ?? date('c')
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Error de base de datos',
+        'message' => $e->getMessage(),
+        'code' => $e->getCode(),
+        'file' => $e->getFile(),
+        'line' => $e->getLine()
+    ], JSON_UNESCAPED_UNICODE);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode([
         'success' => false,
         'error' => 'Error interno del servidor',
-        'message' => $e->getMessage()
-    ]);
+        'message' => $e->getMessage(),
+        'trace' => $e->getTraceAsString(),
+        'file' => $e->getFile(),
+        'line' => $e->getLine()
+    ], JSON_UNESCAPED_UNICODE);
 }
 ?>

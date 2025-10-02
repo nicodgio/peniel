@@ -11,37 +11,39 @@ export const useYouTubeVideos = (limit = 6) => {
       setLoading(true);
       setError(null);
       
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      
-      const API_URL = isLocalhost 
-        ? `/api/youtube.php?limit=${limit}`
-        : `https://orangered-guanaco-582072.hostingersite.com/api/youtube.php?limit=${limit}`;
-      
-      console.log('Fetching from:', API_URL);
-      
-      const response = await fetch(API_URL);
-      
-      console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
-      
+      const API_URL = `https://orangered-guanaco-582072.hostingersite.com/api/youtube.php?limit=${limit}`;
+
+      const response = await fetch(API_URL, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
+
+      const text = await response.text();
       
-      const data = await response.json();
-      console.log('API Response:', data);
-      
-      if (data.success) {
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        console.error('Response text:', text);
+        throw new Error('La respuesta no es JSON válido');
+      }
+
+      if (data.success && Array.isArray(data.videos)) {
         setVideos(data.videos);
         setLastUpdated(data.lastUpdated);
-        console.log('Videos loaded from database:', data.videos.length);
       } else {
-        throw new Error(data.message || 'Error desconocido');
+        throw new Error(data.message || 'No se encontraron videos');
       }
+
     } catch (err) {
-      console.error('Error fetching YouTube videos:', err);
-      console.error('Full error object:', err);
-      setError(`Error cargando videos: ${err.message}`);
+      console.error('Error en useYouTubeVideos:', err);
+      setError(err.message);
       setVideos([]);
     } finally {
       setLoading(false);
@@ -50,17 +52,15 @@ export const useYouTubeVideos = (limit = 6) => {
 
   useEffect(() => {
     fetchVideos();
-    
     const interval = setInterval(fetchVideos, 30 * 60 * 1000);
-    
     return () => clearInterval(interval);
   }, [limit]);
 
-  return { 
-    videos, 
-    loading, 
-    error, 
+  return {
+    videos,
+    loading,
+    error,
     lastUpdated,
-    refetch: fetchVideos 
+    refetch: fetchVideos
   };
 };

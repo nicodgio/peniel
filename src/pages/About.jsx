@@ -41,7 +41,7 @@ const About = () => {
               <div className="church-video">
                 <video className="church-video-element" controls playsInline>
                   <source
-                    src="/videos/about/about.MOV"
+                    src="/videos/about/about.mp4"
                     type="video/mp4"
                   />
                   Tu navegador no soporta el elemento de video.
