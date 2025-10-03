@@ -7,6 +7,8 @@ import Reuniones from './pages/Reuniones';
 import GruposPeniel from './pages/GruposPeniel';
 import Ministerios from './pages/Ministerios';
 import Donaciones from './pages/Donaciones';
+import Blog from './pages/Blog';
+import DevocionalDetalle from './pages/DevocionalDetalle';
 import Contacto from './pages/Contacto';
 import Footer from './components/Footer';
 import './css/globales/global.css';
@@ -38,7 +40,8 @@ const App = () => {
             <Route path="/grupos-peniel" element={<GruposPeniel />} />
             <Route path="/ministerios" element={<Ministerios />} />
             <Route path="/donaciones" element={<Donaciones />} />
-            <Route path="/blog" element={<div className="coming-soon">Página en construcción</div>} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<DevocionalDetalle />} />
             <Route path="/contacto" element={<Contacto />} />
           </Routes>
         </main>

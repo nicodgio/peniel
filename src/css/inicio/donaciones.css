@@ -24,15 +24,13 @@
   background: #111;
 }
 
-/* HERO SECTION */
 .donaciones-hero {
   padding: 12rem 0 8rem;
   text-align: center;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/imgs/hero-peniel.jpg');
   background-size: cover;
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   margin-top: -120px;
   padding-top: 16rem;
   position: relative;
@@ -41,18 +39,25 @@
 .donaciones-page .donaciones-hero h1 {
   font-size: 4rem !important;
   font-weight: 300 !important;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #27ae60;
   letter-spacing: -1px;
 }
 
+.donaciones-page .donaciones-hero p {
+  font-size: 1.5rem !important;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
 .hero-subtitle {
-  font-size: 1.3rem !important;
+  font-size: 1.2rem !important;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 400;
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
-  line-height: 1.6;
 }
 
 /* IMPACTO SECTION */

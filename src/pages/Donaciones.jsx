@@ -1,48 +1,47 @@
-import React, { useState } from 'react';
-import '../css/inicio/donaciones.css';
+import React, { useState } from "react";
+import "../css/inicio/donaciones.css";
 
 const Donaciones = () => {
-  const [copiado, setCopiado] = useState('');
+  const [copiado, setCopiado] = useState("");
 
   const copiarTexto = (texto, tipo) => {
     navigator.clipboard.writeText(texto);
     setCopiado(tipo);
-    setTimeout(() => setCopiado(''), 2000);
+    setTimeout(() => setCopiado(""), 2000);
   };
 
   const impactos = [
     {
       texto: "Llevando el evangelio a nuestra ciudad y las naciones",
-      icono: "fas fa-bullhorn"
+      icono: "fas fa-bullhorn",
     },
     {
       texto: "Apoyando misiones y proyectos sociales",
-      icono: "fas fa-heart"
+      icono: "fas fa-heart",
     },
     {
       texto: "Formando discípulos y líderes",
-      icono: "fas fa-users"
+      icono: "fas fa-users",
     },
     {
       texto: "Cuidando y consolidando a nuevos creyentes",
-      icono: "fas fa-hands-helping"
+      icono: "fas fa-hands-helping",
     },
     {
       texto: "Invirtiendo en la próxima generación",
-      icono: "fas fa-seedling"
-    }
+      icono: "fas fa-seedling",
+    },
   ];
 
   return (
     <div className="donaciones-page">
       <div className="donaciones-hero">
-        <div className="container-donaciones">
-          <div className="hero-content">
-            <h1>DONACIONES</h1>
-            <p className="hero-subtitle">
-              Gracias por sembrar en lo que Dios está haciendo a través de Iglesia Peniel Comunidad Cristiana
-            </p>
-          </div>
+        <div className="container-clean">
+          <h1>DONACIONES</h1>
+          <p>
+            Gracias por sembrar en lo que Dios está haciendo a través de Iglesia
+            Peniel Comunidad Cristiana
+          </p>
         </div>
       </div>
 
@@ -68,7 +67,7 @@ const Donaciones = () => {
         <div className="container-donaciones">
           <div className="metodos-section">
             <h2>Formas de donar</h2>
-            
+
             <div className="metodos-container">
               <div className="metodo-card bizum-card">
                 <div className="metodo-header">
@@ -77,19 +76,28 @@ const Donaciones = () => {
                   </div>
                   <div className="metodo-info">
                     <h3>1. Bizum</h3>
-                    <p>Ve a la opción <strong>"Donativo"</strong> en tu app de Bizum e introduce el siguiente código:</p>
+                    <p>
+                      Ve a la opción <strong>"Donativo"</strong> en tu app de
+                      Bizum e introduce el siguiente código:
+                    </p>
                   </div>
                 </div>
-                
+
                 <div className="codigo-container">
                   <div className="codigo-display">
                     <span className="codigo-numero">07145</span>
-                    <button 
-                      className={`copiar-btn ${copiado === 'bizum' ? 'copiado' : ''}`}
-                      onClick={() => copiarTexto('07145', 'bizum')}
+                    <button
+                      className={`copiar-btn ${
+                        copiado === "bizum" ? "copiado" : ""
+                      }`}
+                      onClick={() => copiarTexto("07145", "bizum")}
                     >
-                      <i className={copiado === 'bizum' ? 'fas fa-check' : 'fas fa-copy'}></i>
-                      {copiado === 'bizum' ? 'Copiado' : 'Copiar'}
+                      <i
+                        className={
+                          copiado === "bizum" ? "fas fa-check" : "fas fa-copy"
+                        }
+                      ></i>
+                      {copiado === "bizum" ? "Copiado" : "Copiar"}
                     </button>
                   </div>
                 </div>
@@ -104,23 +112,33 @@ const Donaciones = () => {
                     <h3>2. Transferencia bancaria</h3>
                   </div>
                 </div>
-                
+
                 <div className="datos-bancarios">
                   <div className="dato-bancario">
                     <span className="dato-label">Banco:</span>
                     <span className="dato-valor">CaixaBank</span>
                   </div>
-                  
+
                   <div className="dato-bancario iban-dato">
                     <span className="dato-label">IBAN:</span>
                     <div className="iban-container">
-                      <span className="dato-valor iban-numero">ES81 2100 6186 6713 0005 0591</span>
-                      <button 
-                        className={`copiar-btn ${copiado === 'iban' ? 'copiado' : ''}`}
-                        onClick={() => copiarTexto('ES81 2100 6186 6713 0005 0591', 'iban')}
+                      <span className="dato-valor iban-numero">
+                        ES81 2100 6186 6713 0005 0591
+                      </span>
+                      <button
+                        className={`copiar-btn ${
+                          copiado === "iban" ? "copiado" : ""
+                        }`}
+                        onClick={() =>
+                          copiarTexto("ES81 2100 6186 6713 0005 0591", "iban")
+                        }
                       >
-                        <i className={copiado === 'iban' ? 'fas fa-check' : 'fas fa-copy'}></i>
-                        {copiado === 'iban' ? 'Copiado' : 'Copiar'}
+                        <i
+                          className={
+                            copiado === "iban" ? "fas fa-check" : "fas fa-copy"
+                          }
+                        ></i>
+                        {copiado === "iban" ? "Copiado" : "Copiar"}
                       </button>
                     </div>
                   </div>
@@ -134,10 +152,14 @@ const Donaciones = () => {
                   </div>
                   <div className="metodo-info">
                     <h3>3. Kilo de Amor</h3>
-                    <p>Los <strong>primeros domingos de cada mes</strong>, puedes traer un alimento no perecedero destinado a apoyar familias en situaciones vulnerables.</p>
+                    <p>
+                      Los <strong>primeros domingos de cada mes</strong>, puedes
+                      traer un alimento no perecedero destinado a apoyar
+                      familias en situaciones vulnerables.
+                    </p>
                   </div>
                 </div>
-                
+
                 <div className="kilo-info">
                   <div className="kilo-display">
                     <div className="kilo-icono">
@@ -145,7 +167,9 @@ const Donaciones = () => {
                     </div>
                     <div className="kilo-texto">
                       <span className="kilo-fecha">Primer domingo del mes</span>
-                      <span className="kilo-descripcion">Alimento no perecedero</span>
+                      <span className="kilo-descripcion">
+                        Alimento no perecedero
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -163,7 +187,7 @@ const Donaciones = () => {
               <p className="mensaje-impacto">
                 Cada donación cuenta y tiene un impacto eterno.
               </p>
-              
+
               <div className="contacto-section">
                 <p>¿Preguntas sobre donaciones?</p>
                 <div className="contacto-buttons">
@@ -171,7 +195,12 @@ const Donaciones = () => {
                     <i className="fas fa-phone"></i>
                     Contactar
                   </a>
-                  <a href="https://wa.me/34609377944" target="_blank" rel="noopener noreferrer" className="btn-donaciones secondary">
+                  <a
+                    href="https://wa.me/34609377944"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-donaciones secondary"
+                  >
                     <i className="fab fa-whatsapp"></i>
                     WhatsApp
                   </a>

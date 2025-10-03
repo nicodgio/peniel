@@ -1,0 +1,551 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* Base */
+.devocional-detalle-page {
+  font-family: 'Montserrat', sans-serif;
+  background: #000;
+  color: white;
+  min-height: 100vh;
+}
+
+/* LOADING Y ERROR */
+.loading-container,
+.error-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #609be8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-container p,
+.error-container h2 {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.error-container i {
+  font-size: 4rem;
+  color: rgba(220, 53, 69, 0.5);
+}
+
+/* HERO */
+.devocional-hero {
+  height: 70vh;
+  min-height: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: -120px;
+  padding-top: 120px;
+}
+
+.devocional-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.8)
+  );
+}
+
+.devocional-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 2rem;
+}
+
+.btn-back-hero {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back-hero:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: #609be8;
+  transform: translateX(-5px);
+}
+
+.categoria-badge {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #609be8, #4a8bc2);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+
+.devocional-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.hero-meta i {
+  color: #609be8;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.devocional-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* ARTÍCULO */
+.devocional-article {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem;
+  backdrop-filter: blur(10px);
+}
+
+/* LEAD/DESCRIPCIÓN DESTACADA */
+.devocional-lead {
+  padding: 2rem;
+  background: rgba(96, 155, 232, 0.1);
+  border-left: 4px solid #609be8;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+
+.devocional-lead p {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* VERSÍCULOS DESTACADOS */
+.versiculos-destacados {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin-bottom: 3rem;
+  align-items: flex-start;
+}
+
+.versiculos-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #609be8, #4a8bc2);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.versiculos-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #609be8;
+  margin-bottom: 0.8rem;
+}
+
+.versiculos-content p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CUERPO DEL DEVOCIONAL */
+.devocional-body {
+  margin-bottom: 4rem;
+}
+
+.devocional-body p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.8rem;
+  text-align: justify;
+}
+
+/* FOOTER DEL DEVOCIONAL */
+.devocional-footer {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Card de compartir en sidebar */
+.sidebar-card-compartir p {
+  margin-bottom: 1rem;
+}
+
+.btn-compartir-sidebar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.5rem;
+  background: #25d366;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.btn-compartir-sidebar:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-volver,
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: transparent;
+  border: 2px solid rgba(96, 155, 232, 0.3);
+  border-radius: 50px;
+  color: #609be8;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-volver:hover,
+.btn-back:hover {
+  background: #609be8;
+  color: white;
+  border-color: #609be8;
+  transform: translateX(-5px);
+}
+
+/* SIDEBAR */
+.devocional-sidebar {
+  position: sticky;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.sidebar-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #609be8, #4a8bc2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  margin: 0 auto 1.5rem;
+}
+
+.sidebar-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+}
+
+.sidebar-card p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.autor-nombre {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: white !important;
+}
+
+/* SIDEBAR CTA */
+.sidebar-cta {
+  background: linear-gradient(135deg, rgba(96, 155, 232, 0.15), rgba(74, 139, 194, 0.15));
+  border: 1px solid rgba(96, 155, 232, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.sidebar-cta i {
+  font-size: 2.5rem;
+  color: #609be8;
+  margin-bottom: 1rem;
+}
+
+.sidebar-cta h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.sidebar-cta p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #609be8, #4a8bc2);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(96, 155, 232, 0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .devocional-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .devocional-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .devocional-hero {
+    height: 60vh;
+    min-height: 400px;
+    margin-top: -100px;
+    padding-top: 100px;
+  }
+
+  .btn-back-hero {
+    top: 1.5rem;
+    left: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .devocional-hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero-meta {
+    gap: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .devocional-container {
+    padding: 3rem 1.5rem;
+  }
+
+  .devocional-article {
+    padding: 2rem;
+  }
+
+  .devocional-lead {
+    padding: 1.5rem;
+  }
+
+  .devocional-lead p {
+    font-size: 1.1rem;
+  }
+
+  .versiculos-destacados {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .versiculos-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+
+  .devocional-body p {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .share-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .devocional-sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .devocional-hero {
+    height: 50vh;
+    min-height: 350px;
+  }
+
+  .btn-back-hero {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .categoria-badge {
+    padding: 0.4rem 1.2rem;
+    font-size: 0.75rem;
+  }
+
+  .devocional-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-meta {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .devocional-container {
+    padding: 2rem 1rem;
+  }
+
+  .devocional-article {
+    padding: 1.5rem;
+  }
+
+  .devocional-lead {
+    padding: 1.2rem;
+  }
+
+  .devocional-lead p {
+    font-size: 1rem;
+  }
+
+  .versiculos-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  .versiculos-content h3 {
+    font-size: 1rem;
+  }
+
+  .devocional-body p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .share-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
