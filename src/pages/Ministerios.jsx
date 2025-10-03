@@ -72,7 +72,7 @@ const Ministerios = () => {
       icono: "fas fa-fire",
       color: "#e67e22",
       imagen: "/imgs/ministerios/ados.jpg",
-      videoUrl: "/videos/ministerios/penielng.mov", // Agrega la URL de tu video
+      videoUrl: "/videos/ministerios/penielng.mp4", // Agrega la URL de tu video
     },
     {
       id: "peniel-kids",
@@ -383,7 +383,7 @@ const Ministerios = () => {
             </div>
             <div className="intro-video">
               <video className="intro-video-element" controls playsInline>
-                <source src="/videos/ministerios/ministerios.mov" type="video/quicktime" />
+                <source src="/videos/ministerios/ministerios.mp4" type="video/mp4" />
                 Tu navegador no soporta el elemento de video.
               </video>
             </div>
