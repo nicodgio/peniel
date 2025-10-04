@@ -7,7 +7,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 require_once '../admin/conn/conn.php';
 
 try {
-    $stmt = $pdo->query("SELECT id, dias, mes, diaSemana, titulo, descripcion, hora, icono, color FROM eventos ORDER BY id DESC");
+    $stmt = $pdo->query("SELECT id, dias, mes, diaSemana, titulo, descripcion, hora, icono, color FROM eventos ORDER BY id ASC");
     $eventos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     $eventosActivos = [];

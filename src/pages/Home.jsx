@@ -10,7 +10,9 @@ const Home = () => {
     nombre: "",
     telefono: "",
     cantidad: 1,
+    forma_pago: "efectivo",
   });
+  const [comprobanteFile, setComprobanteFile] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
   const [formMessage, setFormMessage] = useState("");
 
@@ -52,14 +54,23 @@ const Home = () => {
     setFormMessage("");
 
     try {
+      // Crear FormData para enviar archivo
+      const formData = new FormData();
+      formData.append('nombre', menuForm.nombre);
+      formData.append('telefono', menuForm.telefono);
+      formData.append('cantidad', menuForm.cantidad);
+      formData.append('forma_pago', menuForm.forma_pago);
+      
+      // Agregar imagen si existe
+      if (comprobanteFile) {
+        formData.append('comprobante', comprobanteFile);
+      }
+
       const response = await fetch(
         "https://orangered-guanaco-582072.hostingersite.com/api/menu-registro.php",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(menuForm),
+          body: formData, // Enviar FormData en lugar de JSON
         }
       );
 
@@ -67,7 +78,8 @@ const Home = () => {
 
       if (data.success) {
         setFormMessage("¡Registro exitoso! Nos vemos el domingo.");
-        setMenuForm({ nombre: "", telefono: "", cantidad: 1 });
+        setMenuForm({ nombre: "", telefono: "", cantidad: 1, forma_pago: "efectivo" });
+        setComprobanteFile(null);
         setTimeout(() => {
           setShowMenuModal(false);
           setFormMessage("");
@@ -89,6 +101,24 @@ const Home = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validar que sea una imagen
+      if (!file.type.startsWith('image/')) {
+        setFormMessage("Por favor, selecciona un archivo de imagen válido");
+        return;
+      }
+      // Validar tamaño (máximo 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setFormMessage("El archivo no debe superar los 5MB");
+        return;
+      }
+      setComprobanteFile(file);
+      setFormMessage("");
+    }
   };
 
   const scrollCarousel = (direction) => {
@@ -164,6 +194,12 @@ const Home = () => {
       description:
         "En Peniel, creemos que la alabanza y la adoración no son simplemente un momento del servicio, sino una expresión viva y poderosa de nuestra relación con Dios.",
     },
+        {
+      meta: ["DOMINGOS", "SERVICIO"],
+      title: "Ministerio de sordos",
+      description:
+        "En nuestra iglesia creemos que el amor de Dios trasciende todas las barreras, también las del lenguaje. Por eso el Ministerio de Sordos es un espacio dedicado a aprender y compartir la Lengua de Signos Española (LSE).",
+    }
   ];
 
   return (
@@ -580,7 +616,7 @@ const Home = () => {
                 />
               </div>
 
-              <div style={{ marginBottom: "2rem" }}>
+              <div style={{ marginBottom: "1rem" }}>
                 <label
                   style={{
                     display: "block",
@@ -605,6 +641,95 @@ const Home = () => {
                   ))}
                 </select>
               </div>
+
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontWeight: "600",
+                    fontFamily: "Montserrat, sans-serif",
+                  }}
+                >
+                  Forma de pago *
+                </label>
+                <select
+                  name="forma_pago"
+                  value={menuForm.forma_pago}
+                  onChange={handleInputChange}
+                  required
+                  className="menu-form-select"
+                >
+                  <option value="efectivo">Efectivo</option>
+                  <option value="bizum">Bizum</option>
+                </select>
+              </div>
+
+              {menuForm.forma_pago === "bizum" && (
+                <div
+                  style={{
+                    marginBottom: "1rem",
+                    padding: "1rem",
+                    background: "rgba(96, 155, 232, 0.1)",
+                    border: "1px solid rgba(96, 155, 232, 0.3)",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <p
+                    style={{
+                      margin: 0,
+                      fontFamily: "Montserrat, sans-serif",
+                      fontSize: "0.9rem",
+                      textAlign: "center",
+                      color: "#609be8",
+                      fontWeight: "600",
+                    }}
+                  >
+                    <i className="fas fa-info-circle"></i> Bizum opción donativo: <strong>07145</strong>
+                  </p>
+                </div>
+              )}
+
+              {menuForm.forma_pago === "bizum" && (
+                <div style={{ marginBottom: "1rem" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: "0.5rem",
+                      fontWeight: "600",
+                      fontFamily: "Montserrat, sans-serif",
+                    }}
+                  >
+                    Comprobante de pago
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{
+                      width: "100%",
+                      padding: "0.8rem",
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                      borderRadius: "10px",
+                      color: "white",
+                      fontFamily: "Montserrat, sans-serif",
+                    }}
+                  />
+                  {comprobanteFile && (
+                    <p
+                      style={{
+                        marginTop: "0.5rem",
+                        fontSize: "0.85rem",
+                        color: "#4ade80",
+                        fontFamily: "Montserrat, sans-serif",
+                      }}
+                    >
+                      <i className="fas fa-check-circle"></i> Archivo seleccionado: {comprobanteFile.name}
+                    </p>
+                  )}
+                </div>
+              )}
 
               <button
                 type="submit"

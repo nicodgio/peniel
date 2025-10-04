@@ -329,6 +329,42 @@ const Ministerios = () => {
       color: "#d946ef",
       imagen: "/imgs/ministerios/adoracion.jpg",
     },
+    {
+      id: "ministerio-sordos",
+      nombre: "Ministerio de Sordos",
+      categoria: "Inclusión",
+      frecuencia: "Continuo",
+      horario: "Traducción en reuniones + Talleres regulares",
+      lema: "El amor de Dios trasciende todas las barreras",
+      descripcion:
+        "Espacio dedicado a aprender y compartir la Lengua de Signos Española para que cada persona pueda conocer y vivir el mensaje de Jesús.",
+      descripcionCompleta:
+        "En nuestra iglesia creemos que el amor de Dios trasciende todas las barreras, también las del lenguaje. Por eso el Ministerio de Sordos es un espacio dedicado a aprender y compartir la Lengua de Signos Española (LSE), para que cada persona pueda conocer y vivir el mensaje de Jesús. A través de cursos, talleres y la práctica constante, buscamos que nuestra comunidad esté preparada para comunicar el evangelio con nuestras manos, demostrando que en Cristo todos somos parte de una misma familia. Nuestro anhelo es que cada persona sorda pueda sentirse acogida, valorada y amada, y que juntos adoremos a Dios en un mismo Espíritu, con voz y con manos.",
+      lider: "Por definir",
+      telefono: "+34 609 377 944",
+      actividades: [
+        "Facilitamos la traducción en lengua de señas durante las reuniones generales",
+        "Compartimos el amor de Jesús de forma clara y cercana con la comunidad sorda",
+        "Promovemos una cultura de inclusión, honra y unidad en la iglesia",
+        "Preparamos y entrenamos intérpretes comprometidos con servir y amar",
+        "Realizamos talleres formativos regularmente para crecer en habilidades de interpretación y comunicación",
+        "Colaboramos con otros ministerios para garantizar accesibilidad integral en eventos, materiales y espacios",
+      ],
+      requisitos: [
+        "Ser miembro activo y comprometido con la iglesia",
+        "Estar bautizado",
+        "Haber hecho el curso de integración",
+        "Asistir a un grupo Peniel",
+        "Tener conocimientos en lengua de señas o disposición para aprender",
+        "Tener un corazón sensible, paciente y dispuesto a servir con amor",
+        "Disponibilidad para talleres y reuniones",
+      ],
+      impacto:
+        "Que cada persona sorda pueda sentirse acogida, valorada y amada, adorando a Dios en un mismo Espíritu",
+      icono: "fas fa-hands",
+      color: "#16a085",
+      imagen: "/imgs/ministerios/ministerio-sordos.png",
+    },
   ];
 
   const categorias = [
@@ -383,7 +419,10 @@ const Ministerios = () => {
             </div>
             <div className="intro-video">
               <video className="intro-video-element" controls playsInline>
-                <source src="/videos/ministerios/ministerios.mp4" type="video/mp4" />
+                <source
+                  src="/videos/ministerios/ministerios.mp4"
+                  type="video/mp4"
+                />
                 Tu navegador no soporta el elemento de video.
               </video>
             </div>
@@ -486,11 +525,10 @@ const Ministerios = () => {
       <section className="section-ministerios bg-dark">
         <div className="container-ministerios">
           <div className="cta-ministerios">
-            <h2>¿Listo para usar tus dones?</h2>
+            <h2>Fuiste creado con propósito</h2>
             <p>
-              No importa cuáles sean tus talentos, experiencia o disponibilidad,
-              hay un lugar para ti en el Reino de Dios. Da el paso y descubre
-              cómo Dios puede usar tu vida para transformar otras vidas.
+              Cuando pones tus habilidades en las manos de Jesús, Él las
+              convierte en instrumentos de esperanza y salvación.
             </p>
             <div className="cta-buttons">
               <a href="/contacto" className="btn-cta primary">
