@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useYouTubeVideos } from "../hooks/useYoutubeVideos";
-import "../css/inicio/sections.css";
-import "../css/inicio/ministerios-predicas.css";
+import "../css/inicio/home.css";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
@@ -13,6 +12,7 @@ const Home = () => {
   });
   const [formLoading, setFormLoading] = useState(false);
   const [formMessage, setFormMessage] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const {
     videos: predicas,
@@ -20,16 +20,22 @@ const Home = () => {
     error: videosError,
   } = useYouTubeVideos();
 
-  // Función para decodificar entidades HTML
   const decodeHtmlEntities = (text) => {
     if (!text) return text;
-    const textArea = document.createElement('textarea');
+    const textArea = document.createElement("textarea");
     textArea.innerHTML = text;
     return textArea.value;
   };
 
   useEffect(() => {
     fetchEventos();
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const fetchEventos = async () => {
@@ -93,7 +99,7 @@ const Home = () => {
 
   const scrollCarousel = (direction) => {
     const carousel = document.getElementById("ministeriosCarousel");
-    const cardWidth = 420;
+    const cardWidth = isMobile ? 320 : 450;
     carousel.scrollBy({
       left: direction * cardWidth,
       behavior: "smooth",
@@ -102,7 +108,7 @@ const Home = () => {
 
   const scrollPredicasCarousel = (direction) => {
     const carousel = document.getElementById("predicasCarousel");
-    const cardWidth = 320;
+    const cardWidth = isMobile ? window.innerWidth - 40 : 320;
     carousel.scrollBy({
       left: direction * cardWidth,
       behavior: "smooth",
@@ -168,152 +174,24 @@ const Home = () => {
 
   return (
     <>
-      <section
-        className="hero"
-        id="inicio"
-        style={{
-          height: "100vh",
-          width: "100%",
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-          marginTop: "-120px",
-        }}
-      >
-        <div
-          className="hero-bg"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/imgs/hero.jpg')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            zIndex: -1,
-          }}
-        ></div>
+      <section className="hero" id="inicio">
+        <div className="hero-bg"></div>
 
-        <div
-          style={{
-            position: "relative",
-            zIndex: 10,
-            textAlign: "center",
-            color: "white",
-            maxWidth: "1200px",
-            width: "100%",
-            padding: "0 2rem",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "clamp(3rem, 8vw, 7rem)",
-              fontWeight: 900,
-              lineHeight: 1,
-              margin: "0 0 1.5rem 0",
-              letterSpacing: "-2px",
-              fontFamily: "Montserrat, sans-serif",
-              textTransform: "uppercase",
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-              textAlign: "center",
-              width: "100%",
-            }}
-          >
-            PENIEL MADRID
-          </h1>
+        <div className="hero-content">
+          <h1>PENIEL MADRID</h1>
+          <p className="hero-subtitle">Un encuentro con Dios lo cambia todo</p>
 
-          <p
-            style={{
-              fontSize: "clamp(1.2rem, 3vw, 2rem)",
-              fontWeight: 300,
-              margin: "0 0 3rem 0",
-              opacity: 0.95,
-              fontFamily: "Montserrat, sans-serif",
-              textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
-              lineHeight: 1.3,
-              textAlign: "center",
-              width: "100%",
-            }}
-          >
-            Un encuentro con Dios lo cambia todo
-          </p>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "2rem",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
-              width: "100%",
-            }}
-          >
-            <a
-              href="/reuniones"
-              className="btn btn-primary"
-              style={{
-                padding: "1rem 2.5rem",
-                border: "none",
-                borderRadius: "50px",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                cursor: "pointer",
-                transition: "all 0.3s",
-                textDecoration: "none",
-                display: "inline-block",
-                fontFamily: "Montserrat, sans-serif",
-                fontSize: "0.9rem",
-                background: "rgba(255, 255, 255, 0.9)",
-                color: "black",
-                border: "2px solid rgba(255, 255, 255, 0.9)",
-              }}
-            >
+          <div className="hero-cta">
+            <a href="/reuniones" className="btn btn-primary">
               VISÍTANOS
             </a>
-            <a
-              href="/contacto"
-              className="btn btn-secondary"
-              style={{
-                padding: "1rem 2.5rem",
-                borderRadius: "50px",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                cursor: "pointer",
-                transition: "all 0.3s",
-                textDecoration: "none",
-                display: "inline-block",
-                fontFamily: "Montserrat, sans-serif",
-                fontSize: "0.9rem",
-                background: "transparent",
-                color: "white",
-                border: "2px solid rgba(255, 255, 255, 0.8)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
+            <a href="/contacto" className="btn btn-secondary">
               HÁBLANOS
             </a>
           </div>
         </div>
 
-        <div
-          className="hero-info"
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: "4rem",
-            right: "4rem",
-            zIndex: 10,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div className="hero-info">
           <div className="hero-info-item">
             REUNIONES GENERALES
             <br />
@@ -393,13 +271,7 @@ const Home = () => {
               </div>
             ))
           ) : (
-            <div
-              style={{
-                gridColumn: "1 / -1",
-                textAlign: "center",
-                padding: "2rem",
-              }}
-            >
+            <div className="no-events">
               <p>No hay eventos programados en este momento.</p>
             </div>
           )}
@@ -485,118 +357,51 @@ const Home = () => {
               ×
             </button>
 
-            <h3
-              style={{
-                marginBottom: "1.5rem",
-                fontFamily: "Montserrat, sans-serif",
-                textAlign: "center",
-                fontSize: "1.5rem",
-                fontWeight: "700",
-              }}
-            >
-              Registro Menú Dominical
-            </h3>
+            <h3 className="modal-title">Registro Menú Dominical</h3>
 
             {formMessage && (
               <div
-                style={{
-                  padding: "1rem",
-                  borderRadius: "10px",
-                  marginBottom: "1rem",
-                  textAlign: "center",
-                  backgroundColor: formMessage.includes("exitoso")
-                    ? "rgba(74, 222, 128, 0.2)"
-                    : "rgba(248, 113, 113, 0.2)",
-                  color: formMessage.includes("exitoso")
-                    ? "#4ade80"
-                    : "#f87171",
-                  border: `1px solid ${
-                    formMessage.includes("exitoso")
-                      ? "rgba(74, 222, 128, 0.3)"
-                      : "rgba(248, 113, 113, 0.3)"
-                  }`,
-                }}
+                className={`form-message ${
+                  formMessage.includes("exitoso") ? "success" : "error"
+                }`}
               >
                 {formMessage}
               </div>
             )}
 
             <form onSubmit={handleMenuSubmit}>
-              <div style={{ marginBottom: "1rem" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "0.5rem",
-                    fontWeight: "600",
-                    fontFamily: "Montserrat, sans-serif",
-                  }}
-                >
-                  Nombre completo *
-                </label>
+              <div className="form-group">
+                <label>Nombre completo *</label>
                 <input
                   type="text"
                   name="nombre"
                   value={menuForm.nombre}
                   onChange={handleInputChange}
                   required
-                  style={{
-                    width: "100%",
-                    padding: "0.8rem",
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    borderRadius: "10px",
-                    color: "white",
-                    fontFamily: "Montserrat, sans-serif",
-                  }}
+                  className="form-input"
                 />
               </div>
 
-              <div style={{ marginBottom: "1rem" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "0.5rem",
-                    fontWeight: "600",
-                    fontFamily: "Montserrat, sans-serif",
-                  }}
-                >
-                  Teléfono *
-                </label>
+              <div className="form-group">
+                <label>Teléfono *</label>
                 <input
                   type="tel"
                   name="telefono"
                   value={menuForm.telefono}
                   onChange={handleInputChange}
                   required
-                  style={{
-                    width: "100%",
-                    padding: "0.8rem",
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    borderRadius: "10px",
-                    color: "white",
-                    fontFamily: "Montserrat, sans-serif",
-                  }}
+                  className="form-input"
                 />
               </div>
 
-              <div style={{ marginBottom: "2rem" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "0.5rem",
-                    fontWeight: "600",
-                    fontFamily: "Montserrat, sans-serif",
-                  }}
-                >
-                  Cantidad de personas *
-                </label>
+              <div className="form-group">
+                <label>Cantidad de personas *</label>
                 <select
                   name="cantidad"
                   value={menuForm.cantidad}
                   onChange={handleInputChange}
                   required
-                  className="menu-form-select"
+                  className="form-select"
                 >
                   {[...Array(10)].map((_, i) => (
                     <option key={i + 1} value={i + 1}>
@@ -609,20 +414,7 @@ const Home = () => {
               <button
                 type="submit"
                 disabled={formLoading}
-                style={{
-                  width: "100%",
-                  padding: "1rem",
-                  backgroundColor: "#609be8",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "15px",
-                  fontWeight: "600",
-                  fontFamily: "Montserrat, sans-serif",
-                  textTransform: "uppercase",
-                  letterSpacing: "1px",
-                  cursor: formLoading ? "not-allowed" : "pointer",
-                  opacity: formLoading ? 0.7 : 1,
-                }}
+                className="btn btn-primary btn-block"
               >
                 {formLoading ? "REGISTRANDO..." : "CONFIRMAR REGISTRO"}
               </button>
@@ -640,119 +432,112 @@ const Home = () => {
           </p>
         </div>
 
-        {/* Grid de prédicas - Solo visible en desktop */}
-        <div className="predicas-grid" style={{ display: window.innerWidth > 768 ? 'grid' : 'none' }}>
-          {videosLoading ? (
-            <div
-              style={{
-                gridColumn: "1 / -1",
-                textAlign: "center",
-                padding: "2rem",
-              }}
-            >
-              <p>Cargando videos...</p>
+        {isMobile ? (
+          <>
+            <div className="predicas-carousel" id="predicasCarousel">
+              {videosLoading ? (
+                <div className="loading-message">
+                  <p>Cargando videos...</p>
+                </div>
+              ) : videosError ? (
+                <div className="error-message">
+                  <p>Error cargando videos: {videosError}</p>
+                </div>
+              ) : (
+                predicas.map((predica, index) => (
+                  <div
+                    key={predica.id || index}
+                    className="predica-card"
+                    style={{
+                      backgroundImage: `url('${
+                        predica.thumbnail || predica.image
+                      }')`,
+                    }}
+                    onClick={() => window.open(predica.url, "_blank")}
+                  >
+                    <div className="predica-overlay">
+                      <div className="play-button">
+                        <i className="fas fa-play"></i>
+                      </div>
+                    </div>
+                    <div className="predica-info">
+                      <h3 className="predica-title">
+                        {decodeHtmlEntities(predica.title)}
+                      </h3>
+                      <p className="predica-meta">
+                        {predica.channelTitle
+                          ? decodeHtmlEntities(predica.channelTitle)
+                          : predica.pastor}
+                        {predica.timeAgo && ` • ${predica.timeAgo}`}
+                        {predica.date && ` • ${predica.date}`}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
-          ) : videosError ? (
-            <div
-              style={{
-                gridColumn: "1 / -1",
-                textAlign: "center",
-                padding: "2rem",
-              }}
-            >
-              <p>Error cargando videos: {videosError}</p>
-            </div>
-          ) : (
-            predicas.map((predica, index) => (
-              <div
-                key={predica.id || index}
-                className="predica-card"
-                style={{
-                  backgroundImage: `url('${
-                    predica.thumbnail || predica.image
-                  }')`,
-                }}
-                onClick={() => window.open(predica.url, "_blank")}
+
+            <div className="predicas-carousel-controls">
+              <button
+                className="predicas-carousel-btn"
+                onClick={() => scrollPredicasCarousel(-1)}
               >
-                <div className="predica-overlay">
-                  <div className="play-button">
-                    <i className="fas fa-play"></i>
+                <i className="fas fa-chevron-left"></i>
+              </button>
+              <button
+                className="predicas-carousel-btn"
+                onClick={() => scrollPredicasCarousel(1)}
+              >
+                <i className="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="predicas-grid">
+            {videosLoading ? (
+              <div className="loading-message">
+                <p>Cargando videos...</p>
+              </div>
+            ) : videosError ? (
+              <div className="error-message">
+                <p>Error cargando videos: {videosError}</p>
+              </div>
+            ) : (
+              predicas.map((predica, index) => (
+                <div
+                  key={predica.id || index}
+                  className="predica-card"
+                  style={{
+                    backgroundImage: `url('${
+                      predica.thumbnail || predica.image
+                    }')`,
+                  }}
+                  onClick={() => window.open(predica.url, "_blank")}
+                >
+                  <div className="predica-overlay">
+                    <div className="play-button">
+                      <i className="fas fa-play"></i>
+                    </div>
+                  </div>
+                  <div className="predica-info">
+                    <h3 className="predica-title">
+                      {decodeHtmlEntities(predica.title)}
+                    </h3>
+                    <p className="predica-meta">
+                      {predica.channelTitle
+                        ? decodeHtmlEntities(predica.channelTitle)
+                        : predica.pastor}
+                      {predica.timeAgo && ` • ${predica.timeAgo}`}
+                      {predica.date && ` • ${predica.date}`}
+                    </p>
                   </div>
                 </div>
-                <div className="predica-info">
-                  <h3 className="predica-title">{decodeHtmlEntities(predica.title)}</h3>
-                  <p className="predica-meta">
-                    {predica.channelTitle ? decodeHtmlEntities(predica.channelTitle) : predica.pastor}
-                    {predica.timeAgo && ` • ${predica.timeAgo}`}
-                    {predica.date && ` • ${predica.date}`}
-                  </p>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
+              ))
+            )}
+          </div>
+        )}
 
-        {/* Carrusel de prédicas - Solo visible en mobile */}
-        <div className="predicas-carousel" id="predicasCarousel" style={{ display: window.innerWidth <= 768 ? 'flex' : 'none' }}>
-          {videosLoading ? (
-            <div
-              style={{ textAlign: "center", padding: "2rem", width: "100%" }}
-            >
-              <p>Cargando videos...</p>
-            </div>
-          ) : videosError ? (
-            <div
-              style={{ textAlign: "center", padding: "2rem", width: "100%" }}
-            >
-              <p>Error cargando videos: {videosError}</p>
-            </div>
-          ) : (
-            predicas.map((predica, index) => (
-              <div
-                key={predica.id || index}
-                className="predica-card"
-                style={{
-                  backgroundImage: `url('${
-                    predica.thumbnail || predica.image
-                  }')`,
-                }}
-                onClick={() => window.open(predica.url, "_blank")}
-              >
-                <div className="predica-overlay">
-                  <div className="play-button">
-                    <i className="fas fa-play"></i>
-                  </div>
-                </div>
-                <div className="predica-info">
-                  <h3 className="predica-title">{decodeHtmlEntities(predica.title)}</h3>
-                  <p className="predica-meta">
-                    {predica.channelTitle ? decodeHtmlEntities(predica.channelTitle) : predica.pastor}
-                    {predica.timeAgo && ` • ${predica.timeAgo}`}
-                    {predica.date && ` • ${predica.date}`}
-                  </p>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* Controles del carrusel - Solo visibles en mobile */}
-        <div className="predicas-carousel-controls" style={{ display: window.innerWidth <= 768 ? 'flex' : 'none' }}>
-          <button
-            className="predicas-carousel-btn"
-            onClick={() => scrollPredicasCarousel(-1)}
-          >
-            <i className="fas fa-chevron-left"></i>
-          </button>
-          <button
-            className="predicas-carousel-btn"
-            onClick={() => scrollPredicasCarousel(1)}
-          >
-            <i className="fas fa-chevron-right"></i>
-          </button>
-        </div>
-
-        <div style={{ textAlign: "center", marginTop: "3rem" }}>
+        <div className="section-footer">
           <a href="/predicas" className="btn btn-primary">
             VER MÁS PRÉDICAS
           </a>

@@ -104,9 +104,16 @@
   font-weight: 600;
 }
 
-.highlight {
-  color: #609be8;
-  font-weight: 600;
+.highlight-centered {
+  color: #609be8 !important;
+  font-weight: 600 !important;
+  text-align: center;
+  font-size: 1.3rem !important;
+  padding: 1rem 2rem;
+  background: rgba(96, 155, 232, 0.1);
+  border-radius: 15px;
+  border: 1px solid rgba(96, 155, 232, 0.3);
+  margin: 2rem 0 !important;
 }
 
 .intro-image {
@@ -166,11 +173,24 @@
   margin-bottom: 4rem;
 }
 
-.areas-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+/* CARRUSEL DE ÁREAS */
+.areas-carousel-wrapper {
+  position: relative;
   margin-bottom: 4rem;
+}
+
+.areas-carousel {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem 0;
+}
+
+.areas-carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .area-card {
@@ -181,6 +201,8 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  flex: 0 0 calc(25% - 1.5rem);
+  min-width: 220px;
 }
 
 .area-card:hover {
@@ -206,6 +228,40 @@
   font-size: 1.1rem !important;
   margin-bottom: 0.5rem;
   color: white;
+}
+
+.areas-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.areas-carousel-btn:hover {
+  background: #609be8;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 25px rgba(96, 155, 232, 0.3);
+}
+
+.areas-carousel-btn.prev {
+  left: -1.5rem;
+}
+
+.areas-carousel-btn.next {
+  right: -1.5rem;
 }
 
 /* OBJETIVO HIGHLIGHT */
@@ -279,6 +335,7 @@
   justify-content: center;
   font-size: 1.5rem;
   color: white;
+  flex-shrink: 0;
 }
 
 .grupos-page .caracteristica-header h3 {
@@ -557,7 +614,6 @@
   transition: width 0.3s ease;
 }
 
-/* Diferentes estados de progreso */
 .step-indicator[data-step="1"]::after {
   width: 0%;
 }
@@ -862,8 +918,51 @@
   box-shadow: none;
 }
 
-/* RESPONSIVE DESIGN PARA MODAL */
+/* DESKTOP - Areas en grid normal */
+@media (min-width: 1025px) {
+  .areas-carousel-wrapper {
+    position: static;
+  }
+  
+  .areas-carousel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    overflow: visible;
+  }
+  
+  .area-card {
+    flex: none;
+    min-width: unset;
+  }
+  
+  .areas-carousel-btn {
+    display: none;
+  }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+  .caracteristicas-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .areas-carousel-btn.prev {
+    left: -0.5rem;
+  }
+  
+  .areas-carousel-btn.next {
+    right: -0.5rem;
+  }
+}
+
 @media (max-width: 1024px) {
+  .intro-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
   .modal-modern {
     max-width: 800px;
   }
@@ -888,6 +987,105 @@
 }
 
 @media (max-width: 768px) {
+  .container-clean {
+    padding: 0 1.5rem;
+  }
+  
+  .section-clean {
+    padding: 4rem 0;
+  }
+  
+  .grupos-hero {
+    padding: 8rem 0 4rem;
+    padding-top: 12rem;
+  }
+  
+  .grupos-page .grupos-hero h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .grupos-page .grupos-hero p {
+    font-size: 1.2rem !important;
+  }
+  
+  .grupos-page h2, 
+  .grupos-page .section-title-centered {
+    font-size: 2rem !important;
+  }
+  
+  .highlight-centered {
+    font-size: 1.1rem !important;
+    padding: 1rem 1.5rem;
+  }
+  
+  /* Carrusel responsive */
+  .area-card {
+    flex: 0 0 calc(50% - 1rem);
+    min-width: 150px;
+  }
+  
+  .areas-carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .areas-carousel-btn.prev {
+    left: 0;
+  }
+  
+  .areas-carousel-btn.next {
+    right: 0;
+  }
+  
+  /* Características responsive mejorado */
+  .caracteristica-block {
+    padding: 2rem;
+  }
+  
+  .caracteristica-header {
+    flex-direction: row;
+    text-align: left;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .caracteristica-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  
+  .grupos-page .caracteristica-header h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  .caracteristica-item {
+    flex-direction: row;
+    text-align: left;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .item-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+  
+  .buttons-clean {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-clean {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+  
+  /* Modal responsive */
   .modal-overlay {
     padding: 1rem;
   }
@@ -929,7 +1127,8 @@
     margin-bottom: 2rem;
   }
   
-  .step-indicator::before {
+  .step-indicator::before,
+  .step-indicator::after {
     display: none;
   }
   
@@ -971,6 +1170,78 @@
 }
 
 @media (max-width: 480px) {
+  .container-clean {
+    padding: 0 1rem;
+  }
+  
+  .grupos-page .grupos-hero h1 {
+    font-size: 2rem !important;
+  }
+  
+  .grupos-page .grupos-hero p {
+    font-size: 1rem !important;
+  }
+  
+  .grupos-page h2, 
+  .grupos-page .section-title-centered {
+    font-size: 1.75rem !important;
+  }
+  
+  .highlight-centered {
+    font-size: 1rem !important;
+    padding: 0.8rem 1rem;
+  }
+  
+  /* Carrusel en móviles pequeños */
+  .area-card {
+    flex: 0 0 calc(100% - 2rem);
+    min-width: unset;
+  }
+  
+  .area-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .grupos-page .area-card h3 {
+    font-size: 1rem !important;
+  }
+  
+  /* Características en móviles pequeños */
+  .caracteristica-block {
+    padding: 1.5rem;
+  }
+  
+  .caracteristica-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+  
+  .grupos-page .caracteristica-header h3 {
+    font-size: 1.3rem !important;
+  }
+  
+  .item-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  
+  .item-content h4 {
+    font-size: 1rem !important;
+  }
+  
+  .item-content p {
+    font-size: 0.9rem;
+  }
+  
+  .objetivo-highlight {
+    padding: 2rem;
+  }
+  
+  /* Modal en móviles pequeños */
   .modal-modern {
     border-radius: 16px;
     margin: 0.5rem;
@@ -1018,124 +1289,5 @@
   .privacy-compact {
     padding: 0.8rem;
     font-size: 0.75rem;
-  }
-}
-
-/* RESPONSIVE DESIGN GENERAL */
-@media (max-width: 1200px) {
-  .areas-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .caracteristicas-layout {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .intro-content {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .areas-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .container-clean {
-    padding: 0 1.5rem;
-  }
-  
-  .section-clean {
-    padding: 4rem 0;
-  }
-  
-  .grupos-hero {
-    padding: 8rem 0 4rem;
-    padding-top: 12rem;
-  }
-  
-  .grupos-page .grupos-hero h1 {
-    font-size: 2.5rem !important;
-  }
-  
-  .grupos-page .grupos-hero p {
-    font-size: 1.2rem !important;
-  }
-  
-  .grupos-page h2, 
-  .grupos-page .section-title-centered {
-    font-size: 2rem !important;
-  }
-  
-  .areas-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .caracteristica-block {
-    padding: 2rem;
-  }
-  
-  .caracteristica-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
-  
-  .grupos-page .caracteristica-header h3 {
-    font-size: 1.5rem !important;
-  }
-  
-  .caracteristica-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-  
-  .buttons-clean {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .btn-clean {
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .container-clean {
-    padding: 0 1rem;
-  }
-  
-  .grupos-page .grupos-hero h1 {
-    font-size: 2rem !important;
-  }
-  
-  .grupos-page .grupos-hero p {
-    font-size: 1rem !important;
-  }
-  
-  .grupos-page h2, 
-  .grupos-page .section-title-centered {
-    font-size: 1.75rem !important;
-  }
-  
-  .area-card {
-    padding: 2rem 1.5rem;
-  }
-  
-  .caracteristica-block {
-    padding: 1.5rem;
-  }
-  
-  .objetivo-highlight {
-    padding: 2rem;
   }
 }

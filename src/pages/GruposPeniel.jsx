@@ -1,70 +1,78 @@
-import React, { useState } from 'react';
-import '../css/inicio/grupos.css';
+import React, { useState, useEffect } from "react";
+import "../css/inicio/grupos.css";
 
 const GruposPeniel = () => {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
-    nombre: '',
-    telefono: '',
-    fechaNacimiento: '',
-    sexo: '',
-    direccion: '',
-    cp: '',
-    invitadoDe: '',
-    primeraVez: '',
-    conocerMas: '',
-    pedidoOracion: ''
+    nombre: "",
+    telefono: "",
+    fechaNacimiento: "",
+    sexo: "",
+    direccion: "",
+    cp: "",
+    invitadoDe: "",
+    primeraVez: "",
+    conocerMas: "",
+    pedidoOracion: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const validateStep1 = () => {
-    return formData.nombre.trim() !== '' && 
-           formData.telefono.trim() !== '' && 
-           formData.fechaNacimiento.trim() !== '' && 
-           formData.sexo !== '';
+    return (
+      formData.nombre.trim() !== "" &&
+      formData.telefono.trim() !== "" &&
+      formData.fechaNacimiento.trim() !== "" &&
+      formData.sexo !== ""
+    );
   };
 
   const validateStep2 = () => {
-    return formData.direccion.trim() !== '' && 
-           formData.cp.trim() !== '' && 
-           formData.primeraVez !== '';
+    return (
+      formData.direccion.trim() !== "" &&
+      formData.cp.trim() !== "" &&
+      formData.primeraVez !== ""
+    );
   };
 
   const validateStep3 = () => {
-    return formData.conocerMas !== '';
+    return formData.conocerMas !== "";
   };
 
   const nextStep = () => {
     let canAdvance = false;
-    
+
     if (currentStep === 1) {
       canAdvance = validateStep1();
       if (!canAdvance) {
-        setErrorMessage('Por favor, completa todos los campos obligatorios del paso 1');
+        setErrorMessage(
+          "Por favor, completa todos los campos obligatorios del paso 1"
+        );
         setShowErrorModal(true);
         return;
       }
     } else if (currentStep === 2) {
       canAdvance = validateStep2();
       if (!canAdvance) {
-        setErrorMessage('Por favor, completa todos los campos obligatorios del paso 2');
+        setErrorMessage(
+          "Por favor, completa todos los campos obligatorios del paso 2"
+        );
         setShowErrorModal(true);
         return;
       }
     }
-    
+
     if (canAdvance && currentStep < 3) {
       setCurrentStep(currentStep + 1);
     }
@@ -72,21 +80,26 @@ const GruposPeniel = () => {
 
   const handleSubmit = async () => {
     if (!validateStep3()) {
-      setErrorMessage('Por favor, completa todos los campos obligatorios del paso 3');
+      setErrorMessage(
+        "Por favor, completa todos los campos obligatorios del paso 3"
+      );
       setShowErrorModal(true);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
-      const response = await fetch('https://orangered-guanaco-582072.hostingersite.com/api/grupospeniel.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://orangered-guanaco-582072.hostingersite.com/api/grupospeniel.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const result = await response.json();
 
@@ -94,25 +107,24 @@ const GruposPeniel = () => {
         setShowSuccessModal(true);
         setShowModal(false);
         setCurrentStep(1);
-        // Limpiar formulario
         setFormData({
-          nombre: '',
-          telefono: '',
-          fechaNacimiento: '',
-          sexo: '',
-          direccion: '',
-          cp: '',
-          invitadoDe: '',
-          primeraVez: '',
-          conocerMas: '',
-          pedidoOracion: ''
+          nombre: "",
+          telefono: "",
+          fechaNacimiento: "",
+          sexo: "",
+          direccion: "",
+          cp: "",
+          invitadoDe: "",
+          primeraVez: "",
+          conocerMas: "",
+          pedidoOracion: "",
         });
       } else {
-        setErrorMessage(result.error || 'Error al enviar el formulario');
+        setErrorMessage(result.error || "Error al enviar el formulario");
         setShowErrorModal(true);
       }
     } catch (error) {
-      setErrorMessage('Error de conexión. Por favor, inténtalo de nuevo.');
+      setErrorMessage("Error de conexión. Por favor, inténtalo de nuevo.");
       setShowErrorModal(true);
     } finally {
       setIsSubmitting(false);
@@ -128,32 +140,45 @@ const GruposPeniel = () => {
     setCurrentStep(1);
   };
 
+  const scrollAreasCarousel = (direction) => {
+    const carousel = document.getElementById("areasCarousel");
+    const cardWidth = carousel.querySelector(".area-card").offsetWidth + 32;
+    carousel.scrollBy({
+      left: direction * cardWidth,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
-      {/* Página Principal */}
       <div className="grupos-page">
-        
-        {/* Hero Section */}
         <div className="grupos-hero">
           <div className="container-clean">
             <h1>GRUPOS PENIEL</h1>
-            <p>“Y todos los días, en el templo y por las casas, no cesaban de enseñar y predicar a Jesucristo”</p>
+            <p>
+              "Y todos los días, en el templo y por las casas, no cesaban de
+              enseñar y predicar a Jesucristo"
+            </p>
           </div>
         </div>
 
-        {/* Introducción */}
         <section className="section-clean">
           <div className="container-clean">
             <div className="intro-content">
               <div className="intro-text">
                 <h2>Una iglesia en movimiento</h2>
                 <p>
-                  Peniel no es una iglesia que se queda dentro de cuatro paredes, sino una <strong>iglesia en movimiento</strong>.
-                  Llevamos el evangelio a los hogares y a cada rincón de nuestra ciudad.
+                  Peniel no es una iglesia que se queda dentro de cuatro
+                  paredes, sino una <strong>iglesia en movimiento</strong>.
+                  Llevamos el evangelio a los hogares y a cada rincón de nuestra
+                  ciudad.
                 </p>
                 <p>
-                  Por eso somos una <strong>iglesia en células</strong>, con un propósito claro:<br></br>
-                  <span className="highlight">Alcanzar más almas para Cristo.</span>
+                  Por eso somos una <strong>iglesia en células</strong>, con un
+                  propósito claro:
+                </p>
+                <p className="highlight-centered">
+                  Alcanzar más almas para Cristo.
                 </p>
               </div>
               <div className="intro-image">
@@ -165,70 +190,94 @@ const GruposPeniel = () => {
           </div>
         </section>
 
-        {/* ¿Qué son los Grupos Peniel? */}
         <section className="section-clean bg-light">
           <div className="container-clean">
             <div className="section-header">
-              <h2 className="section-title-centered">¿Qué son los Grupos Peniel?</h2>
+              <h2 className="section-title-centered">
+                ¿Qué son los Grupos Peniel?
+              </h2>
               <div className="header-line"></div>
             </div>
-            
+
             <div className="que-son-content">
               <p className="section-intro">
-                Son la integración de hermanos en la fe que trabajan juntos, de manera
-                ordenada y sistemática, para impulsar la vida de la iglesia local en todas sus áreas:
+                Son la integración de hermanos en la fe que trabajan juntos, de
+                manera ordenada y sistemática, para impulsar la vida de la
+                iglesia local en todas sus áreas:
               </p>
 
-              <div className="areas-grid">
-                <div className="area-card">
-                  <div className="area-icon">
-                    <i className="fas fa-praying-hands"></i>
+              <div className="areas-carousel-wrapper">
+                <div className="areas-carousel" id="areasCarousel">
+                  <div className="area-card">
+                    <div className="area-icon">
+                      <i className="fas fa-praying-hands"></i>
+                    </div>
+                    <h3>Oración</h3>
                   </div>
-                  <h3>Oración</h3>
-                </div>
-                <div className="area-card">
-                  <div className="area-icon">
-                    <i className="fas fa-hands-helping"></i>
+                  <div className="area-card">
+                    <div className="area-icon">
+                      <i className="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Servicio</h3>
                   </div>
-                  <h3>Servicio</h3>
-                </div>
-                <div className="area-card">
-                  <div className="area-icon">
-                    <i className="fas fa-star"></i>
+                  <div className="area-card">
+                    <div className="area-icon">
+                      <i className="fas fa-star"></i>
+                    </div>
+                    <h3>Consagración</h3>
                   </div>
-                  <h3>Consagración</h3>
-                </div>
-                <div className="area-card">
-                  <div className="area-icon">
-                    <i className="fas fa-bullhorn"></i>
+                  <div className="area-card">
+                    <div className="area-icon">
+                      <i className="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Evangelización</h3>
                   </div>
-                  <h3>Evangelización</h3>
                 </div>
+
+                <button
+                  className="areas-carousel-btn prev"
+                  onClick={() => scrollAreasCarousel(-1)}
+                >
+                  <i className="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  className="areas-carousel-btn next"
+                  onClick={() => scrollAreasCarousel(1)}
+                >
+                  <i className="fas fa-chevron-right"></i>
+                </button>
               </div>
 
               <div className="objetivo-highlight">
                 <p>
-                  Los Grupos Peniel no son solo reuniones de oración o alabanza, ni un club social.
+                  Los Grupos Peniel no son solo reuniones de oración o alabanza,
+                  ni un club social.
                 </p>
                 <p className="objetivo-main">
-                  Su verdadero objetivo es <strong>dar a conocer a Jesús</strong> a nuestros amigos, vecinos, comunidad y nación.
+                  Su verdadero objetivo es{" "}
+                  <strong>dar a conocer a Jesús</strong> a nuestros amigos,
+                  vecinos, comunidad y nación.
                 </p>
                 <p className="objetivo-footer">
-                  Esta no es tarea de unos pocos, es una misión que nos involucra a todos.
+                  Esta no es tarea de unos pocos, es una misión que nos
+                  involucra a todos.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Características */}
         <section className="section-clean">
           <div className="container-clean">
-            <h2 className="section-title-centered">Características de un Grupo Peniel</h2>
-            <div className="header-line" style={{margin: '0 auto 4rem'}}></div>
+            <h2 className="section-title-centered">
+              Características de un Grupo Peniel
+            </h2>
+            <div
+              className="header-line"
+              style={{ margin: "0 auto 4rem" }}
+            ></div>
 
             <div className="caracteristicas-layout">
-              {/* En lo externo */}
               <div className="caracteristica-block">
                 <div className="caracteristica-header">
                   <div className="caracteristica-icon">
@@ -252,13 +301,15 @@ const GruposPeniel = () => {
                     </div>
                     <div className="item-content">
                       <h4>Homogeneidad</h4>
-                      <p>Se organiza por edad (adolescentes, jovenes y adultos) y sexo (hombres o mujeres).</p>
+                      <p>
+                        Se organiza por edad (adolescentes, jovenes y adultos) y
+                        sexo (hombres o mujeres).
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* En lo interno */}
               <div className="caracteristica-block">
                 <div className="caracteristica-header">
                   <div className="caracteristica-icon">
@@ -273,7 +324,10 @@ const GruposPeniel = () => {
                     </div>
                     <div className="item-content">
                       <h4>Reproduce discípulos</h4>
-                      <p>Su prioridad es la multiplicación: "Ser y Hacer discípulos".</p>
+                      <p>
+                        Su prioridad es la multiplicación: "Ser y Hacer
+                        discípulos".
+                      </p>
                     </div>
                   </div>
                   <div className="caracteristica-item">
@@ -282,7 +336,10 @@ const GruposPeniel = () => {
                     </div>
                     <div className="item-content">
                       <h4>Tiene vida</h4>
-                      <p>Cada miembro experimenta el ciclo de vida espiritual dentro del grupo.</p>
+                      <p>
+                        Cada miembro experimenta el ciclo de vida espiritual
+                        dentro del grupo.
+                      </p>
                     </div>
                   </div>
                   <div className="caracteristica-item">
@@ -291,7 +348,10 @@ const GruposPeniel = () => {
                     </div>
                     <div className="item-content">
                       <h4>Trabaja en equipo</h4>
-                      <p>Todos son importantes y necesarios para el desarrollo espiritual.</p>
+                      <p>
+                        Todos son importantes y necesarios para el desarrollo
+                        espiritual.
+                      </p>
                     </div>
                   </div>
                   <div className="caracteristica-item">
@@ -300,7 +360,10 @@ const GruposPeniel = () => {
                     </div>
                     <div className="item-content">
                       <h4>Crece espiritualmente</h4>
-                      <p>Se edifica a través de enseñanza, doctrina, comunión y visión.</p>
+                      <p>
+                        Se edifica a través de enseñanza, doctrina, comunión y
+                        visión.
+                      </p>
                     </div>
                   </div>
                   <div className="caracteristica-item">
@@ -309,7 +372,10 @@ const GruposPeniel = () => {
                     </div>
                     <div className="item-content">
                       <h4>Edifica la iglesia</h4>
-                      <p>Fortalece la vida local en oración, servicio, consagración y evangelización.</p>
+                      <p>
+                        Fortalece la vida local en oración, servicio,
+                        consagración y evangelización.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -318,13 +384,13 @@ const GruposPeniel = () => {
           </div>
         </section>
 
-        {/* Call to Action */}
         <section className="section-clean bg-dark">
           <div className="container-clean">
             <div className="cta-content">
               <h2>Únete a un Grupo Peniel</h2>
               <p>
-                ¡Este es el tiempo de crecer, compartir y llevar la luz de Jesús a cada rincón de nuestra ciudad!
+                ¡Este es el tiempo de crecer, compartir y llevar la luz de Jesús
+                a cada rincón de nuestra ciudad!
               </p>
               <div className="buttons-clean">
                 <button
@@ -342,23 +408,22 @@ const GruposPeniel = () => {
         </section>
       </div>
 
-      {/* Modal del Formulario Rediseñado */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-modern">
-            {/* Header del modal */}
             <div className="modal-header-modern">
               <button onClick={closeModal} className="close-btn-modern">
                 <i className="fas fa-times"></i>
               </button>
             </div>
 
-            {/* Contenido principal del modal */}
             <div className="modal-body-modern">
-              {/* Lado izquierdo - Imagen */}
               <div className="modal-image-side">
                 <div className="modal-image-container">
-                  <img src="/imgs/ministerios/grupospeniel.jpeg" alt="Grupos Peniel" />
+                  <img
+                    src="/imgs/ministerios/grupospeniel.jpeg"
+                    alt="Grupos Peniel"
+                  />
                   <div className="image-overlay-modern">
                     <div className="overlay-content">
                       <h3>Únete a Grupos Peniel</h3>
@@ -368,27 +433,23 @@ const GruposPeniel = () => {
                 </div>
               </div>
 
-              {/* Lado derecho - Formulario */}
               <div className="modal-form-side">
-                {/* Progress indicator */}
                 <div className="step-indicator" data-step={currentStep}>
-                  <div className={`step ${currentStep >= 1 ? 'active' : ''}`}>
+                  <div className={`step ${currentStep >= 1 ? "active" : ""}`}>
                     <div className="step-number">1</div>
                     <span>Datos personales</span>
                   </div>
-                  <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
+                  <div className={`step ${currentStep >= 2 ? "active" : ""}`}>
                     <div className="step-number">2</div>
                     <span>Información adicional</span>
                   </div>
-                  <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
+                  <div className={`step ${currentStep >= 3 ? "active" : ""}`}>
                     <div className="step-number">3</div>
                     <span>Finalizar</span>
                   </div>
                 </div>
 
-                {/* Formulario por pasos */}
                 <div className="form-steps">
-                  {/* Paso 1: Datos Personales */}
                   {currentStep === 1 && (
                     <div className="step-content">
                       <h4>Datos Personales</h4>
@@ -433,7 +494,7 @@ const GruposPeniel = () => {
                                 type="radio"
                                 name="sexo"
                                 value="F"
-                                checked={formData.sexo === 'F'}
+                                checked={formData.sexo === "F"}
                                 onChange={handleInputChange}
                                 required
                               />
@@ -445,7 +506,7 @@ const GruposPeniel = () => {
                                 type="radio"
                                 name="sexo"
                                 value="M"
-                                checked={formData.sexo === 'M'}
+                                checked={formData.sexo === "M"}
                                 onChange={handleInputChange}
                                 required
                               />
@@ -458,7 +519,6 @@ const GruposPeniel = () => {
                     </div>
                   )}
 
-                  {/* Paso 2: Información Adicional */}
                   {currentStep === 2 && (
                     <div className="step-content">
                       <h4>Información Adicional</h4>
@@ -496,14 +556,16 @@ const GruposPeniel = () => {
                           />
                         </div>
                         <div className="form-field full-width">
-                          <label>¿Es tu primera vez en una iglesia evangélica? *</label>
+                          <label>
+                            ¿Es tu primera vez en una iglesia evangélica? *
+                          </label>
                           <div className="radio-modern">
                             <label className="radio-option">
                               <input
                                 type="radio"
                                 name="primeraVez"
                                 value="si"
-                                checked={formData.primeraVez === 'si'}
+                                checked={formData.primeraVez === "si"}
                                 onChange={handleInputChange}
                                 required
                               />
@@ -515,7 +577,7 @@ const GruposPeniel = () => {
                                 type="radio"
                                 name="primeraVez"
                                 value="no"
-                                checked={formData.primeraVez === 'no'}
+                                checked={formData.primeraVez === "no"}
                                 onChange={handleInputChange}
                                 required
                               />
@@ -528,20 +590,21 @@ const GruposPeniel = () => {
                     </div>
                   )}
 
-                  {/* Paso 3: Finalizar */}
                   {currentStep === 3 && (
                     <div className="step-content">
                       <h4>Información Final</h4>
                       <div className="form-grid">
                         <div className="form-field full-width">
-                          <label>¿Te gustaría conocer más de Dios y la Biblia? *</label>
+                          <label>
+                            ¿Te gustaría conocer más de Dios y la Biblia? *
+                          </label>
                           <div className="radio-modern">
                             <label className="radio-option">
                               <input
                                 type="radio"
                                 name="conocerMas"
                                 value="si"
-                                checked={formData.conocerMas === 'si'}
+                                checked={formData.conocerMas === "si"}
                                 onChange={handleInputChange}
                                 required
                               />
@@ -553,7 +616,7 @@ const GruposPeniel = () => {
                                 type="radio"
                                 name="conocerMas"
                                 value="no"
-                                checked={formData.conocerMas === 'no'}
+                                checked={formData.conocerMas === "no"}
                                 onChange={handleInputChange}
                                 required
                               />
@@ -577,7 +640,6 @@ const GruposPeniel = () => {
                   )}
                 </div>
 
-                {/* Navegación */}
                 <div className="modal-navigation">
                   {currentStep > 1 && (
                     <button onClick={prevStep} className="btn-nav secondary">
@@ -592,8 +654,8 @@ const GruposPeniel = () => {
                       <i className="fas fa-arrow-right"></i>
                     </button>
                   ) : (
-                    <button 
-                      onClick={handleSubmit} 
+                    <button
+                      onClick={handleSubmit}
                       className="btn-nav primary"
                       disabled={isSubmitting}
                     >
@@ -612,10 +674,12 @@ const GruposPeniel = () => {
                   )}
                 </div>
 
-                {/* Aviso de privacidad compacto */}
                 {currentStep === 3 && (
                   <div className="privacy-compact">
-                    <p>Al enviar este formulario aceptas nuestros términos de privacidad y el uso de tus datos según la LOPD.</p>
+                    <p>
+                      Al enviar este formulario aceptas nuestros términos de
+                      privacidad y el uso de tus datos según la LOPD.
+                    </p>
                   </div>
                 )}
               </div>
@@ -624,7 +688,6 @@ const GruposPeniel = () => {
         </div>
       )}
 
-      {/* Modal de Éxito */}
       {showSuccessModal && (
         <div className="modal-overlay">
           <div className="modal-simple">
@@ -634,11 +697,12 @@ const GruposPeniel = () => {
               </div>
               <h3>¡Datos enviados correctamente!</h3>
               <p>
-                Gracias por tu interés en formar parte de Grupos Peniel. 
-                Hemos recibido tu información y en breve nos pondremos en contacto contigo.
+                Gracias por tu interés en formar parte de Grupos Peniel. Hemos
+                recibido tu información y en breve nos pondremos en contacto
+                contigo.
               </p>
-              <button 
-                onClick={() => setShowSuccessModal(false)} 
+              <button
+                onClick={() => setShowSuccessModal(false)}
                 className="btn-nav primary"
               >
                 Entendido
@@ -648,7 +712,6 @@ const GruposPeniel = () => {
         </div>
       )}
 
-      {/* Modal de Error */}
       {showErrorModal && (
         <div className="modal-overlay">
           <div className="modal-simple">
@@ -658,8 +721,8 @@ const GruposPeniel = () => {
               </div>
               <h3>Error</h3>
               <p>{errorMessage}</p>
-              <button 
-                onClick={() => setShowErrorModal(false)} 
+              <button
+                onClick={() => setShowErrorModal(false)}
                 className="btn-nav secondary"
               >
                 Cerrar

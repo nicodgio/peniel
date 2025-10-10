@@ -1,4 +1,5 @@
-/* Reset y base */
+/* MOBILE FIRST - BASE STYLES */
+
 .about-page-clean {
   font-family: 'Montserrat', sans-serif;
   background: #000;
@@ -9,11 +10,11 @@
 .container-clean {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .section-clean {
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .bg-light {
@@ -21,27 +22,25 @@
 }
 
 .grid-2col {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
-  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* HERO SECTION */
 .hero-clean {
-  padding: 12rem 0 8rem;
+  padding: 8rem 0 4rem;
+  padding-top: 12rem;
   text-align: center;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/imgs/about/abouthero.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin-top: -120px;
-  padding-top: 16rem;
+  margin-top: -80px;
   position: relative;
 }
 
 .about-page-clean .hero-clean h1 {
-  font-size: 4rem !important;
+  font-size: 2rem !important;
   font-weight: 300 !important;
   margin-bottom: 1rem;
   color: #609be8;
@@ -49,43 +48,41 @@
 }
 
 .about-page-clean .hero-clean p {
-  font-size: 1.5rem !important;
+  font-size: 1.2rem !important;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 300;
 }
 
-/* TÍTULOS GENERALES */
 .about-page-clean h2,
 .about-page-clean .section-title-centered {
-  font-size: 2.5rem !important;
+  font-size: 1.75rem !important;
   font-weight: 600 !important;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   color: white;
 }
 
 .about-page-clean .section-title-centered {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .about-page-clean h3 {
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
   font-weight: 600 !important;
   margin-bottom: 1rem;
   color: white;
 }
 
 .about-page-clean h4 {
-  font-size: 1.2rem !important;
+  font-size: 1rem !important;
   font-weight: 500 !important;
   color: #609be8;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-/* TEXTO */
 .text-block p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -94,7 +91,6 @@
   font-weight: 600;
 }
 
-/* IMAGEN DE LA IGLESIA */
 .church-image-container {
   display: flex;
   align-items: stretch;
@@ -102,61 +98,75 @@
   height: 100%;
 }
 
-.church-image {
-  width: 100%;
-  height: 100%;
+.church-video {
+  position: relative;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
-}
-
-.church-image:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-}
-
-.church-image img {
   width: 100%;
-  height: 100%;
+}
+
+.church-video:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.church-video-element {
+  width: 100%;
+  height: 250px;
   object-fit: cover;
-  object-position: center;
   display: block;
 }
 
-/* SECCIÓN DE FE */
 .faith-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
   background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
 }
 
 .faith-intro {
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 1rem;
 }
 
 .faith-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  max-width: none;
-  margin: 0 auto;
+  display: none;
+}
+
+.faith-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.faith-carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .faith-card {
   background: rgba(255, 255, 255, 0.05);
-  padding: 2.5rem 2rem;
+  padding: 2rem 1.5rem;
   border-radius: 15px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  flex: 0 0 calc(100vw - 3rem);
+  max-width: 350px;
+  scroll-snap-align: center;
 }
 
 .faith-card:hover {
@@ -189,17 +199,42 @@
   font-size: 0.95rem;
 }
 
-/* SECCIÓN PASTORAL */
+.faith-carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.faith-carousel-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.faith-carousel-btn:hover {
+  background: #609be8;
+  transform: scale(1.1);
+}
+
 .pastoral-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
   background: #111;
 }
 
 .pastoral-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .pastor-main {
@@ -216,41 +251,6 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* Video en sección Nuestra Identidad */
-.church-video {
-  position: relative;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.church-video:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
-}
-
-.church-video-element {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  display: block;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .church-video-element {
-    height: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .church-video-element {
-    height: 250px;
-  }
-}
-
 .pastor-image {
   width: 100%;
   overflow: hidden;
@@ -263,12 +263,12 @@
 }
 
 .pastor-info {
-  padding: 2.5rem;
+  padding: 2rem;
   text-align: center;
 }
 
 .about-page-clean .pastor-info h3 {
-  font-size: 1.6rem !important;
+  font-size: 1.4rem !important;
   margin-bottom: 0.5rem;
   color: white;
 }
@@ -292,25 +292,23 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
 }
 
 .about-page-clean .leadership-info h3 {
   color: #609be8;
-  margin-bottom: 2rem;
-  font-size: 1.8rem !important;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem !important;
 }
 
 .leadership-content p {
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.7;
   margin-bottom: 1.5rem;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
-/* VISIÓN Y MISIÓN - DISEÑO MODERNO */
 .vision-mission-modern {
-  padding: 8rem 0;
+  padding: 4rem 0;
   background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%);
   position: relative;
   overflow: hidden;
@@ -331,13 +329,14 @@
 
 .section-intro {
   text-align: center;
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
   position: relative;
   z-index: 2;
+  padding: 0 1rem;
 }
 
 .about-page-clean .section-intro h2 {
-  font-size: 3rem !important;
+  font-size: 2rem !important;
   font-weight: 300 !important;
   margin-bottom: 1rem;
   background: linear-gradient(135deg, #609be8, #4a8bc2);
@@ -346,22 +345,22 @@
 }
 
 .section-intro p {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
 }
 
 .vm-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
   position: relative;
   z-index: 2;
 }
 
 .vision-side,
 .mission-side {
-  padding: 4rem;
+  padding: 2rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 25px;
@@ -384,16 +383,16 @@
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 20px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .about-page-clean .vision-side h3,
 .about-page-clean .mission-side h3 {
-  font-size: 2rem !important;
+  font-size: 1.4rem !important;
   font-weight: 600 !important;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -402,18 +401,18 @@
 
 .vision-side p,
 .mission-side p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .process-flow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 3rem;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -421,10 +420,12 @@
 
 .process-step {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  flex: 1;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .step-circle {
@@ -437,8 +438,12 @@
   justify-content: center;
   font-weight: 700;
   color: white;
-  margin-bottom: 1rem;
   font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.step-info {
+  text-align: left;
 }
 
 .step-info h4 {
@@ -456,33 +461,30 @@
 }
 
 .flow-arrow {
-  font-size: 1.5rem;
-  color: #609be8;
-  margin: 0 1rem;
-  font-weight: 300;
+  display: none;
 }
 
-/* VALORES - DISEÑO MODERNO */
 .values-modern {
-  padding: 8rem 0;
+  padding: 4rem 0;
   background: #111;
   position: relative;
 }
 
 .values-header {
   text-align: center;
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
+  padding: 0 1rem;
 }
 
 .about-page-clean .values-header h2 {
-  font-size: 3rem !important;
+  font-size: 2rem !important;
   font-weight: 300 !important;
   margin-bottom: 1rem;
   color: white;
 }
 
 .values-header p {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
   max-width: 700px;
@@ -490,19 +492,31 @@
 }
 
 .values-showcase {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
+  display: none;
+}
+
+.values-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.values-carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .value-highlight {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   align-items: center;
-  padding: 3rem;
+  padding: 2rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
@@ -510,6 +524,10 @@
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  flex: 0 0 calc(100vw - 3rem);
+  max-width: 400px;
+  scroll-snap-align: center;
+  text-align: center;
 }
 
 .value-highlight::before {
@@ -525,7 +543,7 @@
 }
 
 .value-highlight:hover {
-  transform: translateX(10px);
+  transform: translateY(-10px);
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(96, 155, 232, 0.3);
 }
@@ -535,7 +553,7 @@
 }
 
 .value-number {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 100;
   color: rgba(96, 155, 232, 0.3);
   line-height: 1;
@@ -548,6 +566,7 @@
 
 .value-title {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
@@ -561,47 +580,75 @@
 }
 
 .about-page-clean .value-title h3 {
-  font-size: 2rem !important;
+  font-size: 1.5rem !important;
   font-weight: 600 !important;
   margin: 0;
   color: white;
 }
 
 .value-content-modern p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
 
-/* CONTACTO */
+.values-carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.values-carousel-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.values-carousel-btn:hover {
+  background: #609be8;
+  transform: scale(1.1);
+}
+
 .contact-clean {
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .about-page-clean .contact-clean h2 {
   margin-bottom: 1rem;
   color: white;
-  font-size: 2.5rem !important;
+  font-size: 2rem !important;
   font-weight: 600 !important;
 }
 
 .contact-clean p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .buttons-clean {
   display: flex;
-  gap: 2rem;
-  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }
 
 .btn-clean {
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
@@ -610,6 +657,9 @@
   border: 2px solid;
   display: inline-block;
   border-radius: 50px;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
 }
 
 .btn-clean.primary {
@@ -637,199 +687,288 @@
   transform: translateY(-3px);
 }
 
-/* RESPONSIVE DESIGN */
-@media (max-width: 1200px) {
-  .faith-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .grid-2col,
-  .pastoral-layout {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .vm-hero {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .vision-side,
-  .mission-side {
-    padding: 3rem;
-  }
-  
-  .process-flow {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  
-  .flow-arrow {
-    transform: rotate(90deg);
-    margin: 1rem 0;
-  }
-  
-  .value-highlight {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
-  
-  .value-title {
-    justify-content: center;
-  }
-  
-  .faith-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
+@media (min-width: 769px) {
   .container-clean {
-    padding: 0 1.5rem;
+    padding: 0 2rem;
   }
-  
+
   .section-clean,
-  .vision-mission-modern,
-  .values-modern,
   .faith-section,
-  .pastoral-section {
-    padding: 4rem 0;
+  .pastoral-section,
+  .vision-mission-modern,
+  .values-modern {
+    padding: 8rem 0;
   }
-  
-  .hero-clean {
-    padding: 8rem 0 4rem;
-    padding-top: 12rem;
-  }
-  
-  .about-page-clean .hero-clean h1 {
-    font-size: 2.5rem !important;
-  }
-  
-  .about-page-clean h2, 
-  .about-page-clean .section-title-centered,
-  .about-page-clean .section-intro h2,
-  .about-page-clean .values-header h2 {
-    font-size: 2rem !important;
-  }
-  
-  .faith-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .vision-side,
-  .mission-side {
-    padding: 2rem;
-  }
-  
-  .about-page-clean .vision-side h3,
-  .about-page-clean .mission-side h3 {
-    font-size: 1.5rem !important;
-  }
-  
-  .process-flow {
-    padding: 1.5rem;
-  }
-  
-  .step-circle {
-    width: 40px;
-    height: 40px;
-    font-size: 0.9rem;
-  }
-  
-  .value-highlight {
-    padding: 2rem;
-  }
-  
-  .value-number {
-    font-size: 3rem;
-  }
-  
-  .about-page-clean .value-title h3 {
-    font-size: 1.5rem !important;
-  }
-  
-  .value-title i {
-    font-size: 1.5rem;
-  }
-  
-  .buttons-clean {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .btn-clean {
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-  }
-  
-  .pastor-image {
-    height: 250px;
-  }
-  
-  .pastor-info {
-    padding: 2rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .container-clean {
-    padding: 0 1rem;
+  .hero-clean {
+    padding: 12rem 0 8rem;
+    padding-top: 16rem;
+    margin-top: -120px;
   }
-  
+
   .about-page-clean .hero-clean h1 {
-    font-size: 2rem !important;
+    font-size: 4rem !important;
   }
-  
+
   .about-page-clean .hero-clean p {
+    font-size: 1.5rem !important;
+  }
+
+  .about-page-clean h2,
+  .about-page-clean .section-title-centered {
+    font-size: 2.5rem !important;
+    margin-bottom: 3rem;
+  }
+
+  .about-page-clean .section-title-centered {
+    margin-bottom: 4rem;
+  }
+
+  .about-page-clean h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .about-page-clean h4 {
     font-size: 1.2rem !important;
   }
-  
-  .about-page-clean h2, 
-  .about-page-clean .section-title-centered,
-  .about-page-clean .section-intro h2,
-  .about-page-clean .values-header h2 {
-    font-size: 1.75rem !important;
+
+  .text-block p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
   }
-  
+
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: stretch;
+  }
+
+  .church-video-element {
+    height: 400px;
+  }
+
+  .faith-intro {
+    font-size: 1.3rem;
+    margin-bottom: 4rem;
+  }
+
+  .faith-carousel,
+  .faith-carousel-controls {
+    display: none;
+  }
+
+  .faith-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: none;
+    margin: 0 auto;
+  }
+
   .faith-card {
-    padding: 2rem 1.5rem;
+    flex: none;
+    max-width: none;
+    padding: 2.5rem 2rem;
   }
-  
+
+  .pastoral-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .pastor-info {
+    padding: 2.5rem;
+  }
+
+  .about-page-clean .pastor-info h3 {
+    font-size: 1.6rem !important;
+  }
+
+  .pastor-info p {
+    font-size: 1rem;
+  }
+
+  .about-page-clean .leadership-info h3 {
+    font-size: 1.8rem !important;
+    margin-bottom: 2rem;
+  }
+
+  .leadership-content p {
+    font-size: 1.05rem;
+  }
+
+  .section-intro {
+    margin-bottom: 6rem;
+  }
+
+  .about-page-clean .section-intro h2 {
+    font-size: 3rem !important;
+  }
+
+  .section-intro p {
+    font-size: 1.3rem;
+  }
+
+  .vm-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
   .vision-side,
   .mission-side {
-    padding: 1.5rem;
+    padding: 4rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
-  
-  .value-highlight {
-    padding: 1.5rem;
+
+  .vm-label {
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
   }
-  
-  .value-number {
-    font-size: 2.5rem;
+
+  .about-page-clean .vision-side h3,
+  .about-page-clean .mission-side h3 {
+    font-size: 2rem !important;
   }
-  
+
+  .vision-side p,
+  .mission-side p {
+    font-size: 1.1rem;
+    flex-grow: 1;
+  }
+
+  .process-flow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding: 2rem;
+    gap: 0;
+  }
+
   .process-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background: transparent;
+    border: none;
+    gap: 0;
+  }
+
+  .step-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
   }
-  
-  .step-circle {
-    width: 35px;
-    height: 35px;
+
+  .step-info {
+    text-align: center;
+  }
+
+  .step-info h4 {
+    font-size: 1rem !important;
+  }
+
+  .step-info span {
     font-size: 0.8rem;
   }
-  
-  .step-info h4 {
-    font-size: 0.9rem !important;
+
+  .flow-arrow {
+    display: block;
+    transform: rotate(0deg);
+    margin: 0 1rem;
+    font-size: 1.5rem;
+    color: #609be8;
+    font-weight: 300;
   }
-  
-  .step-info span {
-    font-size: 0.7rem;
+
+  .values-header {
+    margin-bottom: 6rem;
+  }
+
+  .about-page-clean .values-header h2 {
+    font-size: 3rem !important;
+  }
+
+  .values-header p {
+    font-size: 1.3rem;
+  }
+
+  .values-carousel,
+  .values-carousel-controls {
+    display: none;
+  }
+
+  .values-showcase {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .value-highlight {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem;
+    flex: none;
+    max-width: none;
+    text-align: left;
+  }
+
+  .value-number {
+    font-size: 4rem;
+  }
+
+  .value-title {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .about-page-clean .value-title h3 {
+    font-size: 2rem !important;
+  }
+
+  .value-content-modern p {
+    font-size: 1.1rem;
+  }
+
+  .about-page-clean .contact-clean h2 {
+    font-size: 2.5rem !important;
+  }
+
+  .contact-clean p {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .buttons-clean {
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .btn-clean {
+    width: auto;
+    padding: 1rem 3rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .faith-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/inicio/about.css";
+
 const About = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const scrollFaithCarousel = (direction) => {
+    const carousel = document.getElementById("faithCarousel");
+    const cardWidth = isMobile ? window.innerWidth - 60 : 300;
+    carousel.scrollBy({
+      left: direction * cardWidth,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollValuesCarousel = (direction) => {
+    const carousel = document.getElementById("valuesCarousel");
+    const cardWidth = isMobile ? window.innerWidth - 60 : 400;
+    carousel.scrollBy({
+      left: direction * cardWidth,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="about-page-clean">
       <section className="hero-clean">
@@ -9,6 +39,7 @@ const About = () => {
           <p>Peniel Comunidad Cristiana</p>
         </div>
       </section>
+
       <section className="section-clean">
         <div className="container-clean">
           <div className="grid-2col">
@@ -40,10 +71,7 @@ const About = () => {
             <div className="church-image-container">
               <div className="church-video">
                 <video className="church-video-element" controls playsInline>
-                  <source
-                    src="/videos/about/about.mp4"
-                    type="video/mp4"
-                  />
+                  <source src="/videos/about/about.mp4" type="video/mp4" />
                   Tu navegador no soporta el elemento de video.
                 </video>
               </div>
@@ -51,6 +79,7 @@ const About = () => {
           </div>
         </div>
       </section>
+
       <section className="faith-section">
         <div className="container-clean">
           <h2 className="section-title-centered">Nuestra Fe</h2>
@@ -58,65 +87,143 @@ const About = () => {
             En Peniel creemos y afirmamos la fe cristiana basada en:
           </p>
 
-          <div className="faith-grid">
-            <div className="faith-card">
-              <div className="faith-icon">
-                <i className="fas fa-bible"></i>
-              </div>
-              <h4>La Biblia</h4>
-              <p>Como Palabra inspirada de Dios</p>
-            </div>
+          {isMobile ? (
+            <>
+              <div className="faith-carousel" id="faithCarousel">
+                <div className="faith-card">
+                  <div className="faith-icon">
+                    <i className="fas fa-bible"></i>
+                  </div>
+                  <h4>La Biblia</h4>
+                  <p>Como Palabra inspirada de Dios</p>
+                </div>
 
-            <div className="faith-card">
-              <div className="faith-icon">
-                <i className="fas fa-cross"></i>
-              </div>
-              <h4>Dios Trino</h4>
-              <p>Padre, Hijo y Espíritu Santo</p>
-            </div>
+                <div className="faith-card">
+                  <div className="faith-icon">
+                    <i className="fas fa-cross"></i>
+                  </div>
+                  <h4>Dios Trino</h4>
+                  <p>Padre, Hijo y Espíritu Santo</p>
+                </div>
 
-            <div className="faith-card">
-              <div className="faith-icon">
-                <i className="fas fa-heart"></i>
-              </div>
-              <h4>Jesucristo</h4>
-              <p>Como único y suficiente Salvador</p>
-            </div>
+                <div className="faith-card">
+                  <div className="faith-icon">
+                    <i className="fas fa-heart"></i>
+                  </div>
+                  <h4>Jesucristo</h4>
+                  <p>Como único y suficiente Salvador</p>
+                </div>
 
-            <div className="faith-card">
-              <div className="faith-icon">
-                <i className="fas fa-hands-praying"></i>
-              </div>
-              <h4>Salvación</h4>
-              <p>Por gracia, mediante la fe</p>
-            </div>
+                <div className="faith-card">
+                  <div className="faith-icon">
+                    <i className="fas fa-hands-praying"></i>
+                  </div>
+                  <h4>Salvación</h4>
+                  <p>Por gracia, mediante la fe</p>
+                </div>
 
-            <div className="faith-card">
-              <div className="faith-icon">
-                <i className="fas fa-dove"></i>
-              </div>
-              <h4>Espíritu Santo</h4>
-              <p>Su poder para transformar vidas</p>
-            </div>
+                <div className="faith-card">
+                  <div className="faith-icon">
+                    <i className="fas fa-dove"></i>
+                  </div>
+                  <h4>Espíritu Santo</h4>
+                  <p>Su poder para transformar vidas</p>
+                </div>
 
-            <div className="faith-card">
-              <div className="faith-icon">
-                <i className="fas fa-church"></i>
-              </div>
-              <h4>La Iglesia</h4>
-              <p>Como cuerpo de Cristo, llamada a hacer discípulos</p>
-            </div>
+                <div className="faith-card">
+                  <div className="faith-icon">
+                    <i className="fas fa-church"></i>
+                  </div>
+                  <h4>La Iglesia</h4>
+                  <p>Como cuerpo de Cristo, llamada a hacer discípulos</p>
+                </div>
 
-            <div className="faith-card">
-              <div className="faith-icon">
-                <i className="fas fa-crown"></i>
+                <div className="faith-card">
+                  <div className="faith-icon">
+                    <i className="fas fa-crown"></i>
+                  </div>
+                  <h4>Segunda Venida</h4>
+                  <p>La esperanza en el regreso de Cristo</p>
+                </div>
               </div>
-              <h4>Segunda Venida</h4>
-              <p>La esperanza en el regreso de Cristo</p>
+
+              <div className="faith-carousel-controls">
+                <button
+                  className="faith-carousel-btn"
+                  onClick={() => scrollFaithCarousel(-1)}
+                >
+                  <i className="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  className="faith-carousel-btn"
+                  onClick={() => scrollFaithCarousel(1)}
+                >
+                  <i className="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="faith-grid">
+              <div className="faith-card">
+                <div className="faith-icon">
+                  <i className="fas fa-bible"></i>
+                </div>
+                <h4>La Biblia</h4>
+                <p>Como Palabra inspirada de Dios</p>
+              </div>
+
+              <div className="faith-card">
+                <div className="faith-icon">
+                  <i className="fas fa-cross"></i>
+                </div>
+                <h4>Dios Trino</h4>
+                <p>Padre, Hijo y Espíritu Santo</p>
+              </div>
+
+              <div className="faith-card">
+                <div className="faith-icon">
+                  <i className="fas fa-heart"></i>
+                </div>
+                <h4>Jesucristo</h4>
+                <p>Como único y suficiente Salvador</p>
+              </div>
+
+              <div className="faith-card">
+                <div className="faith-icon">
+                  <i className="fas fa-hands-praying"></i>
+                </div>
+                <h4>Salvación</h4>
+                <p>Por gracia, mediante la fe</p>
+              </div>
+
+              <div className="faith-card">
+                <div className="faith-icon">
+                  <i className="fas fa-dove"></i>
+                </div>
+                <h4>Espíritu Santo</h4>
+                <p>Su poder para transformar vidas</p>
+              </div>
+
+              <div className="faith-card">
+                <div className="faith-icon">
+                  <i className="fas fa-church"></i>
+                </div>
+                <h4>La Iglesia</h4>
+                <p>Como cuerpo de Cristo, llamada a hacer discípulos</p>
+              </div>
+
+              <div className="faith-card">
+                <div className="faith-icon">
+                  <i className="fas fa-crown"></i>
+                </div>
+                <h4>Segunda Venida</h4>
+                <p>La esperanza en el regreso de Cristo</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
+
       <section className="pastoral-section">
         <div className="container-clean">
           <h2 className="section-title-centered">Nuestros Pastores</h2>
@@ -164,6 +271,7 @@ const About = () => {
           </div>
         </div>
       </section>
+
       <section className="vision-mission-modern">
         <div className="container-clean">
           <div className="section-intro">
@@ -257,6 +365,7 @@ const About = () => {
           </div>
         </div>
       </section>
+
       <section className="values-modern">
         <div className="container-clean">
           <div className="values-header">
@@ -266,69 +375,151 @@ const About = () => {
             </p>
           </div>
 
-          <div className="values-showcase">
-            <div className="value-highlight">
-              <div className="value-number">01</div>
-              <div className="value-content-modern">
-                <div className="value-title">
-                  <i className="fas fa-heart"></i>
-                  <h3>Amor</h3>
+          {isMobile ? (
+            <>
+              <div className="values-carousel" id="valuesCarousel">
+                <div className="value-highlight">
+                  <div className="value-number">01</div>
+                  <div className="value-content-modern">
+                    <div className="value-title">
+                      <i className="fas fa-heart"></i>
+                      <h3>Amor</h3>
+                    </div>
+                    <p>
+                      Amamos a Dios sobre todas las cosas y extendemos ese amor
+                      incondicional a nuestro prójimo, creando un ambiente de
+                      gracia, aceptación y cuidado mutuo.
+                    </p>
+                  </div>
                 </div>
-                <p>
-                  Amamos a Dios sobre todas las cosas y extendemos ese amor
-                  incondicional a nuestro prójimo, creando un ambiente de
-                  gracia, aceptación y cuidado mutuo.
-                </p>
-              </div>
-            </div>
 
-            <div className="value-highlight">
-              <div className="value-number">02</div>
-              <div className="value-content-modern">
-                <div className="value-title">
-                  <i className="fas fa-users"></i>
-                  <h3>Comunidad</h3>
+                <div className="value-highlight">
+                  <div className="value-number">02</div>
+                  <div className="value-content-modern">
+                    <div className="value-title">
+                      <i className="fas fa-users"></i>
+                      <h3>Comunidad</h3>
+                    </div>
+                    <p>
+                      Creemos en la vida en familia de fe, donde cada persona es
+                      valorada, cuidada y tiene un lugar de pertenencia dentro
+                      del cuerpo de Cristo.
+                    </p>
+                  </div>
                 </div>
-                <p>
-                  Creemos en la vida en familia de fe, donde cada persona es
-                  valorada, cuidada y tiene un lugar de pertenencia dentro del
-                  cuerpo de Cristo.
-                </p>
-              </div>
-            </div>
 
-            <div className="value-highlight">
-              <div className="value-number">03</div>
-              <div className="value-content-modern">
-                <div className="value-title">
-                  <i className="fas fa-seedling"></i>
-                  <h3>Crecimiento</h3>
+                <div className="value-highlight">
+                  <div className="value-number">03</div>
+                  <div className="value-content-modern">
+                    <div className="value-title">
+                      <i className="fas fa-seedling"></i>
+                      <h3>Crecimiento</h3>
+                    </div>
+                    <p>
+                      Buscamos constantemente madurar espiritualmente a través
+                      del estudio de la Palabra, la oración y la aplicación
+                      práctica de los principios bíblicos.
+                    </p>
+                  </div>
                 </div>
-                <p>
-                  Buscamos constantemente madurar espiritualmente a través del
-                  estudio de la Palabra, la oración y la aplicación práctica de
-                  los principios bíblicos.
-                </p>
-              </div>
-            </div>
 
-            <div className="value-highlight">
-              <div className="value-number">04</div>
-              <div className="value-content-modern">
-                <div className="value-title">
-                  <i className="fas fa-globe"></i>
-                  <h3>Misión</h3>
+                <div className="value-highlight">
+                  <div className="value-number">04</div>
+                  <div className="value-content-modern">
+                    <div className="value-title">
+                      <i className="fas fa-globe"></i>
+                      <h3>Misión</h3>
+                    </div>
+                    <p>
+                      Estamos profundamente comprometidos con la Gran Comisión,
+                      llevando el evangelio tanto a nuestra ciudad de Madrid
+                      como hasta los confines del mundo.
+                    </p>
+                  </div>
                 </div>
-                <p>
-                  Estamos profundamente comprometidos con la Gran Comisión,
-                  llevando el evangelio tanto a nuestra ciudad de Madrid como
-                  hasta los confines del mundo.
-                </p>
+              </div>
+
+              <div className="values-carousel-controls">
+                <button
+                  className="values-carousel-btn"
+                  onClick={() => scrollValuesCarousel(-1)}
+                >
+                  <i className="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  className="values-carousel-btn"
+                  onClick={() => scrollValuesCarousel(1)}
+                >
+                  <i className="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="values-showcase">
+              <div className="value-highlight">
+                <div className="value-number">01</div>
+                <div className="value-content-modern">
+                  <div className="value-title">
+                    <i className="fas fa-heart"></i>
+                    <h3>Amor</h3>
+                  </div>
+                  <p>
+                    Amamos a Dios sobre todas las cosas y extendemos ese amor
+                    incondicional a nuestro prójimo, creando un ambiente de
+                    gracia, aceptación y cuidado mutuo.
+                  </p>
+                </div>
+              </div>
+
+              <div className="value-highlight">
+                <div className="value-number">02</div>
+                <div className="value-content-modern">
+                  <div className="value-title">
+                    <i className="fas fa-users"></i>
+                    <h3>Comunidad</h3>
+                  </div>
+                  <p>
+                    Creemos en la vida en familia de fe, donde cada persona es
+                    valorada, cuidada y tiene un lugar de pertenencia dentro del
+                    cuerpo de Cristo.
+                  </p>
+                </div>
+              </div>
+
+              <div className="value-highlight">
+                <div className="value-number">03</div>
+                <div className="value-content-modern">
+                  <div className="value-title">
+                    <i className="fas fa-seedling"></i>
+                    <h3>Crecimiento</h3>
+                  </div>
+                  <p>
+                    Buscamos constantemente madurar espiritualmente a través del
+                    estudio de la Palabra, la oración y la aplicación práctica
+                    de los principios bíblicos.
+                  </p>
+                </div>
+              </div>
+
+              <div className="value-highlight">
+                <div className="value-number">04</div>
+                <div className="value-content-modern">
+                  <div className="value-title">
+                    <i className="fas fa-globe"></i>
+                    <h3>Misión</h3>
+                  </div>
+                  <p>
+                    Estamos profundamente comprometidos con la Gran Comisión,
+                    llevando el evangelio tanto a nuestra ciudad de Madrid como
+                    hasta los confines del mundo.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
+
       <section className="section-clean">
         <div className="container-clean">
           <div className="contact-clean">
@@ -348,4 +539,5 @@ const About = () => {
     </div>
   );
 };
+
 export default About;
