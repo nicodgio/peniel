@@ -72,7 +72,7 @@ const Ministerios = () => {
       icono: "fas fa-fire",
       color: "#e67e22",
       imagen: "/imgs/ministerios/ados.jpg",
-      videoUrl: "/videos/ministerios/penielng.mp4", // Agrega la URL de tu video
+      videoUrl: "/videos/ministerios/penielng.mp4",
     },
     {
       id: "peniel-kids",
@@ -146,7 +146,7 @@ const Ministerios = () => {
       icono: "fas fa-heart",
       color: "#9b59b6",
       imagen: "/imgs/ministerios/consolidacion.jpg",
-      videoUrl: "/videos/ministerios/atencionprimaria.mp4", // Agrega la URL de tu video
+      videoUrl: "/videos/ministerios/atencionprimaria.mp4",
     },
     {
       id: "instituto-biblico",
@@ -329,25 +329,43 @@ const Ministerios = () => {
       color: "#d946ef",
       imagen: "/imgs/ministerios/adoracion.jpg",
     },
+    {
+      id: "ministerio-sordos",
+      nombre: "Ministerio de Sordos",
+      categoria: "Inclusión",
+      frecuencia: "Semanal",
+      horario: "Domingos + Talleres formativos",
+      lema: "El amor de Dios trasciende todas las barreras",
+      descripcion:
+        "Un espacio dedicado a aprender y compartir la Lengua de Signos Española (LSE), para que cada persona pueda conocer y vivir el mensaje de Jesús.",
+      descripcionCompleta:
+        "En nuestra iglesia creemos que el amor de Dios trasciende todas las barreras, también las del lenguaje. Por eso el Ministerio de Sordos es un espacio dedicado a aprender y compartir la Lengua de Signos Española (LSE), para que cada persona pueda conocer y vivir el mensaje de Jesús. A través de cursos, talleres y la práctica constante, buscamos que nuestra comunidad esté preparada para comunicar el evangelio con nuestras manos, demostrando que en Cristo todos somos parte de una misma familia. Nuestro anhelo es que cada persona sorda pueda sentirse acogida, valorada y amada, y que juntos adoremos a Dios en un mismo Espíritu.",
+      lider: "Norma Villagrán",
+      telefono: "+34 609 377 944",
+      actividades: [
+        "Facilitamos la traducción en lengua de señas durante las reuniones generales",
+        "Compartimos el amor de Jesús de forma clara y cercana con la comunidad sorda",
+        "Promovemos una cultura de inclusión, honra y unidad en la iglesia",
+        "Preparamos y entrenamos intérpretes comprometidos con servir y amar",
+        "Realizamos talleres formativos regularmente para crecer en habilidades de interpretación y comunicación",
+        "Colaboramos con otros ministerios para garantizar accesibilidad integral en eventos, materiales y espacios",
+      ],
+      requisitos: [
+        "Ser miembro activo y comprometido con la iglesia",
+        "Estar bautizado",
+        "Haber hecho el curso de integración",
+        "Asistir a un grupo Peniel",
+        "Tener conocimientos en lengua de señas o disposición para aprender",
+        "Tener un corazón sensible, paciente y dispuesto a servir con amor",
+        "Disponibilidad para talleres y reuniones",
+      ],
+      impacto:
+        "Rompiendo barreras del lenguaje para que todos puedan experimentar el amor de Cristo",
+      icono: "fas fa-hands",
+      color: "#16a085",
+      imagen: "/imgs/ministerios/ministerio-sordos.png",
+    },
   ];
-
-  const categorias = [
-    "Todos",
-    "Servicio",
-    "Jóvenes",
-    "Niños",
-    "Pastoral",
-    "Educación",
-    "Evangelismo",
-    "Comunidad",
-    "Adoración",
-  ];
-  const [categoriaActiva, setCategoriaActiva] = useState("Todos");
-
-  const ministeriosFiltrados =
-    categoriaActiva === "Todos"
-      ? ministerios
-      : ministerios.filter((m) => m.categoria === categoriaActiva);
 
   const abrirModal = (ministerio) => {
     setMinisterioActivo(ministerio);
@@ -383,7 +401,10 @@ const Ministerios = () => {
             </div>
             <div className="intro-video">
               <video className="intro-video-element" controls playsInline>
-                <source src="/videos/ministerios/ministerios.mp4" type="video/mp4" />
+                <source
+                  src="/videos/ministerios/ministerios.mp4"
+                  type="video/mp4"
+                />
                 Tu navegador no soporta el elemento de video.
               </video>
             </div>
@@ -391,33 +412,11 @@ const Ministerios = () => {
         </div>
       </section>
 
-      {/* Filtros */}
+      {/* Grid de Ministerios */}
       <section className="section-ministerios bg-dark">
         <div className="container-ministerios">
-          <div className="filtros-section">
-            <h2>Explora por categoría</h2>
-            <div className="filtros-container">
-              {categorias.map((categoria) => (
-                <button
-                  key={categoria}
-                  className={`filtro-btn ${
-                    categoriaActiva === categoria ? "active" : ""
-                  }`}
-                  onClick={() => setCategoriaActiva(categoria)}
-                >
-                  {categoria}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Grid de Ministerios */}
-      <section className="section-ministerios">
-        <div className="container-ministerios">
           <div className="ministerios-grid">
-            {ministeriosFiltrados.map((ministerio, index) => (
+            {ministerios.map((ministerio, index) => (
               <div key={index} className="ministerio-card-modern">
                 <div className="card-image">
                   <img src={ministerio.imagen} alt={ministerio.nombre} />
@@ -483,7 +482,7 @@ const Ministerios = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="section-ministerios bg-dark">
+      <section className="section-ministerios">
         <div className="container-ministerios">
           <div className="cta-ministerios">
             <h2>¿Listo para usar tus dones?</h2>

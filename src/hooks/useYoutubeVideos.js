@@ -11,7 +11,7 @@ export const useYouTubeVideos = (limit = 6) => {
       setLoading(true);
       setError(null);
       
-      const API_URL = `https://orangered-guanaco-582072.hostingersite.com/api/youtube.php?limit=${limit}`;
+      const API_URL = `https://lightcyan-boar-659405.hostingersite.com/api/youtube.php?limit=${limit}`;
 
       const response = await fetch(API_URL, {
         method: 'GET',

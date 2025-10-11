@@ -135,51 +135,6 @@
   display: block;
 }
 
-/* FILTROS */
-.filtros-section {
-  text-align: center;
-}
-
-.filtros-section h2 {
-  font-size: 2.5rem !important;
-  font-weight: 600 !important;
-  margin-bottom: 3rem;
-  color: white;
-}
-
-.filtros-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.filtro-btn {
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-family: inherit;
-  backdrop-filter: blur(10px);
-}
-
-.filtro-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-3px);
-  border-color: rgba(96, 155, 232, 0.3);
-}
-
-.filtro-btn.active {
-  background: linear-gradient(135deg, #609be8, #4a8bc2);
-  border-color: #609be8;
-  box-shadow: 0 10px 30px rgba(96, 155, 232, 0.3);
-}
-
 /* GRID DE MINISTERIOS */
 .ministerios-grid {
   display: grid;
@@ -195,6 +150,9 @@
   transition: all 0.4s ease;
   backdrop-filter: blur(10px);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .ministerio-card-modern:hover {
@@ -259,6 +217,9 @@
 
 .card-content {
   padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .card-header {
@@ -306,11 +267,13 @@
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
   margin-bottom: 2rem;
+  flex: 1;
 }
 
 .card-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 1.5rem;
+  margin-top: auto;
 }
 
 .leader-info {
@@ -867,16 +830,6 @@
   
   .ministerios-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .filtros-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .filtro-btn {
-    width: 100%;
-    max-width: 300px;
   }
   
   .cta-buttons {

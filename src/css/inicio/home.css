@@ -443,6 +443,103 @@ body {
   background-image: url('/imgs/ministerios/adoracion.jpg'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
 }
 
+.ministerio-card:nth-child(10) .ministerio-img {
+  background-image: url('/imgs/ministerios/ministerio-sordos.png'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+}
+
+/* Estilos para la carga de comprobante */
+.file-upload-container {
+  margin-top: 0.5rem;
+}
+
+.file-upload-label {
+  display: block;
+  cursor: pointer;
+}
+
+.file-upload-input {
+  display: none;
+}
+
+.file-upload-box {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.file-upload-box:hover {
+  border-color: #609be8;
+  background: rgba(96, 155, 232, 0.1);
+}
+
+.file-upload-box i {
+  font-size: 2.5rem;
+  color: #609be8;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.file-upload-box span {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.file-upload-box small {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.comprobante-preview {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.comprobante-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.remove-comprobante {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 0, 0, 0.8);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.remove-comprobante:hover {
+  background: rgba(255, 0, 0, 1);
+  transform: scale(1.1);
+}
+
+.form-help {
+  display: block;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
 .ministerio-content {
   padding: 1.2rem;
   flex-grow: 1;

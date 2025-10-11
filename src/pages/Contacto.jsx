@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import '../css/inicio/contacto.css';
+import React, { useState } from "react";
+import "../css/inicio/contacto.css";
 
 const Contacto = () => {
   const [formData, setFormData] = useState({
-    nombre: '',
-    email: '',
-    telefono: '',
-    asunto: '',
-    mensaje: ''
+    nombre: "",
+    email: "",
+    telefono: "",
+    asunto: "",
+    mensaje: "",
   });
 
   const [enviando, setEnviando] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -27,31 +27,34 @@ const Contacto = () => {
     setEnviando(true);
 
     try {
-      const response = await fetch('https://orangered-guanaco-582072.hostingersite.com/api/contacto.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://lightcyan-boar-659405.hostingersite.com/api/contacto.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const result = await response.json();
 
       if (response.ok && result.success) {
         setShowSuccessModal(true);
         setFormData({
-          nombre: '',
-          email: '',
-          telefono: '',
-          asunto: '',
-          mensaje: ''
+          nombre: "",
+          email: "",
+          telefono: "",
+          asunto: "",
+          mensaje: "",
         });
       } else {
-        setErrorMessage(result.error || 'Error al enviar el mensaje');
+        setErrorMessage(result.error || "Error al enviar el mensaje");
         setShowErrorModal(true);
       }
     } catch (error) {
-      setErrorMessage('Error de conexión. Por favor, inténtalo de nuevo.');
+      setErrorMessage("Error de conexión. Por favor, inténtalo de nuevo.");
       setShowErrorModal(true);
     } finally {
       setEnviando(false);
@@ -64,7 +67,7 @@ const Contacto = () => {
         <section className="contacto-page">
           <div className="floating-element"></div>
           <div className="floating-element"></div>
-          
+
           <div className="section-header">
             <h2 className="section-title">CONTACTO</h2>
             <p className="section-subtitle">
@@ -73,24 +76,25 @@ const Contacto = () => {
           </div>
 
           <div className="contacto-container">
-            
             <div className="contacto-main-grid">
-              
               <div className="contacto-left">
                 <div className="contacto-intro">
                   <h3>Estamos aquí para ti</h3>
                   <p>
-                    En Peniel Madrid valoramos cada persona que se acerca a nosotros. 
-                    Ya sea tu primera visita o necesites acompañamiento pastoral, 
-                    tenemos las puertas abiertas para recibirte con amor y dedicación.
+                    En Peniel Madrid valoramos cada persona que se acerca a
+                    nosotros. Ya sea tu primera visita o necesites
+                    acompañamiento pastoral, tenemos las puertas abiertas para
+                    recibirte con amor y dedicación.
                   </p>
                 </div>
 
                 <div className="contact-methods">
-                  <a href="https://wa.me/34609377944" 
-                     target="_blank" 
-                     rel="noopener noreferrer" 
-                     className="contact-method whatsapp">
+                  <a
+                    href="https://wa.me/34609377944"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method whatsapp"
+                  >
                     <div className="method-icon">
                       <i className="fab fa-whatsapp"></i>
                     </div>
@@ -112,13 +116,18 @@ const Contacto = () => {
                     <i className="fas fa-arrow-right method-arrow"></i>
                   </a>
 
-                  <a href="mailto:secretariapenielmadrid@gmail.com" className="contact-method email">
+                  <a
+                    href="mailto:secretariapenielmadrid@gmail.com"
+                    className="contact-method email"
+                  >
                     <div className="method-icon">
                       <i className="fas fa-envelope"></i>
                     </div>
                     <div className="method-info">
                       <span className="method-label">Email</span>
-                      <span className="method-value">secretariapenielmadrid@gmail.com</span>
+                      <span className="method-value">
+                        secretariapenielmadrid@gmail.com
+                      </span>
                     </div>
                     <i className="fas fa-arrow-right method-arrow"></i>
                   </a>
@@ -129,13 +138,13 @@ const Contacto = () => {
                     <i className="fas fa-map-marker-alt"></i>
                     <h4>Nuestra ubicación</h4>
                   </div>
-                  
+
                   <div className="location-details">
                     <div className="address">
                       <p className="street">Calle Miguel Fleta 11</p>
                       <p className="city">28037, Madrid</p>
                     </div>
-                    
+
                     <div className="transport-pills">
                       <div className="transport-pill">
                         <i className="fas fa-subway"></i>
@@ -153,8 +162,11 @@ const Contacto = () => {
               <div className="contacto-right">
                 <div className="form-container">
                   <h3>Envíanos un mensaje</h3>
-                  <p>Completa el formulario y nos pondremos en contacto contigo pronto</p>
-                  
+                  <p>
+                    Completa el formulario y nos pondremos en contacto contigo
+                    pronto
+                  </p>
+
                   <form onSubmit={handleSubmit} className="contact-form">
                     <div className="form-group">
                       <label htmlFor="nombre">Nombre completo *</label>
@@ -229,8 +241,8 @@ const Contacto = () => {
                       ></textarea>
                     </div>
 
-                    <button 
-                      type="submit" 
+                    <button
+                      type="submit"
                       className="submit-button"
                       disabled={enviando}
                     >
@@ -270,19 +282,21 @@ const Contacto = () => {
               <div className="cta-contenido">
                 <h3>Da el primer paso</h3>
                 <p className="cta-verse">
-                  "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar." 
+                  "Venid a mí todos los que estáis trabajados y cargados, y yo
+                  os haré descansar."
                   <span>- Mateo 11:28</span>
                 </p>
                 <p>
-                  No importa en qué momento de tu vida te encuentres, hay un lugar para ti 
-                  en nuestra familia. Contáctanos y descubre cómo podemos caminar juntos 
-                  en esta jornada de fe.
+                  No importa dónde estés ni cómo te sientas hoy, Dios quiere
+                  encontrarse contigo. En Peniel. Creemos que una sola
+                  experiencia con Su presencia puede transformar tu vida por
+                  completo. ¡Te esperamos!
                 </p>
-                
+
                 <div className="cta-buttons">
-                  <a 
-                    href="https://wa.me/34609377944" 
-                    target="_blank" 
+                  <a
+                    href="https://wa.me/34609377944"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-primary"
                   >
@@ -310,10 +324,11 @@ const Contacto = () => {
               </div>
               <h3>¡Mensaje enviado!</h3>
               <p>
-                Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos lo antes posible.
+                Gracias por contactarnos. Hemos recibido tu mensaje y te
+                responderemos lo antes posible.
               </p>
-              <button 
-                onClick={() => setShowSuccessModal(false)} 
+              <button
+                onClick={() => setShowSuccessModal(false)}
                 className="btn-modal primary"
               >
                 Entendido
@@ -333,8 +348,8 @@ const Contacto = () => {
               </div>
               <h3>Error al enviar</h3>
               <p>{errorMessage}</p>
-              <button 
-                onClick={() => setShowErrorModal(false)} 
+              <button
+                onClick={() => setShowErrorModal(false)}
                 className="btn-modal secondary"
               >
                 Cerrar

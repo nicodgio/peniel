@@ -10,6 +10,24 @@ const Donaciones = () => {
     setTimeout(() => setCopiado(""), 2000);
   };
 
+  // Función para scroll del carrusel de impactos
+  const scrollImpactosCarousel = (direction) => {
+    const carousel = document.getElementById("impactosCarousel");
+    if (!carousel) return;
+
+    const cards = carousel.querySelectorAll(".impacto-item");
+    if (cards.length === 0) return;
+
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 32; // 2rem de gap
+    const scrollAmount = cardWidth + gap;
+
+    carousel.scrollBy({
+      left: direction * scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
   const impactos = [
     {
       texto: "Llevando el evangelio a nuestra ciudad y las naciones",
@@ -49,15 +67,33 @@ const Donaciones = () => {
         <div className="container-donaciones">
           <div className="impacto-content">
             <h2>Tu generosidad permite que sigamos</h2>
-            <div className="impactos-grid">
-              {impactos.map((impacto, index) => (
-                <div key={index} className="impacto-item">
-                  <div className="impacto-icon">
-                    <i className={impacto.icono}></i>
+
+            <div className="impactos-carousel-wrapper">
+              <div className="impactos-grid" id="impactosCarousel">
+                {impactos.map((impacto, index) => (
+                  <div key={index} className="impacto-item">
+                    <div className="impacto-icon">
+                      <i className={impacto.icono}></i>
+                    </div>
+                    <p>{impacto.texto}</p>
                   </div>
-                  <p>{impacto.texto}</p>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              <button
+                className="impactos-carousel-btn prev"
+                onClick={() => scrollImpactosCarousel(-1)}
+                aria-label="Anterior"
+              >
+                <i className="fas fa-chevron-left"></i>
+              </button>
+              <button
+                className="impactos-carousel-btn next"
+                onClick={() => scrollImpactosCarousel(1)}
+                aria-label="Siguiente"
+              >
+                <i className="fas fa-chevron-right"></i>
+              </button>
             </div>
           </div>
         </div>

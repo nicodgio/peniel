@@ -9,7 +9,10 @@ const Home = () => {
     nombre: "",
     telefono: "",
     cantidad: 1,
+    forma_pago: "efectivo",
   });
+  const [comprobante, setComprobante] = useState(null);
+  const [comprobantePreview, setComprobantePreview] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
   const [formMessage, setFormMessage] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -41,7 +44,7 @@ const Home = () => {
   const fetchEventos = async () => {
     try {
       const response = await fetch(
-        "https://orangered-guanaco-582072.hostingersite.com/api/eventos.php"
+        "https://lightcyan-boar-659405.hostingersite.com/api/eventos.php"
       );
       const data = await response.json();
       if (data.success) {
@@ -58,14 +61,22 @@ const Home = () => {
     setFormMessage("");
 
     try {
+      const formData = new FormData();
+      formData.append("nombre", menuForm.nombre);
+      formData.append("telefono", menuForm.telefono);
+      formData.append("cantidad", menuForm.cantidad);
+      formData.append("forma_pago", menuForm.forma_pago);
+      
+      // Si es Bizum y hay comprobante, agregarlo
+      if (menuForm.forma_pago === "bizum" && comprobante) {
+        formData.append("comprobante", comprobante);
+      }
+
       const response = await fetch(
-        "https://orangered-guanaco-582072.hostingersite.com/api/menu-registro.php",
+        "https://lightcyan-boar-659405.hostingersite.com/api/menu-registro.php",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(menuForm),
+          body: formData,
         }
       );
 
@@ -73,7 +84,9 @@ const Home = () => {
 
       if (data.success) {
         setFormMessage("¡Registro exitoso! Nos vemos el domingo.");
-        setMenuForm({ nombre: "", telefono: "", cantidad: 1 });
+        setMenuForm({ nombre: "", telefono: "", cantidad: 1, forma_pago: "efectivo" });
+        setComprobante(null);
+        setComprobantePreview(null);
         setTimeout(() => {
           setShowMenuModal(false);
           setFormMessage("");
@@ -95,6 +108,37 @@ const Home = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleComprobanteChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validar que sea una imagen
+      if (!file.type.startsWith('image/')) {
+        setFormMessage("Por favor selecciona una imagen válida");
+        return;
+      }
+      
+      // Validar tamaño (máximo 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setFormMessage("La imagen no debe superar los 5MB");
+        return;
+      }
+      
+      setComprobante(file);
+      
+      // Crear preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setComprobantePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeComprobante = () => {
+    setComprobante(null);
+    setComprobantePreview(null);
   };
 
   const scrollCarousel = (direction) => {
@@ -169,6 +213,12 @@ const Home = () => {
       title: "Alabanza y Adoración",
       description:
         "En Peniel, creemos que la alabanza y la adoración no son simplemente un momento del servicio, sino una expresión viva y poderosa de nuestra relación con Dios.",
+    },
+    {
+      meta: ["DOMINGOS", "SERVICIO"],
+      title: "Ministerio de sordos",
+      description:
+        "En nuestra iglesia creemos que el amor de Dios trasciende todas las barreras, también las del lenguaje. Por eso el Ministerio de Sordos es un espacio dedicado a aprender y compartir la Lengua de Signos Española (LSE).",
     },
   ];
 
@@ -410,6 +460,57 @@ const Home = () => {
                   ))}
                 </select>
               </div>
+
+              <div className="form-group">
+                <label>Forma de pago *</label>
+                <select
+                  name="forma_pago"
+                  value={menuForm.forma_pago}
+                  onChange={handleInputChange}
+                  required
+                  className="form-select"
+                >
+                  <option value="efectivo">Efectivo</option>
+                  <option value="bizum">Bizum</option>
+                </select>
+              </div>
+
+              {menuForm.forma_pago === "bizum" && (
+                <div className="form-group">
+                  <label>Comprobante de pago (opcional)</label>
+                  <div className="file-upload-container">
+                    {!comprobantePreview ? (
+                      <label className="file-upload-label">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleComprobanteChange}
+                          className="file-upload-input"
+                        />
+                        <div className="file-upload-box">
+                          <i className="fas fa-cloud-upload-alt"></i>
+                          <span>Subir comprobante</span>
+                          <small>JPG, PNG o GIF (máx. 5MB)</small>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="comprobante-preview">
+                        <img src={comprobantePreview} alt="Comprobante" />
+                        <button
+                          type="button"
+                          onClick={removeComprobante}
+                          className="remove-comprobante"
+                        >
+                          <i className="fas fa-times"></i>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <small className="form-help">
+                    Envía tu comprobante de Bizum para agilizar tu registro
+                  </small>
+                </div>
+              )}
 
               <button
                 type="submit"

@@ -91,7 +91,7 @@ const GruposPeniel = () => {
 
     try {
       const response = await fetch(
-        "https://orangered-guanaco-582072.hostingersite.com/api/grupospeniel.php",
+        "https://lightcyan-boar-659405.hostingersite.com/api/grupospeniel.php",
         {
           method: "POST",
           headers: {
@@ -140,11 +140,20 @@ const GruposPeniel = () => {
     setCurrentStep(1);
   };
 
+  // Función mejorada para el scroll del carrusel
   const scrollAreasCarousel = (direction) => {
     const carousel = document.getElementById("areasCarousel");
-    const cardWidth = carousel.querySelector(".area-card").offsetWidth + 32;
+    if (!carousel) return;
+
+    const cards = carousel.querySelectorAll(".area-card");
+    if (cards.length === 0) return;
+
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 32; // 2rem de gap
+    const scrollAmount = cardWidth + gap;
+
     carousel.scrollBy({
-      left: direction * cardWidth,
+      left: direction * scrollAmount,
       behavior: "smooth",
     });
   };
@@ -237,12 +246,14 @@ const GruposPeniel = () => {
                 <button
                   className="areas-carousel-btn prev"
                   onClick={() => scrollAreasCarousel(-1)}
+                  aria-label="Anterior"
                 >
                   <i className="fas fa-chevron-left"></i>
                 </button>
                 <button
                   className="areas-carousel-btn next"
                   onClick={() => scrollAreasCarousel(1)}
+                  aria-label="Siguiente"
                 >
                   <i className="fas fa-chevron-right"></i>
                 </button>
@@ -397,10 +408,12 @@ const GruposPeniel = () => {
                   onClick={() => setShowModal(true)}
                   className="btn-clean primary"
                 >
-                  Haz clic si quieres formar parte
+                  <i className="fas fa-users"></i>
+                  Formar parte ahora
                 </button>
               </div>
               <div className="contact-info">
+                <i className="fas fa-phone-alt"></i>
                 También puedes escribirnos al <strong>+34 609 377 944</strong>
               </div>
             </div>
