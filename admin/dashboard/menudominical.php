@@ -7,6 +7,35 @@ if (!isset($_SESSION['admin_user'])) {
     exit;
 }
 
+function limpiarRegistrosAntiguos($pdo) {
+    try {
+        $hoy = new DateTime();
+        $diaSemana = (int)$hoy->format('N');
+        
+        if ($diaSemana >= 1) {
+            $ultimoDomingo = clone $hoy;
+            if ($diaSemana == 7) {
+                $ultimoDomingo->modify('today');
+            } else {
+                $ultimoDomingo->modify('last Sunday');
+            }
+            
+            $fechaLimite = $ultimoDomingo->format('Y-m-d 23:59:59');
+            
+            $stmt = $pdo->prepare("DELETE FROM menudominical WHERE fecha <= ?");
+            $stmt->execute([$fechaLimite]);
+            
+            return $stmt->rowCount();
+        }
+        return 0;
+    } catch (Exception $e) {
+        error_log("Error al limpiar registros antiguos: " . $e->getMessage());
+        return 0;
+    }
+}
+
+$registrosEliminados = limpiarRegistrosAntiguos($pdo);
+
 try {
     $stmt = $pdo->query("SELECT COUNT(*) as total FROM menudominical");
     $totalMenus = $stmt->fetch()['total'];
@@ -14,7 +43,6 @@ try {
     $stmt = $pdo->query("SELECT id, nombre, telefono, cantidad, forma_pago, fecha FROM menudominical ORDER BY fecha DESC");
     $menus = $stmt->fetchAll();
     
-    // Calcular totales
     $totalPlatos = 0;
     $totalEfectivo = 0;
     $totalBizum = 0;
@@ -94,6 +122,15 @@ try {
             gap: 15px;
             align-items: center;
         }
+        .info-message {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +154,13 @@ try {
                     </a>
                 </div>
             </div>
+
+            <?php if ($registrosEliminados > 0): ?>
+                <div class="info-message" id="infoMessage">
+                    <i class="fas fa-info-circle"></i>
+                    Se eliminaron <?php echo $registrosEliminados; ?> registro(s) del domingo pasado automáticamente
+                </div>
+            <?php endif; ?>
 
             <?php if (isset($error)): ?>
                 <div class="error-message">

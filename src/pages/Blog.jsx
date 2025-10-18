@@ -18,7 +18,7 @@ const Blog = () => {
   const fetchDevocionales = async () => {
     setLoading(true);
     try {
-      const url = `https://orangered-guanaco-582072.hostingersite.com/api/blog.php?limit=${limit}&offset=${offset}`;
+      const url = `https://penielmadrid.es/api/blog.php?limit=${limit}&offset=${offset}`;
 
       const response = await fetch(url);
       const data = await response.json();

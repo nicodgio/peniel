@@ -12,21 +12,22 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
-    
+
     if (!empty($username) && !empty($password)) {
         try {
-            $stmt = $pdo->prepare("SELECT id, username, password, Nombre, rol FROM usuarios WHERE username = ?");
+            $stmt = $pdo->prepare("SELECT id, username, password, Nombre, rol, permisos FROM usuarios WHERE username = ?");
             $stmt->execute([$username]);
             $user = $stmt->fetch();
-            
+
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['admin_user'] = [
                     'id' => $user['id'],
                     'username' => $user['username'],
                     'nombre' => $user['Nombre'],
-                    'rol' => $user['rol']
+                    'rol' => $user['rol'],
+                    'permisos' => $user['permisos'] ?? ''
                 ];
-                
+
                 header('Location: dashboard/dashboard.php');
                 exit;
             } else {
@@ -42,11 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
     <style>
         * {
             font-family: 'Montserrat', sans-serif;
@@ -69,13 +72,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             position: absolute;
             inset: 0;
             background: radial-gradient(circle at 30% 40%, rgba(96, 155, 232, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(96, 155, 232, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 70% 60%, rgba(96, 155, 232, 0.05) 0%, transparent 50%);
             animation: pulse 6s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .login-container {
@@ -210,16 +220,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 padding: 2rem;
                 margin: 1rem;
             }
-            
+
             .login-title {
                 font-size: 1.6rem;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="login-bg-effect"></div>
-    
+
     <div class="login-container">
         <div class="login-header">
             <div class="admin-badge">Administración</div>
@@ -234,27 +245,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST">
             <div class="form-group">
                 <label for="username" class="form-label">Usuario</label>
-                <input 
-                    type="text" 
-                    id="username" 
-                    name="username" 
-                    class="form-input" 
-                    placeholder="Ingresa tu usuario"
-                    value="<?php echo htmlspecialchars($username ?? ''); ?>"
-                    required
-                >
+                <input type="text" id="username" name="username" class="form-input" placeholder="Ingresa tu usuario"
+                    value="<?php echo htmlspecialchars($username ?? ''); ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="password" class="form-label">Contraseña</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    class="form-input" 
-                    placeholder="Ingresa tu contraseña"
-                    required
-                >
+                <input type="password" id="password" name="password" class="form-input"
+                    placeholder="Ingresa tu contraseña" required>
             </div>
 
             <button type="submit" class="login-btn">Iniciar Sesión</button>
@@ -265,4 +263,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </body>
+
 </html>

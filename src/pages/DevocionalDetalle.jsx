@@ -17,7 +17,7 @@ const DevocionalDetalle = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://orangered-guanaco-582072.hostingersite.com/api/blog-detalle.php?id=${id}`
+        `https://penielmadrid.es/api/blog-detalle.php?id=${id}`
       );
       const data = await response.json();
 

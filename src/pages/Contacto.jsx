@@ -28,7 +28,7 @@ const Contacto = () => {
 
     try {
       const response = await fetch(
-        "https://lightcyan-boar-659405.hostingersite.com/api/contacto.php",
+        "https://penielmadrid.es/api/contacto.php",
         {
           method: "POST",
           headers: {

@@ -6,6 +6,8 @@ if (!isset($_SESSION['admin_user'])) {
     header('Location: ../login.php');
     exit;
 }
+
+$user = $_SESSION['admin_user'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -195,89 +197,44 @@ if (!isset($_SESSION['admin_user'])) {
             <div class="header">
                 <h1 class="page-title">Dashboard</h1>
                 <div class="header-actions">
-                    <a href="../" class="btn btn-primary" target="_blank">
+                    <a href="https://penielmadrid.es" class="btn btn-primary" target="_blank">
                         <i class="fas fa-external-link-alt"></i>
                         Ver Sitio Web
                     </a>
                 </div>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-value">247</div>
-                    <div class="stat-label">Miembros Registrados</div>
-                    <div class="stat-trend trend-up">
-                        <i class="fas fa-arrow-up"></i>
-                        +12% este mes
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <div class="stat-value">8</div>
-                    <div class="stat-label">Eventos Próximos</div>
-                    <div class="stat-trend trend-up">
-                        <i class="fas fa-arrow-up"></i>
-                        3 esta semana
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <div class="stat-value">1,524</div>
-                    <div class="stat-label">Visualizaciones Live</div>
-                    <div class="stat-trend trend-down">
-                        <i class="fas fa-arrow-down"></i>
-                        -5% última semana
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div class="stat-value">45</div>
-                    <div class="stat-label">Predicaciones</div>
-                    <div class="stat-trend trend-up">
-                        <i class="fas fa-arrow-up"></i>
-                        2 nuevas
-                    </div>
-                </div>
-            </div>
-
             <div class="modules-grid">
-                <a href="#" class="module-card">
+                <?php if ($user['rol'] === 'admin'): ?>
+                <a href="usuarios.php" class="module-card">
                     <div class="module-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="module-title">Gestión de Usuarios</h3>
                     <p class="module-description">Administrar miembros, permisos y roles del sistema</p>
                     <div class="module-status">
-                        <span>Próximamente</span>
-                        <span class="status-badge status-pending">Pendiente</span>
+                        <span>Disponible</span>
+                        <span class="status-badge status-active">Activo</span>
                     </div>
                 </a>
+                <?php endif; ?>
 
-                <a href="#" class="module-card">
+                <?php if (tienePermiso('eventos')): ?>
+                <a href="eventos.php" class="module-card">
                     <div class="module-icon">
                         <i class="fas fa-calendar"></i>
                     </div>
                     <h3 class="module-title">Eventos</h3>
                     <p class="module-description">Crear y gestionar eventos, actividades y programaciones</p>
                     <div class="module-status">
-                        <span>Próximamente</span>
-                        <span class="status-badge status-pending">Pendiente</span>
+                        <span>Disponible</span>
+                        <span class="status-badge status-active">Activo</span>
                     </div>
                 </a>
+                <?php endif; ?>
 
-                <a href="#" class="module-card">
+                <?php if (tienePermiso('transmisiones')): ?>
+                <a href="transmisiones.php" class="module-card">
                     <div class="module-icon">
                         <i class="fas fa-video"></i>
                     </div>
@@ -288,8 +245,10 @@ if (!isset($_SESSION['admin_user'])) {
                         <span class="status-badge status-pending">Pendiente</span>
                     </div>
                 </a>
+                <?php endif; ?>
 
-                <a href="#" class="module-card">
+                <?php if (tienePermiso('ministerios')): ?>
+                <a href="ministerios.php" class="module-card">
                     <div class="module-icon">
                         <i class="fas fa-hands-praying"></i>
                     </div>
@@ -300,30 +259,35 @@ if (!isset($_SESSION['admin_user'])) {
                         <span class="status-badge status-pending">Pendiente</span>
                     </div>
                 </a>
+                <?php endif; ?>
 
-                <a href="#" class="module-card">
+                <?php if (tienePermiso('predicaciones')): ?>
+                <a href="predicaciones.php" class="module-card">
                     <div class="module-icon">
                         <i class="fas fa-bible"></i>
                     </div>
                     <h3 class="module-title">Predicaciones</h3>
-                    <p class="module-description">Subir y gestionar videos de predicaciones y estudios</p>
-                    <div class="module-status">
-                        <span>Próximamente</span>
-                        <span class="status-badge status-pending">Pendiente</span>
-                    </div>
-                </a>
-
-                <a href="menudominical.php" class="module-card">
-                    <div class="module-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3 class="module-title">Menú Dominical</h3>
-                    <p class="module-description">Actualizar menú semanal y información de comidas</p>
+                    <p class="module-description">Gestionar videos de predicaciones de YouTube</p>
                     <div class="module-status">
                         <span>Disponible</span>
                         <span class="status-badge status-active">Activo</span>
                     </div>
                 </a>
+                <?php endif; ?>
+
+                <?php if (tienePermiso('menu_dominical')): ?>
+                <a href="menudominical.php" class="module-card">
+                    <div class="module-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="module-title">Menú Dominical</h3>
+                    <p class="module-description">Gestionar registros del menú dominical</p>
+                    <div class="module-status">
+                        <span>Disponible</span>
+                        <span class="status-badge status-active">Activo</span>
+                    </div>
+                </a>
+                <?php endif; ?>
             </div>
         </main>
     </div>

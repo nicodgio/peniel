@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Peniel Madrid</string>
+    <string name="title_activity_main">Peniel Madrid</string>
+    <string name="package_name">com.penielmadrid.es</string>
+    <string name="custom_url_scheme">com.penielmadrid.es</string>
+</resources>

@@ -44,7 +44,7 @@ const Home = () => {
   const fetchEventos = async () => {
     try {
       const response = await fetch(
-        "https://lightcyan-boar-659405.hostingersite.com/api/eventos.php"
+        "https://penielmadrid.es/api/eventos.php"
       );
       const data = await response.json();
       if (data.success) {
@@ -67,13 +67,12 @@ const Home = () => {
       formData.append("cantidad", menuForm.cantidad);
       formData.append("forma_pago", menuForm.forma_pago);
       
-      // Si es Bizum y hay comprobante, agregarlo
       if (menuForm.forma_pago === "bizum" && comprobante) {
         formData.append("comprobante", comprobante);
       }
 
       const response = await fetch(
-        "https://lightcyan-boar-659405.hostingersite.com/api/menu-registro.php",
+        "https://penielmadrid.es/api/menu-registro.php",
         {
           method: "POST",
           body: formData,
@@ -113,13 +112,11 @@ const Home = () => {
   const handleComprobanteChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Validar que sea una imagen
       if (!file.type.startsWith('image/')) {
         setFormMessage("Por favor selecciona una imagen válida");
         return;
       }
       
-      // Validar tamaño (máximo 5MB)
       if (file.size > 5 * 1024 * 1024) {
         setFormMessage("La imagen no debe superar los 5MB");
         return;
@@ -127,7 +124,6 @@ const Home = () => {
       
       setComprobante(file);
       
-      // Crear preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setComprobantePreview(reader.result);
@@ -476,40 +472,50 @@ const Home = () => {
               </div>
 
               {menuForm.forma_pago === "bizum" && (
-                <div className="form-group">
-                  <label>Comprobante de pago (opcional)</label>
-                  <div className="file-upload-container">
-                    {!comprobantePreview ? (
-                      <label className="file-upload-label">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleComprobanteChange}
-                          className="file-upload-input"
-                        />
-                        <div className="file-upload-box">
-                          <i className="fas fa-cloud-upload-alt"></i>
-                          <span>Subir comprobante</span>
-                          <small>JPG, PNG o GIF (máx. 5MB)</small>
-                        </div>
-                      </label>
-                    ) : (
-                      <div className="comprobante-preview">
-                        <img src={comprobantePreview} alt="Comprobante" />
-                        <button
-                          type="button"
-                          onClick={removeComprobante}
-                          className="remove-comprobante"
-                        >
-                          <i className="fas fa-times"></i>
-                        </button>
-                      </div>
-                    )}
+                <>
+                  <div className="bizum-info">
+                    <i className="fas fa-mobile-alt"></i>
+                    <div>
+                      <strong>Código 07145</strong>
+                      <span>Opción "donativo"</span>
+                    </div>
                   </div>
-                  <small className="form-help">
-                    Envía tu comprobante de Bizum para agilizar tu registro
-                  </small>
-                </div>
+                  
+                  <div className="form-group">
+                    <label>Comprobante de pago (opcional)</label>
+                    <div className="file-upload-container">
+                      {!comprobantePreview ? (
+                        <label className="file-upload-label">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleComprobanteChange}
+                            className="file-upload-input"
+                          />
+                          <div className="file-upload-box">
+                            <i className="fas fa-cloud-upload-alt"></i>
+                            <span>Subir comprobante</span>
+                            <small>JPG, PNG o GIF (máx. 5MB)</small>
+                          </div>
+                        </label>
+                      ) : (
+                        <div className="comprobante-preview">
+                          <img src={comprobantePreview} alt="Comprobante" />
+                          <button
+                            type="button"
+                            onClick={removeComprobante}
+                            className="remove-comprobante"
+                          >
+                            <i className="fas fa-times"></i>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                    <small className="form-help">
+                      Envía tu comprobante de Bizum para agilizar tu registro
+                    </small>
+                  </div>
+                </>
               )}
 
               <button

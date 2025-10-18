@@ -91,7 +91,7 @@ const GruposPeniel = () => {
 
     try {
       const response = await fetch(
-        "https://lightcyan-boar-659405.hostingersite.com/api/grupospeniel.php",
+        "https://penielmadrid.es/api/grupospeniel.php",
         {
           method: "POST",
           headers: {

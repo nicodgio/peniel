@@ -532,6 +532,42 @@ body {
   background: rgba(255, 0, 0, 1);
   transform: scale(1.1);
 }
+.menu-modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.bizum-info {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 4px;
+}
+
+.bizum-info i {
+  font-size: 24px;
+  color: #2196f3;
+}
+
+.bizum-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bizum-info strong {
+  font-size: 16px;
+  color: #1976d2;
+}
+
+.bizum-info span {
+  font-size: 14px;
+  color: #555;
+}
 
 .form-help {
   display: block;

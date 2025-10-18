@@ -39,6 +39,7 @@ const Ministerios = () => {
       icono: "fas fa-hands-helping",
       color: "#e74c3c",
       imagen: "/imgs/ministerios/accion-social.jpg",
+      videoUrl: "/videos/ministerios/accionsocial.mp4",
     },
     {
       id: "peniel-ng",
