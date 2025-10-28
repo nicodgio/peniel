@@ -16,13 +16,33 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 try {
-    // Obtener datos del formulario
+    $config = $pdo->query("SELECT * FROM config_menu WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$config || !$config['activo']) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'El registro de menú no está disponible en este momento'
+        ]);
+        exit;
+    }
+    
+    date_default_timezone_set('Europe/Madrid');
+    $ahora = new DateTime();
+    $hora_limite = new DateTime($config['hora_limite']);
+    
+    if ($ahora >= $hora_limite) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'El plazo para registrarse ha finalizado. El registro cierra los sábados a las 00:00h'
+        ]);
+        exit;
+    }
+    
     $nombre = trim($_POST['nombre'] ?? '');
     $telefono = trim($_POST['telefono'] ?? '');
     $cantidad = (int)($_POST['cantidad'] ?? 1);
     $forma_pago = trim($_POST['forma_pago'] ?? 'efectivo');
     
-    // Validar campos obligatorios
     if (empty($nombre) || empty($telefono) || $cantidad < 1) {
         echo json_encode([
             'success' => false,
@@ -31,16 +51,14 @@ try {
         exit;
     }
     
-    // Validar cantidad máxima
     if ($cantidad > 10) {
         echo json_encode([
             'success' => false,
-            'message' => 'La cantidad máxima es de 10 personas'
+            'message' => 'La cantidad máxima es de 10 platos por persona'
         ]);
         exit;
     }
     
-    // Validar forma de pago
     if (!in_array($forma_pago, ['efectivo', 'bizum'])) {
         echo json_encode([
             'success' => false,
@@ -49,32 +67,41 @@ try {
         exit;
     }
     
-    // Insertar en la base de datos
+    $stmt = $pdo->query("SELECT COALESCE(SUM(cantidad), 0) as total_vendidos FROM menudominical WHERE fecha = CURDATE()");
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    $total_vendidos = $resultado['total_vendidos'];
+    $platos_restantes = $config['platos_disponibles'] - $total_vendidos;
+    
+    if ($cantidad > $platos_restantes) {
+        echo json_encode([
+            'success' => false,
+            'message' => $platos_restantes > 0 
+                ? "Solo quedan {$platos_restantes} platos disponibles" 
+                : "Lo sentimos, ya no hay platos disponibles"
+        ]);
+        exit;
+    }
+    
     $stmt = $pdo->prepare("INSERT INTO menudominical (nombre, telefono, cantidad, forma_pago, fecha) VALUES (?, ?, ?, ?, CURDATE())");
     $stmt->execute([$nombre, $telefono, $cantidad, $forma_pago]);
     
-    // Si es Bizum, enviar notificación a Telegram
     if ($forma_pago === 'bizum') {
-        // Configuración de Telegram
         $telegram_token = "7956966475:AAHYJZbmtT4CYBMEA8xF-a9oZqX6LEDyKqE";
         $chat_id = "-4925348780";
         
-        // Preparar el mensaje
-        $personas_texto = $cantidad === 1 ? "persona" : "personas";
+        $platos_texto = $cantidad === 1 ? "plato" : "platos";
         $mensaje = "🍽️ *NUEVO REGISTRO - MENÚ DOMINICAL*\n\n";
         $mensaje .= "👤 *Nombre:* {$nombre}\n";
         $mensaje .= "📱 *Teléfono:* {$telefono}\n";
-        $mensaje .= "🍴 *Cantidad:* {$cantidad} {$personas_texto}\n";
+        $mensaje .= "🍴 *Cantidad:* {$cantidad} {$platos_texto}\n";
         $mensaje .= "💳 *Forma de pago:* Bizum\n";
         $mensaje .= "📅 *Fecha:* " . date('d/m/Y') . "\n";
         
-        // Verificar si hay imagen adjunta
         if (isset($_FILES['comprobante']) && $_FILES['comprobante']['error'] === UPLOAD_ERR_OK) {
             $file_tmp = $_FILES['comprobante']['tmp_name'];
             $file_name = $_FILES['comprobante']['name'];
             $file_type = $_FILES['comprobante']['type'];
             
-            // Validar que sea una imagen
             $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
             if (!in_array($file_type, $allowed_types)) {
                 echo json_encode([
@@ -84,7 +111,6 @@ try {
                 exit;
             }
             
-            // Enviar foto a Telegram con el mensaje como caption
             $url = "https://api.telegram.org/bot{$telegram_token}/sendPhoto";
             
             $post_fields = [
@@ -104,12 +130,10 @@ try {
             $telegram_data = json_decode($telegram_response, true);
             curl_close($ch);
             
-            // Verificar si el envío fue exitoso
             if (!$telegram_data['ok']) {
                 error_log("Error enviando a Telegram: " . $telegram_response);
             }
         } else {
-            // Si no hay imagen, enviar solo el mensaje de texto
             $url = "https://api.telegram.org/bot{$telegram_token}/sendMessage";
             
             $mensaje .= "\n⚠️ *No se adjuntó comprobante*";

@@ -7,6 +7,57 @@ if (!isset($_SESSION['admin_user'])) {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action'])) {
+        if ($_POST['action'] === 'actualizar_config') {
+            try {
+                $platos_disponibles = (int)$_POST['platos_disponibles'];
+                
+                date_default_timezone_set('Europe/Madrid');
+                $ahora = new DateTime();
+                $diaSemana = (int)$ahora->format('N');
+                
+                if ($diaSemana == 6) {
+                    $proximoSabado = clone $ahora;
+                    $proximoSabado->setTime(0, 0, 0);
+                    
+                    if ($ahora >= $proximoSabado) {
+                        $proximoSabado->modify('+7 days');
+                    }
+                } else {
+                    $proximoSabado = clone $ahora;
+                    if ($diaSemana == 7) {
+                        $proximoSabado->modify('+6 days');
+                    } else {
+                        $diasHastaSabado = 6 - $diaSemana;
+                        $proximoSabado->modify("+{$diasHastaSabado} days");
+                    }
+                    $proximoSabado->setTime(0, 0, 0);
+                }
+                
+                $hora_limite = $proximoSabado->format('Y-m-d H:i:s');
+                
+                $stmt = $pdo->prepare("UPDATE config_menu SET platos_disponibles = ?, hora_limite = ? WHERE id = 1");
+                $stmt->execute([$platos_disponibles, $hora_limite]);
+                
+                $success_message = "Configuración actualizada. Fecha límite: " . $proximoSabado->format('d/m/Y H:i');
+            } catch (PDOException $e) {
+                $error_message = "Error al actualizar la configuración: " . $e->getMessage();
+            }
+        } elseif ($_POST['action'] === 'eliminar_registro') {
+            try {
+                $id = (int)$_POST['id'];
+                $stmt = $pdo->prepare("DELETE FROM menudominical WHERE id = ?");
+                $stmt->execute([$id]);
+                
+                $success_message = "Registro eliminado correctamente";
+            } catch (PDOException $e) {
+                $error_message = "Error al eliminar el registro: " . $e->getMessage();
+            }
+        }
+    }
+}
+
 function limpiarRegistrosAntiguos($pdo) {
     try {
         $hoy = new DateTime();
@@ -37,6 +88,13 @@ function limpiarRegistrosAntiguos($pdo) {
 $registrosEliminados = limpiarRegistrosAntiguos($pdo);
 
 try {
+    $config = $pdo->query("SELECT * FROM config_menu WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$config) {
+        $pdo->exec("INSERT INTO config_menu (platos_disponibles, hora_limite, activo) VALUES (50, '2025-11-01 00:00:00', 1)");
+        $config = $pdo->query("SELECT * FROM config_menu WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
+    }
+    
     $stmt = $pdo->query("SELECT COUNT(*) as total FROM menudominical");
     $totalMenus = $stmt->fetch()['total'];
     
@@ -71,8 +129,19 @@ try {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="includes/admin_styles.css">
     <style>
-        .export-btn {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        * {
+            box-sizing: border-box;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 12px 24px;
             border: none;
@@ -84,52 +153,283 @@ try {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.95rem;
         }
-        .export-btn:hover {
+
+        .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
+
+        .action-btn.export {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .action-btn.export:hover {
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .action-btn.config {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .action-btn.config:hover {
+            box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+        }
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
+
         .stat-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 25px;
+            border-radius: 15px;
             color: white;
             text-align: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
         }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
         .stat-card.efectivo {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
+
         .stat-card.bizum {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
+
+        .stat-card.disponibles {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
             margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
+
         .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            font-weight: 500;
         }
-        .header-actions {
+
+        .message-box {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
             display: flex;
-            gap: 15px;
             align-items: center;
+            gap: 12px;
+            font-weight: 500;
         }
-        .info-message {
-            background: rgba(74, 222, 128, 0.2);
-            color: #4ade80;
-            border: 1px solid rgba(74, 222, 128, 0.3);
-            padding: 1rem;
+
+        .message-box.success {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(16, 185, 129, 0.15));
+            color: #059669;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .message-box.error {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.15));
+            color: #dc2626;
+            border: 2px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .message-box.info {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.15));
+            color: #2563eb;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #1a1d2e;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-body {
+            padding: 30px;
+            background: #1a1d2e;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #2d3748;
             border-radius: 10px;
-            margin-bottom: 2rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            background: #0f1117;
+            color: #e2e8f0;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            background: #151823;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .modal-btn.secondary {
+            background: #2d3748;
+            color: #e2e8f0;
+            border: 1px solid #4a5568;
+        }
+
+        .modal-btn.secondary:hover {
+            background: #4a5568;
+        }
+
+        .modal-btn.danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .modal-btn.danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
+
+        .confirm-modal .modal-body {
             text-align: center;
+            padding: 40px 30px;
+            background: #1a1d2e;
+        }
+
+        .confirm-modal .icon-warning {
+            font-size: 4rem;
+            color: #ef4444;
+            margin-bottom: 20px;
+        }
+
+        .confirm-modal h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #e2e8f0;
+        }
+
+        .confirm-modal p {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
         }
     </style>
 </head>
@@ -144,35 +444,53 @@ try {
                     Menú Dominical
                 </h1>
                 <div class="header-actions">
-                    <a href="export-menu-pdf.php" class="export-btn" target="_blank">
+                    <button type="button" class="action-btn config" id="btnConfig">
+                        <i class="fas fa-cog"></i>
+                        Configuración
+                    </button>
+                    <a href="export-menu-pdf.php" class="action-btn export" target="_blank">
                         <i class="fas fa-file-pdf"></i>
                         Exportar PDF
                     </a>
                     <a href="dashboard.php" class="btn back-btn">
                         <i class="fas fa-arrow-left"></i>
-                        Volver al Dashboard
+                        Volver
                     </a>
                 </div>
             </div>
 
-            <?php if ($registrosEliminados > 0): ?>
-                <div class="info-message" id="infoMessage">
-                    <i class="fas fa-info-circle"></i>
-                    Se eliminaron <?php echo $registrosEliminados; ?> registro(s) del domingo pasado automáticamente
+            <?php if (isset($success_message)): ?>
+                <div class="message-box success">
+                    <i class="fas fa-check-circle"></i>
+                    <span><?php echo htmlspecialchars($success_message); ?></span>
                 </div>
             <?php endif; ?>
 
-            <?php if (isset($error)): ?>
-                <div class="error-message">
-                    <?php echo htmlspecialchars($error); ?>
+            <?php if (isset($error_message)): ?>
+                <div class="message-box error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span><?php echo htmlspecialchars($error_message); ?></span>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($registrosEliminados > 0): ?>
+                <div class="message-box info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Se eliminaron <?php echo $registrosEliminados; ?> registro(s) del domingo pasado automáticamente</span>
                 </div>
             <?php endif; ?>
 
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-label">TOTAL PLATOS</div>
+                    <div class="stat-label">TOTAL PLATOS VENDIDOS</div>
                     <div class="stat-number"><?php echo number_format($totalPlatos); ?></div>
                     <div class="stat-label"><?php echo $totalMenus; ?> personas registradas</div>
+                </div>
+                
+                <div class="stat-card disponibles">
+                    <div class="stat-label">PLATOS DISPONIBLES</div>
+                    <div class="stat-number"><?php echo number_format($config['platos_disponibles'] - $totalPlatos); ?></div>
+                    <div class="stat-label">de <?php echo $config['platos_disponibles']; ?> totales</div>
                 </div>
                 
                 <div class="stat-card efectivo">
@@ -215,6 +533,7 @@ try {
                                     <th>Cantidad</th>
                                     <th>Forma de Pago</th>
                                     <th>Fecha</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -225,7 +544,7 @@ try {
                                         <td><?php echo htmlspecialchars($menu['telefono']); ?></td>
                                         <td>
                                             <span class="quantity-badge">
-                                                <?php echo htmlspecialchars($menu['cantidad']); ?> personas
+                                                <?php echo htmlspecialchars($menu['cantidad']); ?> platos
                                             </span>
                                         </td>
                                         <td>
@@ -244,6 +563,13 @@ try {
                                                 <?php echo date('d/m/Y', strtotime($menu['fecha'])); ?>
                                             </span>
                                         </td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="delete-btn" onclick="confirmarEliminacion(<?php echo $menu['id']; ?>, '<?php echo htmlspecialchars($menu['nombre']); ?>')">
+                                                    <i class="fas fa-trash"></i> Eliminar
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -253,5 +579,141 @@ try {
             </div>
         </main>
     </div>
+
+    <div id="configModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <i class="fas fa-cog"></i>
+                Configuración del Menú
+            </div>
+            <form method="POST">
+                <input type="hidden" name="action" value="actualizar_config">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="platos_disponibles">
+                            <i class="fas fa-pizza-slice"></i>
+                            Platos Disponibles
+                        </label>
+                        <input 
+                            type="number" 
+                            id="platos_disponibles" 
+                            name="platos_disponibles" 
+                            value="<?php echo htmlspecialchars($config['platos_disponibles']); ?>"
+                            min="1"
+                            required
+                        >
+                    </div>
+                    
+                    <div style="background: rgba(102, 126, 234, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(102, 126, 234, 0.3);">
+                        <p style="margin: 0; color: #94a3b8; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle" style="color: #667eea;"></i>
+                            La fecha límite se establecerá automáticamente para el próximo sábado a las 00:00 (hora Madrid)
+                        </p>
+                        <p style="margin: 10px 0 0 0; color: #e2e8f0; font-weight: 600; font-size: 0.95rem;">
+                            <i class="fas fa-clock"></i>
+                            Próxima fecha límite: 
+                            <?php 
+                            date_default_timezone_set('Europe/Madrid');
+                            $fecha_limite = new DateTime($config['hora_limite']);
+                            echo $fecha_limite->format('d/m/Y H:i');
+                            ?>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-btn secondary" id="btnCerrarConfig">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="modal-btn primary">
+                        <i class="fas fa-save"></i>
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal-overlay confirm-modal">
+        <div class="modal-box">
+            <div class="modal-body">
+                <div class="icon-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Confirmar Eliminación</h3>
+                <p id="deleteMessage"></p>
+            </div>
+            <form method="POST">
+                <input type="hidden" name="action" value="eliminar_registro">
+                <input type="hidden" name="id" id="deleteId">
+                <div class="modal-footer">
+                    <button type="button" class="modal-btn secondary" id="btnCerrarDelete">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="modal-btn danger">
+                        <i class="fas fa-trash"></i>
+                        Eliminar Registro
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const configModal = document.getElementById('configModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const btnConfig = document.getElementById('btnConfig');
+        const btnCerrarConfig = document.getElementById('btnCerrarConfig');
+        const btnCerrarDelete = document.getElementById('btnCerrarDelete');
+
+        btnConfig.addEventListener('click', function() {
+            configModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        btnCerrarConfig.addEventListener('click', function() {
+            configModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        btnCerrarDelete.addEventListener('click', function() {
+            deleteModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        configModal.addEventListener('click', function(e) {
+            if (e.target === configModal) {
+                configModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        deleteModal.addEventListener('click', function(e) {
+            if (e.target === deleteModal) {
+                deleteModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function confirmarEliminacion(id, nombre) {
+            document.getElementById('deleteId').value = id;
+            document.getElementById('deleteMessage').textContent = '¿Estás seguro de que deseas eliminar el registro de ' + nombre + '?';
+            deleteModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        setTimeout(function() {
+            const messages = document.querySelectorAll('.message-box');
+            messages.forEach(function(message) {
+                message.style.transition = 'opacity 0.5s, transform 0.5s';
+                message.style.opacity = '0';
+                message.style.transform = 'translateY(-10px)';
+                setTimeout(function() {
+                    message.remove();
+                }, 500);
+            });
+        }, 5000);
+    </script>
 </body>
 </html>

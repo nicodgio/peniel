@@ -101,14 +101,14 @@ const Navbar = () => {
                 DONACIONES
               </Link>
             </li>
-            {/* <li>
+            <li>
               <Link
                 to="/blog"
                 className={location.pathname === "/blog" ? "active" : ""}
               >
                 BLOG
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link
                 to="/contacto"
@@ -207,7 +207,7 @@ const Navbar = () => {
                 DONACIONES
               </Link>
             </li>
-            {/* <li>
+            <li>
               <Link
                 to="/blog"
                 className={location.pathname === "/blog" ? "active" : ""}
@@ -215,7 +215,7 @@ const Navbar = () => {
               >
                 BLOG
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link
                 to="/contacto"
