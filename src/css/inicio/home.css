@@ -153,6 +153,162 @@ body {
   width: 100%;
 }
 
+.live-stream {
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.live-stream::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(220, 38, 38, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(96, 155, 232, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.live-stream-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+  animation: pulse-live 2s ease-in-out infinite;
+  position: relative;
+}
+
+.live-badge::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50px;
+  padding: 2px;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(220, 38, 38, 0.6);
+  }
+}
+
+@keyframes border-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.live-dot {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: blink-live 1.5s ease-in-out infinite;
+}
+
+@keyframes blink-live {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+.live-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.live-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.live-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.live-description {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  border-left: 4px solid #609be8;
+}
+
+.live-video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: #000;
+  transition: all 0.3s ease;
+}
+
+.live-video-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.live-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .visitanos-banner {
   padding: 4rem 1rem;
   background: #0a0a0a;
@@ -407,47 +563,6 @@ body {
   background-color: #333;
 }
 
-.ministerio-card:nth-child(1) .ministerio-img {
-  background-image: url('/imgs/ministerios/accion-social.jpg'), linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.ministerio-card:nth-child(2) .ministerio-img {
-  background-image: url('/imgs/ministerios/ados.jpg'), linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.ministerio-card:nth-child(3) .ministerio-img {
-  background-image: url('/imgs/ministerios/kids.jpg'), linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.ministerio-card:nth-child(4) .ministerio-img {
-  background-image: url('/imgs/ministerios/atencion-primaria.png'), linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-}
-
-.ministerio-card:nth-child(5) .ministerio-img {
-  background-image: url('/imgs/ministerios/instituto.jpg'), linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-}
-
-.ministerio-card:nth-child(6) .ministerio-img {
-  background-image: url('/imgs/ministerios/misiones.jpg'), linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-}
-
-.ministerio-card:nth-child(7) .ministerio-img {
-  background-image: url('/imgs/ministerios/evangelismo.jpg'), linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-}
-
-.ministerio-card:nth-child(8) .ministerio-img {
-  background-image: url('/imgs/ministerios/grupospeniel.jpeg'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-}
-
-.ministerio-card:nth-child(9) .ministerio-img {
-  background-image: url('/imgs/ministerios/adoracion.jpg'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-}
-
-.ministerio-card:nth-child(10) .ministerio-img {
-  background-image: url('/imgs/ministerios/ministerio-sordos.png'), linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-}
-
-/* Estilos para la carga de comprobante */
 .file-upload-container {
   margin-top: 0.5rem;
 }
@@ -532,6 +647,7 @@ body {
   background: rgba(255, 0, 0, 1);
   transform: scale(1.1);
 }
+
 .menu-modal-content {
   max-height: 90vh;
   overflow-y: auto;
@@ -978,6 +1094,23 @@ body {
     font-size: 0.9rem;
   }
 
+  .live-stream {
+    padding: 4rem 2rem;
+  }
+
+  .live-stream {
+    padding: 4rem 2rem;
+  }
+
+  .live-title {
+    font-size: 2.2rem;
+  }
+
+  .live-description {
+    font-size: 1rem;
+    padding: 1.2rem 1.5rem;
+  }
+
   .visitanos-image img,
   .menu-image img {
     height: 300px;
@@ -1024,6 +1157,25 @@ body {
     padding: 1rem 2.5rem;
     font-size: 0.9rem;
     min-width: auto;
+  }
+
+  .live-stream {
+    padding: 5rem 2rem;
+  }
+
+  .live-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .live-title {
+    font-size: 2.5rem;
+  }
+
+  .live-description {
+    font-size: 1.1rem;
   }
 
   .visitanos-banner,
@@ -1211,6 +1363,23 @@ body {
 
   .hero-info-item strong {
     font-size: 1rem;
+  }
+
+  .live-stream {
+    padding: 6rem 4rem;
+  }
+
+  .live-content {
+    gap: 5rem;
+  }
+
+  .live-title {
+    font-size: 3.5rem;
+  }
+
+  .live-description {
+    font-size: 1.2rem;
+    padding: 2rem 2.5rem;
   }
 
   .visitanos-banner,

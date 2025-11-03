@@ -241,8 +241,8 @@ $user = $_SESSION['admin_user'];
                     <h3 class="module-title">Transmisiones</h3>
                     <p class="module-description">Configurar streams en vivo y enlaces de transmisión</p>
                     <div class="module-status">
-                        <span>Próximamente</span>
-                        <span class="status-badge status-pending">Pendiente</span>
+                        <span>Disponible</span>
+                        <span class="status-badge status-active">Activo</span>
                     </div>
                 </a>
                 <?php endif; ?>
@@ -255,8 +255,8 @@ $user = $_SESSION['admin_user'];
                     <h3 class="module-title">Ministerios</h3>
                     <p class="module-description">Administrar ministerios, líderes y actividades</p>
                     <div class="module-status">
-                        <span>Próximamente</span>
-                        <span class="status-badge status-pending">Pendiente</span>
+                        <span>Disponible</span>
+                        <span class="status-badge status-active">Activo</span>
                     </div>
                 </a>
                 <?php endif; ?>

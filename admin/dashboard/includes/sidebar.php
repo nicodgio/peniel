@@ -8,11 +8,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 function tienePermiso($modulo) {
     global $user;
-    
     if ($user['rol'] === 'admin') {
         return true;
     }
-    
     $permisos = $user['permisos'] ?? '';
     return strpos($permisos, "|$modulo|") !== false;
 }
@@ -23,6 +21,7 @@ function tienePermiso($modulo) {
         <h2 class="sidebar-title">Dashboard</h2>
         <p class="sidebar-subtitle">Panel de Control</p>
     </div>
+    
     <nav>
         <ul class="sidebar-nav">
             <li class="nav-item">
@@ -31,7 +30,7 @@ function tienePermiso($modulo) {
                     Inicio
                 </a>
             </li>
-            
+
             <?php if ($user['rol'] === 'admin'): ?>
             <li class="nav-item">
                 <a href="usuarios.php" class="nav-link <?php echo ($current_page == 'usuarios.php') ? 'active' : ''; ?>">
@@ -40,7 +39,7 @@ function tienePermiso($modulo) {
                 </a>
             </li>
             <?php endif; ?>
-            
+
             <?php if (tienePermiso('eventos')): ?>
             <li class="nav-item">
                 <a href="eventos.php" class="nav-link <?php echo ($current_page == 'eventos.php') ? 'active' : ''; ?>">
@@ -49,7 +48,7 @@ function tienePermiso($modulo) {
                 </a>
             </li>
             <?php endif; ?>
-            
+
             <?php if (tienePermiso('transmisiones')): ?>
             <li class="nav-item">
                 <a href="transmisiones.php" class="nav-link <?php echo ($current_page == 'transmisiones.php') ? 'active' : ''; ?>">
@@ -58,7 +57,7 @@ function tienePermiso($modulo) {
                 </a>
             </li>
             <?php endif; ?>
-            
+
             <?php if (tienePermiso('ministerios')): ?>
             <li class="nav-item">
                 <a href="ministerios.php" class="nav-link <?php echo ($current_page == 'ministerios.php') ? 'active' : ''; ?>">
@@ -67,7 +66,7 @@ function tienePermiso($modulo) {
                 </a>
             </li>
             <?php endif; ?>
-            
+
             <?php if (tienePermiso('predicaciones')): ?>
             <li class="nav-item">
                 <a href="predicaciones.php" class="nav-link <?php echo ($current_page == 'predicaciones.php') ? 'active' : ''; ?>">
@@ -76,7 +75,7 @@ function tienePermiso($modulo) {
                 </a>
             </li>
             <?php endif; ?>
-            
+
             <?php if (tienePermiso('menu_dominical')): ?>
             <li class="nav-item">
                 <a href="menudominical.php" class="nav-link <?php echo ($current_page == 'menudominical.php') ? 'active' : ''; ?>">
@@ -87,6 +86,7 @@ function tienePermiso($modulo) {
             <?php endif; ?>
         </ul>
     </nav>
+
     <div class="user-info">
         <div class="user-name"><?php echo htmlspecialchars($user['nombre']); ?></div>
         <div class="user-role"><?php echo ucfirst($user['rol']); ?></div>

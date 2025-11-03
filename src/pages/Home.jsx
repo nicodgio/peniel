@@ -4,6 +4,8 @@ import "../css/inicio/home.css";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
+  const [ministerios, setMinisterios] = useState([]);
+  const [liveStream, setLiveStream] = useState(null);
   const [showMenuModal, setShowMenuModal] = useState(false);
   const [menuForm, setMenuForm] = useState({
     nombre: "",
@@ -32,6 +34,8 @@ const Home = () => {
 
   useEffect(() => {
     fetchEventos();
+    fetchMinisterios();
+    fetchLiveStream();
 
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -43,15 +47,37 @@ const Home = () => {
 
   const fetchEventos = async () => {
     try {
-      const response = await fetch(
-        "https://penielmadrid.es/api/eventos.php"
-      );
+      const response = await fetch("https://penielmadrid.es/api/eventos.php");
       const data = await response.json();
       if (data.success) {
         setEventos(data.eventos.slice(0, 3));
       }
     } catch (error) {
       console.error("Error cargando eventos:", error);
+    }
+  };
+
+  const fetchMinisterios = async () => {
+    try {
+      const response = await fetch("https://penielmadrid.es/api/ministerios.php");
+      const data = await response.json();
+      if (data.success) {
+        setMinisterios(data.ministerios);
+      }
+    } catch (error) {
+      console.error("Error cargando ministerios:", error);
+    }
+  };
+
+  const fetchLiveStream = async () => {
+    try {
+      const response = await fetch("https://penielmadrid.es/api/live-stream.php");
+      const data = await response.json();
+      if (data.success && data.live) {
+        setLiveStream(data.live);
+      }
+    } catch (error) {
+      console.error("Error cargando transmisión en vivo:", error);
     }
   };
 
@@ -155,69 +181,6 @@ const Home = () => {
     });
   };
 
-  const ministerios = [
-    {
-      meta: ["MENSUAL", "SERVICIO"],
-      title: "Acción Social",
-      description:
-        "Cada mes recogemos y distribuimos alimentos a más de 100 personas en riesgo de exclusión, evitando el desperdicio y ofreciendo también un ropero comunitario. Todo esto como expresión práctica del amor de Dios.",
-    },
-    {
-      meta: ["SÁBADOS", "19:00"],
-      title: "Peniel NG (Next Generation)",
-      description:
-        "Ministerio para adolescentes y jóvenes apasionados por Cristo. Crecemos en la fe, fortalecemos amistades y vivimos juntos la Palabra de Dios. También organizamos campamentos en verano e invierno.",
-    },
-    {
-      meta: ["DOMINGOS", "11:00"],
-      title: "Peniel Kids",
-      description:
-        "Ministerio para los niños de 3 a 11 años. Aprenden la Palabra de Dios de forma creativa y divertida cada domingo. Se dividen en tres grupos por edad: Exploradores (3-5 años), Valientes (6-9 años) y Detectives (9-11 años). Además, disfrutan de un campamento urbano especial en julio.",
-    },
-    {
-      meta: ["CONTINUO", "SERVICIO"],
-      title: "Atención Primaria y Consolidación",
-      description:
-        "El primer contacto para quienes llegan a la iglesia o comienzan su caminar con Jesús. Acompañamos a los recién convertidos para afianzar su relación con Dios e integrarse a la familia de la iglesia.",
-    },
-    {
-      meta: ["MARTES", "21:00"],
-      title: "Instituto Bíblico Peniel",
-      description:
-        "Formación semipresencial para profundizar en la Palabra y prepararse para el servicio ministerial. Material oficial de Global University con certificaciones internas.",
-    },
-    {
-      meta: ["GLOBAL", "9 PAÍSES"],
-      title: "Misiones",
-      description:
-        "Somos una comunidad misionera comprometida con llevar el evangelio a todas las naciones. Apoyamos 9 proyectos misioneros alrededor del mundo. Celebramos anualmente la Fiesta de las Naciones.",
-    },
-    {
-      meta: ["MIÉRCOLES", "19:00"],
-      title: "Evangelismo",
-      description:
-        "Cada semana salimos a llevar esperanza a nuestra ciudad. Punto de encuentro: Centro Comercial Alcalá Norte (Ciudad Lineal). No se necesita experiencia, solo un corazón dispuesto.",
-    },
-    {
-      meta: ["HOGARES", "SEMANAL"],
-      title: "Grupos Peniel",
-      description:
-        "Peniel es una iglesia en células con un solo propósito: alcanzar más almas. Las células llevan el evangelio a los hogares para dar a conocer el nombre de Dios a nuestros amigos, vecinos y comunidad.",
-    },
-    {
-      meta: ["DOMINGOS", "ADORACIÓN"],
-      title: "Alabanza y Adoración",
-      description:
-        "En Peniel, creemos que la alabanza y la adoración no son simplemente un momento del servicio, sino una expresión viva y poderosa de nuestra relación con Dios.",
-    },
-    {
-      meta: ["DOMINGOS", "SERVICIO"],
-      title: "Ministerio de sordos",
-      description:
-        "En nuestra iglesia creemos que el amor de Dios trasciende todas las barreras, también las del lenguaje. Por eso el Ministerio de Sordos es un espacio dedicado a aprender y compartir la Lengua de Signos Española (LSE).",
-    },
-  ];
-
   return (
     <>
       <section className="hero" id="inicio">
@@ -250,6 +213,35 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {liveStream && (
+        <section className="live-stream">
+          <div className="live-stream-container">
+            <div className="live-badge">
+              <span className="live-dot"></span>
+              TRANSMISIÓN EN VIVO
+            </div>
+            
+            <div className="live-content">
+              <div className="live-info">
+                <h2 className="live-title">{liveStream.titulo}</h2>
+                {liveStream.descripcion && (
+                  <p className="live-description">{liveStream.descripcion}</p>
+                )}
+              </div>
+              
+              <div className="live-video-wrapper">
+                <iframe
+                  src={liveStream.url_embed}
+                  title="Transmisión en vivo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="visitanos-banner">
         <div className="visitanos-content">
@@ -338,22 +330,33 @@ const Home = () => {
         </div>
 
         <div className="ministerios-carousel" id="ministeriosCarousel">
-          {ministerios.map((ministerio, index) => (
-            <div key={index} className="ministerio-card">
-              <div className="ministerio-img"></div>
+          {ministerios.map((ministerio) => (
+            <div key={ministerio.id} className="ministerio-card">
+              <div 
+                className="ministerio-img"
+                style={{
+                  backgroundImage: ministerio.imagen 
+                    ? `url(${ministerio.imagen})` 
+                    : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                }}
+              ></div>
               <div className="ministerio-content">
                 <div className="ministerio-meta">
-                  {ministerio.meta.map((meta, i) => (
-                    <span key={i}>
-                      <i
-                        className={i === 0 ? "far fa-calendar" : "far fa-clock"}
-                      ></i>
-                      {meta}
+                  {ministerio.frecuencia && (
+                    <span>
+                      <i className="far fa-calendar"></i>
+                      {ministerio.frecuencia}
                     </span>
-                  ))}
+                  )}
+                  {ministerio.horario && (
+                    <span>
+                      <i className="far fa-clock"></i>
+                      {ministerio.horario}
+                    </span>
+                  )}
                 </div>
-                <h3>{ministerio.title}</h3>
-                <p>{ministerio.description}</p>
+                <h3>{ministerio.nombre}</h3>
+                <p>{ministerio.descripcion}</p>
                 <a href="/ministerios" className="more-info">
                   MÁS INFORMACIÓN
                 </a>
