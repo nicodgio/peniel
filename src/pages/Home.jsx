@@ -37,12 +37,19 @@ const Home = () => {
     fetchMinisterios();
     fetchLiveStream();
 
+    const liveStreamInterval = setInterval(() => {
+      fetchLiveStream();
+    }, 30000);
+
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearInterval(liveStreamInterval);
+    };
   }, []);
 
   const fetchEventos = async () => {
@@ -71,13 +78,24 @@ const Home = () => {
 
   const fetchLiveStream = async () => {
     try {
-      const response = await fetch("https://penielmadrid.es/api/live-stream.php");
+      const timestamp = new Date().getTime();
+      const response = await fetch(`https://penielmadrid.es/api/live-stream.php?t=${timestamp}`, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
       const data = await response.json();
-      if (data.success && data.live) {
+      
+      if (data.success && data.live && data.live.activo === 1) {
         setLiveStream(data.live);
+      } else {
+        setLiveStream(null);
       }
     } catch (error) {
       console.error("Error cargando transmisión en vivo:", error);
+      setLiveStream(null);
     }
   };
 
@@ -214,7 +232,7 @@ const Home = () => {
         </div>
       </section>
 
-      {liveStream && (
+      {liveStream && liveStream.activo === 1 && (
         <section className="live-stream">
           <div className="live-stream-container">
             <div className="live-badge">
@@ -232,7 +250,8 @@ const Home = () => {
               
               <div className="live-video-wrapper">
                 <iframe
-                  src={liveStream.url_embed}
+                  key={liveStream.id}
+                  src={`${liveStream.url_embed}?t=${Date.now()}`}
                   title="Transmisión en vivo"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -626,7 +645,7 @@ const Home = () => {
                 >
                   <div className="predica-overlay">
                     <div className="play-button">
-                      <i className="fas fa-play"></i>
+                      <i class="fas fa-play"></i>
                     </div>
                   </div>
                   <div className="predica-info">

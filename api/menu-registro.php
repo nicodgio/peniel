@@ -28,14 +28,27 @@ try {
     
     date_default_timezone_set('Europe/Madrid');
     $ahora = new DateTime();
-    $hora_limite = new DateTime($config['hora_limite']);
     
-    if ($ahora >= $hora_limite) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'El plazo para registrarse ha finalizado. El registro cierra los sábados a las 00:00h'
-        ]);
-        exit;
+    if ($config['fecha_especifica']) {
+        $fecha_limite = new DateTime($config['fecha_especifica'] . ' 23:59:59');
+        
+        if ($ahora > $fecha_limite) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'El plazo para registrarse ha finalizado'
+            ]);
+            exit;
+        }
+    } else {
+        $diaSemana = (int)$ahora->format('N');
+        
+        if ($diaSemana == 7) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'El registro cierra los sábados a las 23:59h. Ya no puedes registrarte para este domingo'
+            ]);
+            exit;
+        }
     }
     
     $nombre = trim($_POST['nombre'] ?? '');

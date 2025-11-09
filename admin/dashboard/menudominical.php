@@ -12,35 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($_POST['action'] === 'actualizar_config') {
             try {
                 $platos_disponibles = (int)$_POST['platos_disponibles'];
+                $fecha_especifica = !empty($_POST['fecha_especifica']) ? $_POST['fecha_especifica'] : null;
                 
-                date_default_timezone_set('Europe/Madrid');
-                $ahora = new DateTime();
-                $diaSemana = (int)$ahora->format('N');
+                $stmt = $pdo->prepare("UPDATE config_menu SET platos_disponibles = ?, fecha_especifica = ? WHERE id = 1");
+                $stmt->execute([$platos_disponibles, $fecha_especifica]);
                 
-                if ($diaSemana == 6) {
-                    $proximoSabado = clone $ahora;
-                    $proximoSabado->setTime(0, 0, 0);
-                    
-                    if ($ahora >= $proximoSabado) {
-                        $proximoSabado->modify('+7 days');
-                    }
+                if ($fecha_especifica) {
+                    $fecha_obj = new DateTime($fecha_especifica);
+                    $success_message = "Configuración actualizada. Fecha límite: " . $fecha_obj->format('d/m/Y');
                 } else {
-                    $proximoSabado = clone $ahora;
-                    if ($diaSemana == 7) {
-                        $proximoSabado->modify('+6 days');
-                    } else {
-                        $diasHastaSabado = 6 - $diaSemana;
-                        $proximoSabado->modify("+{$diasHastaSabado} days");
-                    }
-                    $proximoSabado->setTime(0, 0, 0);
+                    $success_message = "Configuración actualizada. Modo: Vencimiento semanal (cada domingo)";
                 }
-                
-                $hora_limite = $proximoSabado->format('Y-m-d H:i:s');
-                
-                $stmt = $pdo->prepare("UPDATE config_menu SET platos_disponibles = ?, hora_limite = ? WHERE id = 1");
-                $stmt->execute([$platos_disponibles, $hora_limite]);
-                
-                $success_message = "Configuración actualizada. Fecha límite: " . $proximoSabado->format('d/m/Y H:i');
             } catch (PDOException $e) {
                 $error_message = "Error al actualizar la configuración: " . $e->getMessage();
             }
@@ -60,23 +42,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function limpiarRegistrosAntiguos($pdo) {
     try {
-        $hoy = new DateTime();
-        $diaSemana = (int)$hoy->format('N');
+        $config = $pdo->query("SELECT fecha_especifica FROM config_menu WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
         
-        if ($diaSemana >= 1) {
-            $ultimoDomingo = clone $hoy;
-            if ($diaSemana == 7) {
-                $ultimoDomingo->modify('today');
-            } else {
-                $ultimoDomingo->modify('last Sunday');
+        if ($config['fecha_especifica']) {
+            $fecha_limite_obj = new DateTime($config['fecha_especifica'] . ' 23:59:59');
+            $ahora = new DateTime();
+            
+            if ($ahora > $fecha_limite_obj) {
+                $stmt = $pdo->prepare("DELETE FROM menudominical WHERE fecha <= ?");
+                $stmt->execute([$config['fecha_especifica']]);
+                return $stmt->rowCount();
             }
+        } else {
+            $hoy = new DateTime();
+            $diaSemana = (int)$hoy->format('N');
             
-            $fechaLimite = $ultimoDomingo->format('Y-m-d 23:59:59');
-            
-            $stmt = $pdo->prepare("DELETE FROM menudominical WHERE fecha <= ?");
-            $stmt->execute([$fechaLimite]);
-            
-            return $stmt->rowCount();
+            if ($diaSemana >= 1) {
+                $ultimoDomingo = clone $hoy;
+                if ($diaSemana == 7) {
+                    $ultimoDomingo->modify('today');
+                } else {
+                    $ultimoDomingo->modify('last Sunday');
+                }
+                
+                $fechaLimite = $ultimoDomingo->format('Y-m-d 23:59:59');
+                
+                $stmt = $pdo->prepare("DELETE FROM menudominical WHERE fecha <= ?");
+                $stmt->execute([$fechaLimite]);
+                
+                return $stmt->rowCount();
+            }
         }
         return 0;
     } catch (Exception $e) {
@@ -91,7 +86,7 @@ try {
     $config = $pdo->query("SELECT * FROM config_menu WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
     
     if (!$config) {
-        $pdo->exec("INSERT INTO config_menu (platos_disponibles, hora_limite, activo) VALUES (50, '2025-11-01 00:00:00', 1)");
+        $pdo->exec("INSERT INTO config_menu (platos_disponibles, fecha_especifica, activo) VALUES (50, NULL, 1)");
         $config = $pdo->query("SELECT * FROM config_menu WHERE id = 1")->fetch(PDO::FETCH_ASSOC);
     }
     
@@ -325,6 +320,23 @@ try {
             color: #e2e8f0;
         }
 
+        .form-group input[type="date"] {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            border-radius: 4px;
+            margin-right: 2px;
+            opacity: 0.8;
+            filter: invert(0.8);
+        }
+
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
         .form-group input:focus {
             outline: none;
             border-color: #667eea;
@@ -476,7 +488,7 @@ try {
             <?php if ($registrosEliminados > 0): ?>
                 <div class="message-box info">
                     <i class="fas fa-info-circle"></i>
-                    <span>Se eliminaron <?php echo $registrosEliminados; ?> registro(s) del domingo pasado automáticamente</span>
+                    <span>Se eliminaron <?php echo $registrosEliminados; ?> registro(s) automáticamente</span>
                 </div>
             <?php endif; ?>
 
@@ -604,20 +616,58 @@ try {
                         >
                     </div>
                     
+                    <div class="form-group">
+                        <label for="fecha_especifica">
+                            <i class="fas fa-calendar-alt"></i>
+                            Fecha Específica (Opcional)
+                        </label>
+                        <div style="display: flex; gap: 10px; align-items: stretch;">
+                            <input 
+                                type="date" 
+                                id="fecha_especifica" 
+                                name="fecha_especifica" 
+                                value="<?php echo htmlspecialchars($config['fecha_especifica'] ?? ''); ?>"
+                                style="flex: 1; cursor: pointer;"
+                            >
+                            <button 
+                                type="button" 
+                                id="btnLimpiarFecha"
+                                class="modal-btn secondary"
+                                style="padding: 12px 20px; margin: 0; white-space: nowrap;"
+                                title="Limpiar fecha y volver a modo semanal"
+                            >
+                                <i class="fas fa-times"></i>
+                                Limpiar
+                            </button>
+                        </div>
+                    </div>
+                    
                     <div style="background: rgba(102, 126, 234, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(102, 126, 234, 0.3);">
-                        <p style="margin: 0; color: #94a3b8; font-size: 0.9rem;">
+                        <p style="margin: 0 0 10px 0; color: #94a3b8; font-size: 0.9rem;">
                             <i class="fas fa-info-circle" style="color: #667eea;"></i>
-                            La fecha límite se establecerá automáticamente para el próximo sábado a las 00:00 (hora Madrid)
+                            <strong>Modo de vencimiento:</strong>
                         </p>
-                        <p style="margin: 10px 0 0 0; color: #e2e8f0; font-weight: 600; font-size: 0.95rem;">
-                            <i class="fas fa-clock"></i>
-                            Próxima fecha límite: 
+                        <p style="margin: 0 0 8px 0; color: #e2e8f0; font-size: 0.88rem;">
+                            • <strong>Sin fecha:</strong> Los registros vencen cada domingo automáticamente
+                        </p>
+                        <p style="margin: 0; color: #e2e8f0; font-size: 0.88rem;">
+                            • <strong>Con fecha:</strong> Todos los registros vencen en la fecha especificada
+                        </p>
+                        <?php if ($config['fecha_especifica']): ?>
+                        <p style="margin: 15px 0 0 0; color: #4ade80; font-weight: 600; font-size: 0.95rem;">
+                            <i class="fas fa-calendar-check"></i>
+                            Fecha límite actual: 
                             <?php 
-                            date_default_timezone_set('Europe/Madrid');
-                            $fecha_limite = new DateTime($config['hora_limite']);
-                            echo $fecha_limite->format('d/m/Y H:i');
+                            $fecha_obj = new DateTime($config['fecha_especifica']);
+                            echo $fecha_obj->format('d/m/Y');
                             ?>
                         </p>
+                        <?php else: ?>
+                        <p style="margin: 15px 0 0 0; color: #4ade80; font-weight: 600; font-size: 0.95rem;">
+                            <i class="fas fa-sync-alt"></i>
+                            Modo activo: Vencimiento semanal (cada domingo)
+                        </p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -666,6 +716,8 @@ try {
         const btnConfig = document.getElementById('btnConfig');
         const btnCerrarConfig = document.getElementById('btnCerrarConfig');
         const btnCerrarDelete = document.getElementById('btnCerrarDelete');
+        const btnLimpiarFecha = document.getElementById('btnLimpiarFecha');
+        const inputFecha = document.getElementById('fecha_especifica');
 
         btnConfig.addEventListener('click', function() {
             configModal.classList.add('active');
@@ -680,6 +732,10 @@ try {
         btnCerrarDelete.addEventListener('click', function() {
             deleteModal.classList.remove('active');
             document.body.style.overflow = 'auto';
+        });
+
+        btnLimpiarFecha.addEventListener('click', function() {
+            inputFecha.value = '';
         });
 
         configModal.addEventListener('click', function(e) {

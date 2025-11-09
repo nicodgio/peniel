@@ -28,6 +28,21 @@ if (!$tiene_permiso) {
 $mensaje = '';
 $tipo_mensaje = '';
 
+if (isset($_GET['success'])) {
+    $tipo_mensaje = 'success';
+    switch ($_GET['success']) {
+        case 'created':
+            $mensaje = 'Transmisión creada exitosamente';
+            break;
+        case 'updated':
+            $mensaje = 'Transmisión actualizada exitosamente';
+            break;
+        case 'deleted':
+            $mensaje = 'Transmisión eliminada exitosamente';
+            break;
+    }
+}
+
 try {
     $check = $pdo->query("SHOW TABLES LIKE 'live_stream'");
     if ($check->rowCount() == 0) {
@@ -63,51 +78,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $pdo->prepare("INSERT INTO live_stream (titulo, descripcion, url_video, url_embed, activo) VALUES (?, ?, ?, ?, ?)");
                     $stmt->execute([$titulo, $descripcion, $url_video, $url_embed, $activo]);
 
-                    $mensaje = "Transmisión creada exitosamente";
-                    $tipo_mensaje = "success";
+                    header('Location: ' . $_SERVER['PHP_SELF'] . '?success=created');
+                    exit;
                 } else {
                     $id = intval($_POST['id']);
 
                     if ($activo == 1) {
-                        $pdo->exec("UPDATE live_stream SET activo = 0");
+                        $pdo->exec("UPDATE live_stream SET activo = 0 WHERE id != $id");
                     }
 
                     $stmt = $pdo->prepare("UPDATE live_stream SET titulo = ?, descripcion = ?, url_video = ?, url_embed = ?, activo = ? WHERE id = ?");
                     $stmt->execute([$titulo, $descripcion, $url_video, $url_embed, $activo, $id]);
 
-                    $mensaje = "Transmisión actualizada exitosamente";
-                    $tipo_mensaje = "success";
+                    header('Location: ' . $_SERVER['PHP_SELF'] . '?success=updated');
+                    exit;
                 }
             } elseif ($action === 'eliminar') {
                 $id = intval($_POST['id']);
+                
+                $pdo->beginTransaction();
+                
                 $stmt = $pdo->prepare("DELETE FROM live_stream WHERE id = ?");
                 $stmt->execute([$id]);
+                
+                $pdo->commit();
 
-                $mensaje = "Transmisión eliminada exitosamente";
-                $tipo_mensaje = "success";
+                header('Location: ' . $_SERVER['PHP_SELF'] . '?success=deleted');
+                exit;
             } elseif ($action === 'toggle') {
                 $id = intval($_POST['id']);
                 $activo = intval($_POST['activo']);
+
+                $pdo->beginTransaction();
 
                 $check = $pdo->prepare("SELECT id FROM live_stream WHERE id = ?");
                 $check->execute([$id]);
 
                 if ($check->rowCount() === 0) {
+                    $pdo->rollBack();
                     throw new Exception("Transmisión no encontrada");
                 }
 
                 if ($activo == 1) {
-                    $pdo->exec("UPDATE live_stream SET activo = 0");
+                    $pdo->exec("UPDATE live_stream SET activo = 0 WHERE id != $id");
                 }
 
                 $stmt = $pdo->prepare("UPDATE live_stream SET activo = ? WHERE id = ?");
                 $stmt->execute([$activo, $id]);
 
-                $mensaje = $activo ? "Transmisión activada" : "Transmisión desactivada";
-                $tipo_mensaje = "success";
+                $pdo->commit();
+
+                echo json_encode(['success' => true, 'message' => $activo ? 'Transmisión activada' : 'Transmisión desactivada']);
+                exit;
             }
         }
     } catch (PDOException $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        $mensaje = "Error: " . $e->getMessage();
+        $tipo_mensaje = "error";
+    } catch (Exception $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
         $mensaje = "Error: " . $e->getMessage();
         $tipo_mensaje = "error";
     }
@@ -260,7 +294,8 @@ try {
             bottom: 0;
             background-color: rgba(255, 255, 255, .1);
             transition: .3s;
-            border-radius: 30px
+            border-radius: 30px;
+            pointer-events: auto;
         }
 
         .toggle-slider:before {
@@ -281,6 +316,11 @@ try {
 
         input:checked+.toggle-slider:before {
             transform: translateX(30px)
+        }
+
+        .toggle-switch.disabled {
+            opacity: 0.5;
+            pointer-events: none;
         }
 
         .modal {
@@ -414,24 +454,18 @@ try {
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
+            0%, 100% {
                 opacity: 1
             }
-
             50% {
                 opacity: .8
             }
         }
 
         @keyframes blink {
-
-            0%,
-            100% {
+            0%, 100% {
                 opacity: 1
             }
-
             50% {
                 opacity: .3
             }
@@ -464,68 +498,207 @@ try {
                     Transmisión</button>
             </div>
             <?php if ($mensaje): ?>
-                <div class="alert alert-<?php echo $tipo_mensaje; ?>"><i
-                        class="fas fa-<?php echo $tipo_mensaje === 'success' ? 'check-circle' : 'exclamation-circle'; ?>"></i><?php echo htmlspecialchars($mensaje); ?>
-                </div><?php endif; ?>
+                <div class="alert alert-<?php echo $tipo_mensaje; ?>">
+                    <i class="fas fa-<?php echo $tipo_mensaje === 'success' ? 'check-circle' : 'exclamation-circle'; ?>"></i>
+                    <?php echo htmlspecialchars($mensaje); ?>
+                </div>
+            <?php endif; ?>
             <div class="transmisiones-grid">
                 <?php if (empty($transmisiones)): ?>
-                    <div class="empty-state"><i class="fas fa-video"></i>
+                    <div class="empty-state">
+                        <i class="fas fa-video"></i>
                         <h3>No hay transmisiones configuradas</h3>
                         <p>Crea tu primera transmisión para comenzar</p>
-                    </div><?php else:
+                    </div>
+                <?php else:
                     foreach ($transmisiones as $trans): ?>
                         <div class="transmision-card <?php echo $trans['activo'] ? 'activa' : ''; ?>">
                             <div class="transmision-header">
                                 <div class="transmision-info">
                                     <h3 class="transmision-title">
-                                        <?php echo htmlspecialchars($trans['titulo']); ?>        <?php if ($trans['activo']): ?><span
-                                                class="live-badge"><span class="live-dot"></span>EN VIVO</span><?php endif; ?></h3>
+                                        <?php echo htmlspecialchars($trans['titulo']); ?>
+                                        <?php if ($trans['activo']): ?>
+                                            <span class="live-badge">
+                                                <span class="live-dot"></span>EN VIVO
+                                            </span>
+                                        <?php endif; ?>
+                                    </h3>
                                     <?php if ($trans['descripcion']): ?>
                                         <p class="transmision-description"><?php echo htmlspecialchars($trans['descripcion']); ?></p>
                                     <?php endif; ?>
-                                    <div class="transmision-url"><i
-                                            class="fas fa-link"></i><?php echo htmlspecialchars($trans['url_video']); ?></div>
+                                    <div class="transmision-url">
+                                        <i class="fas fa-link"></i>
+                                        <?php echo htmlspecialchars($trans['url_video']); ?>
+                                    </div>
                                 </div>
-                                <div class="transmision-actions"><label class="toggle-switch"><input type="checkbox" <?php echo $trans['activo'] ? 'checked' : ''; ?>
-                                            onchange="toggleTransmision(<?php echo $trans['id']; ?>,this.checked)"><span
-                                            class="toggle-slider"></span></label><button
-                                        onclick='openModal("editar",<?php echo json_encode($trans, JSON_HEX_APOS | JSON_HEX_QUOT); ?>)'
-                                        class="btn btn-secondary btn-icon"><i class="fas fa-edit"></i></button><button
-                                        onclick="eliminarTransmision(<?php echo $trans['id']; ?>)"
-                                        class="btn btn-danger btn-icon"><i class="fas fa-trash"></i></button></div>
+                                <div class="transmision-actions">
+                                    <label class="toggle-switch" id="toggle-<?php echo $trans['id']; ?>">
+                                        <input 
+                                            type="checkbox" 
+                                            <?php echo $trans['activo'] ? 'checked' : ''; ?>
+                                            onchange="toggleTransmision(<?php echo $trans['id']; ?>, this.checked, this)"
+                                        >
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <button
+                                        onclick='openModal("editar", <?php echo json_encode($trans, JSON_HEX_APOS | JSON_HEX_QUOT); ?>)'
+                                        class="btn btn-secondary btn-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button
+                                        onclick="eliminarTransmision(<?php echo $trans['id']; ?>, this)"
+                                        class="btn btn-danger btn-icon">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div><?php endforeach; endif; ?>
+                        </div>
+                    <?php endforeach;
+                endif; ?>
             </div>
         </main>
     </div>
+
     <div id="transmisionModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle">Nueva Transmisión</h2><button class="modal-close"
-                    onclick="closeModal()">×</button>
+                <h2 class="modal-title" id="modalTitle">Nueva Transmisión</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
             </div>
-            <form id="transmisionForm" method="POST"><input type="hidden" name="action" id="formAction"
-                    value="crear"><input type="hidden" name="id" id="transmisionId">
-                <div class="form-group"><label for="titulo">Título *</label><input type="text" class="form-control"
-                        id="titulo" name="titulo" required></div>
-                <div class="form-group"><label for="descripcion">Descripción</label><textarea class="form-control"
-                        id="descripcion" name="descripcion"></textarea></div>
-                <div class="form-group"><label for="url_video">URL del Video *</label><input type="url"
-                        class="form-control" id="url_video" name="url_video" required>
-                    <div class="form-help"><i class="fas fa-info-circle"></i> Puedes usar enlaces de YouTube (ej:
-                        https://www.youtube.com/watch?v=...)</div>
+            <form id="transmisionForm" method="POST">
+                <input type="hidden" name="action" id="formAction" value="crear">
+                <input type="hidden" name="id" id="transmisionId">
+                <div class="form-group">
+                    <label for="titulo">Título *</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" required>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox-group"><input type="checkbox" id="activo" name="activo"><label
-                            for="activo">Activar transmisión</label></div>
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
                 </div>
-                <div class="btn-group"><button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>
-                        Guardar</button><button type="button" class="btn btn-secondary" onclick="closeModal()"><i
-                            class="fas fa-times"></i> Cancelar</button></div>
+                <div class="form-group">
+                    <label for="url_video">URL del Video *</label>
+                    <input type="url" class="form-control" id="url_video" name="url_video" required>
+                    <div class="form-help">
+                        <i class="fas fa-info-circle"></i> Puedes usar enlaces de YouTube (ej: https://www.youtube.com/watch?v=...)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="activo" name="activo">
+                        <label for="activo">Activar transmisión</label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
             </form>
         </div>
     </div>
-    <script>function openModal(a, d) { d = d || null; const m = document.getElementById('transmisionModal'), f = document.getElementById('transmisionForm'), t = document.getElementById('modalTitle'), c = document.getElementById('formAction'); f.reset(); c.value = a; if (a === 'crear') { t.textContent = 'Nueva Transmisión' } else { t.textContent = 'Editar Transmisión'; document.getElementById('transmisionId').value = d.id; document.getElementById('titulo').value = d.titulo; document.getElementById('descripcion').value = d.descripcion || ''; document.getElementById('url_video').value = d.url_video; document.getElementById('activo').checked = d.activo == 1 } m.classList.add('active') } function closeModal() { document.getElementById('transmisionModal').classList.remove('active') } let isToggling = false; function toggleTransmision(id, activo) { if (isToggling) return; isToggling = true; const fd = new FormData(); fd.append('action', 'toggle'); fd.append('id', id); fd.append('activo', activo ? 1 : 0); fetch(window.location.href, { method: 'POST', body: fd }).then(r => r.text()).then(() => window.location.reload()).catch(e => { console.error('Error:', e); alert('Error al cambiar el estado'); isToggling = false; window.location.reload() }) } let isDeleting = false; function eliminarTransmision(id) { if (isDeleting) return; if (confirm('¿Estás seguro de eliminar esta transmisión?')) { isDeleting = true; const fd = new FormData(); fd.append('action', 'eliminar'); fd.append('id', id); fetch(window.location.href, { method: 'POST', body: fd }).then(r => r.text()).then(() => window.location.reload()).catch(e => { console.error('Error:', e); alert('Error al eliminar'); isDeleting = false; window.location.reload() }) } } window.onclick = function (e) { const m = document.getElementById('transmisionModal'); if (e.target === m) { closeModal() } }</script>
+
+    <script>
+        function openModal(action, data) {
+            data = data || null;
+            const modal = document.getElementById('transmisionModal');
+            const form = document.getElementById('transmisionForm');
+            const title = document.getElementById('modalTitle');
+            const formAction = document.getElementById('formAction');
+            
+            form.reset();
+            formAction.value = action;
+            
+            if (action === 'crear') {
+                title.textContent = 'Nueva Transmisión';
+            } else {
+                title.textContent = 'Editar Transmisión';
+                document.getElementById('transmisionId').value = data.id;
+                document.getElementById('titulo').value = data.titulo;
+                document.getElementById('descripcion').value = data.descripcion || '';
+                document.getElementById('url_video').value = data.url_video;
+                document.getElementById('activo').checked = data.activo == 1;
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('transmisionModal').classList.remove('active');
+        }
+
+        function toggleTransmision(id, activo, element) {
+            const toggle = document.getElementById('toggle-' + id);
+            
+            toggle.classList.add('disabled');
+            
+            const formData = new FormData();
+            formData.append('action', 'toggle');
+            formData.append('id', id);
+            formData.append('activo', activo ? 1 : 0);
+            
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 300);
+                } else {
+                    alert('Error al cambiar el estado');
+                    element.checked = !activo;
+                    toggle.classList.remove('disabled');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al cambiar el estado');
+                element.checked = !activo;
+                toggle.classList.remove('disabled');
+            });
+        }
+
+        function eliminarTransmision(id, button) {
+            if (!confirm('¿Estás seguro de eliminar esta transmisión?')) {
+                return;
+            }
+            
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            
+            const formData = new FormData();
+            formData.append('action', 'eliminar');
+            formData.append('id', id);
+            
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(() => {
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al eliminar');
+                button.disabled = false;
+                button.style.opacity = '1';
+            });
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('transmisionModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
 </body>
 
 </html>
